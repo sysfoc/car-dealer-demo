@@ -7,7 +7,7 @@ import {
   NavbarToggle,
 } from "flowbite-react";
 import React, { useState, useEffect } from "react";
-import { SlLogin } from "react-icons/sl";
+import { BiPurchaseTag } from "react-icons/bi";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -55,7 +55,8 @@ const Header = () => {
         </Link>
         <div className="flex items-center gap-5 md:hidden">
           <Button outline gradientDuoTone="purpleToBlue" size="sm">
-            Login
+            Buy Now
+            <BiPurchaseTag fontSize={18} className="ml-2" />
           </Button>
           <NavbarToggle />
         </div>
@@ -76,7 +77,7 @@ const Header = () => {
             className="relative hover:text-blue-950 md:hover:text-blue-950"
           >
             <Link
-              href="#"
+              href="/pricing"
               className="relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:bg-red-500 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full"
             >
               Pricing
@@ -93,11 +94,22 @@ const Header = () => {
               Add-ons
             </Link>
           </NavbarLink>
+          <NavbarLink
+            as={"div"}
+            className="relative hover:text-blue-950 md:hover:text-blue-950"
+          >
+            <Link
+              href="#"
+              className="relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:bg-red-500 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full"
+            >
+              Create an account
+            </Link>
+          </NavbarLink>
         </NavbarCollapse>
         <div className="hidden md:flex items-center gap-5">
           <Button outline gradientDuoTone="purpleToBlue" size="sm">
-            Login
-            <SlLogin className="ml-3 h-4 w-4" />
+            Buy Now
+            <BiPurchaseTag fontSize={18} className="ml-2" />
           </Button>
         </div>
       </Navbar>
