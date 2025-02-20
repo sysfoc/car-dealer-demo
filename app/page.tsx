@@ -11,16 +11,16 @@ export default function Home() {
           backgroundBlendMode: "multiply",
         }}
       >
-        <div className="absolute top-10 left-14 text-white">
-          <span>Great packs of ready-made templates.</span>
+        <div className="absolute top-10 left-10 sm:left-14 text-white">
+          <span>Great packs of ready-made templates</span>
         </div>
         <div className="w-[80%] text-center">
-          <h1 className="text-white text-5xl font-semibold">
-            Car Dealer, Car Wash, Car Repair Next JS Templates
+          <h1 className="text-white text-4xl sm:text-5xl font-semibold leading-tight">
+            Car Dealer, Car Leasing, Car Repair HTML & Next JS Templates
           </h1>
           <div className="flex items-center justify-center">
             <Link
-              href={"/pricing"}
+              href={"/add-ons"}
               className="bg-red-600 text-white px-4 py-2 rounded-md mt-6 flex items-center gap-2"
             >
               View Demos <MdArrowOutward fontSize={20} />

@@ -39,7 +39,7 @@ const Header = () => {
     <>
       <Navbar
         fluid
-        className={`sticky inset-x-0 top-0 z-50 bg-gray-50/95 shadow-md transition-transform duration-300 dark:bg-gray-700/95 ${
+        className={`sticky inset-x-0 top-0 z-50 shadow-md transition-transform duration-300 dark:bg-gray-700/95 ${
           isVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
