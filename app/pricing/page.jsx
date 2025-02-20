@@ -22,9 +22,9 @@ export default function Home() {
             <h2 className="text-center">Subscription Term</h2>
             <div className="flex items-center justify-center">
               <div className="mt-4 flex flex-row items-center gap-5">
-                <p className="text-sm">Annual</p>
+                <p className="text-sm">Monthly</p>
                 <ToggleSwitch
-                  label="Lifetime"
+                  label="Annual"
                   checked={switch1}
                   onChange={setSwitch1}
                   sizing="sm"
