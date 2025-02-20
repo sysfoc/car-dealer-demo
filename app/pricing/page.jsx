@@ -13,7 +13,7 @@ export default function Home() {
           <h1 className="text-2xl font-bold text-blue-950 md:text-4xl">
             Simple Pricing, Unbeatable Value
           </h1>
-          <p className="mt-3 text-center">Join 1,894,082+ Happy Users</p>
+          <p className="mt-3 text-center">Join 1000+ Happy Users</p>
         </div>
       </div>
       <div className="my-8 flex items-center justify-center">
