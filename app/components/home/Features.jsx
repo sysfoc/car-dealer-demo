@@ -91,14 +91,14 @@ const Features = () => {
       <div className="my-6 mx-4 md:mx-12">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
           {features.map((feature) => (
-            <div key={feature.id} className="rounded-md shadow-lg px-3 py-8">
+            <div key={feature.id} className="group rounded-md shadow-lg px-3 py-8">
               <div className="flex items-center justify-center">
                 <Image
                   src={feature.image}
                   alt={feature.alt}
                   width={60}
                   height={60}
-                  className="size-auto transition-transform duration-300 hover:-translate-y-2 hover:scale-110"
+                  className="size-auto transition-transform duration-300 group-hover:-translate-y-2 group-hover:scale-110"
                 />
               </div>
               <div>
