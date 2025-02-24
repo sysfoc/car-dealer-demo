@@ -17,7 +17,7 @@ export default function Home() {
         </div>
       </div>
       <div className="my-8 flex items-center justify-center">
-        <div className="rounded-lg border-t-4 border-blue-950 p-8 shadow-md">
+        <div className="rounded-lg border-t-4 bg-white border-blue-950 p-8 shadow-md">
           <div className="w-full sm:w-[320px]">
             <h2 className="text-center">Subscription Term</h2>
             <div className="flex items-center justify-center">
@@ -36,9 +36,9 @@ export default function Home() {
       </div>
       <div>
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <div className="rounded-lg border-t-4 border-blue-950 p-5 shadow-md">
+          <div className="rounded-lg border-t-4 bg-white border-blue-950 p-5 shadow-md">
             <div>
-              <h3 className="text-xl font-semibold">Basic Plan</h3>
+              <h3 className="text-xl font-semibold">Basic Package</h3>
               <p className="mt-1 text-sm">
                 Build beautiful website faster with advanced features and
                 complete design control.
@@ -115,9 +115,9 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="rounded-lg border-t-4 border-blue-950 p-5 shadow-md">
+          <div className="rounded-lg border-t-4 bg-white border-blue-950 p-5 shadow-md">
             <div>
-              <h3 className="text-xl font-semibold">Essential Toolkit</h3>
+              <h3 className="text-xl font-semibold">Standard Package</h3>
               <p className="mt-1 text-sm">
                 Build beautiful website faster with advanced features and
                 complete design control.
@@ -128,7 +128,7 @@ export default function Home() {
               </div>
               <div className="flex flex-col">
                 <Button className="mt-4 w-full rounded-full bg-blue-950 py-2 text-white">
-                  Purchase Basic Plan
+                  Purchase Standard Plan
                 </Button>
               </div>
             </div>
@@ -194,7 +194,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="rounded-lg shadow-md">
+          <div className="rounded-lg shadow-md bg-white">
             <div className="rounded-t-lg bg-blue-950 p-2 text-white">
               <div className="flex items-center justify-center">
                 <div className="flex items-center gap-2">
@@ -205,7 +205,7 @@ export default function Home() {
             </div>
             <div className="p-5">
               <div>
-                <h3 className="text-xl font-semibold">Business Toolkit</h3>
+                <h3 className="text-xl font-semibold">Premium Package</h3>
                 <p className="mt-1 text-sm">
                   Build beautiful website faster with advanced features and
                   complete design control.
@@ -216,7 +216,7 @@ export default function Home() {
                 </div>
                 <div className="flex flex-col">
                   <Button className="mt-4 w-full rounded-full bg-blue-950 py-2 text-white">
-                    Purchase Basic Plan
+                    Purchase Premium Plan
                   </Button>
                 </div>
               </div>

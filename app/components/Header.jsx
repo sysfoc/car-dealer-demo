@@ -51,6 +51,7 @@ const Header = () => {
             height={50}
             style={{ objectPosition: "center" }}
             className="size-auto"
+            priority={true}
           />
         </Link>
         <div className="flex items-center gap-5 md:hidden">

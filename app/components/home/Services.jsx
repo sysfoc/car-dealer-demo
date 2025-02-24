@@ -65,9 +65,11 @@ const Services = () => {
       <div className="my-6 mx-4 md:mx-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {features.map((feature) => (
-            <div key={feature.id} className="p-5 rounded-lg shadow-md">
+            <div key={feature.id} className="group p-5 rounded-lg shadow-md">
               <div className="flex items-center justify-center">
-                <div className={`p-4 ${feature.bgColor} rounded-full`}>
+                <div
+                  className={`transition-transform duration-300 group-hover:-translate-y-2 group-hover:scale-110 p-4 ${feature.bgColor} rounded-full`}
+                >
                   {feature.icon}
                 </div>
               </div>
