@@ -55,10 +55,6 @@ const Header = () => {
           />
         </Link>
         <div className="flex items-center gap-5 md:hidden">
-          <Button outline gradientDuoTone="purpleToBlue" size="sm">
-            Buy Now
-            <BiPurchaseTag fontSize={18} className="ml-2" />
-          </Button>
           <NavbarToggle />
         </div>
         <NavbarCollapse>
@@ -106,10 +102,23 @@ const Header = () => {
               Create an account
             </Link>
           </NavbarLink>
+          <NavbarLink
+            as={"div"}
+            className="relative hover:text-blue-950 md:hover:text-blue-950 md:hidden"
+          >
+            <Link
+              href="#"
+            >
+              <Button size="md" className="w-full bg-orange-600">
+                Get Started
+                <BiPurchaseTag fontSize={18} className="ml-2" />
+              </Button>
+            </Link>
+          </NavbarLink>
         </NavbarCollapse>
         <div className="hidden md:flex items-center gap-5">
-          <Button outline gradientDuoTone="purpleToBlue" size="sm">
-            Buy Now
+          <Button size="sm" className="bg-orange-600">
+            Get Started
             <BiPurchaseTag fontSize={18} className="ml-2" />
           </Button>
         </div>

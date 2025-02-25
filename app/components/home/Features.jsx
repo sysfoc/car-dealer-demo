@@ -81,7 +81,7 @@ const Features = () => {
     <section className="my-14 py-10 bg-white">
       <div className="mx-4 md:mx-12 py-5 flex items-center justify-center">
         <div className="text-center w-full md:w-[50%]">
-          <h3 className="text-4xl font-semibold">Core Features</h3>
+          <h3 className="text-3xl sm:text-4xl font-semibold">Core Features</h3>
           <p className="my-2 text-gray-500">
             Sysfoc car dealer provides full of features for creating a perfect
             Business websites.
@@ -89,15 +89,15 @@ const Features = () => {
         </div>
       </div>
       <div className="my-6 mx-4 md:mx-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5 sm:gap-8">
           {features.map((feature) => (
             <div key={feature.id} className="group rounded-md shadow-lg px-3 py-8">
               <div className="flex items-center justify-center">
                 <Image
                   src={feature.image}
                   alt={feature.alt}
-                  width={60}
-                  height={60}
+                  width={50}
+                  height={50}
                   className="size-auto transition-transform duration-300 group-hover:-translate-y-2 group-hover:scale-110"
                 />
               </div>

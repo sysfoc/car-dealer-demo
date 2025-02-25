@@ -40,7 +40,7 @@ const Services = () => {
     <section className="my-14 py-10 bg-white">
       <div className="mx-4 md:mx-12 py-5 flex items-center justify-center">
         <div className="text-center w-full md:w-[80%]">
-          <h3 className="text-4xl font-semibold">
+          <h3 className="text-3xl sm:text-4xl font-semibold">
             100% Risk-Free Money Back Guarantee!
           </h3>
           <p className="my-4 text-gray-500 leading-7 tracking-wide">

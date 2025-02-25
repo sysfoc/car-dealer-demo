@@ -14,8 +14,8 @@ const HeroBanner = () => {
       <div className="absolute top-10 left-10 sm:left-14 text-white">
         <span>Great packs of ready-made templates</span>
       </div>
-      <div className="w-[75%] text-center">
-        <h1 className="text-white text-4xl sm:text-5xl font-bold !leading-[3.5rem]">
+      <div className="w-[95%] md:w-[75%] text-center">
+        <h1 className="text-white text-4xl sm:text-5xl font-bold leading-10 md:!leading-[3.5rem]">
           Car Dealer, Car Leasing, Car Repair HTML & Next JS Templates
         </h1>
         <p className="py-4 text-white">

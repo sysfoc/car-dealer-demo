@@ -15,7 +15,7 @@ const ProjectTemplates = () => {
     <section className="my-14 mx-4 md:mx-12">
       <div className="py-5 flex items-center justify-center">
         <div className="text-center w-full md:w-[50%]">
-          <h2 className="text-4xl font-semibold">
+          <h2 className="text-3xl sm:text-4xl font-semibold">
             Great packs of ready-made templates.
           </h2>
           <p className="mt-5 text-gray-500">
