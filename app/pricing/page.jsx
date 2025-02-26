@@ -10,14 +10,14 @@ export default function Home() {
     <section className="mx-4 my-10 sm:mx-8">
       <div className="text-center">
         <div className="mt-5">
-          <h1 className="text-2xl font-bold text-blue-950 md:text-4xl">
+          <h1 className="text-2xl font-bold md:text-4xl">
             Simple Pricing, Unbeatable Value
           </h1>
           <p className="mt-3 text-center">Join 1000+ Happy Users</p>
         </div>
       </div>
       <div className="my-8 flex items-center justify-center">
-        <div className="rounded-lg border-t-4 bg-white border-blue-950 p-8 shadow-md">
+        <div className="rounded-lg border-t-4 bg-white border-red-600 p-8 shadow-md">
           <div className="w-full sm:w-[320px]">
             <h2 className="text-center">Subscription Term</h2>
             <div className="flex items-center justify-center">
@@ -25,6 +25,7 @@ export default function Home() {
                 <p className="text-sm">Monthly</p>
                 <ToggleSwitch
                   label="Annual"
+                  color="red"
                   checked={switch1}
                   onChange={setSwitch1}
                   sizing="sm"
@@ -36,7 +37,7 @@ export default function Home() {
       </div>
       <div>
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <div className="rounded-lg border-t-4 bg-white border-blue-950 p-5 shadow-md">
+          <div className="rounded-lg border-t-4 bg-white border-red-600 p-5 shadow-md">
             <div>
               <h3 className="text-xl font-semibold">Basic Package</h3>
               <p className="mt-1 text-sm">
@@ -48,8 +49,8 @@ export default function Home() {
                 <span className="text-sm">Normally $59 (Save 17% )</span>
               </div>
               <div className="flex flex-col">
-                <Button className="mt-4 w-full rounded-full bg-blue-950 py-2 text-white">
-                  Purchase Basic Plan
+                <Button className="mt-4 w-full rounded-full bg-red-600 py-2 text-white">
+                  Get Started
                 </Button>
               </div>
             </div>
@@ -62,7 +63,7 @@ export default function Home() {
               <div className="mt-3 flex flex-col gap-2">
                 <div className="flex items-start gap-3">
                   <div className="py-1">
-                    <FaCheckCircle className="mr-1 text-green-500" />
+                    <FaCheckCircle className="mr-1 text-red-600" />
                   </div>
                   <div>
                     <h4 className="font-semibold">Unparalleled Flexibility</h4>
@@ -75,7 +76,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="py-1">
-                    <FaCheckCircle className="mr-1 text-green-500" />
+                    <FaCheckCircle className="mr-1 text-red-600" />
                   </div>
                   <div>
                     <h4 className="font-semibold">Various Built-in Layouts</h4>
@@ -88,7 +89,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="py-1">
-                    <FaCheckCircle className="mr-1 text-green-500" />
+                    <FaCheckCircle className="mr-1 text-red-600" />
                   </div>
                   <div>
                     <h4 className="font-semibold">Modern Woo Stores</h4>
@@ -101,7 +102,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="py-1">
-                    <FaCheckCircle className="mr-1 text-green-500" />
+                    <FaCheckCircle className="mr-1 text-red-600" />
                   </div>
                   <div>
                     <h4 className="font-semibold">Site Builder</h4>
@@ -115,7 +116,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="rounded-lg border-t-4 bg-white border-blue-950 p-5 shadow-md">
+          <div className="rounded-lg border-t-4 bg-white border-red-600 p-5 shadow-md">
             <div>
               <h3 className="text-xl font-semibold">Standard Package</h3>
               <p className="mt-1 text-sm">
@@ -127,8 +128,8 @@ export default function Home() {
                 <span className="text-sm">Normally $59 (Save 17% )</span>
               </div>
               <div className="flex flex-col">
-                <Button className="mt-4 w-full rounded-full bg-blue-950 py-2 text-white">
-                  Purchase Standard Plan
+                <Button className="mt-4 w-full rounded-full bg-red-600 py-2 text-white">
+                  Get Started
                 </Button>
               </div>
             </div>
@@ -141,7 +142,7 @@ export default function Home() {
               <div className="mt-3 flex flex-col gap-2">
                 <div className="flex items-start gap-3">
                   <div className="py-1">
-                    <FaCheckCircle className="mr-1 text-green-500" />
+                    <FaCheckCircle className="mr-1 text-red-600" />
                   </div>
                   <div>
                     <h4 className="font-semibold">Unparalleled Flexibility</h4>
@@ -154,7 +155,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="py-1">
-                    <FaCheckCircle className="mr-1 text-green-500" />
+                    <FaCheckCircle className="mr-1 text-red-600" />
                   </div>
                   <div>
                     <h4 className="font-semibold">Various Built-in Layouts</h4>
@@ -167,7 +168,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="py-1">
-                    <FaCheckCircle className="mr-1 text-green-500" />
+                    <FaCheckCircle className="mr-1 text-red-600" />
                   </div>
                   <div>
                     <h4 className="font-semibold">Modern Woo Stores</h4>
@@ -180,7 +181,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="py-1">
-                    <FaCheckCircle className="mr-1 text-green-500" />
+                    <FaCheckCircle className="mr-1 text-red-600" />
                   </div>
                   <div>
                     <h4 className="font-semibold">Site Builder</h4>
@@ -195,7 +196,7 @@ export default function Home() {
             </div>
           </div>
           <div className="rounded-lg shadow-md bg-white">
-            <div className="rounded-t-lg bg-blue-950 p-2 text-white">
+            <div className="rounded-t-lg bg-red-600 p-2 text-white">
               <div className="flex items-center justify-center">
                 <div className="flex items-center gap-2">
                   <MdOutlineCelebration fontSize={18} className="text-white" />
@@ -215,8 +216,8 @@ export default function Home() {
                   <span className="text-sm">Normally $59 (Save 17% )</span>
                 </div>
                 <div className="flex flex-col">
-                  <Button className="mt-4 w-full rounded-full bg-blue-950 py-2 text-white">
-                    Purchase Premium Plan
+                  <Button className="mt-4 w-full rounded-full bg-red-600 py-2 text-white">
+                    Get Started
                   </Button>
                 </div>
               </div>
@@ -229,7 +230,7 @@ export default function Home() {
                 <div className="mt-3 flex flex-col gap-2">
                   <div className="flex items-start gap-3">
                     <div className="py-1">
-                      <FaCheckCircle className="mr-1 text-green-500" />
+                      <FaCheckCircle className="mr-1 text-red-600" />
                     </div>
                     <div>
                       <h4 className="font-semibold">
@@ -244,7 +245,7 @@ export default function Home() {
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="py-1">
-                      <FaCheckCircle className="mr-1 text-green-500" />
+                      <FaCheckCircle className="mr-1 text-red-600" />
                     </div>
                     <div>
                       <h4 className="font-semibold">
@@ -259,7 +260,7 @@ export default function Home() {
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="py-1">
-                      <FaCheckCircle className="mr-1 text-green-500" />
+                      <FaCheckCircle className="mr-1 text-red-600" />
                     </div>
                     <div>
                       <h4 className="font-semibold">Modern Woo Stores</h4>
@@ -272,7 +273,7 @@ export default function Home() {
                   </div>
                   <div className="flex items-start gap-3">
                     <div className="py-1">
-                      <FaCheckCircle className="mr-1 text-green-500" />
+                      <FaCheckCircle className="mr-1 text-red-600" />
                     </div>
                     <div>
                       <h4 className="font-semibold">Site Builder</h4>

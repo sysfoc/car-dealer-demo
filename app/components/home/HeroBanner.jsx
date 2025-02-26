@@ -12,16 +12,14 @@ const HeroBanner = () => {
       }}
     >
       <div className="absolute top-10 left-10 sm:left-14 text-white">
-        <span>Great packs of ready-made templates</span>
+        <span>The Smart Way to Sell Vehicles</span>
       </div>
       <div className="w-[95%] md:w-[75%] text-center">
         <h1 className="text-white text-4xl sm:text-5xl font-bold leading-10 md:!leading-[3.5rem]">
-          Car Dealer, Car Leasing, Car Repair HTML & Next JS Templates
+        A "hassle-free" SaaS platform That Puts Your Dealership in the Fast Lane
         </h1>
         <p className="py-4 text-white">
-          Autovault provides full of features for creating a perfect Business
-          website as like Consulting, Corporate, Finance, Agency and Marketing
-          websites.
+        We help bring potential customers to your door-step. Start your journey to higher profits today! Let&apos;s Get Started!
         </p>
         <div className="flex items-center justify-center">
           <Link
