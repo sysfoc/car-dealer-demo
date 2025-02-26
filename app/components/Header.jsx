@@ -85,7 +85,7 @@ const Header = () => {
             className="relative hover:text-blue-950 md:hover:text-blue-950"
           >
             <Link
-              href="#"
+              href="/add-ons"
               className="relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:bg-red-500 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full"
             >
               Add-ons
