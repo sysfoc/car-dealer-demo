@@ -49,7 +49,7 @@ export default function Home() {
                 <span className="text-sm">Normally $59 (Save 17% )</span>
               </div>
               <div className="flex flex-col">
-                <Button className="mt-4 w-full rounded-full bg-red-600 py-2 text-white">
+                <Button className="mt-4 w-full rounded-full bg-red-600 hover:!bg-red-700 py-2 text-white">
                   Get Started
                 </Button>
               </div>
@@ -128,7 +128,7 @@ export default function Home() {
                 <span className="text-sm">Normally $59 (Save 17% )</span>
               </div>
               <div className="flex flex-col">
-                <Button className="mt-4 w-full rounded-full bg-red-600 py-2 text-white">
+                <Button className="mt-4 w-full rounded-full bg-red-600 hover:!bg-red-700 py-2 text-white">
                   Get Started
                 </Button>
               </div>
@@ -196,7 +196,7 @@ export default function Home() {
             </div>
           </div>
           <div className="rounded-lg shadow-md bg-white">
-            <div className="rounded-t-lg bg-red-600 p-2 text-white">
+            <div className="rounded-t-lg bg-red-600 hover:!bg-red-700 p-2 text-white">
               <div className="flex items-center justify-center">
                 <div className="flex items-center gap-2">
                   <MdOutlineCelebration fontSize={18} className="text-white" />
@@ -216,7 +216,7 @@ export default function Home() {
                   <span className="text-sm">Normally $59 (Save 17% )</span>
                 </div>
                 <div className="flex flex-col">
-                  <Button className="mt-4 w-full rounded-full bg-red-600 py-2 text-white">
+                  <Button className="mt-4 w-full rounded-full bg-red-600 hover:!bg-red-700 py-2 text-white">
                     Get Started
                   </Button>
                 </div>

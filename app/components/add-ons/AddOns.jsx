@@ -62,7 +62,7 @@ const AddOns = () => {
                       <span className="px-5 py-2 rounded-md text-sm bg-gray-100">
                         {service.price}
                       </span>
-                      <Button size="sm" color="dark">
+                      <Button className="w-full bg-red-600 hover:!bg-red-700 text-white">
                         Add to Cart
                       </Button>
                     </div>
