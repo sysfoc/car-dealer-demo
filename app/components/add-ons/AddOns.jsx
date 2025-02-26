@@ -34,7 +34,7 @@ const AddOns = () => {
   ];
 
   return (
-    <section className="mx-4 md:mx-12 my-14 py-10">
+    <section className="mx-4 md:mx-12 my-5">
       <div className="flex items-center justify-center">
         <div className="w-full md:w-[80%]">
           <div className="flex flex-col items-center gap-5">
