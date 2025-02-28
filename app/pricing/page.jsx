@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Button, Radio, ToggleSwitch } from "flowbite-react";
+import { Button, ToggleSwitch } from "flowbite-react";
 import { FaCheckCircle } from "react-icons/fa";
 import { MdOutlineCelebration } from "react-icons/md";
 
