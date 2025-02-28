@@ -15,7 +15,7 @@ export default function Register() {
             <TextInput 
               id="name" 
               type="text" 
-              placeholder="Enter your full name" 
+              placeholder="John Doe" 
               required
             />
           </div>
@@ -25,7 +25,7 @@ export default function Register() {
             <TextInput 
               id="email" 
               type="email" 
-              placeholder="Enter your email" 
+              placeholder="john@gmail.com" 
               required
             />
           </div>
@@ -35,7 +35,7 @@ export default function Register() {
             <TextInput 
               id="password" 
               type="password" 
-              placeholder="Enter your password" 
+              placeholder="*********" 
               required
             />
           </div>
@@ -45,13 +45,18 @@ export default function Register() {
           </Button>
         </form>
         
-        <div className="mt-6 space-y-4">
+        <div className="relative my-5 flex items-center">
+          <div className="flex-grow border-t border-gray-300"></div>
+          <span className="mx-4 flex-shrink text-gray-600">or</span>
+          <div className="flex-grow border-t border-gray-300"></div>
+        </div>
+        <div className="space-y-4">
           <Button 
             className="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 hover:!bg-gray-50"
           >
             <FcGoogle className="text-xl mr-2" /> Sign up with Google
           </Button>
-          
+
           <Button 
             className="w-full flex items-center justify-center gap-2 bg-black text-white hover:!bg-gray-800"
           >
