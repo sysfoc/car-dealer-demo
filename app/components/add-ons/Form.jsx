@@ -24,15 +24,17 @@ const Form = () => {
                   type="text"
                   placeholder="John Doe"
                   className="w-full"
+                  autoComplete="on"
                 />
               </div>
               <div>
-                <Label htmlFor="name">Email</Label>
+                <Label htmlFor="email">Email</Label>
                 <TextInput
                   id="email"
                   type="email"
                   placeholder="john@gmail.com"
                   className="w-full"
+                  autoComplete="on"
                 />
               </div>
               <div>

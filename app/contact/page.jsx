@@ -24,7 +24,12 @@ export default function ContactUs() {
                 >
                   Name
                 </Label>
-                <TextInput type="text" id="name" placeholder="John Doe" />
+                <TextInput
+                  type="text"
+                  id="name"
+                  autoComplete="on"
+                  placeholder="John Doe"
+                />
               </div>
               <div className="mb-4">
                 <Label
@@ -37,6 +42,7 @@ export default function ContactUs() {
                   type="email"
                   id="email"
                   placeholder="john@gmail.com"
+                  autoComplete="on"
                 />
               </div>
               <div className="mb-4">
