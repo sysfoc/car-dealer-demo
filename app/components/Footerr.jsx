@@ -18,8 +18,9 @@ const Footerr = () => {
             <Footer.Link href="/about">About</Footer.Link>
             <Footer.Link href="/contact">Contact</Footer.Link>
             <Footer.Link href="#">FAQ</Footer.Link>
+            <Footer.Link href="/terms">Terms</Footer.Link>
             <Footer.Link href="#">Blog</Footer.Link>
-            <Footer.Link href="#">Privacy Policy</Footer.Link>
+            <Footer.Link href="/privacy">Privacy Policy</Footer.Link>
             <Footer.Link href="#">Refund Policy</Footer.Link>
             <Footer.Link href="#">Cookies Policy</Footer.Link>
           </Footer.LinkGroup>
