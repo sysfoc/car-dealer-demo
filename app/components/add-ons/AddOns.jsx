@@ -44,13 +44,13 @@ const AddOns = () => {
                 className="w-full shadow-md px-8 py-6 rounded-lg bg-white"
               >
                 <div className="flex items-center gap-8 flex-wrap md:flex-nowrap">
-                  <div className="w-[80px] h-[80px] flex-shrink-0">
+                  <div className="w-[100px] h-[100px] flex-shrink-0">
                     <Image
                       src={service.image}
                       alt={service.alt}
-                      width={80}
-                      height={80}
-                      className="rounded-full"
+                      width={100}
+                      height={100}
+                      className="rounded-full p-5 bg-gray-50/95"
                     />
                   </div>
                   <div className="flex items-end justify-between flex-wrap md:flex-nowrap gap-5">
