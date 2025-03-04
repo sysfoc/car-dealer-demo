@@ -21,8 +21,8 @@ const Footerr = () => {
             <Footer.Link href="/terms">Terms</Footer.Link>
             <Footer.Link href="/blogs">Blogs</Footer.Link>
             <Footer.Link href="/privacy">Privacy Policy</Footer.Link>
-            <Footer.Link href="#">Refund Policy</Footer.Link>
-            <Footer.Link href="#">Cookies Policy</Footer.Link>
+            <Footer.Link href="/refund-policy">Refund Policy</Footer.Link>
+            <Footer.Link href="/cookies">Cookies Policy</Footer.Link>
           </Footer.LinkGroup>
         </div>
         <Footer.Divider />

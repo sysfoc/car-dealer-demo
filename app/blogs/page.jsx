@@ -51,7 +51,7 @@ const page = () => {
   ];
   return (
     <section className="mx-4 my-10 sm:mx-8">
-      <h2 className="mt-5 text-center text-3xl font-semibold">Blog Section</h2>
+      <h2 className="mt-5 text-center text-3xl font-bold">Blog Section</h2>
       <div className="mt-8">
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {blogs.map((blog, index) => (
