@@ -4,12 +4,42 @@ import React from "react";
 import { FaCheck } from "react-icons/fa6";
 const ProjectTemplates = () => {
   const dealers = [
-    { id: 1, name: "Dealer One", link: "/" },
-    { id: 2, name: "Dealer Two", link: "/" },
-    { id: 3, name: "Dealer Three", link: "/" },
-    { id: 4, name: "Dealer Four", link: "/" },
-    { id: 5, name: "Dealer Five", link: "/" },
-    { id: 6, name: "Dealer Six", link: "/" },
+    {
+      id: 1,
+      name: "Dealer One",
+      alt: "Car dealership showroom with multiple vehicles - Dealer One",
+      link: "/",
+    },
+    {
+      id: 2,
+      name: "Dealer Two",
+      alt: "Exterior view of a modern car dealership - Dealer Two",
+      link: "/",
+    },
+    {
+      id: 3,
+      name: "Dealer Three",
+      alt: "Luxury cars displayed at a high-end car dealership - Dealer Three",
+      link: "/",
+    },
+    {
+      id: 4,
+      name: "Dealer Four",
+      alt: "Car sales office with customer service desk - Dealer Four",
+      link: "/",
+    },
+    {
+      id: 5,
+      name: "Dealer Five",
+      alt: "Used cars lined up in a dealership parking lot - Dealer Five",
+      link: "/",
+    },
+    {
+      id: 6,
+      name: "Dealer Six",
+      alt: "Car dealership with promotional banners and offers - Dealer Six",
+      link: "/",
+    },
   ];
   return (
     <section className="my-14 mx-4 md:mx-12">
@@ -53,7 +83,7 @@ const ProjectTemplates = () => {
                 <div className="p-4 bg-white">
                   <Image
                     src={"/demo-1.webp"}
-                    alt={dealer.name}
+                    alt={dealer.alt}
                     width={500}
                     height={500}
                     className="size-auto"
