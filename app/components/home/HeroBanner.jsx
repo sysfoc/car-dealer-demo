@@ -16,10 +16,12 @@ const HeroBanner = () => {
       </div>
       <div className="w-[95%] md:w-[75%] text-center">
         <h1 className="text-white text-4xl sm:text-5xl font-bold leading-10 md:!leading-[3.5rem]">
-        A "hassle-free" SaaS platform That Puts Your Dealership in the Fast Lane
+          A "hassle-free" SaaS platform That Puts Your Dealership in the Fast
+          Lane
         </h1>
         <p className="py-4 text-white">
-        We help bring potential customers to your door-step. Start your journey to higher profits today! Let&apos;s Get Started!
+          We help bring potential customers to your door-step. Start your
+          journey to higher profits today! Let&apos;s Get Started!
         </p>
         <div className="flex items-center justify-center">
           <Link

@@ -1,6 +1,7 @@
-import { Button } from "flowbite-react";
+import { Button, Select } from "flowbite-react";
 import Image from "next/image";
 import React from "react";
+import { TiCloudStorage } from "react-icons/ti";
 
 const AddOns = () => {
   const services = [
@@ -28,7 +29,7 @@ const AddOns = () => {
       alt: "Feature 9 - Social Media Marketing",
       title: "Social Media Marketing",
       description:
-        "Boost your brand's social presence with targeted campaigns. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit optio dicta nihil excepturi magni!",
+        "Boost your brand's for better search rankings and online visibility. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit optio dicta nihil excepturi magni",
       price: "$400/month",
     },
   ];
@@ -53,7 +54,7 @@ const AddOns = () => {
                       className="rounded-full p-5 bg-gray-50/95"
                     />
                   </div>
-                  <div className="flex items-end justify-between flex-wrap md:flex-nowrap gap-5">
+                  <div className="w-full flex items-end justify-between flex-wrap md:flex-nowrap gap-5">
                     <div className="flex flex-col gap-1">
                       <h3 className="text-xl font-semibold">{service.title}</h3>
                       <p className="text-gray-500">{service.description}</p>
@@ -70,6 +71,34 @@ const AddOns = () => {
                 </div>
               </div>
             ))}
+            <div className="w-full shadow-md px-8 py-6 rounded-lg bg-white">
+              <div className="flex items-center gap-8 flex-wrap md:flex-nowrap">
+                <div className="w-[100px] h-[100px] flex-shrink-0">
+                  <div className="flex items-center justify-center p-6 w-full h-full rounded-full bg-gray-50/95">
+                    <TiCloudStorage className="text-6xl text-gray-500" />
+                  </div>
+                </div>
+                <div className="w-full flex items-end justify-between flex-wrap md:flex-nowrap gap-5">
+                  <div className="flex flex-col gap-1">
+                    <h3 className="text-xl font-semibold">Extra Storage</h3>
+                    <p className="text-gray-500">Purchased: 10GB - $3/mo</p>
+                    <p className="text-gray-500">
+                      Increase your Storage for a small monthly fee
+                    </p>
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <Select>
+                      <option value="10GB - $3/mo">10GB - $3/mo</option>
+                      <option value="20GB - $7/mo">20GB - $7/mo</option>
+                      <option value="30GB - $12/mo">30GB - $12/mo</option>
+                    </Select>
+                    <Button className="w-full bg-red-600 hover:!bg-red-700 text-white">
+                      Add to Cart
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
