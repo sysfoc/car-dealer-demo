@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaCheck } from "react-icons/fa6";
+import { AiOutlineEye } from "react-icons/ai";
 const ProjectTemplates = () => {
   const dealers = [
     {
@@ -77,7 +78,7 @@ const ProjectTemplates = () => {
           {dealers.map((dealer) => (
             <div
               key={dealer.id}
-              className="rounded-md shadow-lg transition-transform duration-300 hover:-translate-y-4"
+              className="relative rounded-md shadow-lg transition-transform duration-300 hover:-translate-y-4 group"
             >
               <Link href={dealer.link}>
                 <div className="p-4 bg-white">
@@ -95,6 +96,14 @@ const ProjectTemplates = () => {
                   </h3>
                 </div>
               </Link>
+              <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <Link href={"/"}>
+                  <button className="flex items-center gap-2 bg-white text-black font-semibold py-2 px-4 rounded-md shadow-md hover:bg-gray-200">
+                    <AiOutlineEye className="text-lg" />
+                    View Demo
+                  </button>
+                </Link>
+              </div>
             </div>
           ))}
         </div>
