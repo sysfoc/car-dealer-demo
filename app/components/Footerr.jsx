@@ -31,6 +31,7 @@ const Footerr = () => {
             href="https://sysfoc.com"
             by="Sysfoc car dealer"
             year={2025}
+            
           />
           <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
             <Footer.Icon
@@ -38,30 +39,35 @@ const Footerr = () => {
               icon={BsFacebook}
               aria-label="Facebook"
               title="Facebook"
+              target="_blank"
             />
             <Footer.Icon
               href="#"
               icon={BsInstagram}
               aria-label="Instagram"
               title="Instagram"
+              target="_blank"
             />
             <Footer.Icon
               href="#"
               icon={BsTwitter}
               aria-label="Twitter"
               title="Twitter"
+              target="_blank"
             />
             <Footer.Icon
               href="#"
               icon={BsGithub}
               aria-label="Github"
               title="Github"
+              target="_blank"
             />
             <Footer.Icon
               href="#"
               icon={BsDribbble}
               aria-label="Dribble"
               title="Dribble"
+              target="_blank"
             />
           </div>
         </div>
