@@ -2,8 +2,7 @@
 import { usePathname } from "next/navigation";
 import Header from "@/app/components/Header";
 import Footerr from "@/app/components/Footerr";
-import AdminHeader from "@/app/(admin)/components/Header";
-import AdminFooter from "@/app/(admin)/components/Footer";
+import AdminSidebar from "@/app/(admin)/components/AdminSidebar";
 
 export default function LayoutWrapper({
   children,
@@ -12,12 +11,20 @@ export default function LayoutWrapper({
 }) {
   const pathname = usePathname();
   const isDashboardRoute = pathname.startsWith("/dashboard");
-
   return (
     <>
-      {isDashboardRoute ? <AdminHeader /> : <Header />}
-      {children}
-      {isDashboardRoute ? <AdminFooter /> : <Footerr />}
+      {!isDashboardRoute ? (
+        <div>
+          <Header />
+          {children}
+          <Footerr />
+        </div>
+      ) : (
+        <div className="flex">
+          <AdminSidebar />
+          <div className="w-full p-5">{children}</div>
+        </div>
+      )}
     </>
   );
 }
