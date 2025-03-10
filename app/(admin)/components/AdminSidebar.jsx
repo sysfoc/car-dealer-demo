@@ -6,7 +6,6 @@ import {
   HiChartPie,
   HiInbox,
   HiShoppingBag,
-  HiTable,
   HiUser,
   HiViewBoards,
 } from "react-icons/hi";
@@ -22,42 +21,42 @@ const AdminSidebar = () => {
           <Sidebar.Item
             href="#"
             icon={HiChartPie}
-            className="text-white hover:!bg-white hover:!text-black"
+            className="hover:!bg-[#0dcaf021] hover:!text-[#2899b0]"
           >
             Dashboard
           </Sidebar.Item>
           <Sidebar.Item
             href="#"
             icon={HiViewBoards}
-            className="text-white hover:!bg-white hover:!text-black"
+            className="hover:!bg-[#0dcaf021] hover:!text-[#2899b0]"
           >
             Invoice
           </Sidebar.Item>
           <Sidebar.Item
             href="#"
             icon={HiInbox}
-            className="text-white hover:!bg-white hover:!text-black"
+            className="hover:!bg-[#0dcaf021] hover:!text-[#2899b0]"
           >
             Payment Gateways
           </Sidebar.Item>
           <Sidebar.Item
             href="#"
             icon={HiUser}
-            className="text-white hover:!bg-white hover:!text-black"
+            className="hover:!bg-[#0dcaf021] hover:!text-[#2899b0]"
           >
             Users
           </Sidebar.Item>
           <Sidebar.Item
             href="#"
             icon={HiShoppingBag}
-            className="text-white hover:!bg-white hover:!text-black"
+            className="hover:!bg-[#0dcaf021] hover:!text-[#2899b0]"
           >
             Payment History
           </Sidebar.Item>
           <Sidebar.Item
             href="#"
             icon={HiArrowSmRight}
-            className="text-white hover:!bg-white hover:!text-black"
+            className="hover:!bg-[#0dcaf021] hover:!text-[#2899b0]"
           >
             Billings
           </Sidebar.Item>

@@ -1,8 +1,8 @@
-export default function Dashboard(){
-    return (
-      <main>
-        <h1>Dashboard</h1>
-      </main>
-    );
-  }
-  
+import OverviewSection from '@/app/(admin)/components/dashboard/Overview'
+export default function Dashboard() {
+  return (
+    <main>
+      <OverviewSection />
+    </main>
+  );
+}

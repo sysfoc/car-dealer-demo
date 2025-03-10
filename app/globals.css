@@ -7,14 +7,14 @@ html {
 }
 
 .sidebar div {
-  background-color: black !important;
-  color: white !important;
+  background-color: white !important;
+  color: black !important;
 }
 
 .sidebar div svg {
-  fill: white !important;
+  fill: black !important;
 }
 
 .sidebar div svg:hover {
-  fill: black !important;
+  fill: #0DCAF0 !important;
 }
