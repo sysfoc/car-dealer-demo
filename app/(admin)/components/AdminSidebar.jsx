@@ -14,7 +14,7 @@ const AdminSidebar = () => {
   return (
     <Sidebar
       aria-label="Sidebar of a dashboard"
-      className="w-[18rem] h-screen shadow-lg sidebar"
+      className="hidden md:block w-[18rem] h-screen shadow sidebar"
     >
       <Sidebar.Items>
         <Sidebar.ItemGroup>

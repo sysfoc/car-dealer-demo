@@ -20,7 +20,7 @@ export default function LayoutWrapper({
           <Footerr />
         </div>
       ) : (
-        <div className="flex">
+        <div className="flex h-screen overflow-y-scroll">
           <AdminSidebar />
           <div className="w-full p-5">{children}</div>
         </div>
