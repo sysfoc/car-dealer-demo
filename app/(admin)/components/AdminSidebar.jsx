@@ -26,7 +26,7 @@ const AdminSidebar = () => {
             Dashboard
           </Sidebar.Item>
           <Sidebar.Item
-            href="#"
+            href="/dashboard/invoices"
             icon={HiViewBoards}
             className="hover:!bg-[#0dcaf021] hover:!text-[#2899b0]"
           >
