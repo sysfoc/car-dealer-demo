@@ -19,7 +19,7 @@ const AdminSidebar = () => {
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           <Sidebar.Item
-            href="#"
+            href="/dashboard"
             icon={HiChartPie}
             className="hover:!bg-[#0dcaf021] hover:!text-[#2899b0]"
           >

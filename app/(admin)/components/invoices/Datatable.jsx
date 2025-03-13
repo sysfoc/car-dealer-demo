@@ -44,6 +44,24 @@ const Datatable = () => {
         paymentMethod: "Credit Card",
         status: "Paid",
       },
+      {
+        id: "5",
+        invoiceId: "INV-1005",
+        billingName: "Emily Johnson",
+        orderDate: new Date(2025, 2, 12),
+        total: 320.0,
+        paymentMethod: "Credit Card",
+        status: "Paid",
+      },
+      {
+        id: "6",
+        invoiceId: "INV-1006",
+        billingName: "Emily Johnson",
+        orderDate: new Date(2025, 2, 12),
+        total: 320.0,
+        paymentMethod: "Credit Card",
+        status: "Paid",
+      },
     ],
   };
   const BASELINE_THEME = {
