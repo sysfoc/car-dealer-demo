@@ -180,7 +180,7 @@ const Datatable = () => {
       renderCell: (item) => (
         <div className="flex items-center gap-2">
           <Link
-            href={"#"}
+            href={"/dashboard/invoices/view/2"}
             className="p-2 bg-blue-600 text-white rounded hover:bg-blue-700"
             title="View"
           >
