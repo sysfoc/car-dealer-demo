@@ -47,7 +47,7 @@ const AdminSidebar = () => {
             Users
           </Sidebar.Item>
           <Sidebar.Item
-            href="#"
+            href="/dashboard/payment/history"
             icon={HiShoppingBag}
             className="hover:!bg-[#0dcaf021] hover:!text-[#2899b0]"
           >
