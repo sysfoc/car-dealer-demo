@@ -4,6 +4,7 @@ import { CompactTable } from "@table-library/react-table-library/compact";
 import { useRowSelect } from "@table-library/react-table-library/select";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import Link from "next/link";
+import { Button } from "flowbite-react";
 
 const Datatable = () => {
   const data = {
@@ -206,7 +207,16 @@ const Datatable = () => {
   return (
     <div className="my-5 p-5 bg-white shadow">
       <div>
-        <h2 className="text-xl font-semibold mb-4">Invoices List</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-semibold mb-4">Invoices List</h2>
+          <div>
+            <Link href={"/dashboard/invoices/create"}>
+              <Button size={"sm"} color="blue">
+                Create New
+              </Button>
+            </Link>
+          </div>
+        </div>
         <CompactTable
           columns={COLUMNS}
           data={data}
