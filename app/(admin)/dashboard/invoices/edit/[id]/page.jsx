@@ -33,7 +33,7 @@ export default function CreateInvoices() {
   return (
     <main>
       <div>
-        <h1 className="text-xl font-semibold">New Invoice</h1>
+        <h1 className="text-xl font-semibold">Edit Invoice</h1>
       </div>
       <div className="shadow bg-white p-5 my-3">
         <form>
@@ -153,7 +153,7 @@ export default function CreateInvoices() {
           <div>
             <div className="mt-5 flex items-center justify-center">
               <Button type="submit" color="blue">
-                Create Invoice
+                Update Invoice
               </Button>
             </div>
           </div>

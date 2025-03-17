@@ -187,12 +187,14 @@ const Datatable = () => {
           >
             <FaEye className="w-3 h-3" />
           </Link>
-          <button
-            className="p-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
-            title="Edit"
-          >
-            <FaEdit className="w-3 h-3" />
-          </button>
+          <Link href={"/dashboard/invoices/edit/1"}>
+            <button
+              className="p-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+              title="Edit"
+            >
+              <FaEdit className="w-3 h-3" />
+            </button>
+          </Link>
           <button
             className="p-2 bg-red-500 text-white rounded hover:bg-red-600"
             title="Delete"
