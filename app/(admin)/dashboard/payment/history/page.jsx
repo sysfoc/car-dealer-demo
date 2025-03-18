@@ -1,11 +1,20 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { CompactTable } from "@table-library/react-table-library/compact";
 import { useRowSelect } from "@table-library/react-table-library/select";
-import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import Link from "next/link";
-import { Button } from "flowbite-react";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "flowbite-react";
+
 export default function PaymentHistory() {
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
   const data = {
     nodes: [
       {
@@ -131,6 +140,10 @@ export default function PaymentHistory() {
   function onSelectChange(action, state) {
     console.log(action, state);
   }
+  const handleViewTransaction = (transaction) => {
+    setSelectedTransaction(transaction);
+    setOpenModal(true);
+  };
 
   const COLUMNS = [
     {
@@ -181,13 +194,13 @@ export default function PaymentHistory() {
       label: "Action",
       renderCell: (item) => (
         <div className="flex items-center gap-2">
-          <Link
-            href={"/dashboard/invoices/view/2"}
+          <button
             className="p-2 bg-blue-600 text-white rounded hover:bg-blue-700"
             title="View"
+            onClick={() => handleViewTransaction(item)}
           >
             <FaEye className="w-3 h-3" />
-          </Link>
+          </button>
         </div>
       ),
     },
@@ -213,6 +226,61 @@ export default function PaymentHistory() {
           select={select}
           className="w-full overflow-x-scroll"
         />
+        <Modal show={openModal} onClose={() => setOpenModal(false)}>
+          <ModalHeader>
+            Transaction Details of{" "}
+            {selectedTransaction ? selectedTransaction.invoiceId : ""}
+          </ModalHeader>
+          <ModalBody>
+            {selectedTransaction ? (
+              <div className="space-y-3">
+                <p>
+                  <strong>Transaction ID:</strong>
+                  {selectedTransaction.invoiceId}
+                </p>
+                <p>
+                  <strong>Date:</strong>{" "}
+                  {new Date(selectedTransaction.orderDate).toLocaleDateString(
+                    "en-US",
+                    { year: "numeric", month: "long", day: "numeric" }
+                  )}
+                </p>
+                <p>
+                  <strong>Description:</strong>{" "}
+                  {selectedTransaction.description}
+                </p>
+                <p>
+                  <strong>Amount:</strong> $
+                  {selectedTransaction.transactionAmount.toFixed(2)}
+                </p>
+                <p>
+                  <strong>Type:</strong> {selectedTransaction.type}
+                </p>
+                <p>
+                  <strong>Status:</strong>{" "}
+                  <span
+                    className={`px-3 py-1 text-white rounded ${
+                      selectedTransaction.status === "Completed"
+                        ? "bg-green-500"
+                        : selectedTransaction.status === "Pending"
+                        ? "bg-orange-500"
+                        : "bg-red-500"
+                    }`}
+                  >
+                    {selectedTransaction.status}
+                  </span>
+                </p>
+              </div>
+            ) : (
+              <p>No transaction selected.</p>
+            )}
+          </ModalBody>
+          <ModalFooter>
+            <Button color="gray" onClick={() => setOpenModal(false)}>
+              Close
+            </Button>
+          </ModalFooter>
+        </Modal>
       </div>
     </div>
   );
