@@ -210,13 +210,6 @@ export default function PaymentHistory() {
       <div>
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold mb-4">Transactions</h2>
-          <div>
-            <Link href={"/dashboard/invoices/create"}>
-              <Button size={"sm"} color="blue">
-                Add Transaction
-              </Button>
-            </Link>
-          </div>
         </div>
         <CompactTable
           columns={COLUMNS}
