@@ -2,12 +2,13 @@
 import React from "react";
 import { CompactTable } from "@table-library/react-table-library/compact";
 import { useRowSelect } from "@table-library/react-table-library/select";
+import { usePagination } from "@table-library/react-table-library/pagination";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import Link from "next/link";
 import { Button } from "flowbite-react";
 
 const Datatable = () => {
-  const data = {
+  let data = {
     nodes: [
       {
         id: "1",
@@ -65,12 +66,34 @@ const Datatable = () => {
       },
     ],
   };
+  const [search, setSearch] = React.useState("");
+
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+  };
+
+  data = {
+    nodes: data.nodes.filter((item) =>
+      item.invoiceId.toLowerCase().includes(search.toLowerCase())
+    ),
+  };
+  const pagination = usePagination(data, {
+    state: {
+      page: 0,
+      size: 5,
+    },
+    onChange: onPaginationChange,
+  });
+
+  function onPaginationChange(action, state) {
+    console.log(action, state);
+  }
   const BASELINE_THEME = {
     Table: `
               border-radius: 8px;
               overflow: hidden;
               background-color: white;
-              --data-table-library_grid-template-columns: 80px 150px 120px 100px 140px 100px 80px; /* Adjust Column Widths */
+              --data-table-library_grid-template-columns: 60px 80px 100px 100px 80px 80px 100px 200px; /* Adjust Column Widths */
             `,
     Header: `
               background-color: #f8fafc; /* Light Gray Background */
@@ -219,14 +242,47 @@ const Datatable = () => {
             </Link>
           </div>
         </div>
+        <label htmlFor="search">
+          Search by ID:&nbsp;
+          <input
+            id="search"
+            type="text"
+            value={search}
+            onChange={handleSearch}
+            className="p-1 border border-gray-400 outline-none text-sm"
+          />
+        </label>
         <CompactTable
           columns={COLUMNS}
           data={data}
           theme={BASELINE_THEME}
           layout={{ custom: true }}
           select={select}
+          pagination={pagination}
           className="w-full overflow-x-scroll"
         />
+        <div className="mt-3 flex items-center justify-between">
+          <span className="text-sm">
+            Total Pages: {pagination.state.getTotalPages(data.nodes)}
+          </span>
+
+          <span>
+            {pagination.state.getPages(data.nodes).map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                className={`px-3 py-1 border text-sm ${
+                  pagination.state.page === index
+                    ? "bg-blue-700 text-white"
+                    : ""
+                }`}
+                onClick={() => pagination.fns.onSetPage(index)}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </span>
+        </div>
       </div>
     </div>
   );
