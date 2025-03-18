@@ -5,7 +5,11 @@ import { useRowSelect } from "@table-library/react-table-library/select";
 import { FaEdit, FaEye } from "react-icons/fa";
 import Link from "next/link";
 import { FaTrash } from "react-icons/fa6";
+import { Modal, Button } from "flowbite-react";
+
 export default function Users() {
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
   const data = {
     nodes: [
       {
@@ -52,7 +56,10 @@ export default function Users() {
       },
     ],
   };
-
+  const handleViewUser = (user) => {
+    setSelectedUser(user);
+    setIsOpen(true);
+  };
   const BASELINE_THEME = {
     Table: `
                     border-radius: 8px;
@@ -136,10 +143,11 @@ export default function Users() {
           <button
             className="p-2 bg-blue-600 text-white rounded hover:bg-blue-700"
             title="View"
+            onClick={() => handleViewUser(item)}
           >
             <FaEye className="w-3 h-3" />
           </button>
-          <Link href={`/dashboard/invoices/edit/${item.id}`}>
+          <Link href={`/dashboard/users/edit/${item.userId}`}>
             <button
               className="p-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
               title="Edit"
@@ -160,8 +168,15 @@ export default function Users() {
   return (
     <div className="my-5 p-5 bg-white shadow">
       <div>
-        <div>
-          <h2 className="text-xl font-semibold mb-4">Users</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-semibold mb-4">Users List</h2>
+          <div>
+            <Link href={"/dashboard/users/create"}>
+              <Button size={"sm"} color="blue">
+                Add User
+              </Button>
+            </Link>
+          </div>
         </div>
         <CompactTable
           columns={COLUMNS}
@@ -171,6 +186,34 @@ export default function Users() {
           select={select}
           className="w-full overflow-x-scroll"
         />
+        <Modal show={isOpen} onClose={() => setIsOpen(false)}>
+          <Modal.Header>User Details</Modal.Header>
+          <Modal.Body>
+            {selectedUser ? (
+              <div className="space-y-2">
+                <p>
+                  <strong>User ID:</strong> {selectedUser.userId}
+                </p>
+                <p>
+                  <strong>Username:</strong> {selectedUser.username}
+                </p>
+                <p>
+                  <strong>Email:</strong> {selectedUser.email}
+                </p>
+                <p>
+                  <strong>Phone:</strong> {selectedUser.phone}
+                </p>
+              </div>
+            ) : (
+              <p>No user selected.</p>
+            )}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={() => setIsOpen(false)} color="gray">
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </div>
   );

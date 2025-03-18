@@ -181,13 +181,13 @@ const Datatable = () => {
       renderCell: (item) => (
         <div className="flex items-center gap-2">
           <Link
-            href={`/dashboard/invoices/view/${item.id}`}
+            href={`/dashboard/invoices/view/${item.invoiceId}`}
             className="p-2 bg-blue-600 text-white rounded hover:bg-blue-700"
             title="View"
           >
             <FaEye className="w-3 h-3" />
           </Link>
-          <Link href={`/dashboard/invoices/edit/${item.id}`}>
+          <Link href={`/dashboard/invoices/edit/${item.invoiceId}`}>
             <button
               className="p-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
               title="Edit"
