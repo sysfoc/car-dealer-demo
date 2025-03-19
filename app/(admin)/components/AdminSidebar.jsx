@@ -33,7 +33,7 @@ const AdminSidebar = () => {
             Invoice
           </Sidebar.Item>
           <Sidebar.Item
-            href="#"
+            href="/dashboard/payment/gateways"
             icon={HiInbox}
             className="hover:!bg-[#0dcaf021] hover:!text-[#2899b0]"
           >
