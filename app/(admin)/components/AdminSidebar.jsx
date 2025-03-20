@@ -16,6 +16,7 @@ const AdminSidebar = () => {
       aria-label="Sidebar of a dashboard"
       className="hidden md:block w-[18rem] h-screen shadow sidebar"
     >
+      <Sidebar.Logo href="/dashboard">Admin Dashboard</Sidebar.Logo>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           <Sidebar.Item
