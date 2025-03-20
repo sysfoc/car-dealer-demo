@@ -4,7 +4,7 @@ import BarChart from "@/app/(user)/components/dashboard/BarChart";
 const Charts = () => {
   return (
     <section className="my-5">
-      <div className="flex flex-wrap md:flex-nowrap items-center gap-4">
+      <div className="flex flex-wrap">
         <BarChart />
       </div>
     </section>
