@@ -16,11 +16,11 @@ const UserSidebar = () => {
       aria-label="Sidebar of a dashboard"
       className="hidden md:block w-[18rem] h-screen shadow sidebar"
     >
-      <Sidebar.Logo href="/dashboard">User Dashboard</Sidebar.Logo>
+      <Sidebar.Logo href="/user/dashboard">User Dashboard</Sidebar.Logo>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           <Sidebar.Item
-            href="/dashboard"
+            href="/user/dashboard"
             icon={HiChartPie}
             className="hover:!bg-[#EA96FF] hover:!text-black"
           >

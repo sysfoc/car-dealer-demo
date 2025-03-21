@@ -14,7 +14,3 @@ html {
 .sidebar div svg {
   fill: black !important;
 }
-
-.sidebar div svg:hover {
-  fill: #0DCAF0 !important;
-}
