@@ -116,7 +116,7 @@ const UserSidebar = () => {
             }}
           >
             <Sidebar.Item
-              href="/user/dashboard/billing/invoice"
+              href="/user/dashboard/billing/invoices"
               className="hover:!bg-[#EA96FF] hover:!text-black"
             >
               Invoices
