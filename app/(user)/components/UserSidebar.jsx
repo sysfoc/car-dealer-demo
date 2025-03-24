@@ -194,16 +194,10 @@ const UserSidebar = () => {
               Profile
             </Sidebar.Item>
             <Sidebar.Item
-              href="#"
+              href="/user/dashboard/settings/security"
               className="hover:!bg-[#EA96FF] hover:!text-black"
             >
               Security
-            </Sidebar.Item>
-            <Sidebar.Item
-              href="#"
-              className="hover:!bg-[#EA96FF] hover:!text-black"
-            >
-              2F Auth
             </Sidebar.Item>
           </Sidebar.Collapse>
           <Sidebar.Item
