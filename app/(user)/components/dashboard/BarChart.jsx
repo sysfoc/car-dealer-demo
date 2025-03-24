@@ -16,7 +16,7 @@ const BarChart = () => {
   const options = {
     isStacked: true,
     chart: {
-      title: "Website Performance",
+      title: "Website Metrics",
       subtitle: "Website Statistics over the whole week",
     },
     vAxis: {

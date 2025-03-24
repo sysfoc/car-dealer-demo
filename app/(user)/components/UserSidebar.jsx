@@ -188,7 +188,7 @@ const UserSidebar = () => {
             }}
           >
             <Sidebar.Item
-              href="#"
+              href="/user/dashboard/settings/profile"
               className="hover:!bg-[#EA96FF] hover:!text-black"
             >
               Profile
