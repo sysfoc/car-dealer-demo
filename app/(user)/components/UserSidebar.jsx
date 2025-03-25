@@ -201,7 +201,7 @@ const UserSidebar = () => {
             </Sidebar.Item>
           </Sidebar.Collapse>
           <Sidebar.Item
-            href="/dashboard/payment/history"
+            href="/user/dashboard/notifications"
             icon={IoMdNotifications}
             className="hover:!bg-[#EA96FF] hover:!text-black"
           >

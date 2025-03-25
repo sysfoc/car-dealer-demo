@@ -1,4 +1,6 @@
 "use client";
+
+import { useState } from "react";
 import {
   Label,
   Table,
@@ -6,87 +8,111 @@ import {
   TableCell,
   TableRow,
   ToggleSwitch,
+  Card,
 } from "flowbite-react";
 
 export default function ProfileSecurity() {
+  const [auditLogs, setAuditLogs] = useState([
+    { id: 1, action: "Updated Billing Details", date: "March 25, 2025" },
+    { id: 2, action: "Changed Subscription Plan", date: "March 22, 2025" },
+  ]);
+
+  const [settings, setSettings] = useState({
+    readOnly: false,
+    modifyPayments: false,
+    otpEmail: true,
+    otpPhone: false,
+    twoFactorAuth: false,
+  });
+
+  const toggleSetting = (key) => {
+    setSettings((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
   return (
-    <div>
-      <div className="bg-white border-b p-4">
-        <h2 className="font-semibold text-xl">Manage Account</h2>
-      </div>
-      <div className="p-4 bg-white">
-        <div className="w-full flex flex-col gap-3">
+    <div className="p-6 space-y-6">
+      <Card>
+        <h2 className="text-xl font-semibold">Manage Account</h2>
+        <div className="mt-4 space-y-3">
           <div className="flex items-center gap-3">
-            <Label htmlFor="read-only">
-              Make the account read-only for other users, other than you
-            </Label>
-            <ToggleSwitch id="read-only" checked sizing="sm" />
+            <Label htmlFor="read-only">Make account read-only for others</Label>
+            <ToggleSwitch
+              id="read-only"
+              checked={settings.readOnly}
+              onChange={() => toggleSetting("readOnly")}
+              sizing="sm"
+            />
           </div>
           <div className="flex items-center gap-3">
-            <Label htmlFor="read-only">
-              Other users can add add or delete payment methods?
+            <Label htmlFor="modify-payments">
+              Allow others to add or delete payment methods
             </Label>
-            <ToggleSwitch id="read-only" sizing="sm" />
-          </div>
-          <div>
-            <div className="border-y">
-              <h3 className="font-semibold my-2">List of Logged-in users</h3>
-            </div>
-            <div>
-              <Table striped>
-                <TableBody>
-                  <TableRow>
-                    <TableCell>
-                      <span className="text-xs">john@gmail.com</span>
-                    </TableCell>
-                    <TableCell>
-                      <span className="p-1 text-green-500 bg-green-200 text-xs rounded-lg">
-                        Active
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>
-                      <span className="text-xs">john@gmail.com</span>
-                    </TableCell>
-                    <TableCell>
-                      <span className="p-1 text-green-500 bg-green-200 text-xs rounded-lg">
-                        Active
-                      </span>
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </div>
+            <ToggleSwitch
+              id="modify-payments"
+              checked={settings.modifyPayments}
+              onChange={() => toggleSetting("modifyPayments")}
+              sizing="sm"
+            />
           </div>
         </div>
-      </div>
-      <div className="bg-white border-y p-4">
-        <h2 className="font-semibold text-xl">Manage Security</h2>
-      </div>
-      <div className="p-4 bg-white">
-        <div className="w-full flex flex-col gap-3">
+      </Card>
+      <Card>
+        <h2 className="text-xl font-semibold">Manage Security</h2>
+        <div className="mt-4 space-y-3">
           <div className="flex items-center gap-3">
-            <Label htmlFor="otp-gmail">Send OTP message through email</Label>
-            <ToggleSwitch id="otp-gmail" checked sizing="sm" />
+            <Label htmlFor="otp-email">Send OTP via email</Label>
+            <ToggleSwitch
+              id="otp-email"
+              checked={settings.otpEmail}
+              onChange={() => toggleSetting("otpEmail")}
+              sizing="sm"
+            />
           </div>
           <div className="flex items-center gap-3">
-            <Label htmlFor="otp-phone">
-              Send OTP message through Mobile Number
-            </Label>
-            <ToggleSwitch id="otp-phone" sizing="sm" />
+            <Label htmlFor="otp-phone">Send OTP via mobile</Label>
+            <ToggleSwitch
+              id="otp-phone"
+              checked={settings.otpPhone}
+              onChange={() => toggleSetting("otpPhone")}
+              sizing="sm"
+            />
           </div>
           <div className="flex items-center gap-3">
             <div>
-              <Label htmlFor="2f-auth">Enable 2 Factor Authentication</Label>
-              <p className="text-xs">
-                (This service is available for mobile app users only)
+              <Label htmlFor="2fa">Enable 2-Factor Authentication</Label>
+              <p className="text-xs text-gray-500">
+                (Available for mobile app users only)
               </p>
             </div>
-            <ToggleSwitch id="2f-auth" sizing="sm" />
+            <ToggleSwitch
+              id="2fa"
+              checked={settings.twoFactorAuth}
+              onChange={() => toggleSetting("twoFactorAuth")}
+              sizing="sm"
+            />
           </div>
         </div>
-      </div>
+      </Card>
+      <Card>
+        <h2 className="text-xl font-semibold">Audit Logs</h2>
+        <Table striped className="mt-4">
+          <TableBody>
+            {auditLogs.map((log) => (
+              <TableRow key={log.id}>
+                <TableCell>{log.date}</TableCell>
+                <TableCell>{log.action}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Card>
+      <Card>
+        <h2 className="text-xl font-semibold">Data Privacy & Compliance</h2>
+        <p className="text-gray-600 mt-2">
+          We comply with GDPR and other regulations to ensure your billing data
+          is secure.
+        </p>
+      </Card>
     </div>
   );
 }

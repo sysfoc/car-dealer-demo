@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { CompactTable } from "@table-library/react-table-library/compact";
 import { useRowSelect } from "@table-library/react-table-library/select";
 import { FaEye } from "react-icons/fa";
-import Link from "next/link";
 import {
   Button,
   Modal,
