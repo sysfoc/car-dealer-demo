@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Card, Label, TextInput, Button, Table, Modal } from "flowbite-react";
 import {
   HiOutlineCreditCard,
-  HiDownload,
   HiPlus,
   HiTrash,
 } from "react-icons/hi";

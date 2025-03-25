@@ -128,7 +128,7 @@ const UserSidebar = () => {
               Payment History
             </Sidebar.Item>
             <Sidebar.Item
-              href="#"
+              href="/user/dashboard/billing/details"
               className="hover:!bg-[#EA96FF] hover:!text-black"
             >
               Billing Details
@@ -208,7 +208,7 @@ const UserSidebar = () => {
             Notifications
           </Sidebar.Item>
           <Sidebar.Item
-            href="/dashboard/payment/history"
+            href="/user/dashboard/support"
             icon={BiSupport}
             className="hover:!bg-[#EA96FF] hover:!text-black"
           >
