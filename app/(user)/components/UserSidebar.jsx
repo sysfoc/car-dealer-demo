@@ -122,7 +122,7 @@ const UserSidebar = () => {
               Invoices
             </Sidebar.Item>
             <Sidebar.Item
-              href="#"
+              href="/user/dashboard/billing/payment/history"
               className="hover:!bg-[#EA96FF] hover:!text-black"
             >
               Payment History
