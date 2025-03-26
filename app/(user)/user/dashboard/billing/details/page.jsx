@@ -2,11 +2,7 @@
 
 import { useState } from "react";
 import { Card, Label, TextInput, Button, Table, Modal } from "flowbite-react";
-import {
-  HiOutlineCreditCard,
-  HiPlus,
-  HiTrash,
-} from "react-icons/hi";
+import { HiOutlineCreditCard, HiPlus, HiTrash } from "react-icons/hi";
 
 export default function BillingDetail() {
   const [paymentMethods, setPaymentMethods] = useState([
@@ -29,7 +25,7 @@ export default function BillingDetail() {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-6">
       <Card>
         <h2 className="text-xl font-semibold">Billing Summary</h2>
         <div className="flex justify-between items-center mt-4">

@@ -86,13 +86,13 @@ const UserSidebar = () => {
             }}
           >
             <Sidebar.Item
-              href="#"
+              href="/user/dashboard/refund/request"
               className="hover:!bg-[#EA96FF] hover:!text-black"
             >
               Refund Request
             </Sidebar.Item>
             <Sidebar.Item
-              href="#"
+              href="/user/dashboard/refund/cancel-subscription"
               className="hover:!bg-[#EA96FF] hover:!text-black"
             >
               Cancel Subscription

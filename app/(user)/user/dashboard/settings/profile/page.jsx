@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function UserProfile() {
   return (
     <div>
-      <div className="bg-white border-b p-4">
+      <div className="bg-white border-b">
         <h2 className="font-semibold text-xl">Manage Profile</h2>
       </div>
       <div className="flex items-center justify-center p-4 bg-white">

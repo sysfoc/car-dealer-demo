@@ -44,7 +44,7 @@ export default function Support() {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-6">
       <Card>
         <h2 className="text-xl font-semibold">Billing Support</h2>
         <p className="text-gray-600 mt-2">

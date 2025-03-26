@@ -28,7 +28,7 @@ export default function RefundRequest() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen p-4">
+    <div className="flex justify-center items-center min-h-screen">
       <Card className="max-w-lg w-full shadow-lg border border-gray-200">
         <h2 className="text-2xl font-semibold text-center mb-4 text-gray-800">
           Refund Request
@@ -114,10 +114,7 @@ export default function RefundRequest() {
               <option value="store_credit">Store Credit</option>
             </Select>
           </div>
-          <Button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg"
-          >
+          <Button type="submit" color="blue">
             Submit Request
           </Button>
         </form>

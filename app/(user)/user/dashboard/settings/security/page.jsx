@@ -30,7 +30,7 @@ export default function ProfileSecurity() {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="space-y-6">
       <Card>
         <h2 className="text-xl font-semibold">Manage Account</h2>
         <div className="mt-4 space-y-3">
