@@ -44,19 +44,13 @@ const UserSidebar = () => {
             }}
           >
             <Sidebar.Item
-              href="#"
-              className="hover:!bg-[#EA96FF] hover:!text-black"
-            >
-              Plan Details
-            </Sidebar.Item>
-            <Sidebar.Item
-              href="#"
+              href="/user/dashboard/subscription/details"
               className="hover:!bg-[#EA96FF] hover:!text-black"
             >
               Upgrade Plan
             </Sidebar.Item>
             <Sidebar.Item
-              href="#"
+              href="/user/dashboard/subscription/add-ons"
               className="hover:!bg-[#EA96FF] hover:!text-black"
             >
               Add-ons
