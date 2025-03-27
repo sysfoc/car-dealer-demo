@@ -56,7 +56,7 @@ const UserSidebar = () => {
               Add-ons
             </Sidebar.Item>
             <Sidebar.Item
-              href="#"
+              href="/user/dashboard/subscription/trial-status"
               className="hover:!bg-[#EA96FF] hover:!text-black"
             >
               Trial Status
