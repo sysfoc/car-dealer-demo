@@ -114,7 +114,7 @@ export default function RefundRequest() {
               <option value="store_credit">Store Credit</option>
             </Select>
           </div>
-          <Button type="submit" color="blue">
+          <Button type="submit" color="blue" className="w-full">
             Submit Request
           </Button>
         </form>
