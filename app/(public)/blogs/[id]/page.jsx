@@ -64,11 +64,21 @@ const page = () => {
               <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div className="flex flex-col">
                   <Label htmlFor="fname">First Name:</Label>
-                  <TextInput type="text" id="fname" placeholder="First Name" />
+                  <TextInput
+                    type="text"
+                    id="fname"
+                    placeholder="First Name"
+                    required
+                  />
                 </div>
                 <div className="flex flex-col">
                   <Label htmlFor="lname">Last Name:</Label>
-                  <TextInput type="text" id="lname" placeholder="Last Name" />
+                  <TextInput
+                    type="text"
+                    id="lname"
+                    placeholder="Last Name"
+                    required
+                  />
                 </div>
                 <div className="col-span-2 flex flex-col">
                   <Label htmlFor="email">Email:</Label>
@@ -76,11 +86,12 @@ const page = () => {
                     type="email"
                     id="email"
                     placeholder="Email Address"
+                    required
                   />
                 </div>
                 <div className="col-span-2 flex flex-col">
                   <Label htmlFor="comment">Add Comment:</Label>
-                  <Textarea rows={10} id="comment" />
+                  <Textarea rows={10} id="comment" required />
                 </div>
               </div>
               <div>

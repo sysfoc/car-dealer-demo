@@ -28,6 +28,7 @@ export default function UserProfile() {
                 id="name"
                 defaultValue={"Sysfoc"}
                 placeholder="John Doe"
+                required
               />
             </div>
             <div>
@@ -37,6 +38,7 @@ export default function UserProfile() {
                 id="email"
                 defaultValue={"sysfoc@gmail.com"}
                 placeholder="johndoe@gmail.com"
+                required
               />
             </div>
             <div>
@@ -46,6 +48,7 @@ export default function UserProfile() {
                 id="phone"
                 defaultValue={"111-234-567"}
                 placeholder="111-234-567"
+                required
               />
             </div>
             <div>
@@ -55,6 +58,7 @@ export default function UserProfile() {
                 id="password"
                 defaultValue={"12345678"}
                 placeholder="*******"
+                required
               />
             </div>
             <div>

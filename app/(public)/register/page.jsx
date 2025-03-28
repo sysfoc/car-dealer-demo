@@ -32,12 +32,12 @@ export default function Register() {
             <TextInput
               id="password"
               type="password"
-              placeholder="*********"
+              placeholder="********"
               required
             />
           </div>
 
-          <Button color="blue" className="w-full">
+          <Button type="submit" color="blue" className="w-full">
             Sign Up
           </Button>
         </form>

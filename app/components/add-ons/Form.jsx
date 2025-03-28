@@ -16,7 +16,7 @@ const Form = () => {
         </div>
         <div className="flex items-center justify-center">
           <div className="w-full md:w-[80%]">
-            <div className="flex flex-col gap-5 mt-5">
+            <form className="flex flex-col gap-5 mt-5">
               <div>
                 <Label htmlFor="name">Name</Label>
                 <TextInput
@@ -25,6 +25,7 @@ const Form = () => {
                   placeholder="John Doe"
                   className="w-full"
                   autoComplete="on"
+                  required
                 />
               </div>
               <div>
@@ -35,6 +36,7 @@ const Form = () => {
                   placeholder="john@gmail.com"
                   className="w-full"
                   autoComplete="on"
+                  required
                 />
               </div>
               <div>
@@ -44,6 +46,7 @@ const Form = () => {
                   placeholder="Write your suggestion here"
                   className="w-full"
                   rows={5}
+                  required
                 />
               </div>
               <div className="flex items-center justify-center">
@@ -51,7 +54,7 @@ const Form = () => {
                   Submit
                 </Button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>

@@ -40,7 +40,7 @@ export default function CreateInvoices() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="flex flex-col gap-2">
               <Label htmlFor="invoice-id">Invoice ID</Label>
-              <TextInput type="text" placeholder="E.g. #JAN-2345" />
+              <TextInput type="text" placeholder="E.g. #JAN-2345" required />
             </div>
             <div className="flex flex-col gap-2">
               <Label htmlFor="invoice-status">Status</Label>
@@ -53,11 +53,11 @@ export default function CreateInvoices() {
             </div>
             <div className="flex flex-col gap-2">
               <Label htmlFor="invoice-date">Date</Label>
-              <TextInput type="date" id="invoice-date" />
+              <TextInput type="date" id="invoice-date" required />
             </div>
             <div className="flex flex-col gap-2">
               <Label htmlFor="invoice-dueDate">Due Date</Label>
-              <TextInput type="date" id="invoice-dueDate" />
+              <TextInput type="date" id="invoice-dueDate" required />
             </div>
             <div>
               <Label htmlFor="invoice-from">From</Label>
@@ -68,11 +68,12 @@ export default function CreateInvoices() {
                 4545 Seth Street Ballinger, TX 78965
                 +1 444 556 8899"
                 rows={5}
+                required
               />
             </div>
             <div>
               <Label htmlFor="invoice-to">To</Label>
-              <Textarea id="invoice-to" rows={5} />
+              <Textarea id="invoice-to" rows={5} required />
             </div>
           </div>
           <div className="mt-5">
@@ -100,6 +101,7 @@ export default function CreateInvoices() {
                         id={`item-description-${item.id}`}
                         type="text"
                         placeholder="Enter item name"
+                        required
                       />
                     </TableCell>
                     <TableCell>
@@ -115,6 +117,7 @@ export default function CreateInvoices() {
                         min={1}
                         max={10}
                         defaultValue={1}
+                        required
                       />
                     </TableCell>
                     <TableCell>
@@ -126,8 +129,9 @@ export default function CreateInvoices() {
                       </Label>
                       <TextInput
                         id={`item-price-${item.id}`}
-                        type="text"
+                        type="number"
                         placeholder="Enter price"
+                        required
                       />
                     </TableCell>
                     <TableCell>$0.0</TableCell>

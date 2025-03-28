@@ -29,6 +29,7 @@ export default function ContactUs() {
                   id="name"
                   autoComplete="on"
                   placeholder="John Doe"
+                  required
                 />
               </div>
               <div className="mb-4">
@@ -43,6 +44,7 @@ export default function ContactUs() {
                   id="email"
                   placeholder="john@gmail.com"
                   autoComplete="on"
+                  required
                 />
               </div>
               <div className="mb-4">
@@ -56,6 +58,7 @@ export default function ContactUs() {
                   id="message"
                   rows="4"
                   placeholder="Your Message"
+                  required
                 ></Textarea>
               </div>
               <Button type="submit" color={"blue"} className="w-full">

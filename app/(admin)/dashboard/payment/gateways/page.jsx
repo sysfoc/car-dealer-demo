@@ -155,6 +155,7 @@ export default function PaymentGateways() {
               }
               placeholder="Enter gateway name"
               label="Gateway Name"
+              required
             />
             <TextInput
               value={newGateway.sandboxId}
@@ -163,6 +164,7 @@ export default function PaymentGateways() {
               }
               placeholder="Enter sandbox ID"
               label="Sandbox ID"
+              required
             />
             <TextInput
               value={newGateway.apiKey}
@@ -171,6 +173,7 @@ export default function PaymentGateways() {
               }
               placeholder="Enter API key"
               label="API Key"
+              required
             />
             <Select
               value={newGateway.mode}

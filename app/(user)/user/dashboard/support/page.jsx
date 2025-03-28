@@ -99,6 +99,7 @@ export default function Support() {
             <TextInput
               id="support-subject"
               value={newTicket.subject}
+              required
               onChange={(e) =>
                 setNewTicket({ ...newTicket, subject: e.target.value })
               }
@@ -107,6 +108,7 @@ export default function Support() {
             <Textarea
               id="support-description"
               value={newTicket.description}
+              required
               onChange={(e) =>
                 setNewTicket({ ...newTicket, description: e.target.value })
               }
@@ -143,12 +145,17 @@ export default function Support() {
         <Modal.Body>
           <div className="space-y-4">
             <Label htmlFor="email-subject">Subject</Label>
-            <TextInput id="email-subject" placeholder="Enter subject" />
+            <TextInput
+              id="email-subject"
+              placeholder="Enter subject"
+              required
+            />
             <Label htmlFor="email-message">Message</Label>
             <Textarea
               id="email-message"
               rows={4}
               placeholder="Type your message..."
+              required
             />
           </div>
         </Modal.Body>
