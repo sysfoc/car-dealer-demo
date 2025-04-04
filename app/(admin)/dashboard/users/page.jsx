@@ -139,40 +139,40 @@ export default function Users() {
     {
       label: "Action",
       renderCell: (item) => (
-        <div className="flex items-center gap-2">
+        <div className='flex items-center gap-2'>
           <button
-            className="p-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            title="View"
+            className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'
+            title='View'
             onClick={() => handleViewUser(item)}
           >
-            <FaEye className="w-3 h-3" />
+            <FaEye className='w-3 h-3' />
           </button>
           <Link href={`/dashboard/users/edit/${item.userId}`}>
             <button
-              className="p-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
-              title="Edit"
+              className='p-2 bg-yellow-500 text-white rounded hover:bg-yellow-600'
+              title='Edit'
             >
-              <FaEdit className="w-3 h-3" />
+              <FaEdit className='w-3 h-3' />
             </button>
           </Link>
           <button
-            className="p-2 bg-red-500 text-white rounded hover:bg-red-600"
-            title="Delete"
+            className='p-2 bg-red-500 text-white rounded hover:bg-red-600'
+            title='Delete'
           >
-            <FaTrash className="w-3 h-3" />
+            <FaTrash className='w-3 h-3' />
           </button>
         </div>
       ),
     },
   ];
   return (
-    <div className="my-5 p-5 bg-white shadow">
+    <div className='my-5 p-5 bg-white shadow'>
       <div>
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold mb-4">Users List</h2>
+        <div className='flex items-center justify-between'>
+          <h2 className='text-xl font-semibold mb-4'>Users List</h2>
           <div>
             <Link href={"/dashboard/users/create"}>
-              <Button size={"sm"} color="blue">
+              <Button size={"sm"} color='blue'>
                 Add User
               </Button>
             </Link>
@@ -184,13 +184,13 @@ export default function Users() {
           theme={BASELINE_THEME}
           layout={{ custom: true }}
           select={select}
-          className="w-full overflow-x-scroll"
+          className='w-full overflow-x-scroll'
         />
         <Modal show={isOpen} onClose={() => setIsOpen(false)}>
           <Modal.Header>User Details</Modal.Header>
           <Modal.Body>
             {selectedUser ? (
-              <div className="space-y-2">
+              <div className='space-y-2'>
                 <p>
                   <strong>User ID:</strong> {selectedUser.userId}
                 </p>
@@ -209,7 +209,7 @@ export default function Users() {
             )}
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={() => setIsOpen(false)} color="gray">
+            <Button onClick={() => setIsOpen(false)} color='gray'>
               Close
             </Button>
           </Modal.Footer>

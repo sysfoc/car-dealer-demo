@@ -39,53 +39,53 @@ export default function ViewInvoice() {
     pdf.save("invoice.pdf");
   };
   return (
-    <div ref={invoiceRef} className="bg-gray-50 py-5 dark:bg-gray-800">
-      <div className="mx-auto w-full rounded-lg bg-white p-10 shadow dark:bg-gray-700">
-        <div className="my-5">
-          <div className="flex items-center justify-between">
+    <div ref={invoiceRef} className='bg-gray-50 py-5 dark:bg-gray-800'>
+      <div className='mx-auto w-full rounded-lg bg-white p-10 shadow dark:bg-gray-700'>
+        <div className='my-5'>
+          <div className='flex items-center justify-between'>
             <div>
-              <h1 className="font-semibold text-lg">
-                Invoice Number: <span className="font-normal">#SM75692</span>
+              <h1 className='font-semibold text-lg'>
+                Invoice Number: <span className='font-normal'>#SM75692</span>
               </h1>
-              <h2 className="font-semibold">
-                Date: <span className="font-normal">05-03-2022</span>
+              <h2 className='font-semibold'>
+                Date: <span className='font-normal'>05-03-2022</span>
               </h2>
             </div>
             <div>
               <Image
                 src={"/logo.png"}
-                alt="company-logo"
+                alt='company-logo'
                 width={150}
                 height={120}
               />
             </div>
           </div>
-          <div className="my-5 border-b border-gray-300"></div>
-          <div className="flex items-start justify-between">
+          <div className='my-5 border-b border-gray-300'></div>
+          <div className='flex items-start justify-between'>
             <div>
-              <h3 className="font-semibold">Invoice To:</h3>
-              <div className="flex flex-col mt-1">
-                <p className="text-sm text-gray-500">Jennifer Richards</p>
-                <p className="text-sm text-gray-500">
+              <h3 className='font-semibold'>Invoice To:</h3>
+              <div className='flex flex-col mt-1'>
+                <p className='text-sm text-gray-500'>Jennifer Richards</p>
+                <p className='text-sm text-gray-500'>
                   365 Bloor Street East, Toronto,
                 </p>
-                <p className="text-sm text-gray-500">Ontario, M4W 3L4,</p>
-                <p className="text-sm text-gray-500">Canada</p>
+                <p className='text-sm text-gray-500'>Ontario, M4W 3L4,</p>
+                <p className='text-sm text-gray-500'>Canada</p>
               </div>
             </div>
-            <div className="text-end">
-              <h3 className="font-semibold">Pay To:</h3>
-              <div className="flex flex-col mt-1">
-                <p className="text-sm text-gray-500">Biman Airlines</p>
-                <p className="text-sm text-gray-500">
+            <div className='text-end'>
+              <h3 className='font-semibold'>Pay To:</h3>
+              <div className='flex flex-col mt-1'>
+                <p className='text-sm text-gray-500'>Biman Airlines</p>
+                <p className='text-sm text-gray-500'>
                   237 Roanoke Road, North York,
                 </p>
-                <p className="text-sm text-gray-500">Ontario, Canada</p>
-                <p className="text-sm text-gray-500">demo@email.com</p>
+                <p className='text-sm text-gray-500'>Ontario, Canada</p>
+                <p className='text-sm text-gray-500'>demo@email.com</p>
               </div>
             </div>
           </div>
-          <div className="my-5">
+          <div className='my-5'>
             <Table striped>
               <TableHead>
                 <TableHeadCell>Item</TableHeadCell>
@@ -126,50 +126,50 @@ export default function ViewInvoice() {
                   <TableCell>$240</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell colSpan={2} rowSpan={3} className="font-semibold">
-                    <h3 className="text-gray-700">Additional Information:</h3>
-                    <p className="text-sm font-normal">
+                  <TableCell colSpan={2} rowSpan={3} className='font-semibold'>
+                    <h3 className='text-gray-700'>Additional Information:</h3>
+                    <p className='text-sm font-normal'>
                       At check-in, you may need to present the credit card used
                       for payment of this ticket.
                     </p>
                   </TableCell>
                   <TableCell
                     colSpan={2}
-                    className="text-right font-semibold bg-gray-50"
+                    className='text-right font-semibold bg-gray-50'
                   >
                     Subtotal
                   </TableCell>
-                  <TableCell className="font-semibold bg-gray-50">
+                  <TableCell className='font-semibold bg-gray-50'>
                     $1140
                   </TableCell>
                 </TableRow>
               </TableBody>
             </Table>
           </div>
-          <div className="my-5">
+          <div className='my-5'>
             <div>
-              <h3 className="text-gray-700 font-semibold text-sm">Note:</h3>
-              <p className="text-xs text-gray-700">
+              <h3 className='text-gray-700 font-semibold text-sm'>Note:</h3>
+              <p className='text-xs text-gray-700'>
                 Here we can write a additional notes for the client to get a
                 better understanding of this invoice.
               </p>
             </div>
           </div>
-          <div className="my-5 flex items-center justify-center">
-            <div className="flex items-center gap-3">
+          <div className='my-5 flex items-center justify-center'>
+            <div className='flex items-center gap-3'>
               <Button
-                color="green"
+                color='green'
                 onClick={() => window.print()}
-                className="mt-4 flex items-center"
+                className='mt-4 flex items-center'
               >
-                <IoIosPrint fontSize={22} className="mr-2" /> Print Invoice
+                <IoIosPrint fontSize={22} className='mr-2' /> Print Invoice
               </Button>
               <Button
-                gradientDuoTone="greenToBlue"
+                gradientDuoTone='greenToBlue'
                 onClick={handleDownloadPDF}
-                className="mt-4 flex items-center"
+                className='mt-4 flex items-center'
               >
-                <FaDownload fontSize={22} className="mr-2" /> Download Invoice
+                <FaDownload fontSize={22} className='mr-2' /> Download Invoice
               </Button>
             </div>
           </div>

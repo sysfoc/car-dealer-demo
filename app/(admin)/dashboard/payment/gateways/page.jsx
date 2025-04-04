@@ -78,9 +78,9 @@ export default function PaymentGateways() {
   };
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">Payment Gateways</h2>
+    <div className='p-6'>
+      <div className='flex justify-between items-center mb-4'>
+        <h2 className='text-xl font-semibold'>Payment Gateways</h2>
         <Button onClick={() => setOpenModal(true)}>Add Gateway</Button>
       </div>
 
@@ -98,9 +98,9 @@ export default function PaymentGateways() {
           {gateways.map((gateway) => (
             <Table.Row
               key={gateway.id}
-              className="bg-white dark:border-gray-700 dark:bg-gray-800"
+              className='bg-white dark:border-gray-700 dark:bg-gray-800'
             >
-              <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+              <Table.Cell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
                 {gateway.name}
               </Table.Cell>
               <Table.Cell>{gateway.sandboxId}</Table.Cell>
@@ -119,18 +119,18 @@ export default function PaymentGateways() {
               </Table.Cell>
               <Table.Cell>{gateway.createdAt}</Table.Cell>
               <Table.Cell>
-                <div className="flex items-center gap-2">
+                <div className='flex items-center gap-2'>
                   <Button
-                    color="warning"
-                    size="xs"
+                    color='warning'
+                    size='xs'
                     onClick={() => toggleStatus(gateway.id)}
-                    className="mr-2"
+                    className='mr-2'
                   >
                     {gateway.status === "Active" ? "Deactivate" : "Activate"}
                   </Button>
                   <Button
-                    color="failure"
-                    size="xs"
+                    color='failure'
+                    size='xs'
                     onClick={() =>
                       setGateways(gateways.filter((g) => g.id !== gateway.id))
                     }
@@ -147,14 +147,14 @@ export default function PaymentGateways() {
       <Modal show={openModal} onClose={() => setOpenModal(false)}>
         <Modal.Header>Add Payment Gateway</Modal.Header>
         <Modal.Body>
-          <div className="space-y-4">
+          <div className='space-y-4'>
             <TextInput
               value={newGateway.name}
               onChange={(e) =>
                 setNewGateway({ ...newGateway, name: e.target.value })
               }
-              placeholder="Enter gateway name"
-              label="Gateway Name"
+              placeholder='Enter gateway name'
+              label='Gateway Name'
               required
             />
             <TextInput
@@ -162,8 +162,8 @@ export default function PaymentGateways() {
               onChange={(e) =>
                 setNewGateway({ ...newGateway, sandboxId: e.target.value })
               }
-              placeholder="Enter sandbox ID"
-              label="Sandbox ID"
+              placeholder='Enter sandbox ID'
+              label='Sandbox ID'
               required
             />
             <TextInput
@@ -171,8 +171,8 @@ export default function PaymentGateways() {
               onChange={(e) =>
                 setNewGateway({ ...newGateway, apiKey: e.target.value })
               }
-              placeholder="Enter API key"
-              label="API Key"
+              placeholder='Enter API key'
+              label='API Key'
               required
             />
             <Select
@@ -180,23 +180,23 @@ export default function PaymentGateways() {
               onChange={(e) =>
                 setNewGateway({ ...newGateway, mode: e.target.value })
               }
-              label="Mode"
+              label='Mode'
             >
-              <option value="Live">Live</option>
-              <option value="Sandbox">Sandbox</option>
+              <option value='Live'>Live</option>
+              <option value='Sandbox'>Sandbox</option>
             </Select>
             <ToggleSwitch
               checked={newGateway.status}
               onChange={(e) =>
                 setNewGateway({ ...newGateway, status: e.target.checked })
               }
-              label="Active"
+              label='Active'
             />
           </div>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={addGateway}>Add</Button>
-          <Button color="gray" onClick={() => setOpenModal(false)}>
+          <Button color='gray' onClick={() => setOpenModal(false)}>
             Cancel
           </Button>
         </Modal.Footer>

@@ -43,63 +43,63 @@ const ProjectTemplates = () => {
     },
   ];
   return (
-    <section className="my-14 mx-4 md:mx-12">
-      <div className="py-5 flex items-center justify-center">
-        <div className="text-center w-full md:w-[50%]">
-          <h2 className="text-3xl sm:text-4xl font-semibold">
+    <section className='my-14 mx-4 md:mx-12'>
+      <div className='py-5 flex items-center justify-center'>
+        <div className='text-center w-full md:w-[50%]'>
+          <h2 className='text-3xl sm:text-4xl font-semibold'>
             Great packs of ready-made templates.
           </h2>
-          <p className="mt-5 text-gray-500">
+          <p className='mt-5 text-gray-500'>
             Choose one of the existing styles or follow your ideas and customize
             your site
           </p>
         </div>
       </div>
-      <div className="flex items-center justify-center">
-        <div className="flex items-center gap-x-10 gap-y-5 justify-between flex-wrap">
-          <div className="flex items-center gap-3">
-            <FaCheck fontSize={20} className="text-red-600" />
-            <span className="font-semibold">Tailwind Css Supported</span>
+      <div className='flex items-center justify-center'>
+        <div className='flex items-center gap-x-10 gap-y-5 justify-between flex-wrap'>
+          <div className='flex items-center gap-3'>
+            <FaCheck fontSize={20} className='text-red-600' />
+            <span className='font-semibold'>Tailwind Css Supported</span>
           </div>
-          <div className="flex items-center gap-3">
-            <FaCheck fontSize={20} className="text-red-600" />
-            <span className="font-semibold">
+          <div className='flex items-center gap-3'>
+            <FaCheck fontSize={20} className='text-red-600' />
+            <span className='font-semibold'>
               Change Fonts & Colors Globally
             </span>
           </div>
-          <div className="flex items-center gap-3">
-            <FaCheck fontSize={20} className="text-red-600" />
-            <span className="font-semibold">Fully Responsive Layout</span>
+          <div className='flex items-center gap-3'>
+            <FaCheck fontSize={20} className='text-red-600' />
+            <span className='font-semibold'>Fully Responsive Layout</span>
           </div>
         </div>
       </div>
-      <div className="my-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div className='my-10'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
           {dealers.map((dealer) => (
             <div
               key={dealer.id}
-              className="relative rounded-md shadow-lg transition-transform duration-300 hover:-translate-y-4 group"
+              className='relative rounded-md shadow-lg transition-transform duration-300 hover:-translate-y-4 group'
             >
               <Link href={dealer.link}>
-                <div className="p-4 bg-white">
+                <div className='p-4 bg-white'>
                   <Image
                     src={"/demo-1.webp"}
                     alt={dealer.alt}
                     width={500}
                     height={500}
-                    className="size-auto"
+                    className='size-auto'
                   />
                 </div>
-                <div className="py-3">
-                  <h3 className="text-center font-semibold text-xl">
+                <div className='py-3'>
+                  <h3 className='text-center font-semibold text-xl'>
                     {dealer.name}
                   </h3>
                 </div>
               </Link>
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className='absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
                 <Link href={"/"}>
-                  <button className="flex items-center gap-2 bg-white text-black font-semibold py-2 px-4 rounded-md shadow-md hover:bg-gray-200">
-                    <AiOutlineEye className="text-lg" />
+                  <button className='flex items-center gap-2 bg-white text-black font-semibold py-2 px-4 rounded-md shadow-md hover:bg-gray-200'>
+                    <AiOutlineEye className='text-lg' />
                     View Demo
                   </button>
                 </Link>

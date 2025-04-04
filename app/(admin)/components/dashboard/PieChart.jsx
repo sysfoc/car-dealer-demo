@@ -22,12 +22,12 @@ const PieChart = () => {
     colors: ["#0DCAF0", "#FD3550", "#15CA20", "#FA7123"],
   };
   return (
-    <div className="bg-white shadow relative">
-      <p className="absolute top-3 left-5 z-10 text-gray-500">
+    <div className='bg-white shadow relative'>
+      <p className='absolute top-3 left-5 z-10 text-gray-500'>
         Trending Vehicals
       </p>
       <Chart
-        chartType="PieChart"
+        chartType='PieChart'
         data={data}
         options={options}
         width={300}

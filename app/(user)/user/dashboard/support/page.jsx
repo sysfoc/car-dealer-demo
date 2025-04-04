@@ -44,24 +44,24 @@ export default function Support() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className='space-y-6'>
       <Card>
-        <h2 className="text-xl font-semibold">Billing Support</h2>
-        <p className="text-gray-600 mt-2">
+        <h2 className='text-xl font-semibold'>Billing Support</h2>
+        <p className='text-gray-600 mt-2'>
           Need help with your billing or subscription? Contact our support team.
         </p>
-        <div className="mt-4 flex gap-3">
-          <Button color="blue" onClick={() => setIsEmailOpen(true)}>
-            <HiOutlineMail className="mr-2" /> Email Support
+        <div className='mt-4 flex gap-3'>
+          <Button color='blue' onClick={() => setIsEmailOpen(true)}>
+            <HiOutlineMail className='mr-2' /> Email Support
           </Button>
-          <Button color="gray" onClick={() => setIsChatOpen(true)}>
-            <HiOutlineChat className="mr-2" /> Live Chat
+          <Button color='gray' onClick={() => setIsChatOpen(true)}>
+            <HiOutlineChat className='mr-2' /> Live Chat
           </Button>
         </div>
       </Card>
       <Card>
-        <h2 className="text-xl font-semibold">Support Tickets</h2>
-        <Table className="mt-4">
+        <h2 className='text-xl font-semibold'>Support Tickets</h2>
+        <Table className='mt-4'>
           <Table.Head>
             <Table.HeadCell>Date</Table.HeadCell>
             <Table.HeadCell>Subject</Table.HeadCell>
@@ -84,29 +84,29 @@ export default function Support() {
           </Table.Body>
         </Table>
         <Button
-          color="gray"
-          className="mt-4 w-full"
+          color='gray'
+          className='mt-4 w-full'
           onClick={() => setIsModalOpen(true)}
         >
-          <HiPlus className="mr-2" /> Create New Ticket
+          <HiPlus className='mr-2' /> Create New Ticket
         </Button>
       </Card>
       <Modal show={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Modal.Header>Create Support Ticket</Modal.Header>
         <Modal.Body>
-          <div className="space-y-4">
-            <Label htmlFor="support-subject">Subject</Label>
+          <div className='space-y-4'>
+            <Label htmlFor='support-subject'>Subject</Label>
             <TextInput
-              id="support-subject"
+              id='support-subject'
               value={newTicket.subject}
               required
               onChange={(e) =>
                 setNewTicket({ ...newTicket, subject: e.target.value })
               }
             />
-            <Label htmlFor="support-description">Description</Label>
+            <Label htmlFor='support-description'>Description</Label>
             <Textarea
-              id="support-description"
+              id='support-description'
               value={newTicket.description}
               required
               onChange={(e) =>
@@ -118,7 +118,7 @@ export default function Support() {
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={createTicket}>Submit</Button>
-          <Button color="gray" onClick={() => setIsModalOpen(false)}>
+          <Button color='gray' onClick={() => setIsModalOpen(false)}>
             Cancel
           </Button>
         </Modal.Footer>
@@ -126,16 +126,16 @@ export default function Support() {
       <Modal show={isChatOpen} onClose={() => setIsChatOpen(false)}>
         <Modal.Header>Live Chat</Modal.Header>
         <Modal.Body>
-          <div className="space-y-4">
-            <p className="text-gray-600">
+          <div className='space-y-4'>
+            <p className='text-gray-600'>
               You are now connected to a support agent.
             </p>
-            <Textarea rows={4} placeholder="Type your message..." />
+            <Textarea rows={4} placeholder='Type your message...' />
           </div>
         </Modal.Body>
         <Modal.Footer>
           <Button>Send</Button>
-          <Button color="gray" onClick={() => setIsChatOpen(false)}>
+          <Button color='gray' onClick={() => setIsChatOpen(false)}>
             Close
           </Button>
         </Modal.Footer>
@@ -143,25 +143,25 @@ export default function Support() {
       <Modal show={isEmailOpen} onClose={() => setIsEmailOpen(false)}>
         <Modal.Header>Email Support</Modal.Header>
         <Modal.Body>
-          <div className="space-y-4">
-            <Label htmlFor="email-subject">Subject</Label>
+          <div className='space-y-4'>
+            <Label htmlFor='email-subject'>Subject</Label>
             <TextInput
-              id="email-subject"
-              placeholder="Enter subject"
+              id='email-subject'
+              placeholder='Enter subject'
               required
             />
-            <Label htmlFor="email-message">Message</Label>
+            <Label htmlFor='email-message'>Message</Label>
             <Textarea
-              id="email-message"
+              id='email-message'
               rows={4}
-              placeholder="Type your message..."
+              placeholder='Type your message...'
               required
             />
           </div>
         </Modal.Body>
         <Modal.Footer>
           <Button>Send Email</Button>
-          <Button color="gray" onClick={() => setIsEmailOpen(false)}>
+          <Button color='gray' onClick={() => setIsEmailOpen(false)}>
             Cancel
           </Button>
         </Modal.Footer>

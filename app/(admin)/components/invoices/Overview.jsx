@@ -12,7 +12,7 @@ const cardData = [
     value: "2310",
     borderColor: "#0DCAF0",
     bgColor: "#0DCAF0",
-    icon: <FaFileInvoice fontSize={24} className="text-white" />,
+    icon: <FaFileInvoice fontSize={24} className='text-white' />,
     textColor: "text-[#0DCAF0]",
   },
   {
@@ -20,7 +20,7 @@ const cardData = [
     value: "1000",
     borderColor: "#FD3550",
     bgColor: "#FD3550",
-    icon: <FaFileInvoiceDollar fontSize={24} className="text-white" />,
+    icon: <FaFileInvoiceDollar fontSize={24} className='text-white' />,
     textColor: "text-[#FD3550]",
   },
   {
@@ -28,7 +28,7 @@ const cardData = [
     value: "1310",
     borderColor: "#15CA20",
     bgColor: "#15CA20",
-    icon: <FaClipboardCheck fontSize={24} className="text-white" />,
+    icon: <FaClipboardCheck fontSize={24} className='text-white' />,
     textColor: "text-[#15CA20]",
   },
   {
@@ -36,7 +36,7 @@ const cardData = [
     value: "1243",
     borderColor: "#FA7123",
     bgColor: "#FA7123",
-    icon: <FaClipboardList fontSize={24} className="text-white" />,
+    icon: <FaClipboardList fontSize={24} className='text-white' />,
     textColor: "text-[#FA7123]",
   },
 ];
@@ -44,23 +44,23 @@ const cardData = [
 const Overview = () => {
   return (
     <section>
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className='grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
         {cardData.map((card, index) => (
           <div
             key={index}
             className={`p-4 border-l-4 bg-white shadow rounded-lg`}
             style={{ borderColor: card.borderColor }}
           >
-            <div className="flex items-center justify-between gap-2">
+            <div className='flex items-center justify-between gap-2'>
               <div>
-                <h2 className="text-gray-600 text-sm">{card.title}</h2>
+                <h2 className='text-gray-600 text-sm'>{card.title}</h2>
                 <p className={`my-1 text-2xl font-semibold ${card.textColor}`}>
                   {card.value}
                 </p>
               </div>
               <div>
                 <div
-                  className="p-4 rounded-full flex items-center justify-center"
+                  className='p-4 rounded-full flex items-center justify-center'
                   style={{ backgroundColor: card.bgColor }}
                 >
                   {card.icon}

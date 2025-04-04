@@ -30,72 +30,72 @@ export default function ProfileSecurity() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className='space-y-6'>
       <Card>
-        <h2 className="text-xl font-semibold">Manage Account</h2>
-        <div className="mt-4 space-y-3">
-          <div className="flex items-center gap-3">
-            <Label htmlFor="read-only">Make account read-only for others</Label>
+        <h2 className='text-xl font-semibold'>Manage Account</h2>
+        <div className='mt-4 space-y-3'>
+          <div className='flex items-center gap-3'>
+            <Label htmlFor='read-only'>Make account read-only for others</Label>
             <ToggleSwitch
-              id="read-only"
+              id='read-only'
               checked={settings.readOnly}
               onChange={() => toggleSetting("readOnly")}
-              sizing="sm"
+              sizing='sm'
             />
           </div>
-          <div className="flex items-center gap-3">
-            <Label htmlFor="modify-payments">
+          <div className='flex items-center gap-3'>
+            <Label htmlFor='modify-payments'>
               Allow others to add or delete payment methods
             </Label>
             <ToggleSwitch
-              id="modify-payments"
+              id='modify-payments'
               checked={settings.modifyPayments}
               onChange={() => toggleSetting("modifyPayments")}
-              sizing="sm"
+              sizing='sm'
             />
           </div>
         </div>
       </Card>
       <Card>
-        <h2 className="text-xl font-semibold">Manage Security</h2>
-        <div className="mt-4 space-y-3">
-          <div className="flex items-center gap-3">
-            <Label htmlFor="otp-email">Send OTP via email</Label>
+        <h2 className='text-xl font-semibold'>Manage Security</h2>
+        <div className='mt-4 space-y-3'>
+          <div className='flex items-center gap-3'>
+            <Label htmlFor='otp-email'>Send OTP via email</Label>
             <ToggleSwitch
-              id="otp-email"
+              id='otp-email'
               checked={settings.otpEmail}
               onChange={() => toggleSetting("otpEmail")}
-              sizing="sm"
+              sizing='sm'
             />
           </div>
-          <div className="flex items-center gap-3">
-            <Label htmlFor="otp-phone">Send OTP via mobile</Label>
+          <div className='flex items-center gap-3'>
+            <Label htmlFor='otp-phone'>Send OTP via mobile</Label>
             <ToggleSwitch
-              id="otp-phone"
+              id='otp-phone'
               checked={settings.otpPhone}
               onChange={() => toggleSetting("otpPhone")}
-              sizing="sm"
+              sizing='sm'
             />
           </div>
-          <div className="flex items-center gap-3">
+          <div className='flex items-center gap-3'>
             <div>
-              <Label htmlFor="2fa">Enable 2-Factor Authentication</Label>
-              <p className="text-xs text-gray-500">
+              <Label htmlFor='2fa'>Enable 2-Factor Authentication</Label>
+              <p className='text-xs text-gray-500'>
                 (Available for mobile app users only)
               </p>
             </div>
             <ToggleSwitch
-              id="2fa"
+              id='2fa'
               checked={settings.twoFactorAuth}
               onChange={() => toggleSetting("twoFactorAuth")}
-              sizing="sm"
+              sizing='sm'
             />
           </div>
         </div>
       </Card>
       <Card>
-        <h2 className="text-xl font-semibold">Audit Logs</h2>
-        <Table striped className="mt-4">
+        <h2 className='text-xl font-semibold'>Audit Logs</h2>
+        <Table striped className='mt-4'>
           <TableBody>
             {auditLogs.map((log) => (
               <TableRow key={log.id}>
@@ -107,8 +107,8 @@ export default function ProfileSecurity() {
         </Table>
       </Card>
       <Card>
-        <h2 className="text-xl font-semibold">Data Privacy & Compliance</h2>
-        <p className="text-gray-600 mt-2">
+        <h2 className='text-xl font-semibold'>Data Privacy & Compliance</h2>
+        <p className='text-gray-600 mt-2'>
           We comply with GDPR and other regulations to ensure your billing data
           is secure.
         </p>

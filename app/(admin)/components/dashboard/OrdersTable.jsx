@@ -50,8 +50,8 @@ const OrdersTable = () => {
     },
   ];
   return (
-    <section className="my-5 p-3 bg-white shadow">
-      <div className="overflow-x-auto">
+    <section className='my-5 p-3 bg-white shadow'>
+      <div className='overflow-x-auto'>
         <Table>
           <TableHead>
             <TableHeadCell>Users</TableHeadCell>
@@ -62,13 +62,13 @@ const OrdersTable = () => {
               <span>Actions</span>
             </TableHeadCell>
           </TableHead>
-          <TableBody className="divide-y">
+          <TableBody className='divide-y'>
             {tableData.map((data, index) => (
               <TableRow
                 key={index}
-                className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                className='bg-white dark:border-gray-700 dark:bg-gray-800'
               >
-                <TableCell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                <TableCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
                   {data.name}
                 </TableCell>
                 <TableCell>{data.email}</TableCell>
@@ -84,8 +84,8 @@ const OrdersTable = () => {
                 </TableCell>
                 <TableCell>
                   <Link
-                    href="#"
-                    className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
+                    href='#'
+                    className='font-medium text-cyan-600 hover:underline dark:text-cyan-500'
                   >
                     View
                   </Link>

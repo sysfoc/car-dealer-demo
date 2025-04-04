@@ -202,27 +202,27 @@ const Datatable = () => {
     {
       label: "Action",
       renderCell: (item) => (
-        <div className="flex items-center gap-2">
+        <div className='flex items-center gap-2'>
           <Link
             href={`/dashboard/invoices/view/${item.invoiceId}`}
-            className="p-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            title="View"
+            className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'
+            title='View'
           >
-            <FaEye className="w-3 h-3" />
+            <FaEye className='w-3 h-3' />
           </Link>
           <Link href={`/dashboard/invoices/edit/${item.invoiceId}`}>
             <button
-              className="p-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
-              title="Edit"
+              className='p-2 bg-yellow-500 text-white rounded hover:bg-yellow-600'
+              title='Edit'
             >
-              <FaEdit className="w-3 h-3" />
+              <FaEdit className='w-3 h-3' />
             </button>
           </Link>
           <button
-            className="p-2 bg-red-500 text-white rounded hover:bg-red-600"
-            title="Delete"
+            className='p-2 bg-red-500 text-white rounded hover:bg-red-600'
+            title='Delete'
           >
-            <FaTrash className="w-3 h-3" />
+            <FaTrash className='w-3 h-3' />
           </button>
         </div>
       ),
@@ -230,26 +230,26 @@ const Datatable = () => {
   ];
 
   return (
-    <div className="my-5 p-5 bg-white shadow">
+    <div className='my-5 p-5 bg-white shadow'>
       <div>
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold mb-4">Invoices List</h2>
+        <div className='flex items-center justify-between'>
+          <h2 className='text-xl font-semibold mb-4'>Invoices List</h2>
           <div>
             <Link href={"/dashboard/invoices/create"}>
-              <Button size={"sm"} color="blue">
+              <Button size={"sm"} color='blue'>
                 Create New
               </Button>
             </Link>
           </div>
         </div>
-        <label htmlFor="search">
+        <label htmlFor='search'>
           Search by ID:&nbsp;
           <input
-            id="search"
-            type="text"
+            id='search'
+            type='text'
             value={search}
             onChange={handleSearch}
-            className="p-1 border border-gray-400 outline-none text-sm"
+            className='p-1 border border-gray-400 outline-none text-sm'
           />
         </label>
         <CompactTable
@@ -259,10 +259,10 @@ const Datatable = () => {
           layout={{ custom: true }}
           select={select}
           pagination={pagination}
-          className="w-full overflow-x-scroll"
+          className='w-full overflow-x-scroll'
         />
-        <div className="mt-3 flex items-center justify-between">
-          <span className="text-sm">
+        <div className='mt-3 flex items-center justify-between'>
+          <span className='text-sm'>
             Total Pages: {pagination.state.getTotalPages(data.nodes)}
           </span>
 
@@ -270,7 +270,7 @@ const Datatable = () => {
             {pagination.state.getPages(data.nodes).map((_, index) => (
               <button
                 key={index}
-                type="button"
+                type='button'
                 className={`px-3 py-1 border text-sm ${
                   pagination.state.page === index
                     ? "bg-blue-700 text-white"

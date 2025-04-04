@@ -48,12 +48,12 @@ export default function Notifications() {
   };
 
   return (
-    <div className="space-y-6">
-      <Card className="p-5 shadow-lg border border-gray-200">
-        <h2 className="text-2xl font-semibold text-gray-800">
+    <div className='space-y-6'>
+      <Card className='p-5 shadow-lg border border-gray-200'>
+        <h2 className='text-2xl font-semibold text-gray-800'>
           Notifications & Alerts
         </h2>
-        <div className="mt-4 space-y-3">
+        <div className='mt-4 space-y-3'>
           {alerts.map((alert) => (
             <Alert
               key={alert.id}
@@ -76,45 +76,45 @@ export default function Notifications() {
           ))}
         </div>
       </Card>
-      <Card className="p-5 shadow-lg border border-gray-200">
-        <h2 className="text-2xl font-semibold text-gray-800">
+      <Card className='p-5 shadow-lg border border-gray-200'>
+        <h2 className='text-2xl font-semibold text-gray-800'>
           Notification Settings
         </h2>
-        <div className="mt-4 space-y-4">
-          <div className="flex items-center justify-between">
+        <div className='mt-4 space-y-4'>
+          <div className='flex items-center justify-between'>
             <span>Failed Payment Alerts</span>
             <ToggleSwitch
               checked={settings.failedPayments}
               onChange={() => toggleSetting("failedPayments")}
-              sizing="md"
+              sizing='md'
             />
           </div>
-          <div className="flex items-center justify-between">
+          <div className='flex items-center justify-between'>
             <span>Subscription Renewal Reminders</span>
             <ToggleSwitch
               checked={settings.subscriptionRenewals}
               onChange={() => toggleSetting("subscriptionRenewals")}
-              sizing="md"
+              sizing='md'
             />
           </div>
-          <div className="flex items-center justify-between">
+          <div className='flex items-center justify-between'>
             <span>Plan Upgrade Notifications</span>
             <ToggleSwitch
               checked={settings.planUpgrades}
               onChange={() => toggleSetting("planUpgrades")}
-              sizing="md"
+              sizing='md'
             />
           </div>
         </div>
       </Card>
-      <Card className="p-5 shadow-lg border border-gray-200">
-        <h2 className="text-2xl font-semibold text-gray-800">
+      <Card className='p-5 shadow-lg border border-gray-200'>
+        <h2 className='text-2xl font-semibold text-gray-800'>
           Send Announcements
         </h2>
-        <p className="text-gray-600 mt-2">
+        <p className='text-gray-600 mt-2'>
           Notify users about billing updates or new add-ons.
         </p>
-        <Button className="mt-4" onClick={() => setOpenModal(true)}>
+        <Button className='mt-4' onClick={() => setOpenModal(true)}>
           Create Announcement
         </Button>
       </Card>
@@ -124,7 +124,7 @@ export default function Notifications() {
         <ModalHeader>Create Announcement</ModalHeader>
         <ModalBody>
           <Textarea
-            placeholder="Enter announcement message..."
+            placeholder='Enter announcement message...'
             value={announcement}
             onChange={(e) => setAnnouncement(e.target.value)}
             rows={4}
@@ -132,7 +132,7 @@ export default function Notifications() {
         </ModalBody>
         <ModalFooter>
           <Button onClick={sendAnnouncement}>Send</Button>
-          <Button color="gray" onClick={() => setOpenModal(false)}>
+          <Button color='gray' onClick={() => setOpenModal(false)}>
             Cancel
           </Button>
         </ModalFooter>

@@ -34,9 +34,9 @@ const BarChart = () => {
     hAxis: { title: "Visits" },
   };
   return (
-    <div className="p-4 bg-white shadow">
+    <div className='p-4 bg-white shadow'>
       <Chart
-        chartType="Bar"
+        chartType='Bar'
         data={data}
         options={options}
         width={630}

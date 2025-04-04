@@ -4,65 +4,65 @@ import Image from "next/image";
 export default function UserProfile() {
   return (
     <div>
-      <div className="bg-white border-b">
-        <h2 className="font-semibold text-xl">Manage Profile</h2>
+      <div className='bg-white border-b p-4'>
+        <h2 className='font-semibold text-xl'>Manage Profile</h2>
       </div>
-      <div className="flex items-center justify-center p-4 bg-white">
-        <div className="w-full md:w-[70%]">
-          <div className="flex items-center justify-center">
-            <div className="w-[180px] h-[180px] p-2 object-cover overflow-hidden shadow rounded-full flex items-center justify-center">
+      <div className='flex items-center justify-center p-4 bg-white'>
+        <div className='w-full md:w-[70%]'>
+          <div className='flex items-center justify-center'>
+            <div className='w-[180px] h-[180px] p-2 object-cover overflow-hidden shadow rounded-full flex items-center justify-center'>
               <Image
                 src={"/logo.png"}
-                alt="profile-img"
+                alt='profile-img'
                 width={150}
                 height={150}
-                className="size-full object-contain"
+                className='size-full object-contain'
               />
             </div>
           </div>
-          <form className="my-3 flex flex-col gap-3">
+          <form className='my-3 flex flex-col gap-3'>
             <div>
-              <Label htmlFor="name">Name</Label>
+              <Label htmlFor='name'>Name</Label>
               <TextInput
-                type="text"
-                id="name"
+                type='text'
+                id='name'
                 defaultValue={"Sysfoc"}
-                placeholder="John Doe"
+                placeholder='John Doe'
                 required
               />
             </div>
             <div>
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor='email'>Email</Label>
               <TextInput
-                type="email"
-                id="email"
+                type='email'
+                id='email'
                 defaultValue={"sysfoc@gmail.com"}
-                placeholder="johndoe@gmail.com"
+                placeholder='johndoe@gmail.com'
                 required
               />
             </div>
             <div>
-              <Label htmlFor="phone">Phone</Label>
+              <Label htmlFor='phone'>Phone</Label>
               <TextInput
-                type="tel"
-                id="phone"
+                type='tel'
+                id='phone'
                 defaultValue={"111-234-567"}
-                placeholder="111-234-567"
+                placeholder='111-234-567'
                 required
               />
             </div>
             <div>
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor='password'>Password</Label>
               <TextInput
-                type="password"
-                id="password"
+                type='password'
+                id='password'
                 defaultValue={"12345678"}
-                placeholder="*******"
+                placeholder='*******'
                 required
               />
             </div>
             <div>
-              <Button type="submit" color="blue" className="mt-3 w-full">
+              <Button type='submit' color='blue' className='mt-3 w-full'>
                 Save Changes
               </Button>
             </div>

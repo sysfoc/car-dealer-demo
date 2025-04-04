@@ -193,23 +193,23 @@ export default function PaymentHistory() {
     {
       label: "Action",
       renderCell: (item) => (
-        <div className="flex items-center gap-2">
+        <div className='flex items-center gap-2'>
           <button
-            className="p-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            title="View"
+            className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'
+            title='View'
             onClick={() => handleViewTransaction(item)}
           >
-            <FaEye className="w-3 h-3" />
+            <FaEye className='w-3 h-3' />
           </button>
         </div>
       ),
     },
   ];
   return (
-    <div className="my-5 p-5 bg-white shadow">
+    <div className='my-5 p-5 bg-white shadow'>
       <div>
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold mb-4">Transactions</h2>
+        <div className='flex items-center justify-between'>
+          <h2 className='text-xl font-semibold mb-4'>Transactions</h2>
         </div>
         <CompactTable
           columns={COLUMNS}
@@ -217,7 +217,7 @@ export default function PaymentHistory() {
           theme={BASELINE_THEME}
           layout={{ custom: true }}
           select={select}
-          className="w-full overflow-x-scroll"
+          className='w-full overflow-x-scroll'
         />
         <Modal show={openModal} onClose={() => setOpenModal(false)}>
           <ModalHeader>
@@ -226,7 +226,7 @@ export default function PaymentHistory() {
           </ModalHeader>
           <ModalBody>
             {selectedTransaction ? (
-              <div className="space-y-3">
+              <div className='space-y-3'>
                 <p>
                   <strong>Transaction ID:</strong>
                   {selectedTransaction.invoiceId}
@@ -269,7 +269,7 @@ export default function PaymentHistory() {
             )}
           </ModalBody>
           <ModalFooter>
-            <Button color="gray" onClick={() => setOpenModal(false)}>
+            <Button color='gray' onClick={() => setOpenModal(false)}>
               Close
             </Button>
           </ModalFooter>

@@ -25,44 +25,44 @@ export default function PlanDetails() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto my-5">
-      <Card className="p-6 shadow-lg">
-        <h2 className="text-2xl font-semibold text-gray-900">
+    <div className='max-w-3xl mx-auto my-5'>
+      <Card className='p-6 shadow-lg'>
+        <h2 className='text-2xl font-semibold text-gray-900'>
           Current Subscription Plan
         </h2>
-        <p className="text-gray-600 mt-2">
+        <p className='text-gray-600 mt-2'>
           Here are the details of your active plan.
         </p>
 
-        <div className="mt-4 space-y-2">
-          <div className="flex justify-between border-b pb-2">
-            <span className="font-medium text-gray-800">Plan Name:</span>
-            <span className="text-gray-700">{plan}</span>
+        <div className='mt-4 space-y-2'>
+          <div className='flex justify-between border-b pb-2'>
+            <span className='font-medium text-gray-800'>Plan Name:</span>
+            <span className='text-gray-700'>{plan}</span>
           </div>
-          <div className="flex justify-between border-b pb-2">
-            <span className="font-medium text-gray-800">Price:</span>
-            <span className="text-gray-700">{price}</span>
+          <div className='flex justify-between border-b pb-2'>
+            <span className='font-medium text-gray-800'>Price:</span>
+            <span className='text-gray-700'>{price}</span>
           </div>
-          <div className="flex justify-between border-b pb-2">
-            <span className="font-medium text-gray-800">Storage Limit:</span>
-            <span className="text-gray-700">{storage}</span>
+          <div className='flex justify-between border-b pb-2'>
+            <span className='font-medium text-gray-800'>Storage Limit:</span>
+            <span className='text-gray-700'>{storage}</span>
           </div>
-          <div className="flex justify-between border-b pb-2">
-            <span className="font-medium text-gray-800">User Limit:</span>
-            <span className="text-gray-700">{users}</span>
+          <div className='flex justify-between border-b pb-2'>
+            <span className='font-medium text-gray-800'>User Limit:</span>
+            <span className='text-gray-700'>{users}</span>
           </div>
         </div>
 
-        <div className="mt-6 flex gap-4">
+        <div className='mt-6 flex gap-4'>
           <button
             onClick={handleUpgrade}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700"
+            className='px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700'
           >
             Upgrade Plan
           </button>
           <button
             onClick={handleCancel}
-            className="px-4 py-2 bg-red-500 text-white rounded-lg shadow hover:bg-red-600"
+            className='px-4 py-2 bg-red-500 text-white rounded-lg shadow hover:bg-red-600'
           >
             Cancel Subscription
           </button>
@@ -72,38 +72,38 @@ export default function PlanDetails() {
       <Modal show={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Modal.Header>Upgrade Your Plan</Modal.Header>
         <Modal.Body>
-          <p className="text-gray-700">
+          <p className='text-gray-700'>
             Choose a new plan and proceed to payment.
           </p>
-          <div className="mt-4 space-y-2">
-            <label className="flex items-center space-x-2">
+          <div className='mt-4 space-y-2'>
+            <label className='flex items-center space-x-2'>
               <Radio
-                name="plan"
-                value="Premium"
+                name='plan'
+                value='Premium'
                 checked={selectedPlan === "Premium"}
                 onChange={() => setSelectedPlan("Premium")}
               />
-              <span className="text-gray-800">Premium - $49.99 / month</span>
+              <span className='text-gray-800'>Premium - $49.99 / month</span>
             </label>
-            <label className="flex items-center space-x-2">
+            <label className='flex items-center space-x-2'>
               <Radio
-                name="plan"
-                value="Enterprise"
+                name='plan'
+                value='Enterprise'
                 checked={selectedPlan === "Enterprise"}
                 onChange={() => setSelectedPlan("Enterprise")}
               />
-              <span className="text-gray-800">Enterprise - $99.99 / month</span>
+              <span className='text-gray-800'>Enterprise - $99.99 / month</span>
             </label>
           </div>
         </Modal.Body>
         <Modal.Footer>
           <Button
-            className="bg-green-600 hover:bg-green-700"
+            className='bg-green-600 hover:bg-green-700'
             onClick={handleProceedToPayment}
           >
             Proceed to Payment
           </Button>
-          <Button color="gray" onClick={() => setIsModalOpen(false)}>
+          <Button color='gray' onClick={() => setIsModalOpen(false)}>
             Cancel
           </Button>
         </Modal.Footer>

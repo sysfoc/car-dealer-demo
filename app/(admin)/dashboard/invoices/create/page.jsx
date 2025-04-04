@@ -33,50 +33,50 @@ export default function CreateInvoices() {
   return (
     <main>
       <div>
-        <h1 className="text-xl font-semibold">New Invoice</h1>
+        <h1 className='text-xl font-semibold'>New Invoice</h1>
       </div>
-      <div className="shadow bg-white p-5 my-3">
+      <div className='shadow bg-white p-5 my-3'>
         <form>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="invoice-id">Invoice ID</Label>
-              <TextInput type="text" placeholder="E.g. #JAN-2345" required />
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+            <div className='flex flex-col gap-2'>
+              <Label htmlFor='invoice-id'>Invoice ID</Label>
+              <TextInput type='text' placeholder='E.g. #JAN-2345' required />
             </div>
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="invoice-status">Status</Label>
-              <Select id="invoice-status">
+            <div className='flex flex-col gap-2'>
+              <Label htmlFor='invoice-status'>Status</Label>
+              <Select id='invoice-status'>
                 <option>Select</option>
-                <option value="paid">Paid</option>
-                <option value="unpaid">Unpaid</option>
-                <option value="cancelled">Cancelled</option>
+                <option value='paid'>Paid</option>
+                <option value='unpaid'>Unpaid</option>
+                <option value='cancelled'>Cancelled</option>
               </Select>
             </div>
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="invoice-date">Date</Label>
-              <TextInput type="date" id="invoice-date" required />
+            <div className='flex flex-col gap-2'>
+              <Label htmlFor='invoice-date'>Date</Label>
+              <TextInput type='date' id='invoice-date' required />
             </div>
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="invoice-dueDate">Due Date</Label>
-              <TextInput type="date" id="invoice-dueDate" required />
+            <div className='flex flex-col gap-2'>
+              <Label htmlFor='invoice-dueDate'>Due Date</Label>
+              <TextInput type='date' id='invoice-dueDate' required />
             </div>
             <div>
-              <Label htmlFor="invoice-from">From</Label>
+              <Label htmlFor='invoice-from'>From</Label>
               <Textarea
-                id="invoice-from"
-                placeholder="Olivia John
+                id='invoice-from'
+                placeholder='Olivia John
                 olivia@trezo.com
                 4545 Seth Street Ballinger, TX 78965
-                +1 444 556 8899"
+                +1 444 556 8899'
                 rows={5}
                 required
               />
             </div>
             <div>
-              <Label htmlFor="invoice-to">To</Label>
-              <Textarea id="invoice-to" rows={5} required />
+              <Label htmlFor='invoice-to'>To</Label>
+              <Textarea id='invoice-to' rows={5} required />
             </div>
           </div>
-          <div className="mt-5">
+          <div className='mt-5'>
             <Table>
               <TableHead>
                 <TableHeadCell>No</TableHeadCell>
@@ -93,27 +93,27 @@ export default function CreateInvoices() {
                     <TableCell>
                       <Label
                         htmlFor={`item-description-${item.id}`}
-                        className="sr-only"
+                        className='sr-only'
                       >
                         Description
                       </Label>
                       <TextInput
                         id={`item-description-${item.id}`}
-                        type="text"
-                        placeholder="Enter item name"
+                        type='text'
+                        placeholder='Enter item name'
                         required
                       />
                     </TableCell>
                     <TableCell>
                       <Label
                         htmlFor={`item-quantity-${item.id}`}
-                        className="sr-only"
+                        className='sr-only'
                       >
                         Quantity
                       </Label>
                       <TextInput
                         id={`item-quantity-${item.id}`}
-                        type="number"
+                        type='number'
                         min={1}
                         max={10}
                         defaultValue={1}
@@ -123,40 +123,40 @@ export default function CreateInvoices() {
                     <TableCell>
                       <Label
                         htmlFor={`item-price-${item.id}`}
-                        className="sr-only"
+                        className='sr-only'
                       >
                         Price
                       </Label>
                       <TextInput
                         id={`item-price-${item.id}`}
-                        type="number"
-                        placeholder="Enter price"
+                        type='number'
+                        placeholder='Enter price'
                         required
                       />
                     </TableCell>
                     <TableCell>$0.0</TableCell>
                     <TableCell>
                       <button
-                        className="p-2 bg-red-500 text-white rounded hover:bg-red-600"
-                        title="Delete"
+                        className='p-2 bg-red-500 text-white rounded hover:bg-red-600'
+                        title='Delete'
                         onClick={() => removeItem(item.id)}
                       >
-                        <FaTrash className="w-3 h-3" />
+                        <FaTrash className='w-3 h-3' />
                       </button>
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
-            <div className="mt-3">
-              <Button color="blue" onClick={addItem}>
+            <div className='mt-3'>
+              <Button color='blue' onClick={addItem}>
                 Add Item
               </Button>
             </div>
           </div>
           <div>
-            <div className="mt-5 flex items-center justify-center">
-              <Button type="submit" color="blue">
+            <div className='mt-5 flex items-center justify-center'>
+              <Button type='submit' color='blue'>
                 Create Invoice
               </Button>
             </div>

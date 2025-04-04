@@ -188,28 +188,28 @@ export default function Home() {
     },
   ];
   return (
-    <section className="mx-4 my-10 sm:mx-8">
-      <div className="text-center">
-        <div className="mt-5">
-          <h1 className="text-2xl font-bold md:text-4xl">
+    <section className='mx-4 my-10 sm:mx-8'>
+      <div className='text-center'>
+        <div className='mt-5'>
+          <h1 className='text-2xl font-bold md:text-4xl'>
             Simple Pricing, Unbeatable Value
           </h1>
-          <p className="mt-3 text-center">Join 1000+ Happy Users</p>
+          <p className='mt-3 text-center'>Join 1000+ Happy Users</p>
         </div>
       </div>
-      <div className="my-8 flex items-center justify-center">
-        <div className="rounded-lg border-t-4 bg-white border-red-600 p-8 shadow-md">
-          <div className="w-full sm:w-[320px]">
-            <h2 className="text-center">Subscription Term</h2>
-            <div className="flex items-center justify-center">
-              <div className="mt-4 flex flex-row items-center gap-5">
-                <p className="text-sm">Monthly</p>
+      <div className='my-8 flex items-center justify-center'>
+        <div className='rounded-lg border-t-4 bg-white border-red-600 p-8 shadow-md'>
+          <div className='w-full sm:w-[320px]'>
+            <h2 className='text-center'>Subscription Term</h2>
+            <div className='flex items-center justify-center'>
+              <div className='mt-4 flex flex-row items-center gap-5'>
+                <p className='text-sm'>Monthly</p>
                 <ToggleSwitch
-                  label="Annual"
-                  color="red"
+                  label='Annual'
+                  color='red'
                   checked={switch1}
                   onChange={setSwitch1}
-                  sizing="sm"
+                  sizing='sm'
                 />
               </div>
             </div>
@@ -217,40 +217,40 @@ export default function Home() {
         </div>
       </div>
       <div>
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className='mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
           {packages.map((pkg, index) => (
             <div
               key={index}
               className={`rounded-lg border-t-4 bg-white ${pkg.borderColor} p-5 shadow-md`}
             >
               <div>
-                <h3 className="text-xl font-semibold">{pkg.name}</h3>
-                <p className="mt-1 text-sm">
+                <h3 className='text-xl font-semibold'>{pkg.name}</h3>
+                <p className='mt-1 text-sm'>
                   A comprehensive package with essential features.
                 </p>
-                <div className="mt-4 flex flex-col gap-2">
-                  <strong className="text-4xl">{pkg.price}</strong>
-                  <span className="text-sm">{pkg.billingCycle}</span>
+                <div className='mt-4 flex flex-col gap-2'>
+                  <strong className='text-4xl'>{pkg.price}</strong>
+                  <span className='text-sm'>{pkg.billingCycle}</span>
                 </div>
-                <div className="flex flex-col">
-                  <Button className="mt-4 w-full rounded-full bg-red-600 hover:!bg-red-700 py-2 text-white">
+                <div className='flex flex-col'>
+                  <Button className='mt-4 w-full rounded-full bg-red-600 hover:!bg-red-700 py-2 text-white'>
                     Get Started
                   </Button>
                 </div>
               </div>
-              <div className="mt-5">
-                <span className="text-lg font-semibold">
+              <div className='mt-5'>
+                <span className='text-lg font-semibold'>
                   {pkg.name} Includes:
                 </span>
-                <div className="mt-3 flex flex-col gap-2">
+                <div className='mt-3 flex flex-col gap-2'>
                   {pkg.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-start gap-3">
-                      <div className="py-1">
-                        <FaCheckCircle className="mr-1 text-red-600" />
+                    <div key={idx} className='flex items-start gap-3'>
+                      <div className='py-1'>
+                        <FaCheckCircle className='mr-1 text-red-600' />
                       </div>
                       <div>
-                        <h4 className="font-semibold">{feature.title}</h4>
-                        <p className="mt-1 text-sm">{feature.description}</p>
+                        <h4 className='font-semibold'>{feature.title}</h4>
+                        <p className='mt-1 text-sm'>{feature.description}</p>
                       </div>
                     </div>
                   ))}

@@ -28,22 +28,22 @@ export default function RefundRequest() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <Card className="max-w-lg w-full shadow-lg border border-gray-200">
-        <h2 className="text-2xl font-semibold text-center mb-4 text-gray-800">
+    <div className='flex justify-center items-center min-h-screen'>
+      <Card className='max-w-lg w-full shadow-lg border border-gray-200'>
+        <h2 className='text-2xl font-semibold text-center mb-4 text-gray-800'>
           Refund Request
         </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className='space-y-4'>
           <div>
             <Label
-              htmlFor="orderNumber"
-              value="Order Number"
-              className="text-gray-700"
+              htmlFor='orderNumber'
+              value='Order Number'
+              className='text-gray-700'
             />
             <TextInput
-              id="orderNumber"
-              name="orderNumber"
-              placeholder="Enter your order number"
+              id='orderNumber'
+              name='orderNumber'
+              placeholder='Enter your order number'
               required
               value={formData.orderNumber}
               onChange={handleChange}
@@ -51,15 +51,15 @@ export default function RefundRequest() {
           </div>
           <div>
             <Label
-              htmlFor="email"
-              value="Email Address"
-              className="text-gray-700"
+              htmlFor='email'
+              value='Email Address'
+              className='text-gray-700'
             />
             <TextInput
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Enter your email"
+              id='email'
+              name='email'
+              type='email'
+              placeholder='Enter your email'
               required
               value={formData.email}
               onChange={handleChange}
@@ -67,15 +67,15 @@ export default function RefundRequest() {
           </div>
           <div>
             <Label
-              htmlFor="refundAmount"
-              value="Refund Amount"
-              className="text-gray-700"
+              htmlFor='refundAmount'
+              value='Refund Amount'
+              className='text-gray-700'
             />
             <TextInput
-              id="refundAmount"
-              name="refundAmount"
-              type="number"
-              placeholder="Enter refund amount"
+              id='refundAmount'
+              name='refundAmount'
+              type='number'
+              placeholder='Enter refund amount'
               required
               value={formData.refundAmount}
               onChange={handleChange}
@@ -83,14 +83,14 @@ export default function RefundRequest() {
           </div>
           <div>
             <Label
-              htmlFor="reason"
-              value="Reason for Refund"
-              className="text-gray-700"
+              htmlFor='reason'
+              value='Reason for Refund'
+              className='text-gray-700'
             />
             <Textarea
-              id="reason"
-              name="reason"
-              placeholder="Describe why you are requesting a refund"
+              id='reason'
+              name='reason'
+              placeholder='Describe why you are requesting a refund'
               required
               rows={4}
               value={formData.reason}
@@ -99,22 +99,22 @@ export default function RefundRequest() {
           </div>
           <div>
             <Label
-              htmlFor="refundMethod"
-              value="Refund Method"
-              className="text-gray-700"
+              htmlFor='refundMethod'
+              value='Refund Method'
+              className='text-gray-700'
             />
             <Select
-              id="refundMethod"
-              name="refundMethod"
+              id='refundMethod'
+              name='refundMethod'
               value={formData.refundMethod}
               onChange={handleChange}
             >
-              <option value="bank_transfer">Bank Transfer</option>
-              <option value="paypal">PayPal</option>
-              <option value="store_credit">Store Credit</option>
+              <option value='bank_transfer'>Bank Transfer</option>
+              <option value='paypal'>PayPal</option>
+              <option value='store_credit'>Store Credit</option>
             </Select>
           </div>
-          <Button type="submit" color="blue" className="w-full">
+          <Button type='submit' color='blue' className='w-full'>
             Submit Request
           </Button>
         </form>

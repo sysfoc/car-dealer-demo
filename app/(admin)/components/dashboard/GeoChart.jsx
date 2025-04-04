@@ -16,7 +16,7 @@ const GeoChart = () => {
     title: "Popularity by Country",
   };
   return (
-    <div className="p-4 bg-white shadow">
+    <div className='p-4 bg-white shadow'>
       <Chart
         chartEvents={[
           {
@@ -30,7 +30,7 @@ const GeoChart = () => {
             },
           },
         ]}
-        chartType="GeoChart"
+        chartType='GeoChart'
         width={630}
         height={350}
         data={data}

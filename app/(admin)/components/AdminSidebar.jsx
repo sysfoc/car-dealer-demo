@@ -13,51 +13,51 @@ import {
 const AdminSidebar = () => {
   return (
     <Sidebar
-      aria-label="Sidebar of a dashboard"
-      className="hidden md:block w-[18rem] h-screen shadow sidebar"
+      aria-label='Sidebar of a dashboard'
+      className='hidden md:block w-[18rem] h-screen shadow sidebar'
     >
-      <Sidebar.Logo href="/dashboard">Admin Dashboard</Sidebar.Logo>
+      <Sidebar.Logo href='/dashboard'>Admin Dashboard</Sidebar.Logo>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           <Sidebar.Item
-            href="/dashboard"
+            href='/dashboard'
             icon={HiChartPie}
-            className="hover:!bg-[#0dcaf021] hover:!text-[#2899b0]"
+            className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
           >
             Dashboard
           </Sidebar.Item>
           <Sidebar.Item
-            href="/dashboard/invoices"
+            href='/dashboard/invoices'
             icon={HiViewBoards}
-            className="hover:!bg-[#0dcaf021] hover:!text-[#2899b0]"
+            className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
           >
             Invoice
           </Sidebar.Item>
           <Sidebar.Item
-            href="/dashboard/payment/gateways"
+            href='/dashboard/payment/gateways'
             icon={HiInbox}
-            className="hover:!bg-[#0dcaf021] hover:!text-[#2899b0]"
+            className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
           >
             Payment Gateways
           </Sidebar.Item>
           <Sidebar.Item
-            href="/dashboard/users"
+            href='/dashboard/users'
             icon={HiUser}
-            className="hover:!bg-[#0dcaf021] hover:!text-[#2899b0]"
+            className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
           >
             Users
           </Sidebar.Item>
           <Sidebar.Item
-            href="/dashboard/payment/history"
+            href='/dashboard/payment/history'
             icon={HiShoppingBag}
-            className="hover:!bg-[#0dcaf021] hover:!text-[#2899b0]"
+            className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
           >
             Payment History
           </Sidebar.Item>
           <Sidebar.Item
-            href="#"
+            href='#'
             icon={HiArrowSmRight}
-            className="hover:!bg-[#0dcaf021] hover:!text-[#2899b0]"
+            className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
           >
             Billings
           </Sidebar.Item>

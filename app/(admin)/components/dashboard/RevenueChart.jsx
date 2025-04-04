@@ -20,10 +20,10 @@ const RevenueChart = () => {
     legend: { position: "bottom" },
   };
   return (
-    <div className="bg-white shadow">
+    <div className='bg-white shadow'>
       <div>
         <Chart
-          chartType="AreaChart"
+          chartType='AreaChart'
           data={data}
           options={options}
           width={300}
