@@ -1,16 +1,19 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { MdArrowOutward } from "react-icons/md";
 const HeroBanner = () => {
   return (
-    <section
-      className='min-h-screen w-full flex items-center justify-center relative'
-      style={{
-        background: "url('./banner.webp') no-repeat center center/cover",
-        backgroundColor: "rgb(5, 11, 32)",
-        backgroundBlendMode: "multiply",
-      }}
-    >
+    <section className='relative min-h-screen w-full flex items-center justify-center'>
+      <Image
+        src='/banner.webp'
+        alt='Hero background'
+        fill
+        priority
+        quality={80}
+        className='object-cover object-center -z-10'
+      />
+      <div className='absolute inset-0 bg-[#050b20b8] mix-blend-multiply -z-10' />
       <div className='absolute top-10 left-10 sm:left-14 text-white'>
         <span>The Smart Way to Sell Vehicles</span>
       </div>
