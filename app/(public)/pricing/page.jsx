@@ -1,192 +1,19 @@
 "use client";
 import React, { useState } from "react";
-import { Button, ToggleSwitch } from "flowbite-react";
-import { FaCheckCircle } from "react-icons/fa";
-import { MdOutlineCelebration } from "react-icons/md";
+import {
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeadCell,
+  TableRow,
+  ToggleSwitch,
+} from "flowbite-react";
+import { FaCheck } from "react-icons/fa";
 
 export default function Home() {
   const [switch1, setSwitch1] = useState(false);
-  const packages = [
-    {
-      name: "Basic Package",
-      price: "$99",
-      billingCycle: "Billed Monthly",
-      borderColor: "border-red-600",
-      features: [
-        {
-          title: "10GB Storage",
-          description:
-            "Ample space to manage your essential content and media files.",
-        },
-        {
-          title: "30 Car Listings",
-          description:
-            "Perfect for small dealerships looking to showcase their inventory online.",
-        },
-        {
-          title: "Up to 2 User Accounts",
-          description: "Allow up to 2 users to manage your site.",
-        },
-        {
-          title: "Up to 2 Email Accounts",
-          description: "Professional email addresses for your team.",
-        },
-        {
-          title: "Fully Operational Website",
-          description: "A complete, ready-to-use website.",
-        },
-        {
-          title: "Responsive Design",
-          description: "Optimized for all devices.",
-        },
-        {
-          title: "Basic SEO Optimization",
-          description:
-            "Enhance your website’s visibility with fundamental SEO tools.",
-        },
-        {
-          title: "24-Hour Email & Chat Support",
-          description:
-            "Get assistance whenever you need it, with round-the-clock customer support.",
-        },
-        {
-          title: "Monthly Website Backups",
-          description: "Keep your data safe with regular monthly backups.",
-        },
-      ],
-    },
-    {
-      name: "Standard Package",
-      price: "$249",
-      billingCycle: "Billed Monthly",
-      borderColor: "border-blue-600",
-      features: [
-        {
-          title: "25GB Storage",
-          description: "More storage for growing businesses.",
-        },
-        {
-          title: "200 Car Listings",
-          description: "Ideal for mid-sized dealerships.",
-        },
-        {
-          title: "Up to 5 User Accounts",
-          description: "More users to manage your platform.",
-        },
-        {
-          title: "Up to 5 Email Accounts",
-          description: "Professional email addresses for your team.",
-        },
-        {
-          title: "Fully Operational Website",
-          description: "A complete, ready-to-use website.",
-        },
-        {
-          title: "Responsive Design",
-          description: "Optimized for all devices.",
-        },
-        {
-          title: "Basic SEO Optimization",
-          description:
-            "Enhance your website’s visibility with fundamental SEO tools.",
-        },
-        {
-          title: "Advanced SEO Tools",
-          description: "Gain access to advanced SEO functionalities.",
-        },
-        {
-          title: "12-Hour Email & Chat Support",
-          description: "Support available during working hours.",
-        },
-        {
-          title: "Weekly Website Backups",
-          description: "Keep your data safe with weekly backups.",
-        },
-        {
-          title: "Basic Customization",
-          description: "Modify your site’s look and feel.",
-        },
-        {
-          title: "Car Finance",
-          description: "Offer financing options to customers.",
-        },
-      ],
-    },
-    {
-      name: "Premium Package",
-      price: "$499",
-      billingCycle: "Billed Monthly",
-      borderColor: "border-green-600",
-      features: [
-        {
-          title: "50GB Storage",
-          description: "Maximum storage for large dealerships.",
-        },
-        {
-          title: "Unlimited Car Listings",
-          description: "No limits on the number of car listings.",
-        },
-        {
-          title: "Up to 10 User Accounts",
-          description: "Expand your team’s access.",
-        },
-        {
-          title: "Up to 10 Email Accounts",
-          description: "Professional email addresses for your team.",
-        },
-        {
-          title: "Fully Operational Website",
-          description: "A complete, ready-to-use website.",
-        },
-        {
-          title: "Responsive Design",
-          description: "Optimized for all devices.",
-        },
-        {
-          title: "Basic SEO Optimization",
-          description:
-            "Enhance your website’s visibility with fundamental SEO tools.",
-        },
-        {
-          title: "Advanced SEO Tools",
-          description: "Gain access to advanced SEO functionalities.",
-        },
-        {
-          title: "12-Hour Email & Chat Support",
-          description: "Support available during working hours.",
-        },
-        { title: "Phone Support", description: "Direct assistance via phone." },
-        {
-          title: "Daily Website Backups",
-          description: "Keep your data safe with daily backups.",
-        },
-        {
-          title: "Basic Customization",
-          description: "Modify your site’s look and feel.",
-        },
-        {
-          title: "Car Leasing",
-          description: "Provide leasing options for vehicles.",
-        },
-        {
-          title: "Car Finance",
-          description: "Offer financing options to customers.",
-        },
-        {
-          title: "Performance Optimization",
-          description: "Ensure your website runs smoothly and efficiently.",
-        },
-        {
-          title: "Third-Party Integrations",
-          description: "Seamlessly integrate with other tools and platforms.",
-        },
-        {
-          title: "Dedicated Account Manager",
-          description: "Get a dedicated expert to assist you.",
-        },
-      ],
-    },
-  ];
   return (
     <section className='mx-4 my-10 sm:mx-8'>
       <div className='text-center'>
@@ -216,48 +43,458 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div>
-        <div className='mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
-          {packages.map((pkg, index) => (
-            <div
-              key={index}
-              className={`rounded-lg border-t-4 bg-white ${pkg.borderColor} p-5 shadow-md`}
-            >
-              <div>
-                <h3 className='text-xl font-semibold'>{pkg.name}</h3>
-                <p className='mt-1 text-sm'>
-                  A comprehensive package with essential features.
-                </p>
-                <div className='mt-4 flex flex-col gap-2'>
-                  <strong className='text-4xl'>{pkg.price}</strong>
-                  <span className='text-sm'>{pkg.billingCycle}</span>
+      <div className='my-20'>
+        <div className='w-full overflow-x-scroll md:overflow-hidden shadow rounded-lg'>
+          <Table striped className='min-w-[700px] md:w-full table-fixed'>
+            <TableHead className='text-center'>
+              <TableHeadCell>
+                <div>
+                  <h2 className='text-xl'>Features</h2>
                 </div>
-                <div className='flex flex-col'>
-                  <Button className='mt-4 w-full rounded-full bg-red-600 hover:!bg-red-700 py-2 text-white'>
-                    Get Started
-                  </Button>
+              </TableHeadCell>
+              <TableHeadCell>
+                <div>
+                  <h2 className='text-xl'>Basic</h2>
+                  <h3 className='text-lg'>
+                    ($99.<sup>99</sup>
+                    <sub className='text-xs font-normal'>/month</sub>)
+                  </h3>
                 </div>
-              </div>
-              <div className='mt-5'>
-                <span className='text-lg font-semibold'>
-                  {pkg.name} Includes:
-                </span>
-                <div className='mt-3 flex flex-col gap-2'>
-                  {pkg.features.map((feature, idx) => (
-                    <div key={idx} className='flex items-start gap-3'>
-                      <div className='py-1'>
-                        <FaCheckCircle className='mr-1 text-red-600' />
-                      </div>
-                      <div>
-                        <h4 className='font-semibold'>{feature.title}</h4>
-                        <p className='mt-1 text-sm'>{feature.description}</p>
-                      </div>
-                    </div>
-                  ))}
+              </TableHeadCell>
+              <TableHeadCell>
+                <div>
+                  <h2 className='text-xl'>Standard</h2>
+                  <h3 className='text-lg'>
+                    ($249.<sup>99</sup>
+                    <sub className='text-xs font-normal'>/month</sub>)
+                  </h3>
                 </div>
-              </div>
-            </div>
-          ))}
+              </TableHeadCell>
+              <TableHeadCell>
+                <div>
+                  <h2 className='text-xl'>Premium</h2>
+                  <h3 className='text-lg'>
+                    ($499.<sup>99</sup>
+                    <sub className='text-xs font-normal'>/month</sub>)
+                  </h3>
+                </div>
+              </TableHeadCell>
+            </TableHead>
+            <TableBody className='text-left'>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>Hard Disk Limit</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>10 GB</b>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>25 GB</b>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>50 GB</b>
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>Car Listing Limit</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>30 cars</b>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>200 cars</b>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>Unlimited</b>
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>Number of Videos</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'></div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>15</b>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>Unlimited</b>
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>User Accounts</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>Upto 2</b>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>Upto 5</b>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>Upto 10</b>
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>Email Accounts</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>Upto 2</b>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>Upto 5</b>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>Upto 10</b>
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>Fully Operational Website</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>Responsive Design</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>Basic SEO Optimization</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>Advanced SEO Tools</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'></div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>Email & Chat Support</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>24 hour</b>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>12 hour</b>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>12 hour</b>
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>Phone Support </p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'></div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'></div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>Basic Customization</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'></div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'></div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>Car Leasing</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'></div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'></div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>Car Finance</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'></div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'></div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>Website Backups</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>Monthly</b>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>Weekly</b>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <b>Daily</b>
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>Migration</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>Performance Optimization</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'></div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'></div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>Third-Party Integrations</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'></div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'></div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div>
+                    <p className='text-sm'>Dedicated Account Manager</p>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'></div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'></div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <FaCheck fontSize='25' />
+                  </div>
+                </TableCell>
+              </TableRow>
+              <TableRow className='w-min bg-white'>
+                <TableCell>
+                  <div></div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <Button color='dark' className='w-full uppercase'>
+                      Buy Basic
+                    </Button>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <Button color='dark' className='w-full uppercase'>
+                      Buy Standard
+                    </Button>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className='flex items-center justify-center'>
+                    <Button color='dark' className='w-full uppercase'>
+                      Buy Premium
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </div>
       </div>
     </section>
