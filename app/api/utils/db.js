@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import { config } from "@/app/api/utils/env-config";
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = config.mongoDb;
 
 if (!MONGODB_URI) {
   throw new Error(
@@ -17,7 +18,7 @@ export const connectToDatabase = async () => {
 
   try {
     await mongoose.connect(MONGODB_URI, {
-      dbName: process.env.DB_NAME,
+      dbName: config.dbName,
       bufferCommands: false,
       useNewUrlParser: true,
       useUnifiedTopology: true,

@@ -1,7 +1,8 @@
 import bcrypt from "bcrypt";
+import { config } from "@/app/api/utils/env-config";
 
 export const hashedPassword = async (password) => {
-  const salts = parseInt(process.env.SALTS);
+  const salts = parseInt(config.saltRounds);
   const salt = await bcrypt.genSalt(salts);
   const hashedPassword = await bcrypt.hash(password, salt);
   return hashedPassword;
