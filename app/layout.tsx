@@ -11,7 +11,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Car Dealership Demo",
   description: "Explore The Best Car Dealership Themes",
-  icons:'/logo.png'
+  icons: "/logo.png",
 };
 
 export default function RootLayout({
@@ -20,9 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${poppins.className} antialiased bg-gray-50/95 max-w-[1680px] mx-auto`}>
-      <LayoutWrapper>{children}</LayoutWrapper>
+    <html lang='en'>
+      <body
+        className={`${poppins.className} antialiased bg-gray-50/95 max-w-[1680px] mx-auto`}
+      >
+        <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
   );
