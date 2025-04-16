@@ -21,17 +21,6 @@ const userScheama = new mongoose.Schema(
       trim: true,
       minlength: 8,
     },
-    phone: {
-      type: String,
-      required: true,
-      trim: true,
-      unique: true,
-    },
-    address: {
-      type: String,
-      required: true,
-      trim: true,
-    },
     role: {
       type: String,
       enum: ["user", "admin"],
@@ -66,5 +55,5 @@ const userScheama = new mongoose.Schema(
   { timestamps: true }
 );
 
-const User = mongoose.model("User", userScheama);
+const User = mongoose.models.User || mongoose.model("User", userScheama);
 export default User;
