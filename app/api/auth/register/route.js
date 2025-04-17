@@ -40,7 +40,7 @@ export async function POST(req) {
       );
     } else {
       const encryptedPassword = await hashedPassword(password);
-      const user = await User.create({
+      await User.create({
         name,
         email,
         password: encryptedPassword,
@@ -48,7 +48,7 @@ export async function POST(req) {
         billingDetails,
       });
       return NextResponse.json(
-        { message: "User created successfully", user },
+        { message: "User created successfully" },
         { status: 201 }
       );
     }
