@@ -1,10 +1,14 @@
 "use client";
 import { useState } from "react";
-import { Button, Label, TextInput } from "flowbite-react";
+import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useRouter } from "next/navigation";
+import { HiInformationCircle } from "react-icons/hi";
 
 export default function Register() {
   const [formData, setFormData] = useState({});
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -15,6 +19,7 @@ export default function Register() {
   };
   const handleFormData = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await fetch("/api/auth/login", {
         method: "POST",
@@ -24,13 +29,16 @@ export default function Register() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
+      setLoading(false);
       if (res.ok) {
         router.push("/user/dashboard");
       } else {
-        console.log("Unknown User", data.message);
+        setError(true);
+        setErrorMessage(data.message);
       }
     } catch (error) {
-      console.log(error);
+      setError(true);
+      setErrorMessage("An error occurred. Please try again.");
     }
   };
   return (
@@ -39,7 +47,11 @@ export default function Register() {
         <h2 className='mb-6 text-center text-2xl font-bold text-gray-700'>
           Login To Your Account
         </h2>
-
+        {error && (
+          <Alert className='mb-3' color='failure' icon={HiInformationCircle}>
+            <span className='font-medium'>{errorMessage}</span>
+          </Alert>
+        )}
         <form className='space-y-4' onSubmit={handleFormData}>
           <div>
             <Label htmlFor='email' value='Email' />
@@ -66,7 +78,11 @@ export default function Register() {
           </div>
 
           <Button type='submit' color='blue' className='w-full'>
-            Login
+            {loading ? (
+              <Spinner color='warning' aria-label='Spinning' size='md' />
+            ) : (
+              "Login"
+            )}
           </Button>
         </form>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Alert, Button, Label, TextInput } from "flowbite-react";
+import { Alert, Button, Label, TextInput, Spinner } from "flowbite-react";
 // import { FcGoogle } from "react-icons/fc";
 // import { FaGithub } from "react-icons/fa";
 import { useRouter } from "next/navigation";
@@ -10,6 +10,7 @@ export default function Register() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -20,6 +21,7 @@ export default function Register() {
   };
   const handleFormData = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await fetch("/api/auth/register", {
         method: "POST",
@@ -29,6 +31,7 @@ export default function Register() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
+      setLoading(false);
       if (res.ok) {
         router.push("/login");
       } else {
@@ -37,7 +40,7 @@ export default function Register() {
       }
     } catch (error) {
       setError(true);
-      setErrorMessage(error);
+      setErrorMessage("An error occurred. Please try again.");
     }
   };
   return (
@@ -89,7 +92,11 @@ export default function Register() {
           </div>
 
           <Button type='submit' color='blue' className='w-full'>
-            Sign Up
+            {loading ? (
+              <Spinner color='warning' aria-label='Spinning' size='md' />
+            ) : (
+              "Signup"
+            )}
           </Button>
         </form>
 
