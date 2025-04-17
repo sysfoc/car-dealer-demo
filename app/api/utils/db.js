@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 import { config } from "@/app/api/utils/env-config";
 
-const MONGODB_URI = config.mongoDb;
+const mongoDbConnection = config.mongoDb;
 
-if (!MONGODB_URI) {
+if (!mongoDbConnection) {
   throw new Error(
     "Please define the MONGODB_URI environment variable inside envoirement file"
   );
@@ -17,11 +17,9 @@ export const connectToDatabase = async () => {
   }
 
   try {
-    await mongoose.connect(MONGODB_URI, {
+    await mongoose.connect(mongoDbConnection, {
       dbName: config.dbName,
       bufferCommands: false,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
     });
 
     isConnected = true;
