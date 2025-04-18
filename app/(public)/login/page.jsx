@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import { HiInformationCircle } from "react-icons/hi";
-import { FaGithub } from "react-icons/fa";
 import Google from "@/app/components/auth/Google";
+import Github from "@/app/components/auth/Github";
 
 export default function Register() {
   const [formData, setFormData] = useState({});
@@ -96,9 +96,7 @@ export default function Register() {
         </div>
         <div className='space-y-4'>
           <Google />
-          <Button className='w-full flex items-center justify-center gap-2 bg-black text-white hover:!bg-gray-800'>
-            <FaGithub className='text-xl mr-2' /> Sign up with GitHub
-          </Button>
+          <Github />
         </div>
       </div>
     </div>

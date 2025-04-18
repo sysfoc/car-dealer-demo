@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Alert, Button, Label, TextInput, Spinner } from "flowbite-react";
 import Google from "@/app/components/auth/Google";
+import Github from "@/app/components/auth/Github";
 // import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { useRouter } from "next/navigation";
@@ -110,9 +111,7 @@ export default function Register() {
         </div>
         <div className='space-y-4'>
           <Google />
-          <Button className='w-full flex items-center justify-center gap-2 bg-black text-white hover:!bg-gray-800'>
-            <FaGithub className='text-xl mr-2' /> Sign up with GitHub
-          </Button>
+          <Github />
         </div>
       </div>
     </div>
