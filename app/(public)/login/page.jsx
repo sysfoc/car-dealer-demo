@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import { HiInformationCircle } from "react-icons/hi";
+import { FaGithub } from "react-icons/fa";
+import Google from "@/app/components/auth/Google";
 
 export default function Register() {
   const [formData, setFormData] = useState({});
@@ -35,10 +37,12 @@ export default function Register() {
       } else {
         setError(true);
         setErrorMessage(data.message);
+        setLoading(false);
       }
     } catch (error) {
       setError(true);
       setErrorMessage("An error occurred. Please try again.");
+      setLoading(false);
     }
   };
   return (
@@ -85,6 +89,17 @@ export default function Register() {
             )}
           </Button>
         </form>
+        <div className='relative my-5 flex items-center'>
+          <div className='flex-grow border-t border-gray-300'></div>
+          <span className='mx-4 flex-shrink text-gray-600'>or</span>
+          <div className='flex-grow border-t border-gray-300'></div>
+        </div>
+        <div className='space-y-4'>
+          <Google />
+          <Button className='w-full flex items-center justify-center gap-2 bg-black text-white hover:!bg-gray-800'>
+            <FaGithub className='text-xl mr-2' /> Sign up with GitHub
+          </Button>
+        </div>
       </div>
     </div>
   );

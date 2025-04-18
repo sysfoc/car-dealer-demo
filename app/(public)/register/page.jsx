@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
 import { Alert, Button, Label, TextInput, Spinner } from "flowbite-react";
+import Google from "@/app/components/auth/Google";
 // import { FcGoogle } from "react-icons/fc";
-// import { FaGithub } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { HiInformationCircle } from "react-icons/hi";
 
@@ -37,10 +38,12 @@ export default function Register() {
       } else {
         setError(true);
         setErrorMessage(data.message);
+        setLoading(false);
       }
     } catch (error) {
       setError(true);
       setErrorMessage("An error occurred. Please try again.");
+      setLoading(false);
     }
   };
   return (
@@ -100,20 +103,17 @@ export default function Register() {
           </Button>
         </form>
 
-        {/* <div className='relative my-5 flex items-center'>
+        <div className='relative my-5 flex items-center'>
           <div className='flex-grow border-t border-gray-300'></div>
           <span className='mx-4 flex-shrink text-gray-600'>or</span>
           <div className='flex-grow border-t border-gray-300'></div>
         </div>
         <div className='space-y-4'>
-          <Button className='w-full flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 hover:!bg-gray-50'>
-            <FcGoogle className='text-xl mr-2' /> Sign up with Google
-          </Button>
-
+          <Google />
           <Button className='w-full flex items-center justify-center gap-2 bg-black text-white hover:!bg-gray-800'>
             <FaGithub className='text-xl mr-2' /> Sign up with GitHub
           </Button>
-        </div> */}
+        </div>
       </div>
     </div>
   );

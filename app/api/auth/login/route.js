@@ -1,7 +1,7 @@
 import { connectToDatabase } from "@/app/api/utils/db";
 import User from "@/app/model/user.model";
 import { NextResponse } from "next/server";
-import { hashedPassword } from "@/app/api/utils/hashing";
+import { comparePassword } from "@/app/api/utils/hashing";
 import { config } from "@/app/api/utils/env-config";
 import jwt from "jsonwebtoken";
 
@@ -28,7 +28,7 @@ export async function POST(req) {
         { status: 400 }
       );
     } else {
-      const isPasswordMatch = await hashedPassword(
+      const isPasswordMatch = await comparePassword(
         password,
         isUserExist.password
       );
