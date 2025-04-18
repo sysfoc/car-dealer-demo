@@ -24,16 +24,15 @@ const Github = () => {
       setLoading(true);
       await signOut(auth);
       const result = await signInWithPopup(auth, githubProvider);
-      console.log(result);
       const res = await fetch("/api/auth/github", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: result.user.displayName,
+          name: result.user.displayName || "no name",
           email: "noemail@gmail.com",
-          ProfileImg: result.user.photoURL,
+          profileImg: result.user.photoURL,
         }),
       });
       const data = await res.json();

@@ -25,9 +25,9 @@ const Google = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: result.user.displayName,
-          email: result.user.email,
-          ProfileImg: result.user.photoURL,
+          name: result.user.displayName || "no name",
+          email: result.user.email || "noemail@gmail.com",
+          profileImg: result.user.photoURL,
         }),
       });
       const data = await res.json();
