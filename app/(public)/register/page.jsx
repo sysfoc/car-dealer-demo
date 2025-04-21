@@ -3,8 +3,6 @@ import { useState } from "react";
 import { Alert, Button, Label, TextInput, Spinner } from "flowbite-react";
 import Google from "@/app/components/auth/Google";
 import Github from "@/app/components/auth/Github";
-// import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { HiInformationCircle } from "react-icons/hi";
 

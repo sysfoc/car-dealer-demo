@@ -1,7 +1,10 @@
+"use client";
 import { Button, Label, TextInput } from "flowbite-react";
 import Image from "next/image";
+import { useSelector } from "react-redux";
 
 export default function UserProfile() {
+  const currentUser = useSelector((state) => state.user);
   return (
     <div>
       <div className='bg-white border-b p-4'>
@@ -10,9 +13,9 @@ export default function UserProfile() {
       <div className='flex items-center justify-center p-4 bg-white'>
         <div className='w-full md:w-[70%]'>
           <div className='flex items-center justify-center'>
-            <div className='w-[180px] h-[180px] p-2 object-cover overflow-hidden shadow rounded-full flex items-center justify-center'>
+            <div className='w-[150px] h-[150px] p-2 object-cover overflow-hidden shadow rounded-full flex items-center justify-center'>
               <Image
-                src={"/logo.png"}
+                src={`${currentUser?.profileImg}`}
                 alt='profile-img'
                 width={150}
                 height={150}
@@ -26,7 +29,7 @@ export default function UserProfile() {
               <TextInput
                 type='text'
                 id='name'
-                defaultValue={"Sysfoc"}
+                defaultValue={currentUser?.name}
                 placeholder='John Doe'
                 required
               />
@@ -36,18 +39,8 @@ export default function UserProfile() {
               <TextInput
                 type='email'
                 id='email'
-                defaultValue={"sysfoc@gmail.com"}
+                defaultValue={currentUser?.email}
                 placeholder='johndoe@gmail.com'
-                required
-              />
-            </div>
-            <div>
-              <Label htmlFor='phone'>Phone</Label>
-              <TextInput
-                type='tel'
-                id='phone'
-                defaultValue={"111-234-567"}
-                placeholder='111-234-567'
                 required
               />
             </div>
@@ -56,7 +49,6 @@ export default function UserProfile() {
               <TextInput
                 type='password'
                 id='password'
-                defaultValue={"12345678"}
                 placeholder='*******'
                 required
               />

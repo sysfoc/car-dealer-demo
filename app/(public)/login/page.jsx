@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { HiInformationCircle } from "react-icons/hi";
 import Google from "@/app/components/auth/Google";
 import Github from "@/app/components/auth/Github";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "@/lib/features/user/userSlice";
 
 export default function Register() {
   const [formData, setFormData] = useState({});
@@ -12,6 +14,7 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormData({
@@ -34,6 +37,7 @@ export default function Register() {
       setLoading(false);
       if (res.ok) {
         router.push("/user/dashboard");
+        dispatch(loginSuccess(data.user));
       } else {
         setError(true);
         setErrorMessage(data.message);

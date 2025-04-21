@@ -5,6 +5,8 @@ import { Button } from "flowbite-react";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { app } from "@/app/firebase/firebase";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "@/lib/features/user/userSlice";
 
 const Google = () => {
   const auth = getAuth(app);
@@ -12,6 +14,7 @@ const Google = () => {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleGoogleOauth = async () => {
     const provider = new GoogleAuthProvider();
@@ -34,6 +37,7 @@ const Google = () => {
       setLoading(false);
       if (res.ok) {
         router.push("/user/dashboard");
+        dispatch(loginSuccess(data.user));
       } else {
         setError(true);
         setErrorMessage(data.message);

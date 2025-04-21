@@ -9,7 +9,9 @@ import {
 } from "firebase/auth";
 import { app } from "@/app/firebase/firebase";
 import { useRouter } from "next/navigation";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa"
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "@/lib/features/user/userSlice";
 
 const Github = () => {
   const [error, setError] = useState(false);
@@ -18,6 +20,7 @@ const Github = () => {
   const router = useRouter();
   const auth = getAuth(app);
   const githubProvider = new GithubAuthProvider();
+  const dispatch = useDispatch();
 
   const handleGithubOauth = async () => {
     try {
@@ -38,7 +41,8 @@ const Github = () => {
       const data = await res.json();
       setLoading(false);
       if (res.ok) {
-        router.push("/user/dashboard");
+        router.push("/user/dashboard");    
+        dispatch(loginSuccess(data.user));
       } else {
         setError(true);
         setErrorMessage(data.message);
