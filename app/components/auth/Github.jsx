@@ -9,7 +9,7 @@ import {
 } from "firebase/auth";
 import { app } from "@/app/firebase/firebase";
 import { useRouter } from "next/navigation";
-import { FaGithub } from "react-icons/fa"
+import { FaGithub } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "@/lib/features/user/userSlice";
 
@@ -33,15 +33,15 @@ const Github = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: result.user.displayName || "no name",
-          email: "noemail@gmail.com",
+          name: result.user.displayName || "",
+          email: result.user.email || "",
           profileImg: result.user.photoURL,
         }),
       });
       const data = await res.json();
       setLoading(false);
       if (res.ok) {
-        router.push("/user/dashboard");    
+        router.push("/user/dashboard");
         dispatch(loginSuccess(data.user));
       } else {
         setError(true);

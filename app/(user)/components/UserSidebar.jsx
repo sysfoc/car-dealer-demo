@@ -1,5 +1,4 @@
 "use client";
-
 import { Sidebar } from "flowbite-react";
 import { HiChartPie, HiOutlineMinusSm, HiOutlinePlusSm } from "react-icons/hi";
 import { TiFlowMerge } from "react-icons/ti";
@@ -9,14 +8,16 @@ import { BiSupport } from "react-icons/bi";
 import { IoSettings } from "react-icons/io5";
 import { RiRefundFill } from "react-icons/ri";
 import { FaMoneyBill1 } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
 const UserSidebar = () => {
+  const currentUser = useSelector((state)=>state.user)
   return (
     <Sidebar
       aria-label='Sidebar of a dashboard'
       className='hidden md:block w-[18rem] h-screen shadow sidebar'
     >
-      <Sidebar.Logo href='/user/dashboard'>User Dashboard</Sidebar.Logo>
+      <Sidebar.Logo href='/user/dashboard'>{currentUser?.name?.split(" ")[0]}&apos;s Dashboard</Sidebar.Logo>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           <Sidebar.Item

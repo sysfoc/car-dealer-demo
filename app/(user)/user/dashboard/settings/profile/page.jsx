@@ -4,6 +4,7 @@ import { Alert, Button, FileInput, Label, TextInput } from "flowbite-react";
 import Image from "next/image";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import LogoutButton from "@/app/(user)/components/profile/LogoutButton";
 
 export default function UserProfile() {
   const currentUser = useSelector((state) => state.user);
@@ -65,8 +66,9 @@ export default function UserProfile() {
           </span>
         </Alert>
       )}
-      <div className='bg-white border-b p-4'>
+      <div className='bg-white border-b p-4 flex items-center justify-between'>
         <h2 className='font-semibold text-xl'>Manage Profile</h2>
+        <LogoutButton/>
       </div>
       <div className='flex items-center justify-center p-4 bg-white'>
         <div className='w-full md:w-[70%]'>
