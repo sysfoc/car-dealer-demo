@@ -1,37 +1,109 @@
 "use client";
-import { Button, Label, TextInput } from "flowbite-react";
+import { updateUser } from "@/lib/features/user/userSlice";
+import { Alert, Button, FileInput, Label, TextInput } from "flowbite-react";
 import Image from "next/image";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function UserProfile() {
   const currentUser = useSelector((state) => state.user);
+  const [formData, setFormData] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const handleFormData = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const res = await fetch("/api/user/profile/edit", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      setLoading(false);
+      if (res.ok) {
+        dispatch(updateUser(data.user));
+        setSuccess(true);
+        setSuccessMessage(data.message);
+        setError(false);
+        setLoading(false);
+      } else {
+        setSuccess(false);
+        setError(true);
+        setErrorMessage(data.message);
+        setLoading(false);
+      }
+    } catch (error) {
+      setLoading(false);
+      setError(true);
+      setErrorMessage(error.message);
+    }
+  };
   return (
     <div>
+      {error && (
+        <Alert color='failure' className='fixed z-50 top-4 right-4'>
+          <span>
+            <span className='font-medium'>{errorMessage}</span>
+          </span>
+        </Alert>
+      )}
+      {success && (
+        <Alert color='success' className='fixed z-50 top-4 right-4'>
+          <span>
+            <span className='font-medium'>{successMessage}</span>
+          </span>
+        </Alert>
+      )}
       <div className='bg-white border-b p-4'>
         <h2 className='font-semibold text-xl'>Manage Profile</h2>
       </div>
       <div className='flex items-center justify-center p-4 bg-white'>
         <div className='w-full md:w-[70%]'>
-          <div className='flex items-center justify-center'>
-            <div className='w-[150px] h-[150px] p-2 object-cover overflow-hidden shadow rounded-full flex items-center justify-center'>
-              <Image
-                src={`${currentUser?.profileImg}`}
-                alt='profile-img'
-                width={150}
-                height={150}
-                className='size-full object-contain'
-              />
+          <form
+            className='my-3 flex flex-col gap-3'
+            onSubmit={handleFormData}
+            encType='multipart/form-data'
+          >
+            <div className='flex items-center justify-center'>
+              <div className='w-[150px] h-[150px] p-2 object-cover overflow-hidden shadow rounded-full flex items-center justify-center'>
+                <Image
+                  src={`${currentUser?.profileImg || ""}`}
+                  alt='profile-img'
+                  width={150}
+                  height={150}
+                  className='size-full object-contain'
+                />
+              </div>
+              <div>
+                <FileInput
+                  typeof='file'
+                  name='profileImg'
+                  className='hidden'
+                  onChange={handleChange}
+                />
+              </div>
             </div>
-          </div>
-          <form className='my-3 flex flex-col gap-3'>
             <div>
               <Label htmlFor='name'>Name</Label>
               <TextInput
                 type='text'
                 id='name'
+                name='name'
                 defaultValue={currentUser?.name}
                 placeholder='John Doe'
                 required
+                onChange={handleChange}
               />
             </div>
             <div>
@@ -39,9 +111,11 @@ export default function UserProfile() {
               <TextInput
                 type='email'
                 id='email'
+                name='email'
                 defaultValue={currentUser?.email}
                 placeholder='johndoe@gmail.com'
                 required
+                onChange={handleChange}
               />
             </div>
             <div>
@@ -49,12 +123,18 @@ export default function UserProfile() {
               <TextInput
                 type='password'
                 id='password'
+                name='password'
                 placeholder='*******'
-                required
+                onChange={handleChange}
               />
             </div>
             <div>
-              <Button type='submit' color='blue' className='mt-3 w-full'>
+              <Button
+                disabled={loading}
+                type='submit'
+                color='blue'
+                className='mt-3 w-full'
+              >
                 Save Changes
               </Button>
             </div>
