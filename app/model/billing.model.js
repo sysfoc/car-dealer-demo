@@ -7,58 +7,25 @@ const billingSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    dueAmount: {
-      type: Number,
+    fullName: {
+      type: String,
       required: true,
     },
-    products: [
-      {
-        productId: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Product",
-          required: true,
-        },
-        productName: {
-          type: String,
-          required: true,
-        },
-        quantity: {
-          type: Number,
-          required: true,
-        },
-        price: {
-          type: Number,
-          required: true,
-        },
-      },
-    ],
-    addedPaymentGateways: [
-      {
-        cardType: {
-          type: String,
-          enum: ["Visa", "MasterCard", "Paypal", "Stripe"],
-          required: true,
-        },
-        cardNumber: {
-          type: String,
-          required: true,
-        },
-        expiryDate: {
-          type: String,
-          required: true,
-        },
-        cvv: {
-          type: String,
-          required: true,
-        },
-        cardHolderName: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
+    email: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
-const billing = mongoose.model("Billing", billingSchema);
-export default billing;
+const Billing =
+  mongoose.models.Billing || mongoose.model("Billing", billingSchema);
+export default Billing;

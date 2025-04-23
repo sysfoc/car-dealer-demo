@@ -5,16 +5,15 @@ import { useRouter } from "next/navigation";
 import { HiInformationCircle } from "react-icons/hi";
 import Google from "@/app/components/auth/Google";
 import Github from "@/app/components/auth/Github";
-import { useDispatch } from "react-redux";
-import { loginSuccess } from "@/lib/features/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { loginStart, loginSuccess,loginFailure } from "@/lib/features/user/userSlice";
 
 export default function Register() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
   const router = useRouter();
   const dispatch = useDispatch();
+  const {error:errorMessage,loading} = useSelector((state) => state.user);
 
   const handleChange = (e) => {
     setFormData({
@@ -24,7 +23,7 @@ export default function Register() {
   };
   const handleFormData = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    dispatch(loginStart());
     try {
       const res = await fetch("/api/auth/login", {
         method: "POST",
@@ -34,19 +33,16 @@ export default function Register() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      setLoading(false);
       if (res.ok) {
         router.push("/user/dashboard");
         dispatch(loginSuccess(data.user));
       } else {
         setError(true);
-        setErrorMessage(data.message);
-        setLoading(false);
+        dispatch(loginFailure(data.message));
       }
     } catch (error) {
       setError(true);
-      setErrorMessage("An error occurred. Please try again.");
-      setLoading(false);
+      dispatch(loginFailure(error.message));
     }
   };
   return (

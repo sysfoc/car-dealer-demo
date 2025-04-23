@@ -1,8 +1,8 @@
 "use client";
-
 import { useState } from "react";
-import { Card, Label, TextInput, Button, Table, Modal } from "flowbite-react";
+import { Card, Label, TextInput, Button, Modal } from "flowbite-react";
 import { HiOutlineCreditCard, HiPlus, HiTrash } from "react-icons/hi";
+import BillingForm from "@/app/(user)/components/billing/BillingForm";
 
 export default function BillingDetail() {
   const [paymentMethods, setPaymentMethods] = useState([
@@ -110,50 +110,7 @@ export default function BillingDetail() {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Card>
-        <h2 className='text-xl font-semibold'>Customer Billing Details</h2>
-        <form className='space-y-4 mt-4'>
-          <div>
-            <Label htmlFor='full-name' value='Full Name' />
-            <TextInput
-              id='full-name'
-              type='text'
-              placeholder='John Doe'
-              required
-            />
-          </div>
-          <div>
-            <Label htmlFor='email' value='Email Address' />
-            <TextInput
-              id='email'
-              type='email'
-              placeholder='john@example.com'
-              required
-            />
-          </div>
-          <div>
-            <Label htmlFor='address' value='Billing Address' />
-            <TextInput
-              id='address'
-              type='text'
-              placeholder='123 Main St, City, Country'
-              required
-            />
-          </div>
-          <div>
-            <Label htmlFor='phone' value='Phone Number' />
-            <TextInput
-              id='phone'
-              type='tel'
-              placeholder='+1 234 567 890'
-              required
-            />
-          </div>
-          <Button type='submit' color='blue' className='w-full'>
-            Save Billing Details
-          </Button>
-        </form>
-      </Card>
+      <BillingForm/>
     </div>
   );
 }

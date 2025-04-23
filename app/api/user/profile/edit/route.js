@@ -9,7 +9,6 @@ import jwt from 'jsonwebtoken';
 export async function PATCH(req) {
   await connectToDatabase();
   const { name, email, password, profileImg } = await req.json();
-  console.log(profileImg)
   try {
     const cookieStore = await cookies();
     const token = cookieStore.get('token')?.value;

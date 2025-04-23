@@ -5,22 +5,21 @@ import { Button } from "flowbite-react";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { app } from "@/app/firebase/firebase";
 import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
-import { loginSuccess } from "@/lib/features/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { loginStart, loginSuccess,loginFailure } from "@/lib/features/user/userSlice";
 
 const Google = () => {
   const auth = getAuth(app);
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
   const dispatch = useDispatch();
+  const {error:errorMessage,loading} = useSelector((state) => state.user);
 
   const handleGoogleOauth = async () => {
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
     try {
-      setLoading(true);
+      dispatch(loginStart());
       const result = await signInWithPopup(auth, provider);
       const res = await fetch("/api/auth/google", {
         method: "POST",
@@ -28,25 +27,22 @@ const Google = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: result.user.displayName || "no name",
-          email: result.user.email || "noemail@gmail.com",
+          name: result.user.displayName || "",
+          email: result.user.email || "",
           profileImg: result.user.photoURL,
         }),
       });
       const data = await res.json();
-      setLoading(false);
       if (res.ok) {
         router.push("/user/dashboard");
         dispatch(loginSuccess(data.user));
       } else {
         setError(true);
-        setErrorMessage(data.message);
-        setLoading(false);
+        dispatch(loginFailure(data.message));
       }
     } catch (error) {
       setError(true);
-      setErrorMessage("An error occurred. Please try again.");
-      setLoading(false);
+      dispatch(loginFailure(error.message));
     }
   };
   return (

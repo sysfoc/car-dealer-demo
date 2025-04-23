@@ -10,21 +10,24 @@ import {
 import { app } from "@/app/firebase/firebase";
 import { useRouter } from "next/navigation";
 import { FaGithub } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { loginSuccess } from "@/lib/features/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+} from "@/lib/features/user/userSlice";
 
 const Github = () => {
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
   const auth = getAuth(app);
   const githubProvider = new GithubAuthProvider();
   const dispatch = useDispatch();
+  const { error: errorMessage, loading } = useSelector((state) => state.user);
 
   const handleGithubOauth = async () => {
     try {
-      setLoading(true);
+      dispatch(loginStart());
       await signOut(auth);
       const result = await signInWithPopup(auth, githubProvider);
       const res = await fetch("/api/auth/github", {
@@ -39,19 +42,16 @@ const Github = () => {
         }),
       });
       const data = await res.json();
-      setLoading(false);
       if (res.ok) {
         router.push("/user/dashboard");
         dispatch(loginSuccess(data.user));
       } else {
         setError(true);
-        setErrorMessage(data.message);
-        setLoading(false);
+        dispatch(loginFailure(data.message));
       }
     } catch (error) {
       setError(true);
-      setErrorMessage("An error occurred. Please try again.");
-      setLoading(false);
+      dispatch(loginFailure(error.message));
     }
   };
   return (

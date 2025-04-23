@@ -1,5 +1,9 @@
 "use client";
-import { updateUser } from "@/lib/features/user/userSlice";
+import {
+  updateStart,
+  updateUser,
+  updateFailure,
+} from "@/lib/features/user/userSlice";
 import { Alert, Button, FileInput, Label, TextInput } from "flowbite-react";
 import Image from "next/image";
 import { useState } from "react";
@@ -7,14 +11,16 @@ import { useDispatch, useSelector } from "react-redux";
 import LogoutButton from "@/app/(user)/components/profile/LogoutButton";
 
 export default function UserProfile() {
-  const currentUser = useSelector((state) => state.user);
   const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch();
+  const {
+    error: errorMessage,
+    loading,
+    currentUser,
+  } = useSelector((state) => state.user);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,7 +28,7 @@ export default function UserProfile() {
   const handleFormData = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
+      dispatch(updateStart());
       const res = await fetch("/api/user/profile/edit", {
         method: "PATCH",
         headers: {
@@ -31,23 +37,19 @@ export default function UserProfile() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      setLoading(false);
       if (res.ok) {
         dispatch(updateUser(data.user));
         setSuccess(true);
         setSuccessMessage(data.message);
         setError(false);
-        setLoading(false);
       } else {
         setSuccess(false);
         setError(true);
-        setErrorMessage(data.message);
-        setLoading(false);
+        dispatch(updateFailure(data.message));
       }
     } catch (error) {
-      setLoading(false);
       setError(true);
-      setErrorMessage(error.message);
+      dispatch(updateFailure(error.message));
     }
   };
   return (
@@ -68,7 +70,7 @@ export default function UserProfile() {
       )}
       <div className='bg-white border-b p-4 flex items-center justify-between'>
         <h2 className='font-semibold text-xl'>Manage Profile</h2>
-        <LogoutButton/>
+        <LogoutButton />
       </div>
       <div className='flex items-center justify-center p-4 bg-white'>
         <div className='w-full md:w-[70%]'>
@@ -80,7 +82,7 @@ export default function UserProfile() {
             <div className='flex items-center justify-center'>
               <div className='w-[150px] h-[150px] p-2 object-cover overflow-hidden shadow rounded-full flex items-center justify-center'>
                 <Image
-                  src={`${currentUser?.profileImg || ""}`}
+                  src={`${currentUser?.profileImg || "/logo.png"}`}
                   alt='profile-img'
                   width={150}
                   height={150}
