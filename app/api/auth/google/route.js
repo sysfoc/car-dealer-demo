@@ -20,6 +20,8 @@ export async function POST(req) {
             name: isUserExist.name,
             email: isUserExist.email,
             role: isUserExist.role,
+            signupMethod: "google",
+            userAgent: req.headers.get('user-agent'),
             createdAt: isUserExist.createdAt,
             updatedAt: isUserExist.updatedAt,
             profileImg: isUserExist.profileImg,
@@ -40,6 +42,7 @@ export async function POST(req) {
       const newUser = new User({
         name: name,
         email: email,
+        signupMethod: "google",
         password: await hashedPassword(generatedPassword),
         profileImg: profileImg,
       });
@@ -54,6 +57,8 @@ export async function POST(req) {
               name: newUser.name,
               email: newUser.email,
               role: newUser.role,
+              signupMethod: newUser.signupMethod,
+              userAgent: req.headers.get('user-agent'),
               createdAt: newUser.createdAt,
               updatedAt: newUser.updatedAt,
               profileImg: newUser.profileImg,

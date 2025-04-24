@@ -5,10 +5,10 @@ import GeoChartSection from "@/app/(admin)/components/dashboard/Statistics";
 export default function Dashboard() {
   return (
     <main>
-      <OverviewSection />
-      <ChartsSection />
+      {/* <OverviewSection />
+      <ChartsSection /> */}
       <OrdersSection />
-      <GeoChartSection />
+      {/* <GeoChartSection /> */}
     </main>
   );
 }

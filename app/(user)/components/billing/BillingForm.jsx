@@ -67,6 +67,7 @@ const BillingForm = () => {
             defaultValue={userBilling?.fullName}
             placeholder='John Doe'
             required
+            disabled={userBilling}
             onChange={handleChange}
           />
         </div>
@@ -78,6 +79,7 @@ const BillingForm = () => {
             defaultValue={userBilling?.email}
             placeholder='john@example.com'
             required
+            disabled={userBilling}
             onChange={handleChange}
           />
         </div>
@@ -88,6 +90,7 @@ const BillingForm = () => {
             type='text'
             placeholder='123 Main St, City, Country'
             required
+            disabled={userBilling}
             onChange={handleChange}
             defaultValue={userBilling?.address}
           />
@@ -99,6 +102,7 @@ const BillingForm = () => {
             type='tel'
             placeholder='+1 234 567 890'
             required
+            disabled={userBilling}
             onChange={handleChange}
             defaultValue={userBilling?.phone}
           />
@@ -109,7 +113,7 @@ const BillingForm = () => {
         {
         userBilling && (
           <div>
-            <p className="text-red-500 text-sm">You can change billing details in the settings</p>
+            <p className="text-green-500 text-sm">Billing Details Successfully Added! You can change billing details in the settings</p>
           </div>
         )
         }

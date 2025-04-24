@@ -47,6 +47,8 @@ export async function POST(req) {
               name: isUserExist.name,
               email: isUserExist.email,
               role: isUserExist.role,
+              userAgent: req.headers.get('user-agent'),
+              signupMethod: isUserExist.signupMethod,
               createdAt: isUserExist.createdAt,
               updatedAt: isUserExist.updatedAt,
               profileImg: isUserExist.profileImg,

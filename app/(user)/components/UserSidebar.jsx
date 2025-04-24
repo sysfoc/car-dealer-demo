@@ -11,7 +11,7 @@ import { FaMoneyBill1 } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 
 const UserSidebar = () => {
-  const currentUser = useSelector((state)=>state.user)
+  const {currentUser} = useSelector((state)=>state.user)
   return (
     <Sidebar
       aria-label='Sidebar of a dashboard'

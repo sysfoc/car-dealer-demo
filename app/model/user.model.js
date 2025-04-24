@@ -24,6 +24,11 @@ const userScheama = new mongoose.Schema(
       enum: ["user", "admin"],
       default: "user",
     },
+    signupMethod:{
+      type: String,
+      enum: ["email", "google", "github"],
+      default: "email",
+    },
     profileImg: {
       type: String,
       default:

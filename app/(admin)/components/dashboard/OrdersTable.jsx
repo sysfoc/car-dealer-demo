@@ -1,5 +1,8 @@
 "use client";
 import {
+  Button,
+  Modal,
+  Spinner,
   Table,
   TableBody,
   TableCell,
@@ -7,48 +10,42 @@ import {
   TableHeadCell,
   TableRow,
 } from "flowbite-react";
-import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const OrdersTable = () => {
-  const tableData = [
-    {
-      name: "John Doe",
-      email: "john.doe@gmail.com",
-      phone: "123-456-7890",
-      status: "Active",
-    },
-    {
-      name: "Jane Smith",
-      email: "jane.smith@gmail.com",
-      phone: "987-654-3210",
-      status: "Inactive",
-    },
-    {
-      name: "Michael Brown",
-      email: "michael.brown@gmail.com",
-      phone: "456-789-1234",
-      status: "Active",
-    },
-    {
-      name: "Emily Johnson",
-      email: "emily.johnson@gmail.com",
-      phone: "321-654-9870",
-      status: "Active",
-    },
-    {
-      name: "Chris Wilson",
-      email: "chris.wilson@gmail.com",
-      phone: "654-321-7890",
-      status: "Active",
-    },
-    {
-      name: "Sarah Davis",
-      email: "sarah.davis@gmail.com",
-      phone: "789-123-4560",
-      status: "Inactive",
-    },
-  ];
+  const [getAllUsers, setGetAllUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch("/api/user/all-users");
+        const data = await response.json();
+        setGetAllUsers(data.users);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+        setLoading(false);
+      }
+    };
+    fetchUsers();
+  }, []);
+
+  const handleViewButton = async (id) => {
+    setOpenModal(true);
+    try {
+      const res = await fetch(`/api/user/get-user/${id}`);
+      const data = await res.json();
+      if (res.ok) {
+        setSelectedUser(data.user);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <section className='my-5 p-3 bg-white shadow'>
       <div className='overflow-x-auto'>
@@ -56,44 +53,71 @@ const OrdersTable = () => {
           <TableHead>
             <TableHeadCell>Users</TableHeadCell>
             <TableHeadCell>Gmail</TableHeadCell>
-            <TableHeadCell>Phone</TableHeadCell>
-            <TableHeadCell>Status</TableHeadCell>
+            <TableHeadCell>Provider</TableHeadCell>
+            <TableHeadCell>Role</TableHeadCell>
             <TableHeadCell>
               <span>Actions</span>
             </TableHeadCell>
           </TableHead>
           <TableBody className='divide-y'>
-            {tableData.map((data, index) => (
+            {loading && <Spinner size="lg" />}
+            {getAllUsers.map((data, index) => (
               <TableRow
                 key={index}
                 className='bg-white dark:border-gray-700 dark:bg-gray-800'
               >
                 <TableCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
-                  {data.name}
+                  {data?.name}
                 </TableCell>
-                <TableCell>{data.email}</TableCell>
-                <TableCell>{data.phone}</TableCell>
+                <TableCell>{data?.email}</TableCell>
+                <TableCell className="capitalize">{data?.signupMethod}</TableCell>
                 <TableCell>
                   <span
                     className={`${
-                      data.status === "Active" ? "bg-[#15CA20]" : "bg-red-600"
+                      data?.role === "admin" ? "bg-[#15CA20]" : "bg-red-600"
                     } rounded-lg p-2 text-xs text-white`}
                   >
-                    {data.status}
+                    {data?.role}
                   </span>
                 </TableCell>
                 <TableCell>
-                  <Link
-                    href='#'
-                    className='font-medium text-cyan-600 hover:underline dark:text-cyan-500'
+                  <Button
+                    color='gray'
+                    size='sm'
+                    onClick={() => handleViewButton(data?._id)}
                   >
                     View
-                  </Link>
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
+        <Modal show={openModal} onClose={() => setOpenModal(false)}>
+          <Modal.Header>{selectedUser?.name} Profile</Modal.Header>
+          <Modal.Body>
+            {!selectedUser ? (
+              <Spinner size="lg"/>
+            ) : (
+              <div>
+                <p>Email: {selectedUser?.email}</p>
+                <p>Role: {selectedUser?.role}</p>
+                <p>Signup Method: {selectedUser?.signupMethod}</p>
+                <p>
+                  Created At:{" "}
+                  {new Date(selectedUser?.createdAt).toLocaleString()}
+                </p>
+                <p>
+                  Updated At:{" "}
+                  {new Date(selectedUser?.updatedAt).toLocaleString()}
+                </p>
+              </div>
+            )}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={() => setOpenModal(false)}>Close</Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </section>
   );

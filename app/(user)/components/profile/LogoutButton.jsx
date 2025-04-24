@@ -1,14 +1,17 @@
+import { logoutSuccess } from "@/lib/features/user/userSlice";
 import { Button } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { BiLogOut } from "react-icons/bi";
+import { useDispatch } from "react-redux";
 const LogoutButton = () => {
   const router = useRouter();
+  const dispatch =useDispatch()
   const [loading, setLoading] = useState(false);
   const handleLogoutUser = async () => {
     try {
       setLoading(true);
-      const res = fetch("/api/auth/logout", {
+      const res = await fetch("/api/auth/logout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -17,6 +20,7 @@ const LogoutButton = () => {
       await res.json();
       setLoading(false);
       if (res.ok) {
+        dispatch(logoutSuccess());
         router.push("/login");
         setLoading(false);
       }
