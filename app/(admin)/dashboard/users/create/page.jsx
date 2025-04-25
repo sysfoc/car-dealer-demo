@@ -70,6 +70,7 @@ export default function CreateUsers() {
               id='name'
               type='text'
               name='name'
+              autoComplete="on"
               placeholder='Enter name'
               required
               onChange={handleChange}
@@ -81,6 +82,7 @@ export default function CreateUsers() {
               id='email'
               type='email'
               name='email'
+              autoComplete="on"
               placeholder='Enter email'
               required
               onChange={handleChange}
