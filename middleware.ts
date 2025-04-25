@@ -3,15 +3,27 @@ import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
+  const adminToken = request.cookies.get("admin")?.value;
   const { pathname } = request.nextUrl;
 
-  const protectedRoutes = ["/user", "/dashboard"];
+  // If no token and no admin token, redirect to login
+  if (!token && !adminToken) {
+    const loginUrl = request.nextUrl.clone();
+    loginUrl.pathname = "/login";
+    return NextResponse.redirect(loginUrl);
+  }
 
-  const isProtected = protectedRoutes.some(
-    (route) => pathname === route || pathname.startsWith(`${route}/`)
-  );
+  // Restrict /dashboard to admins only
+  if (pathname.startsWith("/dashboard")) {
+    if (!adminToken) {
+      const userDashboardUrl = request.nextUrl.clone();
+      userDashboardUrl.pathname = "/user/dashboard";
+      return NextResponse.redirect(userDashboardUrl);
+    }
+  }
 
-  if (!token && isProtected) {
+  // Restrict /user/* to logged in users (token)
+  if (pathname.startsWith("/user") && !token) {
     const loginUrl = request.nextUrl.clone();
     loginUrl.pathname = "/login";
     return NextResponse.redirect(loginUrl);
@@ -21,5 +33,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/user/:path*", "/dashboard/:path*"], // this part is fine
+  matcher: ["/user/:path*", "/dashboard/:path*"],
 };

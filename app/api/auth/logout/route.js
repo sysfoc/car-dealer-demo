@@ -9,6 +9,14 @@ export async function POST() {
     maxAge: 0,
     httpOnly: true,
   });
+  
+  response.cookies.set({
+    name: 'admin',
+    value: '',
+    path: '/',
+    maxAge: 0,
+    httpOnly: true,
+  });
 
   return response;
 }

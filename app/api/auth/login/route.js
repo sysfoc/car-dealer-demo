@@ -47,7 +47,7 @@ export async function POST(req) {
               name: isUserExist.name,
               email: isUserExist.email,
               role: isUserExist.role,
-              userAgent: req.headers.get('user-agent'),
+              userAgent: req.headers.get("user-agent"),
               signupMethod: isUserExist.signupMethod,
               createdAt: isUserExist.createdAt,
               updatedAt: isUserExist.updatedAt,
@@ -56,6 +56,14 @@ export async function POST(req) {
           },
           { status: 200 }
         );
+        if (isUserExist.role === "admin") {
+          const token = jwt.sign({ admin: true }, config.jwtSecretKey);
+          response.cookies.set("admin", token, {
+            httpOnly: true,
+            maxAge: 60 * 60 * 24 * 7,
+            sameSite: "strict",
+          });
+        }
         response.cookies.set("token", token, {
           httpOnly: true,
           maxAge: 60 * 60 * 24 * 7,
