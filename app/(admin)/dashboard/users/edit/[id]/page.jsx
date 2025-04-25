@@ -106,7 +106,7 @@ export default function EditUsers() {
           </div>
           <div>
             <Label htmlFor='role' value='Role' />
-            <Select id='role' name='role' value={UserDetails?.role} onChange={handleChange}>
+            <Select id='role' name='role' defaultValue={UserDetails?.role} onChange={handleChange}>
               <option value='user'>
                 User
               </option>

@@ -1,17 +1,29 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { CompactTable } from "@table-library/react-table-library/compact";
-import { useRowSelect } from "@table-library/react-table-library/select";
 import { FaEdit, FaEye } from "react-icons/fa";
 import Link from "next/link";
 import { FaTrash } from "react-icons/fa6";
-import { Modal, Button } from "flowbite-react";
+import {
+  Modal,
+  Button,
+  Table,
+  TableHead,
+  TableHeadCell,
+  TableBody,
+  TableRow,
+  TableCell,
+  Spinner,
+  Alert,
+} from "flowbite-react";
 
 export default function Users() {
   const [selectedUser, setSelectedUser] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [getAllUsers, setGetAllUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -28,146 +40,126 @@ export default function Users() {
     };
     fetchUsers();
   }, []);
-
-  const data = { nodes: getAllUsers || [] };
-
-  const select = useRowSelect(data, {
-    onChange: onSelectChange,
-  });
-
-  function onSelectChange(action, state) {
-    console.log(action, state);
-  }
-
   const handleViewUser = (user) => {
+    setError(false);
     setSelectedUser(user);
-    setIsOpen(true);
+    setIsDetailModalOpen(true);
   };
-
-  const COLUMNS = [
-    {
-      label: "User ID",
-      renderCell: (item) => item?._id || "N/A",
-      select: true,
-    },
-    { label: "Name", renderCell: (item) => item?.name || "N/A" },
-    { label: "Email", renderCell: (item) => item?.email || "N/A" },
-    { label: "Role", renderCell: (item) => item?.role || "N/A" },
-    {
-      label: "Action",
-      renderCell: (item) => (
-        <div key={item?._id} className="flex items-center gap-2">
-          <button
-            className="p-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            title="View"
-            onClick={() => handleViewUser(item)}
-          >
-            <FaEye className="w-3 h-3" />
-          </button>
-          <Link href={`/dashboard/users/edit/${item?._id}`}>
-            <button
-              className="p-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
-              title="Edit"
-            >
-              <FaEdit className="w-3 h-3" />
-            </button>
-          </Link>
-          <button
-            className="p-2 bg-red-500 text-white rounded hover:bg-red-600"
-            title="Delete"
-          >
-            <FaTrash className="w-3 h-3" />
-          </button>
-        </div>
-      ),
-    },
-  ];
-
-  const BASELINE_THEME = {
-    Table: `
-      border-radius: 8px;
-      overflow: hidden;
-      background-color: white;
-      --data-table-library_grid-template-columns: 80px 150px 120px 100px 140px 100px 80px;
-    `,
-    Header: `background-color: #f8fafc;`,
-    Body: `background-color: white;`,
-    BaseRow: `font-size: 14px;`,
-    HeaderRow: `
-      color: #1f2937;
-      font-weight: bold;
-      text-transform: uppercase;
-    `,
-    Row: `
-      color: #374151;
-      transition: background-color 0.2s ease-in-out;
-      &:hover {
-        background-color: #f1f5f9;
-      }
-      &:not(:last-of-type) > .td {
-        border-bottom: 1px solid #e2e8f0;
-      }
-    `,
-    BaseCell: `padding: 8px 10px; text-align: left;`,
-    HeaderCell: `
-      font-weight: bold;
-      border-bottom: 2px solid #e2e8f0;
-      padding: 10px 12px;
-      text-align: left;
-      .resizer-handle {
-        background-color: #cbd5e1;
-      }
-      svg, path {
-        fill: currentColor;
-      }
-    `,
-    Cell: `
-      &:focus {
-        outline: 2px dashed #60a5fa;
-        outline-offset: -2px;
-      }
-    `,
+  const handleDeleteUser = (user) => {
+    setError(false);
+    setIsDeleteModalOpen(true);
+    setSelectedUser(user);
   };
-
+  const deleteUser = async (id) => {
+    try {
+      const response = await fetch(`/api/auth/delete/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setError(false);
+        setIsDeleteModalOpen(false);
+        setGetAllUsers(getAllUsers.filter((user) => user._id !== id));
+      } else {
+        setError(true);
+        setIsDeleteModalOpen(false);
+        setErrorMessage(data.message);
+      }
+    } catch (error) {
+      setError(true);
+      setIsDeleteModalOpen(false);
+      setErrorMessage(error.message);
+    }
+  };
   return (
-    <div className="my-5 p-5 bg-white shadow">
+    <div className='my-5 p-5 bg-white shadow'>
+      {error && (
+        <Alert color='failure' className='absolute top-5 right-5'>
+          <span>
+            <span className='font-medium'>{errorMessage}</span>
+          </span>
+        </Alert>
+      )}
       <div>
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold mb-4">Users List</h2>
+        <div className='flex items-center justify-between'>
+          <h2 className='text-xl font-semibold mb-4'>Users List</h2>
           <div>
-            <Link href="/dashboard/users/create">
-              <Button size="sm" color="blue">
+            <Link href='/dashboard/users/create'>
+              <Button size='sm' color='blue'>
                 Add User
               </Button>
             </Link>
           </div>
         </div>
 
-        <CompactTable
-          columns={COLUMNS}
-          data={data}
-          theme={BASELINE_THEME}
-          layout={{ custom: true }}
-          select={select}
-          className="w-full overflow-x-scroll"
-        />
-
-        <Modal show={isOpen} onClose={() => setIsOpen(false)}>
+        <Table>
+          <TableHead>
+            <TableHeadCell>Username</TableHeadCell>
+            <TableHeadCell>Email</TableHeadCell>
+            <TableHeadCell>Role</TableHeadCell>
+            <TableHeadCell>Signup Method</TableHeadCell>
+            <TableHeadCell>Actions</TableHeadCell>
+          </TableHead>
+          <TableBody>
+            {getAllUsers.map((user) => (
+              <TableRow key={user._id}>
+                <TableCell>{user.name}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>{user.role}</TableCell>
+                <TableCell className='capitalize'>
+                  {user.signupMethod}
+                </TableCell>
+                <TableCell>
+                  <div key={user?._id} className='flex items-center gap-2'>
+                    <button
+                      className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'
+                      title='View'
+                      onClick={() => handleViewUser(user)}
+                    >
+                      <FaEye className='w-3 h-3' />
+                    </button>
+                    <Link href={`/dashboard/users/edit/${user?._id}`}>
+                      <button
+                        className='p-2 bg-yellow-500 text-white rounded hover:bg-yellow-600'
+                        title='Edit'
+                      >
+                        <FaEdit className='w-3 h-3' />
+                      </button>
+                    </Link>
+                    <button
+                      className='p-2 bg-red-500 text-white rounded hover:bg-red-600'
+                      title='Delete'
+                      onClick={() => handleDeleteUser(user)}
+                    >
+                      <FaTrash className='w-3 h-3' />
+                    </button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        {loading && <Spinner size='xl' color='blue' />}
+        <Modal
+          show={isDetailModalOpen}
+          onClose={() => setIsDetailModalOpen(false)}
+        >
           <Modal.Header>User Details</Modal.Header>
           <Modal.Body>
             {selectedUser ? (
-              <div className="space-y-2">
+              <div className='space-y-2'>
                 <p>
                   <strong>User ID:</strong> {selectedUser?._id}
                 </p>
                 <p>
-                  <strong>Username:</strong> {selectedUser?.name}
+                  <strong>Name:</strong> {selectedUser?.name}
                 </p>
                 <p>
                   <strong>Email:</strong> {selectedUser?.email}
                 </p>
                 <p>
-                  <strong>Phone:</strong> {selectedUser?.role}
+                  <strong>Role:</strong> {selectedUser?.role}
                 </p>
                 <p>
                   <strong>Signup Method:</strong> {selectedUser?.signupMethod}
@@ -178,8 +170,28 @@ export default function Users() {
             )}
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={() => setIsOpen(false)} color="gray">
+            <Button onClick={() => setIsOpen(false)} color='gray'>
               Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <Modal
+          show={isDeleteModalOpen}
+          onClose={() => setIsDeleteModalOpen(false)}
+        >
+          <Modal.Header>Delete {selectedUser?.name}</Modal.Header>
+          <Modal.Body>
+            <p>
+              Are you sure you want to delete this user? This action cannot be
+              undone.
+            </p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={() => setIsDeleteModalOpen(false)} color='gray'>
+              Cancel
+            </Button>
+            <Button onClick={() => deleteUser(selectedUser?._id)} color='red'>
+              Delete
             </Button>
           </Modal.Footer>
         </Modal>
