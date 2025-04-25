@@ -1,5 +1,5 @@
 "use client";
-import { Button, Label, TextInput, Card } from "flowbite-react";
+import { Button, Label, TextInput, Card, Select } from "flowbite-react";
 
 export default function EditUsers() {
   return (
@@ -10,11 +10,12 @@ export default function EditUsers() {
         </h2>
         <form className='space-y-4'>
           <div>
-            <Label htmlFor='username' value='Username' />
+            <Label htmlFor='name' value='Name' />
             <TextInput
-              id='username'
+              id='name'
               type='text'
-              placeholder='Enter username'
+              name="name"
+              placeholder='Enter name'
               required
             />
           </div>
@@ -23,18 +24,31 @@ export default function EditUsers() {
             <TextInput
               id='email'
               type='email'
+              name="email"
               placeholder='Enter email'
               required
             />
           </div>
           <div>
-            <Label htmlFor='phone' value='Phone Number' />
+            <Label htmlFor='password' value='Password' />
             <TextInput
-              id='phone'
-              type='tel'
-              placeholder='Enter phone number'
+              id='password'
+              type='password'
+              name="password"
+              placeholder='Enter password'
               required
             />
+          </div>
+          <div>
+            <Label htmlFor='role' value='Role' />
+            <Select
+              id='role'
+              name="role"
+              required
+            >
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </Select>
           </div>
           <div className='flex justify-end'>
             <Button type='submit' color='blue' className='w-full'>

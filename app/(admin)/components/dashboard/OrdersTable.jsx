@@ -34,17 +34,9 @@ const OrdersTable = () => {
     fetchUsers();
   }, []);
 
-  const handleViewButton = async (id) => {
+  const handleViewButton = async (data) => {
     setOpenModal(true);
-    try {
-      const res = await fetch(`/api/user/get-user/${id}`);
-      const data = await res.json();
-      if (res.ok) {
-        setSelectedUser(data.user);
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
+    setSelectedUser(data);
   };
   return (
     <section className='my-5 p-3 bg-white shadow'>
@@ -60,7 +52,7 @@ const OrdersTable = () => {
             </TableHeadCell>
           </TableHead>
           <TableBody className='divide-y'>
-            {loading && <Spinner size="lg" />}
+            {loading && <Spinner size='lg' />}
             {getAllUsers.map((data, index) => (
               <TableRow
                 key={index}
@@ -70,7 +62,9 @@ const OrdersTable = () => {
                   {data?.name}
                 </TableCell>
                 <TableCell>{data?.email}</TableCell>
-                <TableCell className="capitalize">{data?.signupMethod}</TableCell>
+                <TableCell className='capitalize'>
+                  {data?.signupMethod}
+                </TableCell>
                 <TableCell>
                   <span
                     className={`${
@@ -84,7 +78,7 @@ const OrdersTable = () => {
                   <Button
                     color='gray'
                     size='sm'
-                    onClick={() => handleViewButton(data?._id)}
+                    onClick={() => handleViewButton(data)}
                   >
                     View
                   </Button>
@@ -97,7 +91,7 @@ const OrdersTable = () => {
           <Modal.Header>{selectedUser?.name} Profile</Modal.Header>
           <Modal.Body>
             {!selectedUser ? (
-              <Spinner size="lg"/>
+              <Spinner size='lg' />
             ) : (
               <div>
                 <p>Email: {selectedUser?.email}</p>
