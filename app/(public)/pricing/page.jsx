@@ -2,6 +2,9 @@
 import React, { useState } from "react";
 import {
   Button,
+  Modal,
+  ModalBody,
+  ModalHeader,
   Table,
   TableBody,
   TableCell,
@@ -11,9 +14,40 @@ import {
   ToggleSwitch,
 } from "flowbite-react";
 import { FaCheck } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 export default function Home() {
   const [switch1, setSwitch1] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState(null);
+  const {currentUser} = useSelector((state) => state.user);
+
+  const buySelectedPlan = () => {
+    setShowModal(true);
+  };
+
+  const handleStripePayment = async () => {
+    try {
+      const res = await fetch("/api/stripe/create-checkout-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: currentUser?._id,
+          plan: selectedPlan?.plan,
+          price: selectedPlan?.price
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      console.log(error.message)
+    }
+  };
+
   return (
     <section className='mx-4 my-10 sm:mx-8'>
       <div className='text-center'>
@@ -473,21 +507,21 @@ export default function Home() {
                 </TableCell>
                 <TableCell>
                   <div className='flex items-center justify-center'>
-                    <Button color='dark' className='w-full uppercase'>
+                    <Button onClick={() => buySelectedPlan(setSelectedPlan({ plan: 'Basic' , price: '99.99'}))} color='dark' className='w-full uppercase'>
                       Buy Basic
                     </Button>
                   </div>
                 </TableCell>
                 <TableCell>
                   <div className='flex items-center justify-center'>
-                    <Button color='dark' className='w-full uppercase'>
+                    <Button onClick={() => buySelectedPlan(setSelectedPlan({ plan: 'Standard' , price: '249.99'}))} color='dark' className='w-full uppercase'>
                       Buy Standard
                     </Button>
                   </div>
                 </TableCell>
                 <TableCell>
                   <div className='flex items-center justify-center'>
-                    <Button color='dark' className='w-full uppercase'>
+                    <Button onClick={() => buySelectedPlan(setSelectedPlan({ plan: 'Premium' , price: '499.99'}))} color='dark' className='w-full uppercase'>
                       Buy Premium
                     </Button>
                   </div>
@@ -496,6 +530,23 @@ export default function Home() {
             </TableBody>
           </Table>
         </div>
+        <Modal show={showModal} onClose={() => setShowModal(false)}>
+          <ModalHeader>
+            <p>Select Payment Method For {selectedPlan?.plan} at ${selectedPlan?.price}</p>
+          </ModalHeader>
+          <ModalBody>
+            <div className="w-full py-10 flex items-center justifiy-center">
+                <div className="w-full flex flex-col gap-4">
+                  <Button onClick={handleStripePayment} color='dark' className='w-full uppercase'>
+                    Pay Using Stripe
+                  </Button>
+                  <Button color='blue' className='w-full uppercase'>
+                    Pay Using Paypal
+                  </Button>
+                </div>
+            </div>
+          </ModalBody>
+        </Modal>
       </div>
     </section>
   );

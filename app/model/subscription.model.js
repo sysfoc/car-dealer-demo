@@ -39,7 +39,6 @@ const subscriptionSchema = new mongoose.Schema(
     },
     endDate: {
       type: Date,
-      required: true,
     },
     isActive: {
       type: Boolean,
@@ -49,5 +48,5 @@ const subscriptionSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Subscription = mongoose.model("Subscription", subscriptionSchema);
+const Subscription = mongoose.models.Subscription ||mongoose.model("Subscription", subscriptionSchema);
 export default Subscription;
