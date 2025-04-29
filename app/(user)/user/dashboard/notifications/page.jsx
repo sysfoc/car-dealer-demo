@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Alert,
   Button,
@@ -19,11 +19,7 @@ import {
 export default function Notifications() {
   const [openModal, setOpenModal] = useState(false);
   const [announcement, setAnnouncement] = useState("");
-  const [alerts, setAlerts] = useState([
-    { id: 1, type: "error", message: "Payment failed for Invoice #1234" },
-    { id: 2, type: "warning", message: "Your subscription renews in 3 days" },
-    { id: 3, type: "success", message: "Plan upgraded successfully" },
-  ]);
+  const [alerts, setAlerts] = useState([]);
 
   const [settings, setSettings] = useState({
     failedPayments: true,
@@ -31,8 +27,28 @@ export default function Notifications() {
     planUpgrades: true,
   });
 
-  const dismissAlert = (id) => {
-    setAlerts(alerts.filter((alert) => alert.id !== id));
+  useEffect(()=>{
+    const getAlertsNotifications = async () => {
+      try {
+        const res = await fetch("/api/user/notifications/get-notifications");
+        const data = await res.json();
+        if(res.ok){
+          setAlerts(data.notifications);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getAlertsNotifications();
+  },[])
+
+  const dismissAlert = async(id) => {
+    const res= await fetch(`/api/user/notifications/delete/${id}`, {
+      method: "DELETE",
+    })
+    if(res.ok){
+      setAlerts(alerts.filter((alert) => alert.id !== id));
+    }
   };
 
   const toggleSetting = (key) => {
@@ -71,7 +87,7 @@ export default function Notifications() {
               }
               onDismiss={() => dismissAlert(alert.id)}
             >
-              {alert.message}
+              {alert.title}! {alert.message}
             </Alert>
           ))}
         </div>

@@ -1,5 +1,6 @@
 import { connectToDatabase } from "@/app/api/utils/db";
 import User from "@/app/model/user.model";
+import Notification from "@/app/model/notification.model";
 import { NextResponse } from "next/server";
 import { comparePassword } from "@/app/api/utils/hashing";
 import { config } from "@/app/api/utils/env-config";
@@ -68,6 +69,12 @@ export async function POST(req) {
           httpOnly: true,
           maxAge: 60 * 60 * 24 * 7,
           sameSite: "strict",
+        });
+        await Notification.create({
+          userId: isUserExist._id,
+          type: "success",
+          title: "Login",
+          message: `Welcome back! ${isUserExist.name} to your account`,
         });
         return response;
       }

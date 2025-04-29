@@ -6,6 +6,7 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
+  Spinner,
   Table,
   TableBody,
   TableCell,
@@ -58,6 +59,15 @@ export default function PaymentHistory() {
             <TableHeadCell>Action</TableHeadCell>
           </TableHead>
           <TableBody>
+            {
+              loading && (
+                <TableRow>
+                  <TableCell colSpan={6} className='text-center'>
+                    <Spinner size="lg" />
+                  </TableCell>
+                </TableRow>
+              )
+            }
             {
               transactions.map((transaction) => (
                 <TableRow key={transaction._id}>

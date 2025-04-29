@@ -10,10 +10,12 @@ import React, { useState, useEffect } from "react";
 import { BiPurchaseTag } from "react-icons/bi";
 import Image from "next/image";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,17 +71,19 @@ const Header = () => {
               Home
             </Link>
           </NavbarLink>
-          <NavbarLink
-            as={"div"}
-            className='relative hover:text-blue-950 md:hover:text-blue-950'
-          >
-            <Link
-              href='/pricing'
-              className='relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:bg-red-500 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full'
+          {currentUser && (
+            <NavbarLink
+              as={"div"}
+              className='relative hover:text-blue-950 md:hover:text-blue-950'
             >
-              Pricing
-            </Link>
-          </NavbarLink>
+              <Link
+                href='/pricing'
+                className='relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:bg-red-500 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full'
+              >
+                Pricing
+              </Link>
+            </NavbarLink>
+          )}
           <NavbarLink
             as={"div"}
             className='relative hover:text-blue-950 md:hover:text-blue-950'

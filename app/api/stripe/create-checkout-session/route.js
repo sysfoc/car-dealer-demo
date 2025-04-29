@@ -50,7 +50,7 @@ export async function POST(req) {
             });
             await Subscription.create({ userId, subscriptionType: plan, subscriptionPlan: 'Monthly', startDate: new Date()});
             await Payment.create({ userId, customerId: customer.id, product: plan, paymentMethod: 'Stripe', productPrice: price, transactionDate: new Date(),});
-            await Notification.create({ userId, title: 'Subscription', message: `You have successfully subscribed to ${plan} plan.` });
+            await Notification.create({ userId,type: 'success', title: 'Subscription', message: `You have successfully subscribed to ${plan} plan.` });
             return NextResponse.json({ url: session.url }, { status: 200 });
         }
     } catch (error) {

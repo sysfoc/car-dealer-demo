@@ -1,5 +1,6 @@
 import { connectToDatabase } from "@/app/api/utils/db";
 import User from "@/app/model/user.model";
+import Notification from "@/app/model/notification.model";
 import { hashedPassword } from "@/app/api/utils/hashing";
 import { config } from "@/app/api/utils/env-config";
 import jwt from "jsonwebtoken";
@@ -42,6 +43,12 @@ export async function POST(req) {
         maxAge: 60 * 60 * 24 * 7,
         sameSite: "strict",
       });
+      await Notification.create({
+        userId: isUserExist._id,
+        type: "success",
+        title: "Login",
+        message: `Welcome back! ${isUserExist.name} to your account`,
+      });
       return response;
     } else {
       const generatedPassword =
@@ -78,6 +85,12 @@ export async function POST(req) {
           httpOnly: true,
           maxAge: 60 * 60 * 24 * 7,
           sameSite: "strict",
+        });
+        await Notification.create({
+          userId: newUser._id,
+          type: "success",
+          title: "Account Created",
+          message: `Welcome aboard! ${newUser.name}`,
         });
         return response;
       } catch (error) {
