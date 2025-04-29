@@ -19,7 +19,7 @@ export async function DELETE(req, { params }) {
     );
   } catch (error) {
     return NextResponse.json(
-      { message: "Error deleting notification" },
+      { message: error.message },
       { status: 500 }
     );
   }
