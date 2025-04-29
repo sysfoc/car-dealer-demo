@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server';
 import User from "@/app/model/user.model";
 import Payment from "@/app/model/payment.model";
 import Subscription from "@/app/model/subscription.model";
+import Notification from '@/app/model/notification.model';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export async function POST(req) {
@@ -47,8 +48,9 @@ export async function POST(req) {
                     },
                 ]
             });
-            await Subscription.create({ userId, subscriptionType: plan, productPrice: price, subscriptionPlan: 'Monthly', startDate: new Date()});
-            await Payment.create({ userId, customerId: customer.id, product: plan, paymentMethod: 'Stripe', transactionDate: new Date(),});
+            await Subscription.create({ userId, subscriptionType: plan, subscriptionPlan: 'Monthly', startDate: new Date()});
+            await Payment.create({ userId, customerId: customer.id, product: plan, paymentMethod: 'Stripe', productPrice: price, transactionDate: new Date(),});
+            await Notification.create({ userId, title: 'Subscription', message: `You have successfully subscribed to ${plan} plan.` });
             return NextResponse.json({ url: session.url }, { status: 200 });
         }
     } catch (error) {

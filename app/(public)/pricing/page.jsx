@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import {
   Button,
   Modal,
@@ -15,17 +15,24 @@ import {
 } from "flowbite-react";
 import { FaCheck } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [switch1, setSwitch1] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const { currentUser } = useSelector((state) => state.user);
+  const router = useRouter();
 
   const buySelectedPlan = () => {
     setShowModal(true);
   };
 
+  useEffect(()=>{
+    if(!currentUser){
+      router.push('/login')
+    }
+  },[currentUser])
   const handleStripePayment = async () => {
     const res = await fetch("/api/stripe/create-checkout-session", {
       method: "POST",
@@ -52,6 +59,13 @@ export default function Home() {
             Simple Pricing, Unbeatable Value
           </h1>
           <p className='mt-3 text-center'>Join 1000+ Happy Users</p>
+          {
+            !currentUser && (
+              <div>
+                <p className="text-red-600 my-2 text-sm font-semibold">Please login first to purchase plan</p>
+              </div>
+            )
+          }
         </div>
       </div>
       <div className='my-8 flex items-center justify-center'>
@@ -497,7 +511,9 @@ export default function Home() {
                   </div>
                 </TableCell>
               </TableRow>
-              <TableRow className='w-min bg-white'>
+             {
+              currentUser &&(
+                <TableRow className='w-min bg-white'>
                 <TableCell>
                   <div></div>
                 </TableCell>
@@ -547,6 +563,8 @@ export default function Home() {
                   </div>
                 </TableCell>
               </TableRow>
+              )
+             }
             </TableBody>
           </Table>
         </div>

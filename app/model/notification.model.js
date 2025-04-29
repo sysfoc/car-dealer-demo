@@ -1,38 +1,26 @@
 import mongoose from "mongoose";
 
-const notificationSchema = new mongoose.Schema(
+const notificationScheama = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    billingUpdates: {
-      type: Boolean,
-      default: false,
+    title: {
+      type: String,
+      required: true,
     },
-    newAddons: {
-      type: Boolean,
-      default: false,
-    },
-    paymentsReminder: {
-      type: Boolean,
-      default: true,
-    },
-    failedPayments: {
-      type: Boolean,
-      default: false,
-    },
-    subscriptionExpiry: {
-      type: Boolean,
-      default: true,
-    },
-    upgradePlan: {
-      type: Boolean,
-      default: false,
+    message: {
+      type: String,
+      required: true,
     },
   },
   { timestamps: true }
 );
-const Notification = mongoose.model("Notification", notificationSchema);
+
+const Notification =
+  mongoose.models.Notification ||
+  mongoose.model("Notification", notificationScheama);
+
 export default Notification;
