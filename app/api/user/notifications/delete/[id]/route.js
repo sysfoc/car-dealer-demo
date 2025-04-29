@@ -1,4 +1,6 @@
 import { connectToDatabase } from "@/app/api/utils/db";
+import Notification from "@/app/model/notification.model";
+import { NextResponse } from "next/server";
 
 export async function DELETE(req, { params }) {
   await connectToDatabase();
@@ -16,7 +18,6 @@ export async function DELETE(req, { params }) {
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error deleting notification:", error);
     return NextResponse.json(
       { message: "Error deleting notification" },
       { status: 500 }

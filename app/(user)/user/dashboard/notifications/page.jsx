@@ -47,7 +47,7 @@ export default function Notifications() {
       method: "DELETE",
     })
     if(res.ok){
-      setAlerts(alerts.filter((alert) => alert.id !== id));
+      setAlerts(alerts.filter((alert) => alert._id !== id));
     }
   };
 
@@ -72,7 +72,7 @@ export default function Notifications() {
         <div className='mt-4 space-y-3'>
           {alerts.map((alert) => (
             <Alert
-              key={alert.id}
+              key={alert._id}
               color={
                 alert.type === "error"
                   ? "failure"
@@ -85,7 +85,7 @@ export default function Notifications() {
                   ? HiOutlineExclamationCircle
                   : HiOutlineCheckCircle
               }
-              onDismiss={() => dismissAlert(alert.id)}
+              onDismiss={() => dismissAlert(alert._id)}
             >
               {alert.title}! {alert.message}
             </Alert>

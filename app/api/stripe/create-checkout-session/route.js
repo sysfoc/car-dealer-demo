@@ -2,9 +2,6 @@ import Stripe from 'stripe';
 import {connectToDatabase} from "@/app/api/utils/db";
 import { NextResponse } from 'next/server';
 import User from "@/app/model/user.model";
-import Payment from "@/app/model/payment.model";
-import Subscription from "@/app/model/subscription.model";
-import Notification from '@/app/model/notification.model';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export async function POST(req) {
@@ -26,6 +23,7 @@ export async function POST(req) {
             })
             const session = await stripe.checkout.sessions.create({
                 payment_method_types: ['card'],
+                customer: customer.id,
                 line_items: [
                     {
                         price: price,
@@ -33,7 +31,7 @@ export async function POST(req) {
                     },
                 ],
                 mode: 'payment',
-                success_url: `${process.env.BASE_URL}/user/dashboard`,
+                success_url: `${process.env.BASE_URL}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
                 cancel_url: `${process.env.BASE_URL}/failed-payment`,
                 line_items: [
                     {
@@ -46,11 +44,13 @@ export async function POST(req) {
                             },
                         },
                     },
-                ]
+                ],
+                metadata: {
+                    userId,
+                    plan,
+                    price
+                }
             });
-            await Subscription.create({ userId, subscriptionType: plan, subscriptionPlan: 'Monthly', startDate: new Date()});
-            await Payment.create({ userId, customerId: customer.id, product: plan, paymentMethod: 'Stripe', productPrice: price, transactionDate: new Date(),});
-            await Notification.create({ userId,type: 'success', title: 'Subscription', message: `You have successfully subscribed to ${plan} plan.` });
             return NextResponse.json({ url: session.url }, { status: 200 });
         }
     } catch (error) {
