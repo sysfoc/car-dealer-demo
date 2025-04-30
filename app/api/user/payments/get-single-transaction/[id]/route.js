@@ -3,7 +3,7 @@ import { connectToDatabase } from "@/app/api/utils/db";
 import Payment from "@/app/model/payment.model";
 import User from "@/app/model/user.model";
 
-export async function GET(req, { params }) {
+export async function GET(req,{ params }) {
   await connectToDatabase();
   const { id } = params;
 
