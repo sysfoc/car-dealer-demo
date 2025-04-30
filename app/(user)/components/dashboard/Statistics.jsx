@@ -1,46 +1,97 @@
-import React from "react";
+"use client";
+import { Spinner } from "flowbite-react";
+import React, { useEffect, useState } from "react";
 
 const Statistics = () => {
+  const [subscription, setSubscription] = useState(null);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    const fetchUserSubscription = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/api/user/subscription/detail");
+        const data = await response.json();
+        setLoading(false);
+        if (response.ok) {
+          setSubscription(data.subscription);
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    fetchUserSubscription();
+  }, []);
+  const oneMonthLater = subscription?.startDate
+    ? new Date(
+        new Date(subscription.startDate).setMonth(
+          new Date(subscription.startDate).getMonth() + 1
+        )
+      )
+    : null;
+  const formattedDate = oneMonthLater?.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
   return (
-    <div className="w-full p-4 bg-white shadow">
-      <div>
+    <div className='w-full p-4 bg-white shadow'>
+      {loading ? (
+        <div className='flex items-center justify-center'>
+          <Spinner />
+        </div>
+      ) : (
         <div>
-          <h2 className="font-semibold text-gray-600">Subsciption Overview</h2>
-        </div>
-        <div className="mt-3 flex items-center justify-between">
           <div>
-            <p className="text-sm text-gray-500">Plan:</p>
-            <p className="text-sm text-gray-500">Billing Period:</p>
-            <p className="text-sm text-gray-500">No of Sessions:</p>
-            <p className="text-sm text-gray-500">Effective Date:</p>
-            <p className="text-sm text-gray-500">Next Billing Date:</p>
+            <h2 className='font-semibold text-gray-600'>
+              Subsciption Overview
+            </h2>
           </div>
-          <div className="flex flex-col text-end">
-            <strong className="text-sm">Basic</strong>
-            <strong className="text-sm">Monthly</strong>
-            <strong className="text-sm">4</strong>
-            <strong className="text-sm">01-01-2022</strong>
-            <strong className="text-sm">01-08-2022</strong>
+          <div className='mt-3 flex items-center justify-between'>
+            <div>
+              <p className='text-sm text-gray-500'>Plan:</p>
+              <p className='text-sm text-gray-500'>Billing Period:</p>
+              <p className='text-sm text-gray-500'>No of Sessions:</p>
+              <p className='text-sm text-gray-500'>Effective Date:</p>
+              <p className='text-sm text-gray-500'>Next Billing Date:</p>
+            </div>
+            <div className='flex flex-col text-end'>
+              <strong className='text-sm'>
+                {subscription?.subscriptionType ?? "None"}
+              </strong>
+              <strong className='text-sm'>
+                {subscription?.subscriptionPlan ?? "None"}
+              </strong>
+              <strong className='text-sm'>1</strong>
+              <strong className='text-sm'>
+                {new Date(subscription?.startDate).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                }) || "None"}
+              </strong>
+              <strong className='text-sm'>{formattedDate || "None"}</strong>
+            </div>
+          </div>
+          <div className='my-3'>
+            <h2 className='font-semibold text-gray-600'>Usage Limit</h2>
+          </div>
+          <div className='flex items-center justify-between'>
+            <div>
+              <p className='text-sm text-gray-500'>No of Listings Allowed:</p>
+              <p className='text-sm text-gray-500'>Posted Listings:</p>
+              <p className='text-sm text-gray-500'>Add-ons:</p>
+              <p className='text-sm text-gray-500'>Storage Used:</p>
+            </div>
+            <div className='flex flex-col text-end'>
+              <strong className='text-sm'>30</strong>
+              <strong className='text-sm'>23</strong>
+              <strong className='text-sm'>In Working</strong>
+              <strong className='text-sm'>10gb/month</strong>
+            </div>
           </div>
         </div>
-        <div className="my-3">
-          <h2 className="font-semibold text-gray-600">Usage Limit</h2>
-        </div>
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-sm text-gray-500">No of Listings Allowed:</p>
-            <p className="text-sm text-gray-500">Posted Listings:</p>
-            <p className="text-sm text-gray-500">Add-ons:</p>
-            <p className="text-sm text-gray-500">Storage Used:</p>
-          </div>
-          <div className="flex flex-col text-end">
-            <strong className="text-sm">30</strong>
-            <strong className="text-sm">23</strong>
-            <strong className="text-sm">In Working</strong>
-            <strong className="text-sm">10gb/month</strong>
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

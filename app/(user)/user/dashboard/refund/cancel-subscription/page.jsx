@@ -89,6 +89,7 @@ export default function CancelSubscription() {
                       color='failure'
                       onClick={handleCancel}
                       className='mt-4 w-full'
+                      disabled={loading}
                     >
                       Confirm Cancellation
                     </Button>
