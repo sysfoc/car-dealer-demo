@@ -7,24 +7,46 @@ import {
   Textarea,
   Card,
   Select,
+  Alert,
 } from "flowbite-react";
 
 export default function RefundRequest() {
-  const [formData, setFormData] = useState({
-    orderNumber: "",
-    email: "",
-    refundAmount: "",
-    reason: "",
-    refundMethod: "bank_transfer",
-  });
+  const [formData, setFormData] = useState({});
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Refund Request Submitted:", formData);
+    try {
+      setLoading(true);
+      const res = await fetch("/api/user/refund", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      setLoading(false);
+      if (res.ok) {
+        alert("Refund request sent successfully");
+        setError(false);
+        setLoading(false);
+      } else {
+        setError(true);
+        setErrorMessage(data.message);
+        setLoading(false);
+      }
+    } catch (error) {
+      setError(true);
+      setErrorMessage(error.message);
+      setLoading(false);
+    }
   };
 
   return (
@@ -33,19 +55,26 @@ export default function RefundRequest() {
         <h2 className='text-2xl font-semibold text-center mb-4 text-gray-800'>
           Refund Request
         </h2>
+        {
+          error && (
+            <Alert color="failure">
+              <strong className='font-bold'>Error!</strong>
+              <span className='block sm:inline'>{errorMessage}</span>
+            </Alert>
+          )
+        }
         <form onSubmit={handleSubmit} className='space-y-4'>
           <div>
             <Label
-              htmlFor='orderNumber'
-              value='Order Number'
+              htmlFor='orderId'
+              value='Transaction Id'
               className='text-gray-700'
             />
             <TextInput
-              id='orderNumber'
-              name='orderNumber'
-              placeholder='Enter your order number'
+              id='orderId'
+              name='orderId'
+              placeholder='Enter your transaction id'
               required
-              value={formData.orderNumber}
               onChange={handleChange}
             />
           </div>
@@ -61,23 +90,21 @@ export default function RefundRequest() {
               type='email'
               placeholder='Enter your email'
               required
-              value={formData.email}
               onChange={handleChange}
             />
           </div>
           <div>
             <Label
-              htmlFor='refundAmount'
+              htmlFor='amount'
               value='Refund Amount'
               className='text-gray-700'
             />
             <TextInput
-              id='refundAmount'
-              name='refundAmount'
+              id='amount'
+              name='amount'
               type='number'
               placeholder='Enter refund amount'
               required
-              value={formData.refundAmount}
               onChange={handleChange}
             />
           </div>
@@ -93,7 +120,6 @@ export default function RefundRequest() {
               placeholder='Describe why you are requesting a refund'
               required
               rows={4}
-              value={formData.reason}
               onChange={handleChange}
             />
           </div>
@@ -106,15 +132,18 @@ export default function RefundRequest() {
             <Select
               id='refundMethod'
               name='refundMethod'
-              value={formData.refundMethod}
               onChange={handleChange}
             >
-              <option value='bank_transfer'>Bank Transfer</option>
               <option value='paypal'>PayPal</option>
-              <option value='store_credit'>Store Credit</option>
+              <option value='stripe'>Stripe</option>
             </Select>
           </div>
-          <Button type='submit' color='blue' className='w-full'>
+          <Button
+            disabled={loading}
+            type='submit'
+            color='blue'
+            className='w-full'
+          >
             Submit Request
           </Button>
         </form>

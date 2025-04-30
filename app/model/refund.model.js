@@ -7,9 +7,12 @@ const refundSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    billingId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Billing",
+    orderId: {
+      type: String,
+      required: true,
+    },
+    email:{
+      type: String,
       required: true,
     },
     amount: {
@@ -22,7 +25,7 @@ const refundSchema = new mongoose.Schema(
     },
     refundMethod: {
       type: String,
-      enum: ["bank", "paypal", "stripe"],
+      enum: ["paypal", "stripe"],
       required: true,
     },
     status: {
@@ -33,5 +36,5 @@ const refundSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-const Refund = mongoose.model("Refund", refundSchema);
+const Refund = mongoose.models.Refund || mongoose.model("Refund", refundSchema);
 export default Refund;
