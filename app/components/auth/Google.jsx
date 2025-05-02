@@ -56,6 +56,7 @@ const Google = () => {
         </div>
       )}
       <Button
+      disabled={loading}
         onClick={handleGoogleOauth}
         className='w-full flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 hover:!bg-gray-50'
       >

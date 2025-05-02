@@ -5,6 +5,7 @@ import {
   Modal,
   ModalBody,
   ModalHeader,
+  Spinner,
   Table,
   TableBody,
   TableCell,
@@ -21,6 +22,8 @@ export default function Home() {
   const [switch1, setSwitch1] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const [subscription, setSubscription] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
   const router = useRouter();
 
@@ -28,11 +31,27 @@ export default function Home() {
     setShowModal(true);
   };
 
-  useEffect(()=>{
-    if(!currentUser){
-      router.push('/login')
+  useEffect(() => {
+    setLoading(true);
+    if (!currentUser) {
+      router.push("/login");
     }
-  },[currentUser])
+    if (currentUser?._id) {
+      const fetchUserSubscription = async () => {
+        try {
+          const response = await fetch("/api/user/subscription/detail");
+          const data = await response.json();
+          if (response.ok) {
+            setSubscription(data.subscription);
+            setLoading(false);
+          }
+        } catch (error) {
+          console.error(error.message);
+        }
+      };
+      fetchUserSubscription();
+    }
+  }, [currentUser]);
   const handleStripePayment = async () => {
     const res = await fetch("/api/stripe/create-checkout-session", {
       method: "POST",
@@ -59,13 +78,13 @@ export default function Home() {
             Simple Pricing, Unbeatable Value
           </h1>
           <p className='mt-3 text-center'>Join 1000+ Happy Users</p>
-          {
-            !currentUser && (
-              <div>
-                <p className="text-red-600 my-2 text-sm font-semibold">Please login first to purchase plan</p>
-              </div>
-            )
-          }
+          {!currentUser && (
+            <div>
+              <p className='text-red-600 my-2 text-sm font-semibold'>
+                Please login first to purchase plan
+              </p>
+            </div>
+          )}
         </div>
       </div>
       <div className='my-8 flex items-center justify-center'>
@@ -511,60 +530,83 @@ export default function Home() {
                   </div>
                 </TableCell>
               </TableRow>
-             {
-              currentUser &&(
-                <TableRow className='w-min bg-white'>
-                <TableCell>
-                  <div></div>
-                </TableCell>
-                <TableCell>
-                  <div className='flex items-center justify-center'>
-                    <Button
-                      onClick={() =>
-                        buySelectedPlan(
-                          setSelectedPlan({ plan: "Basic", price: "99.99" })
-                        )
-                      }
-                      color='dark'
-                      className='w-full uppercase'
-                    >
-                      Buy Basic
-                    </Button>
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <div className='flex items-center justify-center'>
-                    <Button
-                      onClick={() =>
-                        buySelectedPlan(
-                          setSelectedPlan({ plan: "Standard", price: "249.99" })
-                        )
-                      }
-                      color='dark'
-                      className='w-full uppercase'
-                    >
-                      Buy Standard
-                    </Button>
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <div className='flex items-center justify-center'>
-                    <Button
-                      onClick={() =>
-                        buySelectedPlan(
-                          setSelectedPlan({ plan: "Premium", price: "499.99" })
-                        )
-                      }
-                      color='dark'
-                      className='w-full uppercase'
-                    >
-                      Buy Premium
-                    </Button>
-                  </div>
-                </TableCell>
-              </TableRow>
-              )
-             }
+              {currentUser && (
+                loading ? (
+                  <TableRow>
+                    <TableCell>
+                      <div className='flex items-center justify-center'>
+                        <Spinner />
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ):(
+                  <TableRow className='w-min bg-white'>
+                  <TableCell>
+                    <div></div>
+                  </TableCell>
+                  <TableCell>
+                    <div className='flex items-center justify-center'>
+                      <Button
+                        disabled={subscription?.subscriptionType === "Basic"}
+                        onClick={() =>
+                          buySelectedPlan(
+                            setSelectedPlan({ plan: "Basic", price: "99.99" })
+                          )
+                        }
+                        color='dark'
+                        className='w-full uppercase'
+                      >
+                        {subscription?.subscriptionType === "Basic"
+                          ? "Current Plan"
+                          : "Buy Basic"}
+                      </Button>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className='flex items-center justify-center'>
+                      <Button
+                        disabled={subscription?.subscriptionType === "Standard"}
+                        onClick={() =>
+                          buySelectedPlan(
+                            setSelectedPlan({
+                              plan: "Standard",
+                              price: "249.99",
+                            })
+                          )
+                        }
+                        color='dark'
+                        className='w-full uppercase'
+                      >
+                        {subscription?.subscriptionType === "Standard"
+                          ? "Current Plan"
+                          : "Buy Standard"}
+                      </Button>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className='flex items-center justify-center'>
+                      <Button
+                        disabled={subscription?.subscriptionType === "Premium"}
+                        onClick={() =>
+                          buySelectedPlan(
+                            setSelectedPlan({
+                              plan: "Premium",
+                              price: "499.99",
+                            })
+                          )
+                        }
+                        color='dark'
+                        className='w-full uppercase'
+                      >
+                        {subscription?.subscriptionType === "Premium"
+                          ? "Current Plan"
+                          : "Buy Premium"}
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+                )
+              )}
             </TableBody>
           </Table>
         </div>

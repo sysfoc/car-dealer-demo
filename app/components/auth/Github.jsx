@@ -65,6 +65,7 @@ const Github = () => {
         </div>
       )}
       <Button
+      disabled={loading}
         onClick={handleGithubOauth}
         className='w-full flex items-center justify-center gap-2 bg-black text-white hover:!bg-gray-800'
       >

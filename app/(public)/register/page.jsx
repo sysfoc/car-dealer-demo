@@ -93,7 +93,7 @@ export default function Register() {
             />
           </div>
 
-          <Button type='submit' color='blue' className='w-full'>
+          <Button disabled={loading} type='submit' color='blue' className='w-full'>
             {loading ? (
               <Spinner color='warning' aria-label='Spinning' size='md' />
             ) : (

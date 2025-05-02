@@ -1,27 +1,47 @@
 "use client";
 import { Card, Modal, Button, Radio } from "flowbite-react";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function PlanDetails() {
-  const [plan, setPlan] = useState("Premium");
-  const [price, setPrice] = useState("$49.99 / month");
-  const [storage, setStorage] = useState("500GB");
-  const [users, setUsers] = useState("10 Users");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState("Premium");
+  const [loading, setLoading] = useState(false);
+  const [subscription, setSubscription] = useState(null);
+  const router = useRouter();
 
+  useEffect(() => {
+    const fetchUserSubscription = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch("/api/user/subscription/detail");
+        const data = await response.json();
+        setLoading(false);
+        if (response.ok) {
+          setSubscription(data.subscription);
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    fetchUserSubscription();
+  }, []);
   const handleUpgrade = () => {
-    setIsModalOpen(true);
+    setLoading(true);
+    router.push("/pricing");
   };
 
-  const handleCancel = () => {
+  const handleCancel = async () => {
     if (confirm("Are you sure you want to cancel your subscription?")) {
-      alert("Subscription canceled.");
+      setLoading(true);
+      const res = await fetch(
+        `/api/user/subscription/cancel/${subscription?._id}`,
+        { method: "DELETE" }
+      );
+      setLoading(false);
+      if (res.ok) {
+        setLoading(false);
+      }
     }
-  };
-
-  const handleProceedToPayment = () => {
-    alert(`Redirecting to payment for the ${selectedPlan} plan...`);
   };
 
   return (
@@ -37,30 +57,42 @@ export default function PlanDetails() {
         <div className='mt-4 space-y-2'>
           <div className='flex justify-between border-b pb-2'>
             <span className='font-medium text-gray-800'>Plan Name:</span>
-            <span className='text-gray-700'>{plan}</span>
+            <span className='text-gray-700'>
+              {subscription?.subscriptionType}
+            </span>
           </div>
           <div className='flex justify-between border-b pb-2'>
             <span className='font-medium text-gray-800'>Price:</span>
-            <span className='text-gray-700'>{price}</span>
+            <span className='text-gray-700'>{
+              subscription?.subscriptionType === "Basic" ? "$99.99" : subscription?.subscriptionType === "Standard" ? "$249.99" : "$499.99"
+              }</span>
           </div>
           <div className='flex justify-between border-b pb-2'>
             <span className='font-medium text-gray-800'>Storage Limit:</span>
-            <span className='text-gray-700'>{storage}</span>
+            <span className='text-gray-700'>{
+              subscription?.subscriptionType === "Basic" ? "10 GB" : subscription?.subscriptionType === "Standard" ? "25 GB" : "50 GB"
+              }</span>
           </div>
           <div className='flex justify-between border-b pb-2'>
             <span className='font-medium text-gray-800'>User Limit:</span>
-            <span className='text-gray-700'>{users}</span>
+            <span className='text-gray-700'> 
+              {
+                subscription?.subscriptionType === "Basic" ? "Upto 2" : subscription?.subscriptionType === "Standard" ? "Upto 5" : "Upto 10"
+                }
+              </span>
           </div>
         </div>
 
         <div className='mt-6 flex gap-4'>
           <button
+            disabled={loading}
             onClick={handleUpgrade}
             className='px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700'
           >
             Upgrade Plan
           </button>
           <button
+            disabled={loading}
             onClick={handleCancel}
             className='px-4 py-2 bg-red-500 text-white rounded-lg shadow hover:bg-red-600'
           >
@@ -68,46 +100,6 @@ export default function PlanDetails() {
           </button>
         </div>
       </Card>
-
-      <Modal show={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <Modal.Header>Upgrade Your Plan</Modal.Header>
-        <Modal.Body>
-          <p className='text-gray-700'>
-            Choose a new plan and proceed to payment.
-          </p>
-          <div className='mt-4 space-y-2'>
-            <label className='flex items-center space-x-2'>
-              <Radio
-                name='plan'
-                value='Premium'
-                checked={selectedPlan === "Premium"}
-                onChange={() => setSelectedPlan("Premium")}
-              />
-              <span className='text-gray-800'>Premium - $49.99 / month</span>
-            </label>
-            <label className='flex items-center space-x-2'>
-              <Radio
-                name='plan'
-                value='Enterprise'
-                checked={selectedPlan === "Enterprise"}
-                onChange={() => setSelectedPlan("Enterprise")}
-              />
-              <span className='text-gray-800'>Enterprise - $99.99 / month</span>
-            </label>
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            className='bg-green-600 hover:bg-green-700'
-            onClick={handleProceedToPayment}
-          >
-            Proceed to Payment
-          </Button>
-          <Button color='gray' onClick={() => setIsModalOpen(false)}>
-            Cancel
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 }

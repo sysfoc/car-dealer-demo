@@ -32,7 +32,7 @@ const userScheama = new mongoose.Schema(
     profileImg: {
       type: String,
       default:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-978409_960_720.png",
+        "https://static.vecteezy.com/system/resources/previews/043/361/860/large_2x/hand-drawnman-avatar-profile-icon-for-social-networks-forums-and-dating-sites-user-avatar-profile-placeholder-anonymous-user-male-no-photo-web-template-default-user-picture-profile-male-symbol-free-vector.jpg",
     },
   },
   { timestamps: true }
