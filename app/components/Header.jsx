@@ -121,7 +121,7 @@ const Header = () => {
             as={"div"}
             className='relative hover:text-blue-950 md:hover:text-blue-950 md:hidden'
           >
-            <Link href='#'>
+            <Link href='/user/dashboard'>
               <Button size='md' className='w-full bg-red-600 hover:!bg-red-700'>
                 Get Started
                 <BiPurchaseTag fontSize={18} className='ml-2' />
@@ -130,10 +130,12 @@ const Header = () => {
           </NavbarLink>
         </NavbarCollapse>
         <div className='hidden md:flex items-center gap-5'>
-          <Button size='sm' className='bg-red-600 hover:!bg-red-700'>
-            Get Started
-            <BiPurchaseTag fontSize={18} className='ml-2' />
-          </Button>
+          <Link href='/user/dashboard'>
+            <Button size='md' className='w-full bg-red-600 hover:!bg-red-700'>
+              Get Started
+              <BiPurchaseTag fontSize={18} className='ml-2' />
+            </Button>
+          </Link>
         </div>
       </Navbar>
     </>

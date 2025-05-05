@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
+    "@paypal/checkout-server-sdk": "^1.0.3",
     "@reduxjs/toolkit": "^2.7.0",
     "@table-library/react-table-library": "^4.1.12",
     "bcrypt": "^5.1.1",

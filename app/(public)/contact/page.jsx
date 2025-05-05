@@ -80,18 +80,16 @@ export default function ContactUs() {
               and we’ll get back to you as soon as possible.
             </p>
             <form onSubmit={handleFormSubmission}>
-              {error ||
-                (errorMessage && (
-                  <Alert color='failure' className='w-full mb-4'>
-                    {errorMessage}
-                  </Alert>
-                ))}
-              {success ||
-                (successMessage && (
-                  <Alert color='success' className='w-full mb-4'>
-                    {successMessage}
-                  </Alert>
-                ))}
+              {error && (
+                <Alert color='failure' className='w-full mb-4'>
+                  {errorMessage}
+                </Alert>
+              )}
+              {success && (
+                <Alert color='success' className='w-full mb-4'>
+                  {successMessage}
+                </Alert>
+              )}
               <div className='mb-4'>
                 <Label
                   htmlFor='name'
@@ -176,7 +174,7 @@ export default function ContactUs() {
                 Email
               </h3>
               <p className='text-gray-600 dark:text-gray-300'>
-                info@example.com
+                sysfoc@gmail.com
               </p>
             </div>
             <div className='mb-4'>

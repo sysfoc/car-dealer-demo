@@ -69,6 +69,23 @@ export default function Home() {
       window.location.href = data.url;
     }
   };
+  const handlePaypalPayment = async () => {
+    const res = await fetch("/api/paypal/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: currentUser?._id,
+        plan: selectedPlan?.plan,
+        price: selectedPlan?.price,
+      }),
+    });
+    const data = await res.json();
+    if (res.ok) {
+      window.location.href = data.url;
+    }
+  };
 
   return (
     <section className='mx-4 my-10 sm:mx-8'>
@@ -530,8 +547,8 @@ export default function Home() {
                   </div>
                 </TableCell>
               </TableRow>
-              {currentUser && (
-                loading ? (
+              {currentUser &&
+                (loading ? (
                   <TableRow>
                     <TableCell>
                       <div className='flex items-center justify-center'>
@@ -539,74 +556,77 @@ export default function Home() {
                       </div>
                     </TableCell>
                   </TableRow>
-                ):(
+                ) : (
                   <TableRow className='w-min bg-white'>
-                  <TableCell>
-                    <div></div>
-                  </TableCell>
-                  <TableCell>
-                    <div className='flex items-center justify-center'>
-                      <Button
-                        disabled={subscription?.subscriptionType === "Basic"}
-                        onClick={() =>
-                          buySelectedPlan(
-                            setSelectedPlan({ plan: "Basic", price: "99.99" })
-                          )
-                        }
-                        color='dark'
-                        className='w-full uppercase'
-                      >
-                        {subscription?.subscriptionType === "Basic"
-                          ? "Current Plan"
-                          : "Buy Basic"}
-                      </Button>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className='flex items-center justify-center'>
-                      <Button
-                        disabled={subscription?.subscriptionType === "Standard"}
-                        onClick={() =>
-                          buySelectedPlan(
-                            setSelectedPlan({
-                              plan: "Standard",
-                              price: "249.99",
-                            })
-                          )
-                        }
-                        color='dark'
-                        className='w-full uppercase'
-                      >
-                        {subscription?.subscriptionType === "Standard"
-                          ? "Current Plan"
-                          : "Buy Standard"}
-                      </Button>
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className='flex items-center justify-center'>
-                      <Button
-                        disabled={subscription?.subscriptionType === "Premium"}
-                        onClick={() =>
-                          buySelectedPlan(
-                            setSelectedPlan({
-                              plan: "Premium",
-                              price: "499.99",
-                            })
-                          )
-                        }
-                        color='dark'
-                        className='w-full uppercase'
-                      >
-                        {subscription?.subscriptionType === "Premium"
-                          ? "Current Plan"
-                          : "Buy Premium"}
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-                )
-              )}
+                    <TableCell>
+                      <div></div>
+                    </TableCell>
+                    <TableCell>
+                      <div className='flex items-center justify-center'>
+                        <Button
+                          disabled={subscription?.subscriptionType === "Basic"}
+                          onClick={() =>
+                            buySelectedPlan(
+                              setSelectedPlan({ plan: "Basic", price: "99.99" })
+                            )
+                          }
+                          color='dark'
+                          className='w-full uppercase'
+                        >
+                          {subscription?.subscriptionType === "Basic"
+                            ? "Current Plan"
+                            : "Buy Basic"}
+                        </Button>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className='flex items-center justify-center'>
+                        <Button
+                          disabled={
+                            subscription?.subscriptionType === "Standard"
+                          }
+                          onClick={() =>
+                            buySelectedPlan(
+                              setSelectedPlan({
+                                plan: "Standard",
+                                price: "249.99",
+                              })
+                            )
+                          }
+                          color='dark'
+                          className='w-full uppercase'
+                        >
+                          {subscription?.subscriptionType === "Standard"
+                            ? "Current Plan"
+                            : "Buy Standard"}
+                        </Button>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className='flex items-center justify-center'>
+                        <Button
+                          disabled={
+                            subscription?.subscriptionType === "Premium"
+                          }
+                          onClick={() =>
+                            buySelectedPlan(
+                              setSelectedPlan({
+                                plan: "Premium",
+                                price: "499.99",
+                              })
+                            )
+                          }
+                          color='dark'
+                          className='w-full uppercase'
+                        >
+                          {subscription?.subscriptionType === "Premium"
+                            ? "Current Plan"
+                            : "Buy Premium"}
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </div>
@@ -627,7 +647,11 @@ export default function Home() {
                 >
                   Pay Using Stripe
                 </Button>
-                <Button color='blue' className='w-full uppercase'>
+                <Button
+                  onClick={handlePaypalPayment}
+                  color='blue'
+                  className='w-full uppercase'
+                >
                   Pay Using Paypal
                 </Button>
               </div>
