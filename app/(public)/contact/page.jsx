@@ -1,6 +1,69 @@
-import { Button, Label, Textarea, TextInput } from "flowbite-react";
-import React from "react";
+"use client";
+import {
+  Alert,
+  Button,
+  Label,
+  Spinner,
+  Textarea,
+  TextInput,
+} from "flowbite-react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 export default function ContactUs() {
+  const { currentUser } = useSelector((state) => state.user);
+  const [formData, setFormData] = useState({
+    name: `${currentUser?.name || ""}`,
+    email: `${currentUser?.email || ""}`,
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
+  const handleFormSubmission = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await fetch("/api/user/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      setLoading(false);
+      if (res.ok) {
+        setError(false);
+        setSuccess(true);
+        setSuccessMessage(data.message);
+        setFormData({
+          name: "",
+          email: "",
+          message: "",
+        });
+        setLoading(false);
+      } else {
+        setSuccess(false);
+        setError(true);
+        setErrorMessage(data.message);
+        setLoading(false);
+      }
+    } catch (error) {
+      setSuccess(false);
+      setError(true);
+      setErrorMessage(error.message);
+      setLoading(false);
+    }
+  };
   return (
     <div className='min-h-screen bg-gray-50 py-10 dark:bg-gray-800'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
@@ -16,7 +79,19 @@ export default function ContactUs() {
               Have questions or want to work with us? Fill out the form below,
               and we’ll get back to you as soon as possible.
             </p>
-            <form>
+            <form onSubmit={handleFormSubmission}>
+              {error ||
+                (errorMessage && (
+                  <Alert color='failure' className='w-full mb-4'>
+                    {errorMessage}
+                  </Alert>
+                ))}
+              {success ||
+                (successMessage && (
+                  <Alert color='success' className='w-full mb-4'>
+                    {successMessage}
+                  </Alert>
+                ))}
               <div className='mb-4'>
                 <Label
                   htmlFor='name'
@@ -27,8 +102,12 @@ export default function ContactUs() {
                 <TextInput
                   type='text'
                   id='name'
+                  name='name'
                   autoComplete='on'
                   placeholder='John Doe'
+                  defaultValue={currentUser?.name || ""}
+                  disabled={currentUser?.name}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -42,8 +121,12 @@ export default function ContactUs() {
                 <TextInput
                   type='email'
                   id='email'
+                  name='email'
                   placeholder='john@gmail.com'
                   autoComplete='on'
+                  defaultValue={currentUser?.email || ""}
+                  disabled={currentUser?.email}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -56,13 +139,20 @@ export default function ContactUs() {
                 </Label>
                 <Textarea
                   id='message'
+                  name='message'
                   rows='4'
                   placeholder='Your Message'
                   required
+                  onChange={handleChange}
                 ></Textarea>
               </div>
-              <Button type='submit' color={"blue"} className='w-full'>
-                Send Message
+              <Button
+                disabled={loading}
+                type='submit'
+                color={"blue"}
+                className='w-full'
+              >
+                {loading ? <Spinner size='sm' color='white' /> : "Send Message"}
               </Button>
             </form>
           </div>
