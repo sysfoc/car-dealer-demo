@@ -1,5 +1,3 @@
----
-
 # **Car Dealer Theme Display Site**  
 
 Welcome to Car Dealers Display Site! We are a team of innovators, creators, and problem-solvers committed to crafting meaningful digital experiences. Our mission is to empower businesses and individuals by delivering high-quality, reliable, and scalable solutions that drive success in an ever-evolving digital landscape.
@@ -69,7 +67,8 @@ Follow these steps to set up the project locally:
      JWT_SECRET_KEY=your-jwt-key
      NEXT_PUBLIC_FIREBASE_API_KEY=your-firebase-api-key
      STRIPE_SECRET_KEY=your-stripe-secret
-     PAYPAL_SECRET_KEY=your-paypal-secret 
+     PAYPAL_SANDBOX_CLIENT_ID=your-paypal-client-id
+     PAYPAL_SANDBOX_CLIENT_SECRET=your-paypal-secret
      ```  
 
 4. Start the application:  
@@ -113,5 +112,3 @@ car-dealer-demo/
 
 ## **License**  
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.  
-
----
