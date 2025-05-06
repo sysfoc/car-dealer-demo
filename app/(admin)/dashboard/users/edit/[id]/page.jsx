@@ -1,5 +1,5 @@
 "use client";
-import { Button, Label, TextInput, Card, Select } from "flowbite-react";
+import { Button, Label, TextInput, Card, Select, Alert } from "flowbite-react";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -70,6 +70,13 @@ export default function EditUsers() {
           Update User
         </h2>
         <form className='space-y-4' onSubmit={handleFormData}>
+          {
+            error && (
+              <Alert color='failure'>
+                <span className='block sm:inline'>{errorMessage}</span>
+              </Alert>
+            )
+          }
           <div>
             <Label htmlFor='name' value='Name' />
             <TextInput

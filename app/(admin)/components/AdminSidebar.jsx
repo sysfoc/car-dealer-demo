@@ -55,11 +55,11 @@ const AdminSidebar = () => {
             Payment History
           </Sidebar.Item>
           <Sidebar.Item
-            href='#'
+            href='/dashboard/refund/requests'
             icon={HiArrowSmRight}
             className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
           >
-            Billings
+            Refund requests
           </Sidebar.Item>
         </Sidebar.ItemGroup>
       </Sidebar.Items>
