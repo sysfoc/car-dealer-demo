@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Button,
   Table,
@@ -14,9 +14,27 @@ import { IoIosPrint } from "react-icons/io";
 import { FaDownload } from "react-icons/fa6";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { useParams } from "next/navigation";
 
 export default function ViewInvoice() {
   const invoiceRef = useRef(null);
+  const params = useParams();
+  const [invoice, setInvoice] = useState(null);
+  const [user, setUser] = useState(null);
+
+  useEffect(()=>{
+    const fetchInvoiceDetails = async () => {
+      const res = await fetch(`/api/user/payments/get-single-transaction/${params.id}`);
+      const data = await res.json();
+      if(res.ok){
+        setInvoice(data.transaction);
+        setUser(data.user);
+      }
+    };
+    if(params.id){
+      fetchInvoiceDetails();
+    }
+  },[params.id]);
   const handleDownloadPDF = async () => {
     if (!invoiceRef.current) {
       console.error("Invoice reference is missing!");
@@ -45,10 +63,13 @@ export default function ViewInvoice() {
           <div className='flex items-center justify-between'>
             <div>
               <h1 className='font-semibold text-lg'>
-                Invoice Number: <span className='font-normal'>#SM75692</span>
+                Invoice Number: <span className='font-normal'>#{invoice?.customerId}</span>
               </h1>
               <h2 className='font-semibold'>
-                Date: <span className='font-normal'>05-03-2022</span>
+                Date: <span className='font-normal'>{new Date(invoice?.transactionDate).toLocaleDateString(
+                    "en-US",
+                    { year: "numeric", month: "long", day: "numeric" }
+                  )}</span>
               </h2>
             </div>
             <div>
@@ -65,23 +86,19 @@ export default function ViewInvoice() {
             <div>
               <h3 className='font-semibold'>Invoice To:</h3>
               <div className='flex flex-col mt-1'>
-                <p className='text-sm text-gray-500'>Jennifer Richards</p>
+                <p className='text-sm text-gray-500'>{user?.name}</p>
                 <p className='text-sm text-gray-500'>
-                  365 Bloor Street East, Toronto,
+                {user?.email}
                 </p>
-                <p className='text-sm text-gray-500'>Ontario, M4W 3L4,</p>
-                <p className='text-sm text-gray-500'>Canada</p>
+                <p className='text-sm text-gray-500'>Pakistan</p>
               </div>
             </div>
             <div className='text-end'>
               <h3 className='font-semibold'>Pay To:</h3>
               <div className='flex flex-col mt-1'>
-                <p className='text-sm text-gray-500'>Biman Airlines</p>
-                <p className='text-sm text-gray-500'>
-                  237 Roanoke Road, North York,
-                </p>
-                <p className='text-sm text-gray-500'>Ontario, Canada</p>
-                <p className='text-sm text-gray-500'>demo@email.com</p>
+                <p className='text-sm text-gray-500'>Sysfoc</p>
+                <p className='text-sm text-gray-500'>Tariq Bin Ziad, Sahiwal, pakistan</p>
+                <p className='text-sm text-gray-500'>sysfoc@email.com</p>
               </div>
             </div>
           </div>
@@ -96,34 +113,11 @@ export default function ViewInvoice() {
               </TableHead>
               <TableBody>
                 <TableRow>
-                  <TableCell>App Development</TableCell>
-                  <TableCell>Mobile & iOS Application Development</TableCell>
-                  <TableCell>2</TableCell>
-                  <TableCell>$460</TableCell>
-                  <TableCell>$920</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>UI/UX Design</TableCell>
-                  <TableCell>
-                    Mobile & iOS Mobile App Design, Product Design
-                  </TableCell>
+                  <TableCell>{invoice?.product} Package</TableCell>
+                  <TableCell>Purchased for {invoice?.productPlan} Subscription</TableCell>
                   <TableCell>1</TableCell>
-                  <TableCell>$220</TableCell>
-                  <TableCell>$220</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Web Design</TableCell>
-                  <TableCell>Web Design & Development</TableCell>
-                  <TableCell>2</TableCell>
-                  <TableCell>$120</TableCell>
-                  <TableCell>$240</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Web Design</TableCell>
-                  <TableCell>Web Design & Development</TableCell>
-                  <TableCell>2</TableCell>
-                  <TableCell>$120</TableCell>
-                  <TableCell>$240</TableCell>
+                  <TableCell>${invoice?.productPrice}</TableCell>
+                  <TableCell>${invoice?.productPrice}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell colSpan={2} rowSpan={3} className='font-semibold'>
@@ -140,7 +134,7 @@ export default function ViewInvoice() {
                     Subtotal
                   </TableCell>
                   <TableCell className='font-semibold bg-gray-50'>
-                    $1140
+                    ${invoice?.productPrice}
                   </TableCell>
                 </TableRow>
               </TableBody>
