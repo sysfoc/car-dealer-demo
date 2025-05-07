@@ -1,9 +1,24 @@
-import { Button, Select } from "flowbite-react";
+"use client";
+import { Button, Modal, ModalBody, ModalHeader, Select } from "flowbite-react";
 import Image from "next/image";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { TiCloudStorage } from "react-icons/ti";
+import { useSelector } from "react-redux";
 
 const AddOns = () => {
+  const [selectedPlan, setSelectedPlan] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const { currentUser } = useSelector((state) => state.user);
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    if (!currentUser) {
+      router.push("/login");
+    }
+  });
   const services = [
     {
       id: 1,
@@ -12,7 +27,7 @@ const AddOns = () => {
       title: "Content Writing",
       description:
         "Sysfoc car dealer provides full of features for creating a perfect Business website. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit optio dicta nihil excepturi magni!",
-      price: "$300/month",
+      price: 300,
     },
     {
       id: 2,
@@ -21,7 +36,7 @@ const AddOns = () => {
       title: "SEO Optimization",
       description:
         "Optimize your website for better search rankings and online visibility. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit optio dicta nihil excepturi magni!",
-      price: "$500/month",
+      price: 500,
     },
     {
       id: 3,
@@ -30,9 +45,53 @@ const AddOns = () => {
       title: "Social Media Marketing",
       description:
         "Boost your brand's for better search rankings and online visibility. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit optio dicta nihil excepturi magni",
-      price: "$400/month",
+      price: 400,
     },
   ];
+
+  const buySelectedPlan = () => {
+    setShowModal(true);
+  };
+
+  const handleStripePayment = async () => {
+    setLoading(true);
+    const res = await fetch("/api/stripe/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: currentUser?._id,
+        plan: selectedPlan?.plan,
+        price: selectedPlan?.price,
+      }),
+    });
+    const data = await res.json();
+    setLoading(false);
+    if (res.ok) {
+      window.location.href = data.url;
+    }
+  };
+
+  const handlePaypalPayment = async () => {
+    setLoading(true);
+    const res = await fetch("/api/paypal/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: currentUser?._id,
+        plan: selectedPlan?.plan,
+        price: selectedPlan?.price,
+      }),
+    });
+    const data = await res.json();
+    setLoading(false);
+    if (res.ok) {
+      window.location.href = data.url;
+    }
+  };
 
   return (
     <section className='mx-4 md:mx-12 my-5'>
@@ -61,9 +120,19 @@ const AddOns = () => {
                     </div>
                     <div className='flex flex-col gap-3'>
                       <span className='px-5 py-2 rounded-md text-sm bg-gray-100'>
-                        {service.price}
+                        ${service.price}/month
                       </span>
-                      <Button className='w-full bg-red-600 hover:!bg-red-700 text-white'>
+                      <Button
+                        className='w-full bg-red-600 hover:!bg-red-700 text-white'
+                        onClick={() =>
+                          buySelectedPlan(
+                            setSelectedPlan({
+                              plan: `${service.title}`,
+                              price: `${service.price}`,
+                            })
+                          )
+                        }
+                      >
                         Purchase
                       </Button>
                     </div>
@@ -102,6 +171,36 @@ const AddOns = () => {
           </div>
         </div>
       </div>
+      <Modal show={showModal} onClose={() => setShowModal(false)}>
+        <ModalHeader>
+          <p>
+            Select Payment Method For {selectedPlan?.plan} at $
+            {selectedPlan?.price}
+          </p>
+        </ModalHeader>
+        <ModalBody>
+          <div className='w-full py-10 flex items-center justifiy-center'>
+            <div className='w-full flex flex-col gap-4'>
+              <Button
+                onClick={handleStripePayment}
+                color='dark'
+                className='w-full uppercase'
+                disabled={loading}
+              >
+                Pay Using Stripe
+              </Button>
+              <Button
+                onClick={handlePaypalPayment}
+                color='blue'
+                className='w-full uppercase'
+                disabled={loading}
+              >
+                Pay Using Paypal
+              </Button>
+            </div>
+          </div>
+        </ModalBody>
+      </Modal>
     </section>
   );
 };
