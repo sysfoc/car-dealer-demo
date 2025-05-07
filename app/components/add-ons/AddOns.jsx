@@ -64,7 +64,7 @@ const AddOns = () => {
                         {service.price}
                       </span>
                       <Button className='w-full bg-red-600 hover:!bg-red-700 text-white'>
-                        Add to Cart
+                        Purchase
                       </Button>
                     </div>
                   </div>
@@ -93,7 +93,7 @@ const AddOns = () => {
                       <option value='30GB - $12/mo'>30GB - $12/mo</option>
                     </Select>
                     <Button className='w-full bg-red-600 hover:!bg-red-700 text-white'>
-                      Add to Cart
+                      Purchase
                     </Button>
                   </div>
                 </div>

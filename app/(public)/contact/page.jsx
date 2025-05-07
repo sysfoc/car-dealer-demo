@@ -103,8 +103,8 @@ export default function ContactUs() {
                   name='name'
                   autoComplete='on'
                   placeholder='John Doe'
-                  defaultValue={currentUser?.name || ""}
-                  disabled={currentUser?.name}
+                  defaultValue={formData?.name || ""}
+                  disabled={formData?.name}
                   onChange={handleChange}
                   required
                 />
@@ -122,8 +122,8 @@ export default function ContactUs() {
                   name='email'
                   placeholder='john@gmail.com'
                   autoComplete='on'
-                  defaultValue={currentUser?.email || ""}
-                  disabled={currentUser?.email}
+                  defaultValue={formData?.email || ""}
+                  disabled={formData?.email}
                   onChange={handleChange}
                   required
                 />
