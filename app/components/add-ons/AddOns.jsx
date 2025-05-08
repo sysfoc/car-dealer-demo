@@ -14,7 +14,6 @@ const AddOns = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
     if (!currentUser) {
       router.push("/login");
     }

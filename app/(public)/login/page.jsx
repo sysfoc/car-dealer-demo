@@ -6,14 +6,18 @@ import { HiInformationCircle } from "react-icons/hi";
 import Google from "@/app/components/auth/Google";
 import Github from "@/app/components/auth/Github";
 import { useDispatch, useSelector } from "react-redux";
-import { loginStart, loginSuccess,loginFailure } from "@/lib/features/user/userSlice";
+import {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+} from "@/lib/features/user/userSlice";
 
 export default function Register() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
-  const {error:errorMessage,loading} = useSelector((state) => state.user);
+  const { error: errorMessage, loading } = useSelector((state) => state.user);
 
   const handleChange = (e) => {
     setFormData({
@@ -81,7 +85,12 @@ export default function Register() {
             />
           </div>
 
-          <Button disabled={loading} type='submit' color='blue' className='w-full'>
+          <Button
+            disabled={loading}
+            type='submit'
+            color='blue'
+            className='w-full'
+          >
             {loading ? (
               <Spinner color='warning' aria-label='Spinning' size='md' />
             ) : (
