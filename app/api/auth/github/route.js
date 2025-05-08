@@ -34,14 +34,20 @@ export async function POST(req) {
         const token = jwt.sign({ admin: true }, config.jwtSecretKey);
         response.cookies.set("admin", token, {
           httpOnly: true,
+          secure: true,
           maxAge: 60 * 60 * 24 * 7,
-          sameSite: "strict",
+          sameSite: "lax",
+          path: "/",
+          priority: "high",
         });
       }
       response.cookies.set("token", token, {
         httpOnly: true,
+        secure: true,
         maxAge: 60 * 60 * 24 * 7,
-        sameSite: "strict",
+        sameSite: "lax",
+        path: "/",
+        priority: "high",
       });
       await Notification.create({
         userId: isUserExist._id,
@@ -83,8 +89,11 @@ export async function POST(req) {
         );
         response.cookies.set("token", token, {
           httpOnly: true,
+          secure: true,
           maxAge: 60 * 60 * 24 * 7,
-          sameSite: "strict",
+          sameSite: "lax",
+          path: "/",
+          priority: "high",
         });
         await Notification.create({
           userId: newUser._id,

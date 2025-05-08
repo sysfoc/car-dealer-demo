@@ -23,6 +23,7 @@ const Google = () => {
       const result = await signInWithPopup(auth, provider);
       const res = await fetch("/api/auth/google", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

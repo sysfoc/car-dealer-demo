@@ -32,6 +32,7 @@ const Github = () => {
       const result = await signInWithPopup(auth, githubProvider);
       const res = await fetch("/api/auth/github", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
