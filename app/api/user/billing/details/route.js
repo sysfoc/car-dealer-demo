@@ -32,19 +32,47 @@ export async function POST(req) {
     }
     const isBillingExist = await Billing.findOne({ userId: id });
     if (isBillingExist) {
-      return NextResponse.json({ message: "Billing details already exist" }, { status: 404 });
+      return NextResponse.json(
+        { message: "Billing details already exist" },
+        { status: 404 }
+      );
     }
-    const createBilling = await Billing.create({
+    await Billing.create({
       userId: id,
       fullName,
       email,
       address,
       phone,
     });
-    return NextResponse.json({
-      message: "Billing details created successfully",
-      billing: createBilling,
-    });
+    return NextResponse.json(
+      {
+        message: "Your billing details are added successfully",
+      },
+      { status: 201 }
+    );
+  } catch (error) {
+    return NextResponse.json({ message: error.message }, { status: 500 });
+  }
+}
+
+
+export async function GET() {
+  await connectToDatabase();
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get("token")?.value;
+    if (!token) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    const decoded = jwt.verify(token, config.jwtSecretKey);
+    if (!decoded.id) {
+      return NextResponse.json({ error: "Invalid token" }, { status: 403 });
+    }
+    const id = decoded.id;
+    const billing = await Billing.findOne({ userId: id }).sort({ createdAt: -1 }).limit(1);
+    if (billing) {
+      return NextResponse.json({ billing }, { status: 200 });
+    }
   } catch (error) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }

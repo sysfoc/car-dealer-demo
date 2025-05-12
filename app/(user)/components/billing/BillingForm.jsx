@@ -1,23 +1,33 @@
 "use client";
-import React, { useState } from "react";
-import { Card, Label, TextInput, Button } from "flowbite-react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  billingFailure,
-  billingStart,
-  billingSuccess,
-} from "@/lib/features/user/userBilling";
+import React, { useEffect, useState } from "react";
+import { Card, Label, TextInput, Button, Alert } from "flowbite-react";
 
 const BillingForm = () => {
-  const dispatch = useDispatch();
-  const {
-    loading,
-    error: errorMessage,
-    userBilling,
-  } = useSelector((state) => state.billing);
   const [error, setError] = useState(false);
   const [formData, setFormData] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [billing, setBilling] = useState({});
+  const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    setLoading(true);
+    const getUserBilling = async () => {
+      const res = await fetch("/api/user/billing/details");
+      const data = await res.json();
+      if (res.ok) {
+        setLoading(false);
+        setBilling(data.billing);
+        setError(false);
+      } else {
+        setLoading(false);
+        setError(true);
+        setErrorMessage(data.message);
+      }
+    };
+    getUserBilling();
+  }, [error, success]);
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -27,7 +37,7 @@ const BillingForm = () => {
   const handleFormData = async (e) => {
     e.preventDefault();
     try {
-      dispatch(billingStart());
+      setLoading(true);
       const res = await fetch("/api/user/billing/details", {
         method: "POST",
         headers: {
@@ -37,26 +47,35 @@ const BillingForm = () => {
       });
       const data = await res.json();
       if (res.ok) {
-        dispatch(billingSuccess(data.billing));
+        setLoading(false);
+        setSuccess(true);
+        setSuccessMessage(data.message);
+        setError(false);
       } else {
+        setLoading(false);
         setError(true);
-        dispatch(billingFailure(data.message));
+        setErrorMessage(data.message);
       }
     } catch (error) {
+      setLoading(false);
       setError(true);
-      dispatch(billingFailure(error.message));
+      setErrorMessage(error.message);
     }
   };
   return (
     <Card>
-      {
-        error && (
-          <div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative'>
-            <strong className='font-bold'>Error! </strong>
-            <span className='block sm:inline'>{errorMessage}</span>
-          </div>
-        )
-      }
+      {error && (
+        <Alert color='failure'>
+          <strong className='font-bold'>Error! </strong>
+          <span className='block sm:inline'>{errorMessage}</span>
+        </Alert>
+      )}
+      {success && (
+        <Alert color='success'>
+          <strong className='font-bold'>Success! </strong>
+          <span className='block sm:inline'>{successMessage}</span>
+        </Alert>
+      )}
       <h2 className='text-xl font-semibold'>Customer Billing Details</h2>
       <form className='space-y-4 mt-4' onSubmit={handleFormData}>
         <div>
@@ -64,10 +83,10 @@ const BillingForm = () => {
           <TextInput
             id='fullName'
             type='text'
-            defaultValue={userBilling?.fullName}
+            defaultValue={billing?.fullName}
             placeholder='John Doe'
             required
-            disabled={userBilling}
+            disabled={billing?.fullName}
             onChange={handleChange}
           />
         </div>
@@ -76,10 +95,10 @@ const BillingForm = () => {
           <TextInput
             id='email'
             type='email'
-            defaultValue={userBilling?.email}
+            defaultValue={billing?.email}
             placeholder='john@example.com'
             required
-            disabled={userBilling}
+            disabled={billing?.email}
             onChange={handleChange}
           />
         </div>
@@ -90,9 +109,9 @@ const BillingForm = () => {
             type='text'
             placeholder='123 Main St, City, Country'
             required
-            disabled={userBilling}
+            disabled={billing?.address}
             onChange={handleChange}
-            defaultValue={userBilling?.address}
+            defaultValue={billing?.address}
           />
         </div>
         <div>
@@ -102,21 +121,27 @@ const BillingForm = () => {
             type='tel'
             placeholder='+1 234 567 890'
             required
-            disabled={userBilling}
+            disabled={billing?.phone}
             onChange={handleChange}
-            defaultValue={userBilling?.phone}
+            defaultValue={billing?.phone}
           />
         </div>
-        <Button disabled={loading || userBilling} type='submit' color='blue' className='w-full'>
+        <Button
+          disabled={loading || billing?._id}
+          type='submit'
+          color='blue'
+          className='w-full'
+        >
           Save Billing Details
         </Button>
-        {
-        userBilling && (
+        {billing?._id && (
           <div>
-            <p className="text-green-500 text-sm">Billing Details Successfully Added! You can change billing details in the settings</p>
+            <p className='text-green-500 text-sm'>
+              Billing Details Successfully Added! You can change billing details
+              in the settings
+            </p>
           </div>
-        )
-        }
+        )}
       </form>
     </Card>
   );
