@@ -45,6 +45,9 @@ export default function Home() {
             setSubscription(data.subscription);
             setLoading(false);
           }
+          if(response.status === 404) {
+            setLoading(false);
+          }
         } catch (error) {
           console.error(error.message);
         }

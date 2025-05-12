@@ -4,6 +4,7 @@ import Refund from "@/app/model/refund.model";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import { config } from "@/app/api/utils/env-config";
+import Notification from "@/app/model/notification.model";
 
 export async function POST(req) {
   await connectToDatabase();
@@ -32,6 +33,12 @@ export async function POST(req) {
       email,
       refundMethod,
       reason,
+    });
+    await Notification.create({
+      type: "success",
+      title: "Refund Request",
+      message: `Your refund request has been sent and will be processed soon`,
+      userId: id,
     });
     return NextResponse.json(
       { message: "Refund request sent successfully" },
