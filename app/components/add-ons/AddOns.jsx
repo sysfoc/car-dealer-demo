@@ -12,6 +12,7 @@ const AddOns = () => {
   const { currentUser } = useSelector((state) => state.user);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [addOns, setAddOns] = useState([]);
 
   useEffect(() => {
     if (!currentUser) {
@@ -48,6 +49,32 @@ const AddOns = () => {
     },
   ];
 
+  useEffect(() => {
+    setLoading(true);
+    if (!currentUser) {
+      router.push("/login");
+    }
+    if (currentUser?._id) {
+      const fetchUserAddons = async () => {
+        try {
+          const response = await fetch("/api/user/add-ons/details");
+          const data = await response.json();
+          if (response.ok) {
+            setAddOns(data.addons);
+            setLoading(false);
+          }
+          if (response.status === 404) {
+            setLoading(false);
+          }
+        } catch (error) {
+          console.error(error.message);
+        }
+      };
+      fetchUserAddons();
+    }
+  }, [currentUser]);
+
+  console.log(addOns);
   const buySelectedPlan = () => {
     setShowModal(true);
   };
@@ -123,6 +150,9 @@ const AddOns = () => {
                       </span>
                       <Button
                         className='w-full bg-red-600 hover:!bg-red-700 text-white'
+                        disabled={addOns.some((addon) =>
+                          addon.serviceName?.includes(service.title)
+                        )}
                         onClick={() =>
                           buySelectedPlan(
                             setSelectedPlan({
@@ -132,7 +162,9 @@ const AddOns = () => {
                           )
                         }
                       >
-                        Purchase
+                        {addOns.serviceName?.includes(service.title)
+                          ? "Current Plan"
+                          : "Purchase"}
                       </Button>
                     </div>
                   </div>

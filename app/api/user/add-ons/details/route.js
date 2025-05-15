@@ -1,5 +1,5 @@
 import { connectToDatabase } from "@/app/api/utils/db";
-import Subscription from "@/app/model/subscription.model";
+import Addon from "@/app/model/addon.model";
 import { config } from "@/app/api/utils/env-config";
 import { cookies } from "next/headers";
 import jwt from 'jsonwebtoken';
@@ -18,14 +18,14 @@ export async function GET() {
       return NextResponse.json({ error: "Invalid token" }, { status: 403 });
     }
     const id = decoded.id;
-    const subscription = await Subscription.findOne({ userId: id, isActive: true }).sort({ createdAt: -1 }).limit(1);
-    if (!subscription) {
+    const addons = await Addon.find({ userId: id, isActive: true })
+    if (!addons) {
       return NextResponse.json(
-        { message: "No subscription found, please create one" },
+        { message: "No addons found, please create one" },
         { status: 404 }
       );
     }
-    return NextResponse.json({ subscription }, { status: 200 });
+    return NextResponse.json({ addons }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }

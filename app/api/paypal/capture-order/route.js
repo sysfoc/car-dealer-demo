@@ -3,6 +3,7 @@ import paypal from "@paypal/checkout-server-sdk";
 import Payment from "@/app/model/payment.model";
 import Subscription from "@/app/model/subscription.model";
 import Notification from "@/app/model/notification.model";
+import Addon from "@/app/model/addon.model";
 
 const clientId = process.env.PAYPAL_SANDBOX_CLIENT_ID;
 const clientSecret = process.env.PAYPAL_SANDBOX_CLIENT_SECRET;
@@ -38,12 +39,35 @@ export async function POST(req) {
         [userId, plan, price] = parts;
       }
     }
-    await Subscription.create({
-      userId,
-      subscriptionType: plan,
-      subscriptionPlan: "Monthly",
-      startDate: new Date(),
-    });
+    if (plan.includes("add-on")) {
+      const existingAddon = await Addon.findOne({ userId, serviceName: plan });
+
+      if (existingAddon) {
+        return NextResponse.json(
+          { error: `You already have the "${plan}" add-on subscribed.` },
+          { status: 400 }
+        );
+      }
+      await Addon.create({
+        userId,
+        serviceName: plan,
+        servicePrice: price,
+        subscribedAt: new Date(),
+        isActive: true,
+      });
+    } else {
+      await Subscription.findOneAndUpdate(
+        { userId },
+        {
+          $set: {
+            subscriptionType: plan,
+            subscriptionPlan: "Monthly",
+            startDate: new Date(),
+          },
+        },
+        { upsert: true, new: true }
+      );
+    }
 
     await Payment.create({
       userId,

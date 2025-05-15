@@ -30,18 +30,21 @@ export async function GET(req) {
   const price = Number(session.amount_total) / 100;
 
   if (plan.includes("add-on")) {
-    await Addon.findOneAndUpdate(
-      { userId },
-      {
-        $set: {
-          serviceName: plan,
-          servicePrice: price,
-          subscribedAt: new Date(),
-          isActive: true,
-        },
-      },
-      { upsert: true, new: true }
-    );
+    const existingAddon = await Addon.findOne({ userId, serviceName: plan });
+
+    if (existingAddon) {
+      return NextResponse.json(
+        { error: `You already have the "${plan}" add-on subscribed.` },
+        { status: 400 }
+      );
+    }
+    await Addon.create({
+      userId,
+      serviceName: plan,
+      servicePrice: price,
+      subscribedAt: new Date(),
+      isActive: true,
+    });
   } else {
     await Subscription.findOneAndUpdate(
       { userId },
