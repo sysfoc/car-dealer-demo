@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import {connectToDatabase} from '@/app/api/utils/db';
+import { connectToDatabase } from "@/app/api/utils/db";
 import Payment from "@/app/model/payment.model";
 import Subscription from "@/app/model/subscription.model";
-import Notification from '@/app/model/notification.model';
+import Notification from "@/app/model/notification.model";
+import Addon from "@/app/model/addon.model";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -28,14 +29,32 @@ export async function GET(req) {
   const plan = session.metadata?.plan;
   const price = Number(session.amount_total) / 100;
 
-  
-  await Subscription.create({
-    userId,
-    subscriptionType: plan,
-    subscriptionPlan: "Monthly",
-    startDate: new Date(),
-  });
-
+  if (plan.includes("add-on")) {
+    await Addon.findOneAndUpdate(
+      { userId },
+      {
+        $set: {
+          serviceName: plan,
+          servicePrice: price,
+          subscribedAt: new Date(),
+          isActive: true,
+        },
+      },
+      { upsert: true, new: true }
+    );
+  } else {
+    await Subscription.findOneAndUpdate(
+      { userId },
+      {
+        $set: {
+          subscriptionType: plan,
+          subscriptionPlan: "Monthly",
+          startDate: new Date(),
+        },
+      },
+      { upsert: true, new: true }
+    );
+  }
   await Payment.create({
     userId,
     customerId: session.customer,

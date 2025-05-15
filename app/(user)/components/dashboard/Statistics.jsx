@@ -38,7 +38,7 @@ const Statistics = () => {
     <div className='w-full p-4 bg-white shadow'>
       {loading ? (
         <div className='flex items-center justify-center'>
-          <Spinner />
+          <Spinner size="lg"/>
         </div>
       ) : (
         <div>

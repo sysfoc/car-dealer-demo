@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Card, Label, TextInput, Button, Alert } from "flowbite-react";
+import { Card, Label, TextInput, Button, Alert, Spinner } from "flowbite-react";
 
 const BillingForm = () => {
   const [error, setError] = useState(false);
@@ -77,72 +77,78 @@ const BillingForm = () => {
         </Alert>
       )}
       <h2 className='text-xl font-semibold'>Customer Billing Details</h2>
-      <form className='space-y-4 mt-4' onSubmit={handleFormData}>
-        <div>
-          <Label htmlFor='fullName' value='Full Name' />
-          <TextInput
-            id='fullName'
-            type='text'
-            defaultValue={billing?.fullName}
-            placeholder='John Doe'
-            required
-            disabled={billing?.fullName}
-            onChange={handleChange}
-          />
+      {loading ? (
+        <div className='text-center'>
+          <Spinner className='my-4' size='xl' />
         </div>
-        <div>
-          <Label htmlFor='email' value='Email Address' />
-          <TextInput
-            id='email'
-            type='email'
-            defaultValue={billing?.email}
-            placeholder='john@example.com'
-            required
-            disabled={billing?.email}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <Label htmlFor='address' value='Billing Address' />
-          <TextInput
-            id='address'
-            type='text'
-            placeholder='123 Main St, City, Country'
-            required
-            disabled={billing?.address}
-            onChange={handleChange}
-            defaultValue={billing?.address}
-          />
-        </div>
-        <div>
-          <Label htmlFor='phone' value='Phone Number' />
-          <TextInput
-            id='phone'
-            type='tel'
-            placeholder='+1 234 567 890'
-            required
-            disabled={billing?.phone}
-            onChange={handleChange}
-            defaultValue={billing?.phone}
-          />
-        </div>
-        <Button
-          disabled={loading || billing?._id}
-          type='submit'
-          color='blue'
-          className='w-full'
-        >
-          Save Billing Details
-        </Button>
-        {billing?._id && (
+      ) : (
+        <form className='space-y-4 mt-4' onSubmit={handleFormData}>
           <div>
-            <p className='text-green-500 text-sm'>
-              Billing Details Successfully Added! You can change billing details
-              in the settings
-            </p>
+            <Label htmlFor='fullName' value='Full Name' />
+            <TextInput
+              id='fullName'
+              type='text'
+              defaultValue={billing?.fullName}
+              placeholder='John Doe'
+              required
+              disabled={billing?.fullName}
+              onChange={handleChange}
+            />
           </div>
-        )}
-      </form>
+          <div>
+            <Label htmlFor='email' value='Email Address' />
+            <TextInput
+              id='email'
+              type='email'
+              defaultValue={billing?.email}
+              placeholder='john@example.com'
+              required
+              disabled={billing?.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <Label htmlFor='address' value='Billing Address' />
+            <TextInput
+              id='address'
+              type='text'
+              placeholder='123 Main St, City, Country'
+              required
+              disabled={billing?.address}
+              onChange={handleChange}
+              defaultValue={billing?.address}
+            />
+          </div>
+          <div>
+            <Label htmlFor='phone' value='Phone Number' />
+            <TextInput
+              id='phone'
+              type='tel'
+              placeholder='+1 234 567 890'
+              required
+              disabled={billing?.phone}
+              onChange={handleChange}
+              defaultValue={billing?.phone}
+            />
+          </div>
+          <Button
+            disabled={loading || billing?._id}
+            type='submit'
+            color='blue'
+            className='w-full'
+          >
+            Save Billing Details
+          </Button>
+          {billing?._id && (
+            <div>
+              <p className='text-green-500 text-sm'>
+                Billing Details Successfully Added! You can change billing
+                details in the settings
+              </p>
+            </div>
+          )}
+        </form>
+      )}
     </Card>
   );
 };

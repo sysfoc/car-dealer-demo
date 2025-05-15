@@ -52,7 +52,13 @@ const OrdersTable = () => {
             </TableHeadCell>
           </TableHead>
           <TableBody className='divide-y'>
-            {loading && <Spinner size='lg' />}
+            {loading && (
+              <TableRow>
+                <TableCell colSpan={5} className='text-center'>
+                  <Spinner size='lg' aria-label='Center-aligned spinner example' />
+                </TableCell>
+              </TableRow>
+            )}
             {getAllUsers.map((data, index) => (
               <TableRow
                 key={index}

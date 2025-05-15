@@ -5,6 +5,7 @@ import {
   Label,
   Modal,
   Select,
+  Spinner,
   Table,
   TableBody,
   TableCell,
@@ -20,12 +21,14 @@ export default function page() {
   const [selectedRefundRequest, setSelectedRefundRequest] = useState({});
   const [showEditRefundModal, setShowEditRefundModal] = useState(false);
   const [status, setStatus] = useState("");
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchRefundRequests = async () => {
+      setLoading(true);
       try {
         const response = await fetch("/api/user/refund/get-all");
         const data = await response.json();
+        setLoading(false);
         setRefundRequests(data.refunds || []);
       } catch (error) {
         console.error("Error fetching requests:", error);
@@ -46,6 +49,7 @@ export default function page() {
 
   const handleFormSubmission = async (id) => {
     try {
+      setLoading(true);
       const res = await fetch(`/api/user/refund/edit/${id}`, {
         method: "POST",
         headers: {
@@ -54,7 +58,7 @@ export default function page() {
         body: JSON.stringify(status),
       });
       const data = await res.json();
-      console.log(data);
+      setLoading(false);
       if (res.ok) {
         alert("Status updated successfully");
         setShowRefundDetailModal(false);
@@ -83,6 +87,13 @@ export default function page() {
             <TableHeadCell>Actions</TableHeadCell>
           </TableHead>
           <TableBody>
+            {loading && (
+              <TableRow>
+                <TableCell colSpan={6} className='text-center'>
+                  <Spinner size='lg' />
+                </TableCell>
+              </TableRow>
+            )}
             {RefundRequests.map((refundRequest) => (
               <TableRow key={refundRequest?._id}>
                 <TableCell>{refundRequest?.orderId}</TableCell>
@@ -190,9 +201,24 @@ export default function page() {
               onChange={(e) => setStatus(e.target.value)}
               defaultValue={selectedRefundRequest?.status}
             >
-              <option disabled={selectedRefundRequest?.status === "pending"} value='pending'>Pending</option>
-              <option disabled={selectedRefundRequest?.status === "approved"} value='approved'>Approved</option>
-              <option disabled={selectedRefundRequest?.status === "rejected"} value='rejected'>Rejected</option>
+              <option
+                disabled={selectedRefundRequest?.status === "pending"}
+                value='pending'
+              >
+                Pending
+              </option>
+              <option
+                disabled={selectedRefundRequest?.status === "approved"}
+                value='approved'
+              >
+                Approved
+              </option>
+              <option
+                disabled={selectedRefundRequest?.status === "rejected"}
+                value='rejected'
+              >
+                Rejected
+              </option>
             </Select>
             <Button className='mt-4' size='md' type='submit'>
               Update

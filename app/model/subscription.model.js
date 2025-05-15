@@ -17,22 +17,6 @@ const subscriptionSchema = new mongoose.Schema(
       enum: ["Monthly", "Yearly"],
       default: "Monthly",
     },
-    addOnServices: [
-      {
-        serviceName: {
-          type: String,
-          required: true,
-        },
-        servicePrice: {
-          type: Number,
-          required: true,
-        },
-        isActive: {
-          type: Boolean,
-          default: false,
-        },
-      },
-    ],
     startDate: {
       type: Date,
       default: Date.now,

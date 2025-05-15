@@ -13,8 +13,7 @@ const paymentSchema = new mongoose.Schema(
     },
     product: {
       type: String,
-      enum: ["Basic", "Standard", "Premium"],
-      default: "Basic",
+      required: true,
     },
     productPrice: {
       type: Number,

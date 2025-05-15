@@ -130,36 +130,6 @@ const UserSidebar = () => {
             </Sidebar.Item>
           </Sidebar.Collapse>
           <Sidebar.Collapse
-            icon={MdOutlinePayment}
-            label='Payments'
-            className='hover:!bg-[#EA96FF] hover:!text-black'
-            renderChevronIcon={(theme, open) => {
-              const IconComponent = open ? HiOutlineMinusSm : HiOutlinePlusSm;
-
-              return (
-                <IconComponent
-                  aria-hidden
-                  className={TiFlowMerge(
-                    theme.label.icon.open[open ? "on" : "off"]
-                  )}
-                />
-              );
-            }}
-          >
-            <Sidebar.Item
-              href='/user/dashboard/payment/gateway'
-              className='hover:!bg-[#EA96FF] hover:!text-black'
-            >
-              Gateways
-            </Sidebar.Item>
-            <Sidebar.Item
-              href='/user/dashboard/payment/notifications'
-              className='hover:!bg-[#EA96FF] hover:!text-black'
-            >
-              Payment Notifications
-            </Sidebar.Item>
-          </Sidebar.Collapse>
-          <Sidebar.Collapse
             icon={IoSettings}
             label='Settings'
             className='hover:!bg-[#EA96FF] hover:!text-black'

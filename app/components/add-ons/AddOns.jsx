@@ -126,7 +126,7 @@ const AddOns = () => {
                         onClick={() =>
                           buySelectedPlan(
                             setSelectedPlan({
-                              plan: `${service.title}`,
+                              plan: `${service.title} add-on`,
                               price: `${service.price}`,
                             })
                           )
