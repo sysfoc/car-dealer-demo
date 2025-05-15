@@ -73,8 +73,6 @@ const AddOns = () => {
       fetchUserAddons();
     }
   }, [currentUser]);
-
-  console.log(addOns);
   const buySelectedPlan = () => {
     setShowModal(true);
   };

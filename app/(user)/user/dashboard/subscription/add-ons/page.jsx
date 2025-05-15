@@ -1,114 +1,137 @@
 "use client";
-import { Card, ToggleSwitch, Button, Modal } from "flowbite-react";
-import { useState } from "react";
+import { Button } from "flowbite-react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Addons() {
-  const [addons, setAddons] = useState({
-    extraListings: false,
-    premiumSupport: false,
-    advancedAnalytics: false,
-    priorityCustomerService: false,
-    marketingBoost: false,
-  });
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedAddon, setSelectedAddon] = useState("");
+  const [addOns, setAddOns] = useState([]);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    const fetchUserAddons = async () => {
+      try {
+        const response = await fetch("/api/user/add-ons/get-all");
+        const data = await response.json();
+        if (response.ok) {
+          setAddOns(data.addons);
+          setLoading(false);
+        }
+        if (response.status === 404) {
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    fetchUserAddons();
+  }, []);
 
-  const toggleAddon = (addon) => {
-    if (addon === "priorityCustomerService" || addon === "marketingBoost") {
-      setSelectedAddon(addon);
-      setIsModalOpen(true);
+  const handleAddonStatus = async (addon) => {
+    const res = await fetch(`/api/user/add-ons/update/${addon?._id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ status: !addon?.isActive }),
+    });
+    const data = await res.json();
+    if (res.ok) {
+      window.location.reload();
     } else {
-      setAddons((prev) => ({ ...prev, [addon]: !prev[addon] }));
+      console.log(data.message);
     }
   };
-
-  const handleSaveChanges = () => {
-    alert("Your add-on preferences have been updated.");
-  };
-
   return (
-    <div className='max-w-3xl mx-auto p-6'>
-      <Card className='p-6 shadow-lg'>
-        <h2 className='text-2xl font-semibold text-gray-900'>Manage Add-Ons</h2>
-        <p className='text-gray-600 mt-2'>
-          Enable or disable add-ons for additional features.
-        </p>
-
-        <div className='mt-4 space-y-4'>
-          <div className='flex justify-between items-center border-b pb-2'>
-            <span className='font-medium text-gray-800'>
-              Additional Car Listings
-            </span>
-            <ToggleSwitch
-              checked={addons.extraListings}
-              onChange={() => toggleAddon("extraListings")}
-            />
-          </div>
-          <div className='flex justify-between items-center border-b pb-2'>
-            <span className='font-medium text-gray-800'>Premium Support</span>
-            <ToggleSwitch
-              checked={addons.premiumSupport}
-              onChange={() => toggleAddon("premiumSupport")}
-            />
-          </div>
-          <div className='flex justify-between items-center border-b pb-2'>
-            <span className='font-medium text-gray-800'>
-              Advanced Analytics
-            </span>
-            <ToggleSwitch
-              checked={addons.advancedAnalytics}
-              onChange={() => toggleAddon("advancedAnalytics")}
-            />
-          </div>
-          <div className='flex justify-between items-center border-b pb-2'>
-            <span className='font-medium text-gray-800'>
-              Priority Customer Service
-            </span>
-            <ToggleSwitch
-              checked={addons.priorityCustomerService}
-              onChange={() => toggleAddon("priorityCustomerService")}
-            />
-          </div>
-          <div className='flex justify-between items-center border-b pb-2'>
-            <span className='font-medium text-gray-800'>Marketing Boost</span>
-            <ToggleSwitch
-              checked={addons.marketingBoost}
-              onChange={() => toggleAddon("marketingBoost")}
-            />
+    <>
+      <section className='my-10 w-full flex items-center justify-center relative'>
+        <div className='text-center'>
+          <div className='mt-5'>
+            <h2 className='text-2xl font-bold md:text-3xl'>Manage Add-ons</h2>
+            <p className='mt-1'>
+              Manage your add-ons, activate or deactivate them
+            </p>
           </div>
         </div>
-
-        <div className='mt-6 flex justify-end'>
-          <Button
-            className='bg-blue-600 hover:bg-blue-700'
-            onClick={handleSaveChanges}
-          >
-            Save Changes
-          </Button>
+      </section>
+      <div className='w-full'>
+        <div className='mx-auto flex flex-col items-center gap-5'>
+          {addOns.map((addon) => (
+            <div
+              key={addon?._id}
+              className='w-[90%] shadow-md px-8 py-6 rounded-lg bg-white'
+            >
+              <div className='flex items-center gap-8 flex-wrap md:flex-nowrap'>
+                <div className='w-[100px] h-[100px] flex-shrink-0'>
+                  <Image
+                    src={`${
+                      addon?.serviceName.includes("add-on") ===
+                      "Content Writing"
+                        ? "/07.png"
+                        : addon.serviceName.includes("SEO")
+                        ? "/08.png"
+                        : "/09.png"
+                    }`}
+                    alt={addon?.serviceName}
+                    width={100}
+                    height={100}
+                    className='rounded-full p-5 bg-gray-50/95'
+                  />
+                </div>
+                <div className='w-full flex items-end justify-between flex-wrap md:flex-nowrap gap-5'>
+                  <div className='flex flex-col gap-1'>
+                    <h3 className='text-xl font-semibold'>
+                      {addon?.serviceName}
+                    </h3>
+                    <p>
+                      Status:{" "}
+                      {addon?.isActive ? (
+                        <span className='text-green-600 font-semibold'>
+                          Active
+                        </span>
+                      ) : (
+                        <span className='text-red-600 font-semibold'>
+                          Inactive
+                        </span>
+                      )}
+                    </p>
+                    <p className='text-sm'>
+                      Subscribed At:{" "}
+                      {new Date(addon?.subscribedAt).toLocaleDateString(
+                        "en-US",
+                        {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        }
+                      )}{" "}
+                      at{" "}
+                      {new Date(addon?.subscribedAt)
+                        .toLocaleTimeString("en-US", {
+                          hour: "numeric",
+                          minute: "2-digit",
+                          hour12: true,
+                        })
+                        .toLowerCase()}
+                    </p>
+                  </div>
+                  <div className='flex flex-col gap-3'>
+                    <span className='px-5 py-2 rounded-md text-sm bg-gray-100'>
+                      ${addon?.servicePrice}/month
+                    </span>
+                    <Button
+                      onClick={() => handleAddonStatus(addon)}
+                      size='sm'
+                      className={`${
+                        addon?.isActive
+                          ? "bg-red-500 hover:!bg-red-600"
+                          : "bg-green-500 hover:!bg-green-600"
+                      }`}
+                    >
+                      {addon?.isActive ? "Deactivate" : "Activate"}
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-      </Card>
-
-      <Modal show={isModalOpen} onClose={() => setIsModalOpen(false)} popup>
-        <Modal.Header>Upgrade Required</Modal.Header>
-        <Modal.Body>
-          <p className='text-gray-700'>
-            The <strong>{selectedAddon.replace(/([A-Z])/g, " $1")}</strong>{" "}
-            add-on is available only with an upgraded plan. Upgrade now to
-            access this feature.
-          </p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            className='bg-green-600 hover:bg-green-700'
-            onClick={() => alert("Redirecting to upgrade page...")}
-          >
-            Upgrade Plan
-          </Button>
-          <Button color='gray' onClick={() => setIsModalOpen(false)}>
-            Cancel
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
+      </div>
+    </>
   );
 }

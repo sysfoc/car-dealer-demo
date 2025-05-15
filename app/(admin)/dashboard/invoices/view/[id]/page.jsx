@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   Button,
+  Spinner,
   Table,
   TableBody,
   TableCell,
@@ -21,26 +22,31 @@ export default function ViewInvoice() {
   const params = useParams();
   const [invoice, setInvoice] = useState(null);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchInvoiceDetails = async () => {
-      const res = await fetch(`/api/user/payments/get-single-transaction/${params.id}`);
+      setLoading(true);
+      const res = await fetch(
+        `/api/user/payments/get-single-transaction/${params.id}`
+      );
       const data = await res.json();
-      if(res.ok){
+      setLoading(false);
+      if (res.ok) {
         setInvoice(data.transaction);
         setUser(data.user);
       }
     };
-    if(params.id){
+    if (params.id) {
       fetchInvoiceDetails();
     }
-  },[params.id]);
+  }, [params.id]);
   const handleDownloadPDF = async () => {
     if (!invoiceRef.current) {
       console.error("Invoice reference is missing!");
       return;
     }
-
+    setLoading(true);
     const element = invoiceRef.current;
     const canvas = await html2canvas(element, {
       scale: 4,
@@ -55,6 +61,7 @@ export default function ViewInvoice() {
 
     pdf.addImage(imgData, "WEBP", 0, 0, pdfWidth, pdfHeight);
     pdf.save("invoice.pdf");
+    setLoading(false);
   };
   return (
     <div ref={invoiceRef} className='bg-gray-50 py-5 dark:bg-gray-800'>
@@ -63,13 +70,27 @@ export default function ViewInvoice() {
           <div className='flex items-center justify-between'>
             <div>
               <h1 className='font-semibold text-lg'>
-                Invoice Number: <span className='font-normal'>#{invoice?.customerId}</span>
+                Invoice Number:{" "}
+                {loading ? (
+                  <Spinner size='sm' />
+                ) : (
+                  <span className='font-normal'>#{invoice?.customerId}</span>
+                )}
               </h1>
               <h2 className='font-semibold'>
-                Date: <span className='font-normal'>{new Date(invoice?.transactionDate).toLocaleDateString(
-                    "en-US",
-                    { year: "numeric", month: "long", day: "numeric" }
-                  )}</span>
+                Date:{" "}
+                <span className='font-normal'>
+                  {loading ? (
+                    <Spinner size='sm' />
+                  ) : (
+                    <span className='font-normal'>
+                      {new Date(invoice?.transactionDate).toLocaleDateString(
+                        "en-US",
+                        { year: "numeric", month: "long", day: "numeric" }
+                      )}
+                    </span>
+                  )}
+                </span>
               </h2>
             </div>
             <div>
@@ -85,21 +106,29 @@ export default function ViewInvoice() {
           <div className='flex items-start justify-between'>
             <div>
               <h3 className='font-semibold'>Invoice To:</h3>
-              <div className='flex flex-col mt-1'>
-                <p className='text-sm text-gray-500'>{user?.name}</p>
-                <p className='text-sm text-gray-500'>
-                {user?.email}
-                </p>
-                <p className='text-sm text-gray-500'>Pakistan</p>
-              </div>
+              {loading ? (
+                <Spinner size='lg' />
+              ) : (
+                <div className='flex flex-col mt-1'>
+                  <p className='text-sm text-gray-500'>{user?.name}</p>
+                  <p className='text-sm text-gray-500'>{user?.email}</p>
+                  <p className='text-sm text-gray-500'>Pakistan</p>
+                </div>
+              )}
             </div>
             <div className='text-end'>
               <h3 className='font-semibold'>Pay To:</h3>
-              <div className='flex flex-col mt-1'>
-                <p className='text-sm text-gray-500'>Sysfoc</p>
-                <p className='text-sm text-gray-500'>Tariq Bin Ziad, Sahiwal, pakistan</p>
-                <p className='text-sm text-gray-500'>sysfoc@email.com</p>
-              </div>
+              {loading ? (
+                <Spinner size='lg' />
+              ) : (
+                <div className='flex flex-col mt-1'>
+                  <p className='text-sm text-gray-500'>Sysfoc</p>
+                  <p className='text-sm text-gray-500'>
+                    Tariq Bin Ziad, Sahiwal, pakistan
+                  </p>
+                  <p className='text-sm text-gray-500'>sysfoc@email.com</p>
+                </div>
+              )}
             </div>
           </div>
           <div className='my-5'>
@@ -112,13 +141,23 @@ export default function ViewInvoice() {
                 <TableHeadCell>Total</TableHeadCell>
               </TableHead>
               <TableBody>
-                <TableRow>
-                  <TableCell>{invoice?.product} Package</TableCell>
-                  <TableCell>Purchased for {invoice?.productPlan} Subscription</TableCell>
-                  <TableCell>1</TableCell>
-                  <TableCell>${invoice?.productPrice}</TableCell>
-                  <TableCell>${invoice?.productPrice}</TableCell>
-                </TableRow>
+                {loading ? (
+                  <TableRow>
+                    <TableCell colSpan={5} className='text-center'>
+                      <Spinner size='lg' />
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  <TableRow>
+                    <TableCell>{invoice?.product} Package</TableCell>
+                    <TableCell>
+                      Purchased for {invoice?.productPlan} Subscription
+                    </TableCell>
+                    <TableCell>1</TableCell>
+                    <TableCell>${invoice?.productPrice}</TableCell>
+                    <TableCell>${invoice?.productPrice}</TableCell>
+                  </TableRow>
+                )}
                 <TableRow>
                   <TableCell colSpan={2} rowSpan={3} className='font-semibold'>
                     <h3 className='text-gray-700'>Additional Information:</h3>
@@ -134,7 +173,7 @@ export default function ViewInvoice() {
                     Subtotal
                   </TableCell>
                   <TableCell className='font-semibold bg-gray-50'>
-                    ${invoice?.productPrice}
+                    ${loading ? <Spinner size='sm' /> : invoice?.productPrice}
                   </TableCell>
                 </TableRow>
               </TableBody>
@@ -150,22 +189,24 @@ export default function ViewInvoice() {
             </div>
           </div>
           <div className='my-5 flex items-center justify-center'>
-            <div className='flex items-center gap-3'>
-              <Button
-                color='green'
-                onClick={() => window.print()}
-                className='mt-4 flex items-center'
-              >
-                <IoIosPrint fontSize={22} className='mr-2' /> Print Invoice
-              </Button>
-              <Button
-                gradientDuoTone='greenToBlue'
-                onClick={handleDownloadPDF}
-                className='mt-4 flex items-center'
-              >
-                <FaDownload fontSize={22} className='mr-2' /> Download Invoice
-              </Button>
-            </div>
+            {!loading && (
+              <div className='flex items-center gap-3'>
+                <Button
+                  color='green'
+                  onClick={() => window.print()}
+                  className='mt-4 flex items-center'
+                >
+                  <IoIosPrint fontSize={22} className='mr-2' /> Print Invoice
+                </Button>
+                <Button
+                  gradientDuoTone='greenToBlue'
+                  onClick={handleDownloadPDF}
+                  className='mt-4 flex items-center'
+                >
+                  <FaDownload fontSize={22} className='mr-2' /> Download Invoice
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>
