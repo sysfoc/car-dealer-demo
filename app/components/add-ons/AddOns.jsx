@@ -162,7 +162,7 @@ const AddOns = () => {
                           )
                         }
                       >
-                        {addOns.serviceName?.includes(service.title)
+                        {addOns.active
                           ? "Current Plan"
                           : "Purchase"}
                       </Button>

@@ -24,6 +24,10 @@ const addonSchema = new mongoose.Schema(
       default: Date.now,
       required: true,
     },
+    expiredAt: {
+      type: Date,
+      required: true,
+    },
   },
   { timestamps: true }
 );

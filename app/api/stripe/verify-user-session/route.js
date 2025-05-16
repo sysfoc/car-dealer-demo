@@ -30,7 +30,7 @@ export async function GET(req) {
   const price = Number(session.amount_total) / 100;
 
   if (plan.includes("add-on")) {
-    const existingAddon = await Addon.findOne({ userId, serviceName: plan });
+    const existingAddon = await Addon.findOne({ userId, serviceName: plan, isActive: true });
 
     if (existingAddon) {
       return NextResponse.json(
@@ -43,6 +43,7 @@ export async function GET(req) {
       serviceName: plan,
       servicePrice: price,
       subscribedAt: new Date(),
+      expiredAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
       isActive: true,
     });
   } else {
