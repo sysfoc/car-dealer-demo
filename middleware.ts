@@ -1,32 +1,44 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { jwtVerify } from "jose";
 
-export function middleware(request: NextRequest) {
+const secret = new TextEncoder().encode(process.env.JWT_SECRET_KEY!);
+
+async function verifyJWT(token: string | undefined) {
+  if (!token) return null;
+
+  try {
+    const { payload } = await jwtVerify(token, secret);
+    return payload;
+  } catch {
+    return null;
+  }
+}
+
+export async function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
   const adminToken = request.cookies.get("admin")?.value;
   const { pathname } = request.nextUrl;
 
-  // If no token and no admin token, redirect to login
-  if (!token && !adminToken) {
-    const loginUrl = request.nextUrl.clone();
-    loginUrl.pathname = "/login";
-    return NextResponse.redirect(loginUrl);
-  }
-
-  // Restrict /dashboard to admins only
   if (pathname.startsWith("/dashboard")) {
-    if (!adminToken) {
-      const userDashboardUrl = request.nextUrl.clone();
-      userDashboardUrl.pathname = "/user/dashboard";
-      return NextResponse.redirect(userDashboardUrl);
+    const userPayload = await verifyJWT(token);
+    const adminPayload = await verifyJWT(adminToken);
+
+    if (!userPayload || !adminPayload || adminPayload.admin !== true) {
+      const redirectUrl = request.nextUrl.clone();
+      redirectUrl.pathname = "/user/dashboard";
+      return NextResponse.redirect(redirectUrl);
     }
   }
 
-  // Restrict /user/* to logged in users (token)
-  if (pathname.startsWith("/user") && !token) {
-    const loginUrl = request.nextUrl.clone();
-    loginUrl.pathname = "/login";
-    return NextResponse.redirect(loginUrl);
+  if (pathname.startsWith("/user")) {
+    const userPayload = await verifyJWT(token);
+
+    if (!userPayload) {
+      const loginUrl = request.nextUrl.clone();
+      loginUrl.pathname = "/login";
+      return NextResponse.redirect(loginUrl);
+    }
   }
 
   return NextResponse.next();
