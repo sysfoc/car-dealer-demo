@@ -1,9 +1,8 @@
 "use client";
-import { Button, Modal, ModalBody, ModalHeader, Select } from "flowbite-react";
+import { Button, Modal, ModalBody, ModalHeader } from "flowbite-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { TiCloudStorage } from "react-icons/ti";
 import { useSelector } from "react-redux";
 
 const AddOns = () => {
@@ -16,9 +15,12 @@ const AddOns = () => {
 
   useEffect(() => {
     if (!currentUser) {
-      router.push("/login");
+      router.replace("/login");
     }
-  });
+  }, [currentUser, router]);
+
+  if (!currentUser) return null;
+  
   const services = [
     {
       id: 1,

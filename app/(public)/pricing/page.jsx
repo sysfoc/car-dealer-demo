@@ -1,5 +1,5 @@
 "use client";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Modal,
@@ -12,14 +12,12 @@ import {
   TableHead,
   TableHeadCell,
   TableRow,
-  ToggleSwitch,
 } from "flowbite-react";
 import { FaCheck } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const [switch1, setSwitch1] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [subscription, setSubscription] = useState(null);
@@ -32,10 +30,15 @@ export default function Home() {
   };
 
   useEffect(() => {
-    setLoading(true);
     if (!currentUser) {
-      router.push("/login");
+      router.replace("/login");
     }
+  }, [currentUser, router]);
+
+  if (!currentUser) return null;
+
+  useEffect(() => {
+    setLoading(true);
     if (currentUser?._id) {
       const fetchUserSubscription = async () => {
         try {
@@ -45,7 +48,7 @@ export default function Home() {
             setSubscription(data.subscription);
             setLoading(false);
           }
-          if(response.status === 404) {
+          if (response.status === 404) {
             setLoading(false);
           }
         } catch (error) {
@@ -107,26 +110,7 @@ export default function Home() {
           )}
         </div>
       </div>
-      <div className='my-8 flex items-center justify-center'>
-        <div className='rounded-lg border-t-4 bg-white border-red-600 p-8 shadow-md'>
-          <div className='w-full sm:w-[320px]'>
-            <h2 className='text-center'>Subscription Term</h2>
-            <div className='flex items-center justify-center'>
-              <div className='mt-4 flex flex-row items-center gap-5'>
-                <p className='text-sm'>Monthly</p>
-                <ToggleSwitch
-                  label='Annual'
-                  color='red'
-                  checked={switch1}
-                  onChange={setSwitch1}
-                  sizing='sm'
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className='my-20'>
+      <div className='my-10'>
         <div className='w-full overflow-x-scroll md:overflow-hidden shadow rounded-lg'>
           <Table striped className='min-w-[700px] md:w-full table-fixed'>
             <TableHead className='text-center'>
