@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Card,
   Button,
@@ -9,37 +9,49 @@ import {
   Textarea,
   TextInput,
   Label,
+  Spinner,
 } from "flowbite-react";
-import { HiOutlineMail, HiOutlineChat, HiPlus } from "react-icons/hi";
+import { HiOutlineMail, HiPlus } from "react-icons/hi";
 
 export default function Support() {
-  const [tickets, setTickets] = useState([
-    { id: 1, subject: "Billing Issue", status: "Open", date: "March 25, 2025" },
-    {
-      id: 2,
-      subject: "Subscription Renewal",
-      status: "Closed",
-      date: "March 20, 2025",
-    },
-  ]);
+  const [tickets, setTickets] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const [isEmailOpen, setIsEmailOpen] = useState(false);
   const [newTicket, setNewTicket] = useState({ subject: "", description: "" });
+  const { loading, setLoading } = useState(false);
 
-  const createTicket = () => {
-    if (newTicket.subject && newTicket.description) {
-      setTickets([
-        ...tickets,
-        {
-          id: Date.now(),
-          ...newTicket,
-          status: "Open",
-          date: new Date().toLocaleDateString(),
-        },
-      ]);
-      setNewTicket({ subject: "", description: "" });
+  useEffect(() => {
+    const getUserIssues = async () => {
+      setLoading(true);
+      const res = await fetch("/api/user/support/get-user-issue");
+      const data = await res.json();
+      setLoading(false);
+      setTickets(data.issues);
+    };
+    getUserIssues();
+  }, [newTicket]);
+  const handleChange = (e) => {
+    setNewTicket({ ...newTicket, [e.target.name]: e.target.value });
+  };
+  const createTicket = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const res = await fetch("/api/user/support/add-issue", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newTicket),
+    });
+    await res.json();
+    setLoading(false);
+    if (res.ok) {
       setIsModalOpen(false);
+      window.location.reload();
+    } else {
+      alert("Something went wrong");
+      setIsModalOpen(false);
+      setLoading(false);
     }
   };
 
@@ -54,9 +66,6 @@ export default function Support() {
           <Button color='blue' onClick={() => setIsEmailOpen(true)}>
             <HiOutlineMail className='mr-2' /> Email Support
           </Button>
-          <Button color='gray' onClick={() => setIsChatOpen(true)}>
-            <HiOutlineChat className='mr-2' /> Live Chat
-          </Button>
         </div>
       </Card>
       <Card>
@@ -68,19 +77,42 @@ export default function Support() {
             <Table.HeadCell>Status</Table.HeadCell>
           </Table.Head>
           <Table.Body>
-            {tickets.map((ticket) => (
-              <Table.Row key={ticket.id}>
-                <Table.Cell>{ticket.date}</Table.Cell>
-                <Table.Cell>{ticket.subject}</Table.Cell>
-                <Table.Cell
-                  className={
-                    ticket.status === "Open" ? "text-red-500" : "text-green-500"
-                  }
-                >
-                  {ticket.status}
+            {loading && (
+              <Table.Row>
+                <Table.Cell colSpan={3} className='text-center'>
+                  <Spinner size='lg' />
                 </Table.Cell>
               </Table.Row>
-            ))}
+            )}
+            {tickets.length > 0 ? (
+              tickets.map((ticket) => (
+                <Table.Row key={ticket?._id}>
+                  <Table.Cell>
+                    {new Date(ticket.createdAt).toLocaleString("en-US", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </Table.Cell>
+                  <Table.Cell>{ticket.subject}</Table.Cell>
+                  <Table.Cell
+                    className={
+                      ticket.status === "Open"
+                        ? "text-red-500"
+                        : "text-green-500"
+                    }
+                  >
+                    {ticket.status}
+                  </Table.Cell>
+                </Table.Row>
+              ))
+            ) : (
+              <Table.Row>
+                <Table.Cell colSpan={3} className='text-center'>
+                  No tickets found
+                </Table.Cell>
+              </Table.Row>
+            )}
           </Table.Body>
         </Table>
         <Button
@@ -94,51 +126,32 @@ export default function Support() {
       <Modal show={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Modal.Header>Create Support Ticket</Modal.Header>
         <Modal.Body>
-          <div className='space-y-4'>
-            <Label htmlFor='support-subject'>Subject</Label>
-            <TextInput
-              id='support-subject'
-              value={newTicket.subject}
-              required
-              onChange={(e) =>
-                setNewTicket({ ...newTicket, subject: e.target.value })
-              }
-            />
-            <Label htmlFor='support-description'>Description</Label>
-            <Textarea
-              id='support-description'
-              value={newTicket.description}
-              required
-              onChange={(e) =>
-                setNewTicket({ ...newTicket, description: e.target.value })
-              }
-              rows={4}
-            />
-          </div>
+          <form onSubmit={createTicket}>
+            <div className='space-y-4'>
+              <Label htmlFor='subject'>Subject</Label>
+              <TextInput
+                id='subject'
+                name='subject'
+                required
+                onChange={handleChange}
+              />
+              <Label htmlFor='description'>Description</Label>
+              <Textarea
+                id='description'
+                name='description'
+                required
+                onChange={handleChange}
+                rows={4}
+              />
+            </div>
+            <div className='mt-4 flex items-center justify-end gap-4'>
+              <Button type='submit'>Submit</Button>
+              <Button color='gray' onClick={() => setIsModalOpen(false)}>
+                Cancel
+              </Button>
+            </div>
+          </form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={createTicket}>Submit</Button>
-          <Button color='gray' onClick={() => setIsModalOpen(false)}>
-            Cancel
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      <Modal show={isChatOpen} onClose={() => setIsChatOpen(false)}>
-        <Modal.Header>Live Chat</Modal.Header>
-        <Modal.Body>
-          <div className='space-y-4'>
-            <p className='text-gray-600'>
-              You are now connected to a support agent.
-            </p>
-            <Textarea rows={4} placeholder='Type your message...' />
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button>Send</Button>
-          <Button color='gray' onClick={() => setIsChatOpen(false)}>
-            Close
-          </Button>
-        </Modal.Footer>
       </Modal>
       <Modal show={isEmailOpen} onClose={() => setIsEmailOpen(false)}>
         <Modal.Header>Email Support</Modal.Header>
