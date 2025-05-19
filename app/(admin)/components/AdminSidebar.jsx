@@ -1,6 +1,7 @@
 "use client";
 
 import { Sidebar } from "flowbite-react";
+import { BiSupport } from "react-icons/bi";
 import {
   HiArrowSmRight,
   HiChartPie,
@@ -60,6 +61,13 @@ const AdminSidebar = () => {
             className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
           >
             Refund requests
+          </Sidebar.Item>
+          <Sidebar.Item
+            href='/dashboard/support'
+            icon={BiSupport}
+            className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
+          >
+            Support
           </Sidebar.Item>
         </Sidebar.ItemGroup>
       </Sidebar.Items>
