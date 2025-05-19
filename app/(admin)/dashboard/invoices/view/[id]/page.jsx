@@ -87,6 +87,14 @@ export default function ViewInvoice() {
                       {new Date(invoice?.transactionDate).toLocaleDateString(
                         "en-US",
                         { year: "numeric", month: "long", day: "numeric" }
+                      )}{" "}
+                      at{" "}
+                      {new Date(invoice?.transactionDate).toLocaleTimeString(
+                        "en-US",
+                        {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        }
                       )}
                     </span>
                   )}

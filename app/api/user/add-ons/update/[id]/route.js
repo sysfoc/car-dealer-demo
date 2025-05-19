@@ -15,7 +15,7 @@ export async function PATCH(req, { params }) {
     const updatedAddon = await Addon.findByIdAndUpdate(
       id,
       {
-        isActive: status,
+        activeAddon: status,
       },
       { new: true }
     );

@@ -19,6 +19,10 @@ const addonSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    activeAddon: {
+      type: Boolean,
+      default: true,
+    },
     subscribedAt: {
       type: Date,
       default: Date.now,

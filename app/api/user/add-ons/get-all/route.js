@@ -13,19 +13,35 @@ export async function GET() {
     if (!token) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
+
     const decoded = jwt.verify(token, config.jwtSecretKey);
     if (!decoded.id) {
       return NextResponse.json({ error: "Invalid token" }, { status: 403 });
     }
+
     const id = decoded.id;
-    const addons = await Addon.find({ userId: id});
-    if (!addons) {
+    const addons = await Addon.find({ userId: id });
+
+    if (!addons || addons.length === 0) {
       return NextResponse.json(
         { message: "No addons found, please create one" },
         { status: 404 }
       );
     }
-    return NextResponse.json({ addons }, { status: 200 });
+
+    const today = new Date();
+
+    const updates = await Promise.all(
+      addons.map(async (addon) => {
+        if (addon.expiredAt && new Date(addon.expiredAt) <= today && addon.isActive) {
+          addon.isActive = false;
+          await addon.save();
+        }
+        return addon;
+      })
+    );
+
+    return NextResponse.json({ addons: updates }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }

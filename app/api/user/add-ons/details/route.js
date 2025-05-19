@@ -2,7 +2,7 @@ import { connectToDatabase } from "@/app/api/utils/db";
 import Addon from "@/app/model/addon.model";
 import { config } from "@/app/api/utils/env-config";
 import { cookies } from "next/headers";
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -18,14 +18,29 @@ export async function GET() {
       return NextResponse.json({ error: "Invalid token" }, { status: 403 });
     }
     const id = decoded.id;
-    const addons = await Addon.find({ userId: id, isActive: true })
+    const addons = await Addon.find({ userId: id, isActive: true });
     if (!addons) {
       return NextResponse.json(
         { message: "No addons found, please create one" },
         { status: 404 }
       );
     }
-    return NextResponse.json({ addons }, { status: 200 });
+    const today = new Date();
+
+    const updates = await Promise.all(
+      addons.map(async (addon) => {
+        if (
+          addon.expiredAt &&
+          new Date(addon.expiredAt) <= today &&
+          addon.isActive
+        ) {
+          addon.isActive = false;
+          await addon.save();
+        }
+        return addon;
+      })
+    );
+    return NextResponse.json({ addons: updates }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }

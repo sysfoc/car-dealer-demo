@@ -32,7 +32,7 @@ export default function Addons() {
     setLoading(true);
     const res = await fetch(`/api/user/add-ons/update/${addon?._id}`, {
       method: "PATCH",
-      body: JSON.stringify({ status: !addon?.isActive }),
+      body: JSON.stringify({ status: !addon?.activeAddon }),
     });
     const data = await res.json();
     setLoading(false);
@@ -41,6 +41,12 @@ export default function Addons() {
     } else {
       alert(data.message);
     }
+  };
+
+  const getImageForAddon = (serviceName) => {
+    if (serviceName.includes("Content Writing")) return "/09.png";
+    if (serviceName.includes("SEO")) return "/08.png";
+    return "/07.png";
   };
   return (
     <>
@@ -65,7 +71,7 @@ export default function Addons() {
             </Alert>
             {addOns.length > 0 &&
               addOns.map((addon) => (
-                <Alert color='failure'>
+                <Alert key={addon?._id} color='failure'>
                   <span>
                     <span className='font-medium'>Note:</span> Your subscription
                     for{" "}
@@ -106,14 +112,7 @@ export default function Addons() {
                 <div className='flex items-center gap-8 flex-wrap md:flex-nowrap'>
                   <div className='w-[100px] h-[100px] flex-shrink-0'>
                     <Image
-                      src={`${
-                        addon?.serviceName.includes("add-on") ===
-                        "Content Writing"
-                          ? "/07.png"
-                          : addon.serviceName.includes("SEO")
-                          ? "/08.png"
-                          : "/09.png"
-                      }`}
+                      src={getImageForAddon(addon?.serviceName || "")}
                       alt={addon?.serviceName}
                       width={100}
                       height={100}
@@ -127,7 +126,7 @@ export default function Addons() {
                       </h3>
                       <p>
                         Status:{" "}
-                        {addon?.isActive ? (
+                        {addon?.activeAddon ? (
                           <span className='text-green-600 font-semibold'>
                             Active
                           </span>
@@ -165,12 +164,12 @@ export default function Addons() {
                         onClick={() => handleAddonStatus(addon)}
                         size='sm'
                         className={`${
-                          addon?.isActive
+                          addon?.activeAddon
                             ? "bg-red-500 hover:!bg-red-600"
                             : "bg-green-500 hover:!bg-green-600"
                         }`}
                       >
-                        {addon?.isActive ? "Deactivate" : "Activate"}
+                        {addon?.activeAddon ? "Deactivate" : "Activate"}
                       </Button>
                     </div>
                   </div>

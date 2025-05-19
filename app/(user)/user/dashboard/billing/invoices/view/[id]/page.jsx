@@ -22,19 +22,21 @@ export default function ViewInvoice() {
   const [invoice, setInvoice] = useState(null);
   const [user, setUser] = useState(null);
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchInvoiceDetails = async () => {
-      const res = await fetch(`/api/user/payments/get-single-transaction/${params.id}`);
+      const res = await fetch(
+        `/api/user/payments/get-single-transaction/${params.id}`
+      );
       const data = await res.json();
-      if(res.ok){
+      if (res.ok) {
         setInvoice(data.transaction);
         setUser(data.user);
       }
     };
-    if(params.id){
+    if (params.id) {
       fetchInvoiceDetails();
     }
-  },[params.id]);
+  }, [params.id]);
   const handleDownloadPDF = async () => {
     if (!invoiceRef.current) {
       console.error("Invoice reference is missing!");
@@ -63,13 +65,25 @@ export default function ViewInvoice() {
           <div className='flex items-center justify-between'>
             <div>
               <h1 className='font-semibold text-lg'>
-                Invoice Number: <span className='font-normal'>#{invoice?.customerId}</span>
+                Invoice Number:{" "}
+                <span className='font-normal'>#{invoice?.customerId}</span>
               </h1>
               <h2 className='font-semibold'>
-                Date: <span className='font-normal'>{new Date(invoice?.transactionDate).toLocaleDateString(
+                Date:{" "}
+                <span className='font-normal'>
+                  {new Date(invoice?.transactionDate).toLocaleDateString(
                     "en-US",
                     { year: "numeric", month: "long", day: "numeric" }
-                  )}</span>
+                  )}{" "}
+                  at{" "}
+                  {new Date(invoice?.transactionDate).toLocaleTimeString(
+                    "en-US",
+                    {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    }
+                  )}
+                </span>
               </h2>
             </div>
             <div>
@@ -87,9 +101,7 @@ export default function ViewInvoice() {
               <h3 className='font-semibold'>Invoice To:</h3>
               <div className='flex flex-col mt-1'>
                 <p className='text-sm text-gray-500'>{user?.name}</p>
-                <p className='text-sm text-gray-500'>
-                {user?.email}
-                </p>
+                <p className='text-sm text-gray-500'>{user?.email}</p>
                 <p className='text-sm text-gray-500'>Pakistan</p>
               </div>
             </div>
@@ -97,7 +109,9 @@ export default function ViewInvoice() {
               <h3 className='font-semibold'>Pay To:</h3>
               <div className='flex flex-col mt-1'>
                 <p className='text-sm text-gray-500'>Sysfoc</p>
-                <p className='text-sm text-gray-500'>Tariq Bin Ziad, Sahiwal, pakistan</p>
+                <p className='text-sm text-gray-500'>
+                  Tariq Bin Ziad, Sahiwal, pakistan
+                </p>
                 <p className='text-sm text-gray-500'>sysfoc@email.com</p>
               </div>
             </div>
@@ -114,7 +128,9 @@ export default function ViewInvoice() {
               <TableBody>
                 <TableRow>
                   <TableCell>{invoice?.product} Package</TableCell>
-                  <TableCell>Purchased for {invoice?.productPlan} Subscription</TableCell>
+                  <TableCell>
+                    Purchased for {invoice?.productPlan} Subscription
+                  </TableCell>
                   <TableCell>1</TableCell>
                   <TableCell>${invoice?.productPrice}</TableCell>
                   <TableCell>${invoice?.productPrice}</TableCell>

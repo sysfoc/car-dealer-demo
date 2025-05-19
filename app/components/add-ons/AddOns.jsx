@@ -20,7 +20,7 @@ const AddOns = () => {
   }, [currentUser, router]);
 
   if (!currentUser) return null;
-  
+
   const services = [
     {
       id: 1,
@@ -150,8 +150,10 @@ const AddOns = () => {
                       </span>
                       <Button
                         className='w-full bg-red-600 hover:!bg-red-700 text-white'
-                        disabled={addOns.some((addon) =>
-                          addon.serviceName?.includes(service.title)
+                        disabled={addOns.some(
+                          (addon) =>
+                            addon.isActive &&
+                            addon.serviceName?.includes(service.title)
                         )}
                         onClick={() =>
                           buySelectedPlan(
@@ -162,9 +164,11 @@ const AddOns = () => {
                           )
                         }
                       >
-                        {addOns.active
-                          ? "Current Plan"
-                          : "Purchase"}
+                        {addOns.some(
+                          (addon) =>
+                            addon.isActive &&
+                            addon.serviceName?.includes(service.title)
+                        ) ? "Subscribed" : "Purchase"}
                       </Button>
                     </div>
                   </div>

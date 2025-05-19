@@ -30,22 +30,50 @@ export async function GET(req) {
   const price = Number(session.amount_total) / 100;
 
   if (plan.includes("add-on")) {
-    const existingAddon = await Addon.findOne({ userId, serviceName: plan, isActive: true });
+    const existingAddon = await Addon.findOne({ userId, serviceName: plan });
 
-    if (existingAddon) {
+    if (existingAddon && existingAddon.isActive) {
       return NextResponse.json(
         { error: `You already have the "${plan}" add-on subscribed.` },
         { status: 400 }
       );
     }
-    await Addon.create({
-      userId,
-      serviceName: plan,
-      servicePrice: price,
-      subscribedAt: new Date(),
-      expiredAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-      isActive: true,
-    });
+
+    if (existingAddon && !existingAddon.isActive) {
+      await Addon.findOneAndUpdate(
+        { userId, serviceName: plan },
+        {
+          $set: {
+            isActive: true,
+            subscribedAt: new Date(),
+            expiredAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+          },
+        }
+      );
+
+      await Notification.create({
+        userId,
+        type: "success",
+        title: "Addon Renewal",
+        message: `You have successfully renewed your ${plan} add-on subscription.`,
+      });
+    } else {
+      await Addon.create({
+        userId,
+        serviceName: plan,
+        servicePrice: price,
+        subscribedAt: new Date(),
+        expiredAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+        isActive: true,
+      });
+
+      await Notification.create({
+        userId,
+        type: "success",
+        title: "Addon Subscription",
+        message: `You have successfully subscribed to ${plan} add-on.`,
+      });
+    }
   } else {
     await Subscription.findOneAndUpdate(
       { userId },
