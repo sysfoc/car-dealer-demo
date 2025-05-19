@@ -58,6 +58,7 @@ export default function Home() {
       fetchUserSubscription();
     }
   }, [currentUser]);
+  console.log(subscription);
   const handleStripePayment = async () => {
     const res = await fetch("/api/stripe/create-checkout-session", {
       method: "POST",
@@ -537,7 +538,7 @@ export default function Home() {
               {currentUser &&
                 (loading ? (
                   <TableRow>
-                    <TableCell>
+                    <TableCell colSpan={4}>
                       <div className='flex items-center justify-center'>
                         <Spinner />
                       </div>
@@ -551,7 +552,10 @@ export default function Home() {
                     <TableCell>
                       <div className='flex items-center justify-center'>
                         <Button
-                          disabled={subscription?.subscriptionType === "Basic"}
+                          disabled={
+                            subscription?.subscriptionType === "Basic" &&
+                            subscription?.isActive
+                          }
                           onClick={() =>
                             buySelectedPlan(
                               setSelectedPlan({ plan: "Basic", price: "99.99" })
@@ -560,7 +564,8 @@ export default function Home() {
                           color='dark'
                           className='w-full uppercase'
                         >
-                          {subscription?.subscriptionType === "Basic"
+                          {subscription?.subscriptionType === "Basic" &&
+                          subscription?.isActive
                             ? "Current Plan"
                             : "Buy Basic"}
                         </Button>
@@ -570,7 +575,8 @@ export default function Home() {
                       <div className='flex items-center justify-center'>
                         <Button
                           disabled={
-                            subscription?.subscriptionType === "Standard"
+                            subscription?.subscriptionType === "Standard" &&
+                            subscription?.isActive
                           }
                           onClick={() =>
                             buySelectedPlan(
@@ -583,7 +589,8 @@ export default function Home() {
                           color='dark'
                           className='w-full uppercase'
                         >
-                          {subscription?.subscriptionType === "Standard"
+                          {subscription?.subscriptionType === "Standard" &&
+                          subscription?.isActive
                             ? "Current Plan"
                             : "Buy Standard"}
                         </Button>
@@ -593,7 +600,8 @@ export default function Home() {
                       <div className='flex items-center justify-center'>
                         <Button
                           disabled={
-                            subscription?.subscriptionType === "Premium"
+                            subscription?.subscriptionType === "Premium" &&
+                            subscription?.isActive
                           }
                           onClick={() =>
                             buySelectedPlan(
@@ -606,7 +614,8 @@ export default function Home() {
                           color='dark'
                           className='w-full uppercase'
                         >
-                          {subscription?.subscriptionType === "Premium"
+                          {subscription?.subscriptionType === "Premium" &&
+                          subscription?.isActive
                             ? "Current Plan"
                             : "Buy Premium"}
                         </Button>

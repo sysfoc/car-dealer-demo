@@ -22,18 +22,6 @@ const Statistics = () => {
     };
     fetchUserSubscription();
   }, []);
-  const oneMonthLater = subscription?.startDate
-    ? new Date(
-        new Date(subscription.startDate).setMonth(
-          new Date(subscription.startDate).getMonth() + 1
-        )
-      )
-    : null;
-  const formattedDate = oneMonthLater?.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
   return (
     <div className='w-full p-4 bg-white shadow'>
       {loading ? (
@@ -70,7 +58,7 @@ const Statistics = () => {
                   day: "numeric",
                 }) || "None"}
               </strong>
-              <strong className='text-sm'>{formattedDate || "None"}</strong>
+              <strong className='text-sm'>{new Date(subscription?.endDate).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</strong>
             </div>
           </div>
           <div className='my-3'>

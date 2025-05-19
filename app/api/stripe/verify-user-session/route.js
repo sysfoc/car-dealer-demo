@@ -75,6 +75,17 @@ export async function GET(req) {
       });
     }
   } else {
+    const existingSubscription = await Subscription.findOne({
+      userId,
+      subscriptionType: plan,
+    });
+
+    if (existingSubscription && existingSubscription.isActive) {
+      return NextResponse.json(
+        { error: "You already have an active subscription." },
+        { status: 400 }
+      );
+    }
     await Subscription.findOneAndUpdate(
       { userId },
       {
@@ -82,6 +93,8 @@ export async function GET(req) {
           subscriptionType: plan,
           subscriptionPlan: "Monthly",
           startDate: new Date(),
+          endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+          isActive: true,
         },
       },
       { upsert: true, new: true }
