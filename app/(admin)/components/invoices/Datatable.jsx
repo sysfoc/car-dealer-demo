@@ -56,7 +56,7 @@ const Datatable = () => {
                 </TableCell>
               </TableRow>
             )}
-            {transactions.map((transaction) => (
+            {transactions.length > 0 && transactions.map((transaction) => (
               <TableRow key={transaction?._id}>
                 <TableCell>{transaction?._id}</TableCell>
                 <TableCell>
@@ -94,7 +94,7 @@ const Datatable = () => {
                   </div>
                 </TableCell>
               </TableRow>
-            ))}
+            )) || <TableRow><TableCell colSpan={6} className='text-center'>No transactions found</TableCell></TableRow>}
           </TableBody>
         </Table>
       </div>

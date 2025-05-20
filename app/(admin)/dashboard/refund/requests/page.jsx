@@ -94,43 +94,50 @@ export default function page() {
                 </TableCell>
               </TableRow>
             )}
-            {RefundRequests.map((refundRequest) => (
-              <TableRow key={refundRequest?._id}>
-                <TableCell>{refundRequest?.orderId}</TableCell>
-                <TableCell>{refundRequest?.email}</TableCell>
-                <TableCell>${refundRequest?.amount}</TableCell>
-                <TableCell className='capitalize'>
-                  {refundRequest?.status}
-                </TableCell>
-                <TableCell>
-                  {new Date(refundRequest?.createdAt).toLocaleDateString(
-                    "en-US",
-                    { year: "numeric", month: "long", day: "numeric" }
-                  )}
-                </TableCell>
-                <TableCell>
-                  <div
-                    key={refundRequest?._id}
-                    className='flex items-center gap-2'
-                  >
-                    <button
-                      className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'
-                      title='View'
-                      onClick={() => showRefundDetails(refundRequest)}
+            {(RefundRequests.length > 0 &&
+              RefundRequests.map((refundRequest) => (
+                <TableRow key={refundRequest?._id}>
+                  <TableCell>{refundRequest?.orderId}</TableCell>
+                  <TableCell>{refundRequest?.email}</TableCell>
+                  <TableCell>${refundRequest?.amount}</TableCell>
+                  <TableCell className='capitalize'>
+                    {refundRequest?.status}
+                  </TableCell>
+                  <TableCell>
+                    {new Date(refundRequest?.createdAt).toLocaleDateString(
+                      "en-US",
+                      { year: "numeric", month: "long", day: "numeric" }
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    <div
+                      key={refundRequest?._id}
+                      className='flex items-center gap-2'
                     >
-                      <FaEye className='w-3 h-3' />
-                    </button>
-                    <Button
-                      color='info'
-                      size='xs'
-                      onClick={() => editRefundDetails(refundRequest)}
-                    >
-                      Edit
-                    </Button>
-                  </div>
+                      <button
+                        className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'
+                        title='View'
+                        onClick={() => showRefundDetails(refundRequest)}
+                      >
+                        <FaEye className='w-3 h-3' />
+                      </button>
+                      <Button
+                        color='info'
+                        size='xs'
+                        onClick={() => editRefundDetails(refundRequest)}
+                      >
+                        Edit
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))) || (
+              <TableRow>
+                <TableCell colSpan={6} className='text-center'>
+                  No Refund Requests found
                 </TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
       </div>

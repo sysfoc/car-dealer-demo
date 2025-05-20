@@ -35,13 +35,6 @@ const AdminSidebar = () => {
             Invoice
           </Sidebar.Item>
           <Sidebar.Item
-            href='/dashboard/payment/gateways'
-            icon={HiInbox}
-            className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
-          >
-            Payment Gateways
-          </Sidebar.Item>
-          <Sidebar.Item
             href='/dashboard/users'
             icon={HiUser}
             className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'

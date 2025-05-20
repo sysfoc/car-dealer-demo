@@ -69,7 +69,7 @@ export default function PaymentHistory() {
               )
             }
             {
-              transactions.map((transaction) => (
+             transactions.length > 0 && transactions.map((transaction) => (
                 <TableRow key={transaction._id}>
                   <TableCell>{transaction._id}</TableCell>
                   <TableCell>
@@ -87,7 +87,13 @@ export default function PaymentHistory() {
                     </Button>
                   </TableCell>
                 </TableRow>
-              ))
+              )) || (
+                <TableRow>
+                  <TableCell colSpan={6} className='text-center'>
+                    No transactions found
+                  </TableCell>
+                </TableRow>
+              )
             }
           </TableBody>
         </Table>

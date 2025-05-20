@@ -75,7 +75,7 @@ const OrdersTable = () => {
                   <span
                     className={`${
                       data?.role === "admin" ? "bg-[#15CA20]" : "bg-red-600"
-                    } rounded-lg p-2 text-xs text-white`}
+                    } rounded-lg p-2 text-xs text-white capitalize`}
                   >
                     {data?.role}
                   </span>

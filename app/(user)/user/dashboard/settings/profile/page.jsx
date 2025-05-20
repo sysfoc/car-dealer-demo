@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LogoutButton from "@/app/(user)/components/profile/LogoutButton";
+import DeleteButton from "@/app/(user)/components/profile/DeleteButton";
 
 export default function UserProfile() {
   const [formData, setFormData] = useState({});
@@ -70,7 +71,10 @@ export default function UserProfile() {
       )}
       <div className='bg-white border-b p-4 flex items-center justify-between'>
         <h2 className='font-semibold text-xl'>Manage Profile</h2>
-        <LogoutButton />
+        <div className="flex items-center gap-3">
+          <LogoutButton />
+          <DeleteButton/>
+        </div>
       </div>
       <div className='flex items-center justify-center p-4 bg-white'>
         <div className='w-full md:w-[70%]'>

@@ -5,6 +5,8 @@ import Billing from "@/app/model/billing.model";
 import Refund from "@/app/model/refund.model";
 import Subscription from "@/app/model/subscription.model";
 import Addon from "@/app/model/addon.model";
+import Contact from "@/app/model/contact.model";
+import Support from "@/app/model/support.model";
 import { connectToDatabase } from "@/app/api/utils/db";
 import { NextResponse } from "next/server";
 
@@ -21,6 +23,8 @@ export async function DELETE(req, { params }) {
   await Refund.deleteMany({ userId: id });
   await Addon.deleteMany({ userId: id });
   await Subscription.deleteMany({ userId: id });
+  await Contact.deleteMany({ userId: id });
+  await Support.deleteMany({ userId: id });
   return NextResponse.json(
     { message: "User deleted successfully" },
     { status: 200 }

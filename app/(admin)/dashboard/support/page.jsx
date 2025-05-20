@@ -48,7 +48,7 @@ export default function Support() {
                 </TableCell>
               </TableRow>
             )}
-            {issues?.map((issue) => (
+            {issues.length > 0 && issues?.map((issue) => (
               <TableRow key={issue?._id}>
                 <TableCell>{issue?.subject}</TableCell>
                 <TableCell>{issue?.description}</TableCell>
@@ -66,7 +66,13 @@ export default function Support() {
                   </Link>
                 </TableCell>
               </TableRow>
-            ))}
+            )) || (
+              <TableRow>
+                <TableCell colSpan={5} className='text-center'>
+                  No issues found
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </div>
