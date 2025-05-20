@@ -2,7 +2,7 @@ import { connectToDatabase } from "@/app/api/utils/db";
 import Support from "@/app/model/support.model";
 import { NextResponse } from "next/server";
 
-export async function GET(req) {
+export async function GET() {
   await connectToDatabase();
   const issues = await Support.find({}).sort({ createdAt: -1 });
   if (!issues) {

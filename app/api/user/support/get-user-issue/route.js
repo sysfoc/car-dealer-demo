@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 
-export async function GET(req) {
+export async function GET() {
   await connectToDatabase();
   try {
     const cookieStore = await cookies();

@@ -18,7 +18,7 @@ export default function Support() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEmailOpen, setIsEmailOpen] = useState(false);
   const [newTicket, setNewTicket] = useState({ subject: "", description: "" });
-  const { loading, setLoading } = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getUserIssues = async () => {
@@ -76,7 +76,7 @@ export default function Support() {
             <Table.HeadCell>Subject</Table.HeadCell>
             <Table.HeadCell>Status</Table.HeadCell>
           </Table.Head>
-          <Table.Body>
+          <Table.Body className='divide-y'>
             {loading && (
               <Table.Row>
                 <Table.Cell colSpan={3} className='text-center'>
