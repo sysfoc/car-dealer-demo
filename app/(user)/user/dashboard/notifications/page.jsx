@@ -4,6 +4,7 @@ import { Alert, Card } from "flowbite-react";
 import {
   HiOutlineExclamationCircle,
   HiOutlineCheckCircle,
+  HiOutlineInformationCircle,
 } from "react-icons/hi";
 
 export default function Notifications() {
@@ -56,11 +57,17 @@ export default function Notifications() {
                   ? "failure"
                   : alert.type === "warning"
                   ? "warning"
+                  : alert.type === "info"
+                  ? "info"
                   : "success"
               }
               icon={
                 alert.type === "error"
                   ? HiOutlineExclamationCircle
+                  : alert.type === "warning"
+                  ? HiOutlineExclamationCircle
+                  : alert.type === "info"
+                  ? HiOutlineInformationCircle
                   : HiOutlineCheckCircle
               }
               onDismiss={() => dismissAlert(alert._id)}

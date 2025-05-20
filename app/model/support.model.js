@@ -20,6 +20,9 @@ const supportSchema = new mongoose.Schema(
       enum: ["Open", "Closed"],
       default: "Open",
     },
+    reply: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

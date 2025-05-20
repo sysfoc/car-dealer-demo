@@ -9,6 +9,7 @@ import {
   TableHeadCell,
   TableRow,
 } from "flowbite-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Support() {
@@ -30,7 +31,7 @@ export default function Support() {
   }, []);
   return (
     <section>
-      <div className="my-5">
+      <div className='my-5'>
         <Table>
           <TableHead>
             <TableHeadCell>Subject</TableHeadCell>
@@ -60,7 +61,9 @@ export default function Support() {
                   })}
                 </TableCell>
                 <TableCell>
-                  <Button size='sm'>Update</Button>
+                  <Link href={`/dashboard/support/update/${issue?._id}`}>
+                    <Button size='sm'>Update</Button>
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}

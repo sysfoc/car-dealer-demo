@@ -16,7 +16,6 @@ import { HiOutlineMail, HiPlus } from "react-icons/hi";
 export default function Support() {
   const [tickets, setTickets] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEmailOpen, setIsEmailOpen] = useState(false);
   const [newTicket, setNewTicket] = useState({ subject: "", description: "" });
   const [loading, setLoading] = useState(false);
 
@@ -29,7 +28,7 @@ export default function Support() {
       setTickets(data.issues);
     };
     getUserIssues();
-  }, [newTicket]);
+  }, []);
   const handleChange = (e) => {
     setNewTicket({ ...newTicket, [e.target.name]: e.target.value });
   };
@@ -63,9 +62,11 @@ export default function Support() {
           Need help with your billing or subscription? Contact our support team.
         </p>
         <div className='mt-4 flex gap-3'>
-          <Button color='blue' onClick={() => setIsEmailOpen(true)}>
-            <HiOutlineMail className='mr-2' /> Email Support
-          </Button>
+          <a href='https://mail.google.com/mail/?view=cm&fs=1&to=sysfoc@gmail.com' target="_blank">
+            <Button color='blue'>
+              <HiOutlineMail className='mr-2' /> Email Support
+            </Button>
+          </a>
         </div>
       </Card>
       <Card>
@@ -152,32 +153,6 @@ export default function Support() {
             </div>
           </form>
         </Modal.Body>
-      </Modal>
-      <Modal show={isEmailOpen} onClose={() => setIsEmailOpen(false)}>
-        <Modal.Header>Email Support</Modal.Header>
-        <Modal.Body>
-          <div className='space-y-4'>
-            <Label htmlFor='email-subject'>Subject</Label>
-            <TextInput
-              id='email-subject'
-              placeholder='Enter subject'
-              required
-            />
-            <Label htmlFor='email-message'>Message</Label>
-            <Textarea
-              id='email-message'
-              rows={4}
-              placeholder='Type your message...'
-              required
-            />
-          </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button>Send Email</Button>
-          <Button color='gray' onClick={() => setIsEmailOpen(false)}>
-            Cancel
-          </Button>
-        </Modal.Footer>
       </Modal>
     </div>
   );
