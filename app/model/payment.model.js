@@ -14,6 +14,7 @@ const paymentSchema = new mongoose.Schema(
     product: {
       type: String,
       required: true,
+      trim: true,
     },
     productPrice: {
       type: Number,

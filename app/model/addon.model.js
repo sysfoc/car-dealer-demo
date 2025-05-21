@@ -10,6 +10,7 @@ const addonSchema = new mongoose.Schema(
     serviceName: {
       type: String,
       required: true,
+      trim: true,
     },
     servicePrice: {
       type: Number,

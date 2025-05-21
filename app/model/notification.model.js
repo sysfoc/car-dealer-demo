@@ -10,14 +10,17 @@ const notificationScheama = new mongoose.Schema(
     type: {
       type: String,
       required: true,
+      trim: true,
     },
     title: {
       type: String,
       required: true,
+      trim: true,
     },
     message: {
       type: String,
       required: true,
+      trim: true,
     },
   },
   { timestamps: true }

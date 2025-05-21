@@ -10,10 +10,12 @@ const supportSchema = new mongoose.Schema(
     subject: {
       type: String,
       required: true,
+      trim: true,
     },
     description: {
       type: String,
       required: true,
+      trim: true,
     },
     status: {
       type: String,
@@ -22,6 +24,7 @@ const supportSchema = new mongoose.Schema(
     },
     reply: {
       type: String,
+      trim: true,
     },
   },
   { timestamps: true }

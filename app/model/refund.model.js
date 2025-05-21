@@ -11,9 +11,11 @@ const refundSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    email:{
+    email: {
       type: String,
       required: true,
+      trim: true,
+      lowercase: true,
     },
     amount: {
       type: Number,
@@ -22,6 +24,7 @@ const refundSchema = new mongoose.Schema(
     reason: {
       type: String,
       required: true,
+      trim: true,
     },
     refundMethod: {
       type: String,
