@@ -16,6 +16,7 @@ const BillingForm = () => {
     const getUserBilling = async () => {
       const res = await fetch("/api/user/billing/details");
       const data = await res.json();
+      setLoading(false);
       if (res.ok) {
         setLoading(false);
         setBilling(data.billing);

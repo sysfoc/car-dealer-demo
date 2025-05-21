@@ -55,7 +55,6 @@ export async function POST(req) {
   }
 }
 
-
 export async function GET() {
   await connectToDatabase();
   try {
@@ -69,10 +68,16 @@ export async function GET() {
       return NextResponse.json({ error: "Invalid token" }, { status: 403 });
     }
     const id = decoded.id;
-    const billing = await Billing.findOne({ userId: id }).sort({ createdAt: -1 }).limit(1);
+    const billing = await Billing.findOne({ userId: id })
+      .sort({ createdAt: -1 })
+      .limit(1);
     if (billing) {
       return NextResponse.json({ billing }, { status: 200 });
     }
+    return NextResponse.json(
+      { message: "Billing details not found" },
+      { status: 404 }
+    );
   } catch (error) {
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
