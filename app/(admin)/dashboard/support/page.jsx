@@ -51,7 +51,7 @@ export default function Support() {
             {issues.length > 0 && issues?.map((issue) => (
               <TableRow key={issue?._id}>
                 <TableCell>{issue?.subject}</TableCell>
-                <TableCell>{issue?.description}</TableCell>
+                <TableCell>{issue?.description.slice(0, 60)}</TableCell>
                 <TableCell>{issue?.status}</TableCell>
                 <TableCell>
                   {new Date(issue?.createdAt).toLocaleDateString("en-US", {
