@@ -8,7 +8,6 @@ import {
   getAuth,
 } from "firebase/auth";
 import { app } from "@/app/firebase/firebase";
-import { useRouter } from "next/navigation";
 import { FaGithub } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -19,7 +18,6 @@ import {
 
 const Github = () => {
   const [error, setError] = useState(false);
-  const router = useRouter();
   const auth = getAuth(app);
   const githubProvider = new GithubAuthProvider();
   const dispatch = useDispatch();
@@ -44,7 +42,7 @@ const Github = () => {
       });
       const data = await res.json();
       if (res.ok) {
-        router.push("/user/dashboard");
+        window.location.href = "/user/dashboard";
         dispatch(loginSuccess(data.user));
       } else {
         setError(true);

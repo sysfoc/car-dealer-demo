@@ -4,16 +4,18 @@ import { FcGoogle } from "react-icons/fc";
 import { Button } from "flowbite-react";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { app } from "@/app/firebase/firebase";
-import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { loginStart, loginSuccess,loginFailure } from "@/lib/features/user/userSlice";
+import {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+} from "@/lib/features/user/userSlice";
 
 const Google = () => {
   const auth = getAuth(app);
   const [error, setError] = useState(false);
-  const router = useRouter();
   const dispatch = useDispatch();
-  const {error:errorMessage,loading} = useSelector((state) => state.user);
+  const { error: errorMessage, loading } = useSelector((state) => state.user);
 
   const handleGoogleOauth = async () => {
     const provider = new GoogleAuthProvider();
@@ -35,7 +37,7 @@ const Google = () => {
       });
       const data = await res.json();
       if (res.ok) {
-        router.push("/user/dashboard");
+        window.location.href = "/user/dashboard";
         dispatch(loginSuccess(data.user));
       } else {
         setError(true);
@@ -57,7 +59,7 @@ const Google = () => {
         </div>
       )}
       <Button
-      disabled={loading}
+        disabled={loading}
         onClick={handleGoogleOauth}
         className='w-full flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 hover:!bg-gray-50'
       >

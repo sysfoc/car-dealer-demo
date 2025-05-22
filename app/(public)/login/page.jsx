@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { Alert, Button, Label, Spinner, TextInput } from "flowbite-react";
-import { useRouter } from "next/navigation";
 import { HiInformationCircle } from "react-icons/hi";
 import Google from "@/app/components/auth/Google";
 import Github from "@/app/components/auth/Github";
@@ -16,7 +15,6 @@ import Link from "next/link";
 export default function Register() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(false);
-  const router = useRouter();
   const dispatch = useDispatch();
   const { error: errorMessage, loading } = useSelector((state) => state.user);
 
@@ -40,7 +38,7 @@ export default function Register() {
       });
       const data = await res.json();
       if (res.ok) {
-        router.push("/user/dashboard");
+        window.location.href = "/user/dashboard";
         dispatch(loginSuccess(data.user));
       } else {
         setError(true);
