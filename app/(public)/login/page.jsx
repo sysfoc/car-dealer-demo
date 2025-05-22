@@ -11,6 +11,7 @@ import {
   loginSuccess,
   loginFailure,
 } from "@/lib/features/user/userSlice";
+import Link from "next/link";
 
 export default function Register() {
   const [formData, setFormData] = useState({});
@@ -107,6 +108,14 @@ export default function Register() {
         <div className='space-y-4'>
           <Google />
           <Github />
+        </div>
+        <div className='mt-3'>
+          <span className='text-sm'>
+            Don't have an account?{" "}
+            <Link className='text-blue-600' href='/register'>
+              Sign Up
+            </Link>
+          </span>
         </div>
       </div>
     </div>

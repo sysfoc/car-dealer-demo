@@ -3,15 +3,15 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 
-const AdminButton = () => {
+const UserButton = () => {
   const { currentUser } = useSelector((state) => state.user);
   return (
     <div>
       {currentUser?.role === "admin" && (
         <div className='flex items-center justify-end p-5'>
           <span className="text-sm">
-            Want to visit the Admin dashboard?{" "}
-            <Link className="text-blue-600" href='/dashboard'>Click Here</Link>
+            Want to visit the user dashboard?{" "}
+            <Link className="text-blue-600" href='/user/dashboard'>Click Here</Link>
           </span>
         </div>
       )}
@@ -19,4 +19,4 @@ const AdminButton = () => {
   );
 };
 
-export default AdminButton;
+export default UserButton;

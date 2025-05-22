@@ -3,7 +3,10 @@ import { usePathname } from "next/navigation";
 import Header from "@/app/components/Header";
 import Footerr from "@/app/components/Footerr";
 import AdminSidebar from "@/app/(admin)/components/AdminSidebar";
+import UserButton from "@/app/(admin)/components/dashboard/UserButton";
 import UserSidebar from "@/app/(user)/components/UserSidebar";
+import AdminButton from "@/app/(user)/components/dashboard/AdminButton";
+import { useSelector } from "react-redux";
 
 export default function LayoutWrapper({
   children,
@@ -18,7 +21,12 @@ export default function LayoutWrapper({
     return (
       <div className="flex h-screen">
         <AdminSidebar />
-        <div className="w-full p-5 h-screen overflow-y-scroll">{children}</div>
+        <div className="w-full px-5 h-screen overflow-y-scroll">
+          <header className="bg-white">
+            <UserButton/>
+          </header>
+          <div>{children}</div>
+        </div>
       </div>
     );
   }
@@ -27,7 +35,12 @@ export default function LayoutWrapper({
     return (
       <div className="flex h-screen">
         <UserSidebar />
-        <div className="w-full p-5 h-screen overflow-y-scroll">{children}</div>
+        <div className="w-full px-5 h-screen overflow-y-scroll">
+          <header className="bg-white">
+            <AdminButton/>
+          </header>
+          <div>{children}</div>
+        </div>
       </div>
     );
   }

@@ -5,6 +5,7 @@ import Google from "@/app/components/auth/Google";
 import Github from "@/app/components/auth/Github";
 import { useRouter } from "next/navigation";
 import { HiInformationCircle } from "react-icons/hi";
+import Link from "next/link";
 
 export default function Register() {
   const [formData, setFormData] = useState({});
@@ -94,7 +95,12 @@ export default function Register() {
             />
           </div>
 
-          <Button disabled={loading} type='submit' color='blue' className='w-full'>
+          <Button
+            disabled={loading}
+            type='submit'
+            color='blue'
+            className='w-full'
+          >
             {loading ? (
               <Spinner color='warning' aria-label='Spinning' size='md' />
             ) : (
@@ -111,6 +117,14 @@ export default function Register() {
         <div className='space-y-4'>
           <Google />
           <Github />
+        </div>
+        <div className='mt-3'>
+          <span className='text-sm'>
+            Already have an account?{" "}
+            <Link className='text-blue-600' href='/login'>
+              Login now
+            </Link>
+          </span>
         </div>
       </div>
     </div>
