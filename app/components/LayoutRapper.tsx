@@ -6,7 +6,6 @@ import AdminSidebar from "@/app/(admin)/components/AdminSidebar";
 import UserButton from "@/app/(admin)/components/dashboard/UserButton";
 import UserSidebar from "@/app/(user)/components/UserSidebar";
 import AdminButton from "@/app/(user)/components/dashboard/AdminButton";
-import { useSelector } from "react-redux";
 
 export default function LayoutWrapper({
   children,
