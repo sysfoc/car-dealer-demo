@@ -38,7 +38,7 @@ export default function LayoutWrapper({
           <header className="bg-white">
             <AdminButton/>
           </header>
-          <div>{children}</div>
+          <div className="mt-4">{children}</div>
         </div>
       </div>
     );
