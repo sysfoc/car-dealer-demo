@@ -84,6 +84,50 @@ export async function POST(req) {
           message: `You have successfully subscribed to ${plan} add-on.`,
         });
       }
+    } else if (plan.includes("theme")) {
+      const existingTheme = await Theme.findOne({ userId, themeName: plan });
+
+      if (existingTheme && existingTheme.isActive) {
+        return NextResponse.json(
+          { error: `You already have the "${plan}" theme subscribed.` },
+          { status: 400 }
+        );
+      }
+
+      if (existingTheme && !existingTheme.isActive) {
+        await Theme.findOneAndUpdate(
+          { userId, themeName: plan },
+          {
+            $set: {
+              isActive: true,
+              subscribedAt: new Date(),
+              expiredAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+            },
+          }
+        );
+
+        await Notification.create({
+          userId,
+          type: "success",
+          title: "Theme Renewal",
+          message: `You have successfully renewed your ${plan} theme subscription.`,
+        });
+      } else {
+        await Theme.create({
+          userId,
+          themeName: plan,
+          themePrice: price,
+          subscribedAt: new Date(),
+          expiredAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+          isActive: true,
+        });
+        await Notification.create({
+          userId,
+          type: "success",
+          title: "Theme Subscription",
+          message: `You have successfully subscribed to ${plan} theme.`,
+        });
+      }
     } else {
       await Subscription.findOneAndUpdate(
         { userId },

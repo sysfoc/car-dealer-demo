@@ -1,47 +1,103 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { AiOutlineEye } from "react-icons/ai";
+import { Button, Modal, ModalBody, ModalHeader } from "flowbite-react";
+import { useSelector } from "react-redux";
 const ProjectTemplates = () => {
   const dealers = [
     {
       id: 1,
-      name: "Dealer One",
+      name: "Autocar Dealer Theme Next Js Template",
       alt: "Car dealership showroom with multiple vehicles - Dealer One",
-      link: "/",
+      price: 1000,
+      link: "https://car-dealer-app-nextjs1.vercel.app/",
     },
     {
       id: 2,
       name: "Dealer Two",
       alt: "Exterior view of a modern car dealership - Dealer Two",
+      price: 500,
       link: "/",
     },
     {
       id: 3,
       name: "Dealer Three",
       alt: "Luxury cars displayed at a high-end car dealership - Dealer Three",
+      price: 2000,
       link: "/",
     },
     {
       id: 4,
       name: "Dealer Four",
       alt: "Car sales office with customer service desk - Dealer Four",
+      price: 1000,
       link: "/",
     },
     {
       id: 5,
       name: "Dealer Five",
       alt: "Used cars lined up in a dealership parking lot - Dealer Five",
+      price: 1000,
       link: "/",
     },
     {
       id: 6,
       name: "Dealer Six",
       alt: "Car dealership with promotional banners and offers - Dealer Six",
+      price: 1000,
       link: "/",
     },
   ];
+  const [selectedPlan, setSelectedPlan] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const { currentUser } = useSelector((state) => state.user);
+  const [loading, setLoading] = useState(false);
+  const buySelectedPlan = () => {
+    setShowModal(true);
+  };
+
+  const handleStripePayment = async () => {
+    setLoading(true);
+    const res = await fetch("/api/stripe/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: currentUser?._id,
+        plan: selectedPlan?.plan,
+        price: selectedPlan?.price,
+      }),
+    });
+    const data = await res.json();
+    setLoading(false);
+    if (res.ok) {
+      window.location.href = data.url;
+    }
+  };
+
+  const handlePaypalPayment = async () => {
+    setLoading(true);
+    const res = await fetch("/api/paypal/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: currentUser?._id,
+        plan: selectedPlan?.plan,
+        price: selectedPlan?.price,
+      }),
+    });
+    const data = await res.json();
+    setLoading(false);
+    if (res.ok) {
+      window.location.href = data.url;
+    }
+  };
   return (
     <section className='my-14 mx-4 md:mx-12'>
       <div className='py-5 flex items-center justify-center'>
@@ -80,7 +136,7 @@ const ProjectTemplates = () => {
               key={dealer.id}
               className='relative rounded-md shadow-lg transition-transform duration-300 hover:-translate-y-4 group'
             >
-              <Link href={dealer.link}>
+              <Link href={dealer.link} target='_blank'>
                 <div className='p-4 bg-white'>
                   <Image
                     src={"/demo-1.webp"}
@@ -96,18 +152,62 @@ const ProjectTemplates = () => {
                   </h3>
                 </div>
               </Link>
-              <div className='absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
-                <Link href={"/"}>
+              <div className='absolute inset-0 bg-black bg-opacity-50 flex flex-col gap-y-4 justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+                <Link href={dealer.link} target='_blank'>
                   <button className='flex items-center gap-2 bg-white text-black font-semibold py-2 px-4 rounded-md shadow-md hover:bg-gray-200'>
                     <AiOutlineEye className='text-lg' />
                     View Demo
                   </button>
                 </Link>
+                <Button
+                  onClick={() =>
+                    buySelectedPlan(
+                      setSelectedPlan({
+                        plan: `${dealer.name} theme`,
+                        price: `${dealer.price}`,
+                      })
+                    )
+                  }
+                  size='sm'
+                  className='bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-red-700'
+                >
+                  Purchase Now
+                </Button>
               </div>
             </div>
           ))}
         </div>
       </div>
+      <Modal show={showModal} onClose={() => setShowModal(false)}>
+        <ModalHeader>
+          <p>
+            Select Payment Method For {selectedPlan?.plan} at $
+            {selectedPlan?.price}
+          </p>
+        </ModalHeader>
+        <ModalBody>
+          <div className='w-full py-10 flex items-center justifiy-center'>
+            <div className='w-full flex flex-col gap-4'>
+              <Button
+                onClick={handleStripePayment}
+                color='dark'
+                className='w-full uppercase'
+                disabled={loading}
+              >
+                Pay Using Stripe
+              </Button>
+              <Button
+                onClick={handlePaypalPayment}
+                color='blue'
+                className='w-full uppercase'
+                disabled={loading}
+              >
+                Pay Using Paypal
+              </Button>
+            </div>
+          </div>
+        </ModalBody>
+      </Modal>
     </section>
   );
 };
