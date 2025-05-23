@@ -20,6 +20,10 @@ export const themeSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    activeTheme: {
+      type: Boolean,
+      default: true,
+    },
     subscribedAt: {
       type: Date,
       default: Date.now,

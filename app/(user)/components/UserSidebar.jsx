@@ -11,13 +11,15 @@ import { FaMoneyBill1 } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 
 const UserSidebar = () => {
-  const {currentUser} = useSelector((state)=>state.user)
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <Sidebar
       aria-label='Sidebar of a dashboard'
       className='hidden md:block w-[18rem] h-screen shadow sidebar'
     >
-      <Sidebar.Logo href='/user/dashboard'>{currentUser?.name?.split(" ")[0]}&apos;s Dashboard</Sidebar.Logo>
+      <Sidebar.Logo href='/user/dashboard'>
+        {currentUser?.name?.split(" ")[0]}&apos;s Dashboard
+      </Sidebar.Logo>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           <Sidebar.Item
@@ -55,6 +57,12 @@ const UserSidebar = () => {
               className='hover:!bg-[#EA96FF] hover:!text-black'
             >
               Add-ons
+            </Sidebar.Item>
+            <Sidebar.Item
+              href='/user/dashboard/subscription/themes'
+              className='hover:!bg-[#EA96FF] hover:!text-black'
+            >
+              Themes
             </Sidebar.Item>
           </Sidebar.Collapse>
           <Sidebar.Collapse

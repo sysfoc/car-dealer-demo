@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { AiOutlineEye } from "react-icons/ai";
 import { Button, Modal, ModalBody, ModalHeader } from "flowbite-react";
@@ -55,9 +55,29 @@ const ProjectTemplates = () => {
   const [showModal, setShowModal] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
   const [loading, setLoading] = useState(false);
+  const [themes, setThemes] = useState([]);
   const buySelectedPlan = () => {
     setShowModal(true);
   };
+
+  useEffect(() => {
+    const fetchUserThemes = async () => {
+      try {
+        const response = await fetch("/api/user/themes/details");
+        const data = await response.json();
+        if (response.ok) {
+          setThemes(data.themes);
+          setLoading(false);
+        }
+        if (response.status === 404) {
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    fetchUserThemes();
+  }, []);
 
   const handleStripePayment = async () => {
     setLoading(true);
@@ -160,6 +180,10 @@ const ProjectTemplates = () => {
                   </button>
                 </Link>
                 <Button
+                  disabled={themes.some(
+                    (theme) =>
+                      theme.isActive && theme.themeName?.includes(dealer.name)
+                  )}
                   onClick={() =>
                     buySelectedPlan(
                       setSelectedPlan({
@@ -171,7 +195,12 @@ const ProjectTemplates = () => {
                   size='sm'
                   className='bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-red-700'
                 >
-                  Purchase Now
+                  {themes.some(
+                    (theme) =>
+                      theme.isActive && theme.themeName?.includes(dealer.name)
+                  )
+                    ? "Already Subscribed"
+                    : "Purchase Now"}
                 </Button>
               </div>
             </div>
@@ -181,7 +210,7 @@ const ProjectTemplates = () => {
       <Modal show={showModal} onClose={() => setShowModal(false)}>
         <ModalHeader>
           <p>
-            Select Payment Method For {selectedPlan?.plan} at $
+            Select Payment Method For {selectedPlan?.plan.slice(0, -6)} at $
             {selectedPlan?.price}
           </p>
         </ModalHeader>
