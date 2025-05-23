@@ -39,13 +39,13 @@ export async function GET() {
       await Notification.create({
         type: "error",
         title: "Subscription Expired",
-        message: `Your subscription that has to be expired on ${new Date(
+        message: `Your subscription that has to be expired on "${new Date(
           subscription.endDate
         ).toLocaleDateString("en-US", {
           year: "numeric",
           month: "long",
           day: "numeric",
-        })} has expired. Please renew your subscription to continue using our services. Thank you for your support!`,
+        })}" has expired. Please renew your subscription to continue using our services. Thank you for your support!`,
         userId: id,
       });
     }

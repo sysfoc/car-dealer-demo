@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import { config } from "@/app/api/utils/env-config";
 import User from "@/app/model/user.model";
 import Billing from "@/app/model/billing.model";
+import Notification from "@/app/model/notification.model";
 
 export async function POST(req) {
   await connectToDatabase();
@@ -43,6 +44,12 @@ export async function POST(req) {
       email,
       address,
       phone,
+    });
+    await Notification.create({
+      type: "success",
+      title: "Billing details added",
+      message: "Dear user, your billing details has been added successfully",
+      userId: id,
     });
     return NextResponse.json(
       {

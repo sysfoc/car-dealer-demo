@@ -29,8 +29,8 @@ export async function POST(req) {
       purchaseUnit?.payments?.captures?.[0]?.custom_id ||
       purchaseUnit?.custom_id;
 
-    let userId = null;
-    let plan = null;
+    let userId = "";
+    let plan = "";
     let price = null;
 
     if (customId) {
@@ -65,7 +65,10 @@ export async function POST(req) {
           userId,
           type: "success",
           title: "Addon Renewal",
-          message: `You have successfully renewed your ${plan} add-on subscription.`,
+          message: `You have successfully renewed your "${plan.slice(
+            0,
+            -6
+          )}" add-on subscription.`,
         });
       } else {
         await Addon.create({
@@ -81,7 +84,10 @@ export async function POST(req) {
           userId,
           type: "success",
           title: "Addon Subscription",
-          message: `You have successfully subscribed to ${plan} add-on.`,
+          message: `You have successfully subscribed to "${plan.slice(
+            0,
+            -6
+          )}" add-on.`,
         });
       }
     } else if (plan.includes("theme")) {
@@ -89,7 +95,12 @@ export async function POST(req) {
 
       if (existingTheme && existingTheme.isActive) {
         return NextResponse.json(
-          { error: `You already have the "${plan}" theme subscribed.` },
+          {
+            error: `You already have the "${plan.slice(
+              0,
+              -6
+            )}" theme subscribed.`,
+          },
           { status: 400 }
         );
       }
@@ -110,7 +121,10 @@ export async function POST(req) {
           userId,
           type: "success",
           title: "Theme Renewal",
-          message: `You have successfully renewed your ${plan} theme subscription.`,
+          message: `You have successfully renewed your "${plan.slice(
+            0,
+            -6
+          )}" theme subscription.`,
         });
       } else {
         await Theme.create({
@@ -125,7 +139,10 @@ export async function POST(req) {
           userId,
           type: "success",
           title: "Theme Subscription",
-          message: `You have successfully subscribed to ${plan} theme.`,
+          message: `You have successfully subscribed to "${plan.slice(
+            0,
+            -6
+          )}" theme.`,
         });
       }
     } else {
@@ -155,7 +172,7 @@ export async function POST(req) {
       userId,
       type: "success",
       title: "Subscription",
-      message: `You have successfully subscribed to ${plan} plan.`,
+      message: `You have successfully subscribed to "${plan}" plan.`,
     });
 
     return NextResponse.json({

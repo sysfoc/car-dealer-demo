@@ -18,7 +18,7 @@ export async function PATCH(req, { params }) {
   await Notification.create({
     type: "info",
     title: "Issue update",
-    message: `You have a new update on issue ${issue.subject}. Team Replied: ${issue.reply}`,
+    message: `You have a new update on issue ${issue.subject}. Team Replied: "${issue.reply}"`,
     userId: issue.userId,
   });
   return NextResponse.json({ issue }, { status: 200 });

@@ -23,7 +23,7 @@ export async function PATCH(req, { params }) {
       userId: findAddon.userId,
       type: `${status ? "success" : "error"}`,
       title: "Addon Update",
-      message: `Addon ${findAddon.serviceName} has been ${
+      message: `Addon "${findAddon.serviceName.slice(0, -6)}" has been ${
         status ? "enabled" : "disabled"
       }`,
     });
