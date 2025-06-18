@@ -2,10 +2,10 @@
 
 import { Sidebar } from "flowbite-react";
 import { BiSupport } from "react-icons/bi";
+import { FaBlog } from "react-icons/fa6";
 import {
   HiArrowSmRight,
   HiChartPie,
-  HiInbox,
   HiShoppingBag,
   HiUser,
   HiViewBoards,
@@ -61,6 +61,13 @@ const AdminSidebar = () => {
             className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
           >
             Support
+          </Sidebar.Item>
+          <Sidebar.Item
+            href='/dashboard/blogs'
+            icon={FaBlog}
+            className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
+          >
+            Blogs
           </Sidebar.Item>
         </Sidebar.ItemGroup>
       </Sidebar.Items>
