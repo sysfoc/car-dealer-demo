@@ -1,5 +1,12 @@
 "use client";
-import { Avatar, Button, Label, Textarea, TextInput } from "flowbite-react";
+import {
+  Alert,
+  Avatar,
+  Button,
+  Label,
+  Textarea,
+  TextInput,
+} from "flowbite-react";
 import Head from "next/head";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -9,6 +16,9 @@ import { IoMdAlarm } from "react-icons/io";
 const page = () => {
   const params = useParams();
   const [blog, setBlog] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [formData, setFormData] = useState({
     slug: params.slug,
     fname: "",
@@ -18,10 +28,12 @@ const page = () => {
   });
   useEffect(() => {
     const getBlogBySlug = async () => {
+      setLoading(true);
       const res = await fetch(`/api/blog/${params.slug}`, {
         method: "GET",
       });
       const data = await res.json();
+      setLoading(false);
       setBlog(data.blog);
     };
     getBlogBySlug();
@@ -36,6 +48,7 @@ const page = () => {
   const handleFormData = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const res = await fetch("/api/blog/comment/add", {
         method: "POST",
         headers: {
@@ -44,17 +57,29 @@ const page = () => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
+      setLoading(false);
       if (res.ok) {
         setBlog({
           ...blog,
           comments: [...blog.comments, data.comment],
         });
-        setFormData({});
+        setFormData({
+          slug: params.slug,
+          fname: "",
+          lname: "",
+          email: "",
+          comment: "",
+        });
+        window.location.reload();
       } else {
-        console.log(data.message);
+        setLoading(false);
+        setError(true);
+        setErrorMessage(data.message);
       }
     } catch (error) {
-      console.log(error);
+      setLoading(false);
+      setError(true);
+      setErrorMessage("An error occurred. Please try again.");
     }
   };
   return (
@@ -116,6 +141,14 @@ const page = () => {
             <h2 className='text-2xl font-bold'>Comments</h2>
             <div>
               <form onSubmit={handleFormData}>
+                {error && (
+                  <Alert color='failure'>
+                    <span>
+                      <span className='font-medium'>Error! </span>
+                      {errorMessage}
+                    </span>
+                  </Alert>
+                )}
                 <div className='mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2'>
                   <div className='flex flex-col'>
                     <Label htmlFor='fname'>First Name:</Label>
@@ -160,6 +193,7 @@ const page = () => {
                 <div>
                   <Button
                     type='submit'
+                    disabled={loading}
                     size={"md"}
                     className=' mt-5 bg-red-600 hover:!bg-red-700'
                   >
@@ -169,19 +203,21 @@ const page = () => {
               </form>
             </div>
             <div>
-              {blog?.comments?.map((comment, index) => (
+              {!loading && blog?.comments?.map((comment, index) => (
                 <div
                   key={index}
                   className='mt-5 border border-gray-300 p-5 dark:border-gray-600'
                 >
                   <div className='flex items-center gap-2'>
                     <Avatar size={"md"} rounded />
-                    <div className="flex flex-col gap-1">
-                      <span>{comment.fname} {comment.lname}</span>
-                      <span className="text-sm">{comment.email}</span>
+                    <div className='flex flex-col gap-1'>
+                      <span>
+                        {comment?.fname} {comment?.lname}
+                      </span>
+                      <span className='text-sm'>{comment?.email}</span>
                     </div>
                   </div>
-                  <p className='mt-3'>{comment.comment}</p>
+                  <p className='mt-3'>{comment?.comment}</p>
                 </div>
               ))}
             </div>
