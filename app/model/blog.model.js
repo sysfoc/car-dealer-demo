@@ -37,6 +37,30 @@ export const blogSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    comments: [
+      {
+        fname: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+        lname: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+        email: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+        comment: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+      },
+    ],
   },
   {
     timestamps: true,

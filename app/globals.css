@@ -14,3 +14,16 @@ html {
 .sidebar div svg {
   fill: black !important;
 }
+
+.dynamic-content ul, .dynamic-content ul li {
+  list-style-type: disc !important;
+  list-style-position: inside;
+}
+.dynamic-content ol, .dynamic-content ol li {
+  list-style-type: disc !important;
+  list-style-position: inside;
+}
+.dynamic-content a{
+  color: red;
+  text-decoration: underline;
+}
