@@ -23,6 +23,17 @@ export default function Blog() {
     };
     getAllBlogs();
   }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await fetch(`/api/blog/delete/${id}`, {
+        method: "DELETE",
+      });
+      setFormData(formData.filter((item) => item.id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <section className='my-5 p-5'>
       <div>
@@ -63,15 +74,22 @@ export default function Blog() {
                       day: "numeric",
                     })}
                   </TableCell>
-                  <TableCell>
-                    <Link href={`/dashboard/blogs/edit/${item._id}`}>
+                  <TableCell className='flex gap-2'>
+                    <Link href={`/dashboard/blogs/edit/${item.id}`}>
                       <Button
-                        size='md'
+                        size='sm'
                         className='bg-blue-500 hover:!bg-blue-600 text-white rounded-md'
                       >
                         Edit
                       </Button>
                     </Link>
+                    <Button
+                      size='sm'
+                      onClick={()=>handleDelete(item._id)}
+                      className='bg-red-500 hover:!bg-red-600 text-white rounded-md'
+                    >
+                      Delete
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
