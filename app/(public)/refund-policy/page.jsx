@@ -1,9 +1,9 @@
 import React from "react";
 
 export const metadata = {
-  title: "Refund Policy - SYSFOC Car Dealer",
+  title: "Refund Policy – Money-Back Guarantee Info ",
   description:
-    "This Refund Policy explains the terms under which refunds are issued for our services and products.",
+    "We believe in our product—and back it with a full money-back guarantee. Here’s how it works.",
 };
 
 export default function RefundPolicy() {

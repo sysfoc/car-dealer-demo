@@ -1,8 +1,8 @@
 import React from "react";
 export const metadata = {
-  title: "Terms and Conditions - Auto Car Dealers",
+  title: "Terms and Conditions – Automotive Web Solutions",
   description:
-    "Please read these terms carefully before using our services. By accessing or using our website, you agree to be bound by these terms.",
+    "Review the terms of service for using Automotive Web Solutions. Understand your rights, responsibilities, and our policies.",
 };
 export default function TermsAndConditions() {
   return (

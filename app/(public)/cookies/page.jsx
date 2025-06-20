@@ -1,9 +1,9 @@
 import React from "react";
 
 export const metadata = {
-  title: "Cookie Policy - SYSFOC Car Dealer",
+  title: "Cookies Policy – How We Use Cookies",
   description:
-    "This Cookie Policy explains how we use cookies and similar tracking technologies on our website.",
+    "Find out how Automotive Web Solutions use cookies to improve user experience and website functionality.",
 };
 
 export default function CookiePolicy() {

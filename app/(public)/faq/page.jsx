@@ -1,9 +1,9 @@
 import React from "react";
 
 export const metadata = {
-  title: "FAQ - SYSFOC Car Dealer Themes",
+  title: "Frequently Asked Questions – Automotive Web Solutions",
   description:
-    "Find answers to common questions about our Next.js car dealer themes and services.",
+    "Get quick answers about pricing, setup, support, and more. Learn how our platform works and how to get started easily.",
 };
 export default function Faqs() {
   return (

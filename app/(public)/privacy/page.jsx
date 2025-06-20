@@ -1,8 +1,8 @@
 import React from "react";
 export const metadata = {
-  title: "Privacy Policy - Auto Car Demo",
+  title: "Privacy Policy – Automotive Web Solutions ",
   description:
-    "This Privacy Policy outlines how we collect, use, and protect your personal information when you use our services.",
+    "Learn how we collect, use, and protect your personal information. Your privacy matters to us.",
 };
 export default function Privacy() {
   return (
