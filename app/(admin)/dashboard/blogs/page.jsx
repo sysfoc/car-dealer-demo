@@ -75,7 +75,7 @@ export default function Blog() {
                     })}
                   </TableCell>
                   <TableCell className='flex gap-2'>
-                    <Link href={`/dashboard/blogs/edit/${item.id}`}>
+                    <Link href={`/dashboard/blogs/edit/${item.slug}`}>
                       <Button
                         size='sm'
                         className='bg-blue-500 hover:!bg-blue-600 text-white rounded-md'
