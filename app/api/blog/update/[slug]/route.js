@@ -6,10 +6,8 @@ import { writeFile, unlink } from "fs/promises";
 
 export async function PATCH(req, { params }) {
   await connectToDatabase();
-
   const { slug } = params;
   const formData = await req.formData();
-
   const title = formData.get("title");
   const content = formData.get("content");
   const metaTitle = formData.get("metaTitle");
@@ -22,33 +20,23 @@ export async function PATCH(req, { params }) {
     if (!blog) {
       return NextResponse.json({ message: "Blog not found" }, { status: 404 });
     }
-
     let imagePath = blog.image;
-
-    // ✅ If a new image is uploaded
     if (image && typeof image === "object" && image.name) {
       const buffer = Buffer.from(await image.arrayBuffer());
-
-      // ✅ Delete old image if it exists
       if (blog.image && blog.image !== "") {
         const oldPath = path.join(process.cwd(), "public", blog.image);
         try {
           await unlink(oldPath);
         } catch (err) {
-          console.warn("Failed to delete old image (may not exist):", oldPath);
+          return NextResponse.json({ message: err.message }, { status: 500 });
         }
       }
-
-      // ✅ Save new image in /public/blog
-      const extension = path.extname(image.name);
       const filename = `${Date.now()}-${image.name}`;
       const fullPath = path.join(process.cwd(), "public", "blog", filename);
       await writeFile(fullPath, buffer);
 
       imagePath = `/blog/${filename}`;
     }
-
-    // ✅ Update the blog
     const updatedBlog = await Blog.findOneAndUpdate(
       { slug },
       {
