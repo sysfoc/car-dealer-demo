@@ -193,7 +193,7 @@ const ProjectTemplates = () => {
                     )
                   }
                   size='sm'
-                  className='bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-red-700'
+                  className={`${!currentUser && "hidden"} bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-red-700`}
                 >
                   {themes.some(
                     (theme) =>
@@ -215,7 +215,7 @@ const ProjectTemplates = () => {
           </p>
         </ModalHeader>
         <ModalBody>
-          <div className='w-full py-10 flex items-center justifiy-center'>
+          <div className={`${!currentUser && "hidden"} w-full py-10 flex items-center justifiy-center`}>
             <div className='w-full flex flex-col gap-4'>
               <Button
                 onClick={handleStripePayment}

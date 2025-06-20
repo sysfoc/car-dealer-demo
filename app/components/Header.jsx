@@ -48,7 +48,7 @@ const Header = () => {
         <Link href='/'>
           <Image
             src={"/logo.png"}
-            alt='Sysfoc-cars-dealer'
+            alt='automotive-logo'
             width={100}
             height={50}
             style={{ objectPosition: "center" }}
@@ -114,8 +114,7 @@ const Header = () => {
           >
             <Link href='/user/dashboard'>
               <Button size='md' className='w-full bg-red-600 hover:!bg-red-700'>
-                Get Started
-                <BiPurchaseTag fontSize={18} className='ml-2' />
+                {currentUser ? "Dashboard" : "Login"}
               </Button>
             </Link>
           </NavbarLink>
@@ -123,8 +122,7 @@ const Header = () => {
         <div className='hidden md:flex items-center gap-5'>
           <Link href='/user/dashboard'>
             <Button size='md' className='w-full bg-red-600 hover:!bg-red-700'>
-              Get Started
-              <BiPurchaseTag fontSize={18} className='ml-2' />
+              {currentUser ? "Dashboard" : "Login"}
             </Button>
           </Link>
         </div>
