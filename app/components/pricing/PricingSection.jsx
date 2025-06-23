@@ -12,12 +12,14 @@ import {
   TableHead,
   TableHeadCell,
   TableRow,
+  ToggleSwitch,
 } from "flowbite-react";
 import { FaCheck } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 const PricingSection = () => {
   const [showModal, setShowModal] = useState(false);
+  const [yearly, setYearly] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [subscription, setSubscription] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -107,6 +109,25 @@ const PricingSection = () => {
               </p>
             </div>
           )}
+        </div>
+      </div>
+      <div className='my-8 flex items-center justify-center'>
+        <div className='rounded-lg border-t-4 bg-white border-red-600 p-8 shadow-md'>
+          <div className='w-full sm:w-[320px]'>
+            <h2 className='text-center'>Subscription Term</h2>
+            <div className='flex items-center justify-center'>
+              <div className='mt-4 flex flex-row items-center gap-5'>
+                <p className='text-sm'>Monthly</p>
+                <ToggleSwitch
+                  label='Annual'
+                  color='red'
+                  checked={yearly}
+                  onChange={setYearly}
+                  sizing='sm'
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div className='my-10'>
