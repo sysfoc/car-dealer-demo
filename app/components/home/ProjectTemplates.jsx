@@ -11,20 +11,23 @@ const ProjectTemplates = () => {
     {
       id: 1,
       name: "Autocar Dealer Theme Next Js Template",
+      image: "/demo-1.png",
       alt: "Car dealership showroom with multiple vehicles - Dealer One",
       price: 1000,
       link: "https://car-dealer-app-nextjs1.vercel.app/",
     },
     {
       id: 2,
-      name: "Dealer Two",
+      name: "Website for Automotive Dealers Built to Sell Cars",
+      image: "/demo-2.png",
       alt: "Exterior view of a modern car dealership - Dealer Two",
       price: 500,
-      link: "/",
+      link: "https://car-dealer-app-nextjs-demo2.vercel.app/",
     },
     {
       id: 3,
       name: "Dealer Three",
+      image: "/demo-3.webp",
       alt: "Luxury cars displayed at a high-end car dealership - Dealer Three",
       price: 2000,
       link: "/",
@@ -32,6 +35,7 @@ const ProjectTemplates = () => {
     {
       id: 4,
       name: "Dealer Four",
+      image: "/demo-3.webp",
       alt: "Car sales office with customer service desk - Dealer Four",
       price: 1000,
       link: "/",
@@ -39,6 +43,7 @@ const ProjectTemplates = () => {
     {
       id: 5,
       name: "Dealer Five",
+      image: "/demo-3.webp",
       alt: "Used cars lined up in a dealership parking lot - Dealer Five",
       price: 1000,
       link: "/",
@@ -46,6 +51,7 @@ const ProjectTemplates = () => {
     {
       id: 6,
       name: "Dealer Six",
+      image: "/demo-3.webp",
       alt: "Car dealership with promotional banners and offers - Dealer Six",
       price: 1000,
       link: "/",
@@ -159,7 +165,7 @@ const ProjectTemplates = () => {
               <Link href={dealer.link} target='_blank'>
                 <div className='p-4 bg-white'>
                   <Image
-                    src={"/demo-1.webp"}
+                    src={dealer.image}
                     alt={dealer.alt}
                     width={500}
                     height={500}
@@ -193,7 +199,9 @@ const ProjectTemplates = () => {
                     )
                   }
                   size='sm'
-                  className={`${!currentUser && "hidden"} bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-red-700`}
+                  className={`${
+                    !currentUser && "hidden"
+                  } bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-red-700`}
                 >
                   {themes.some(
                     (theme) =>
@@ -215,7 +223,11 @@ const ProjectTemplates = () => {
           </p>
         </ModalHeader>
         <ModalBody>
-          <div className={`${!currentUser && "hidden"} w-full py-10 flex items-center justifiy-center`}>
+          <div
+            className={`${
+              !currentUser && "hidden"
+            } w-full py-10 flex items-center justifiy-center`}
+          >
             <div className='w-full flex flex-col gap-4'>
               <Button
                 onClick={handleStripePayment}
