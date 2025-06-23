@@ -77,20 +77,6 @@ const Datatable = () => {
                     >
                       <FaEye className='w-3 h-3' />
                     </Link>
-                    <Link href={`/dashboard/invoices/edit/${transaction?._id}`}>
-                      <button
-                        className='p-2 bg-yellow-500 text-white rounded hover:bg-yellow-600'
-                        title='Edit'
-                      >
-                        <FaEdit className='w-3 h-3' />
-                      </button>
-                    </Link>
-                    <button
-                      className='p-2 bg-red-500 text-white rounded hover:bg-red-600'
-                      title='Delete'
-                    >
-                      <FaTrash className='w-3 h-3' />
-                    </button>
                   </div>
                 </TableCell>
               </TableRow>

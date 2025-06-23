@@ -2,6 +2,7 @@
 import { usePathname } from "next/navigation";
 import Header from "@/app/components/Header";
 import Footerr from "@/app/components/Footerr";
+import Social from "@/app/components/Social";
 import AdminSidebar from "@/app/(admin)/components/AdminSidebar";
 import UserButton from "@/app/(admin)/components/dashboard/UserButton";
 import UserSidebar from "@/app/(user)/components/UserSidebar";
@@ -19,6 +20,7 @@ export default function LayoutWrapper({
   if (isDashboardRoute) {
     return (
       <div className="flex h-screen">
+        <Social/>
         <AdminSidebar />
         <div className="w-full px-5 h-screen overflow-y-scroll">
           <header className="bg-white">
@@ -33,6 +35,7 @@ export default function LayoutWrapper({
   if (isUserRoute) {
     return (
       <div className="flex h-screen">
+        <Social/>
         <UserSidebar />
         <div className="w-full px-5 h-screen overflow-y-scroll">
           <header className="bg-white">
@@ -46,6 +49,7 @@ export default function LayoutWrapper({
 
   return (
     <div>
+      <Social/>
       <Header />
       {children}
       <Footerr />
