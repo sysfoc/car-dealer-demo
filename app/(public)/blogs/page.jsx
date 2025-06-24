@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { IoMdAlarm } from "react-icons/io";
-import { FaRegEye } from "react-icons/fa";
 
 const page = () => {
   const [formData, setFormData] = useState([]);

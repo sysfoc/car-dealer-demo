@@ -4,6 +4,7 @@ import {
   Avatar,
   Button,
   Label,
+  Spinner,
   Textarea,
   TextInput,
 } from "flowbite-react";
@@ -96,14 +97,18 @@ const page = () => {
       <section className='mx-4 my-5 sm:mx-16'>
         <div className='grid grid-cols-1 items-center gap-x-10 gap-y-5 py-5 md:grid-cols-2'>
           <div className='overflow-hidden rounded-lg'>
-            <Image
-              src={blog.image || "/banner.webp"}
-              alt={`${blog.title}-img`}
-              width={500}
-              height={300}
-              priority
-              className='size-full'
-            />
+            {loading ? (
+              <Spinner size='xl' className='mx-auto' />
+            ) : (
+              <Image
+                src={blog.image || "/banner.webp"}
+                alt={`${blog.title}-img`}
+                width={500}
+                height={300}
+                priority
+                className='size-full'
+              />
+            )}
           </div>
           <div>
             <div className='flex flex-row items-center gap-3'>
@@ -122,12 +127,18 @@ const page = () => {
               </div>
             </div>
             <h1 className='mt-3 text-2xl font-bold sm:mt-5 sm:text-4xl'>
-              {blog.title}
+              {loading ? <Spinner size='md' className='mx-auto' /> : blog.title}
             </h1>
             <div className='mt-5 flex items-center gap-10'>
               <div className='flex items-center gap-3'>
                 <Avatar size={"sm"} rounded />
-                <span>{blog.blogWriter}</span>
+                <span>
+                  {loading ? (
+                    <Spinner size='md' className='mx-auto' />
+                  ) : (
+                    blog.blogWriter
+                  )}
+                </span>
               </div>
             </div>
           </div>
@@ -203,23 +214,24 @@ const page = () => {
               </form>
             </div>
             <div>
-              {!loading && blog?.comments?.map((comment, index) => (
-                <div
-                  key={index}
-                  className='mt-5 border border-gray-300 p-5 dark:border-gray-600'
-                >
-                  <div className='flex items-center gap-2'>
-                    <Avatar size={"md"} rounded />
-                    <div className='flex flex-col gap-1'>
-                      <span>
-                        {comment?.fname} {comment?.lname}
-                      </span>
-                      <span className='text-sm'>{comment?.email}</span>
+              {!loading &&
+                blog?.comments?.map((comment, index) => (
+                  <div
+                    key={index}
+                    className='mt-5 border border-gray-300 p-5 dark:border-gray-600'
+                  >
+                    <div className='flex items-center gap-2'>
+                      <Avatar size={"md"} rounded />
+                      <div className='flex flex-col gap-1'>
+                        <span>
+                          {comment?.fname} {comment?.lname}
+                        </span>
+                        <span className='text-sm'>{comment?.email}</span>
+                      </div>
                     </div>
+                    <p className='mt-3'>{comment?.comment}</p>
                   </div>
-                  <p className='mt-3'>{comment?.comment}</p>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         </div>
