@@ -32,30 +32,6 @@ const ProjectTemplates = () => {
       price: 2000,
       link: "/",
     },
-    {
-      id: 4,
-      name: "Dealer Four",
-      image: "/demo-3.webp",
-      alt: "Car sales office with customer service desk - Dealer Four",
-      price: 1000,
-      link: "/",
-    },
-    {
-      id: 5,
-      name: "Dealer Five",
-      image: "/demo-3.webp",
-      alt: "Used cars lined up in a dealership parking lot - Dealer Five",
-      price: 1000,
-      link: "/",
-    },
-    {
-      id: 6,
-      name: "Dealer Six",
-      image: "/demo-3.webp",
-      alt: "Car dealership with promotional banners and offers - Dealer Six",
-      price: 1000,
-      link: "/",
-    },
   ];
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -69,8 +45,15 @@ const ProjectTemplates = () => {
   useEffect(() => {
     const fetchUserThemes = async () => {
       try {
-        const response = await fetch("/api/user/themes/details");
+        setLoading(true);
+        const response = await fetch("/api/user/themes/details", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         const data = await response.json();
+        setLoading(false);
         if (response.ok) {
           setThemes(data.themes);
           setLoading(false);

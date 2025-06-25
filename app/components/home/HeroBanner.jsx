@@ -7,8 +7,9 @@ const HeroBanner = () => {
     <section className='relative min-h-screen w-full flex items-center justify-center'>
       <Image
         src='/banner.webp'
-        alt='Hero background'
+        alt='hero-banner-image'
         fill
+        fetchPriority="high"
         priority
         quality={80}
         className='object-cover object-center -z-10'

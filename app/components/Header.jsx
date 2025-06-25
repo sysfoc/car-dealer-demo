@@ -53,6 +53,7 @@ const Header = () => {
             height={50}
             style={{ objectPosition: "center" }}
             className='size-auto'
+            fetchPriority='high'
             priority={true}
           />
         </Link>

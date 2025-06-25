@@ -1,7 +1,6 @@
 import React from "react";
 import { Footer } from "flowbite-react";
 import {
-  BsDribbble,
   BsFacebook,
   BsGithub,
   BsInstagram,
@@ -15,7 +14,7 @@ const Footerr = () => {
       <div className='w-full text-center'>
         <div className='w-full justify-between sm:flex sm:items-center sm:justify-between'>
           <Footer.Brand href='/' src='/logo.png' alt='car-dealer-logo' />
-          <Footer.LinkGroup>
+          <Footer.LinkGroup className='gap-y-2'>
             <Footer.Link href='/about'>About</Footer.Link>
             <Footer.Link href='/contact'>Contact</Footer.Link>
             <Footer.Link href='/faq'>FAQ</Footer.Link>
