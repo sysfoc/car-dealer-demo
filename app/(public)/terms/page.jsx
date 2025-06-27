@@ -87,9 +87,9 @@ export default function TermsAndConditions() {
           </li>
           <li>Engage in data scraping or automated collection</li>
         </ul>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Restricted Access
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           Some areas may require account creation. You are responsible for:
         </p>
@@ -102,9 +102,9 @@ export default function TermsAndConditions() {
           We reserve the right to restrict access, suspend accounts, or block IP
           addresses without notice.
         </p>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           User Submissions
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           You retain ownership of the content you upload (e.g., vehicle
           listings, images, logos), but you grant us a limited license to host,
@@ -116,9 +116,9 @@ export default function TermsAndConditions() {
           <li>Contain harmful, offensive, or false content</li>
           <li>Violate any applicable laws</li>
         </ul>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Advertisers
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           We may display third-party advertisements. These may include cookies
           or data tracking governed by their privacy policies. We are not
@@ -128,9 +128,9 @@ export default function TermsAndConditions() {
           By interacting with these ads, you consent to potential data sharing
           as outlined by the respective ad providers.
         </p>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Limitations of Liability
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           To the maximum extent permitted by applicable law, Automotive Web
           Solutions and its team shall not be held liable for any:
@@ -152,9 +152,9 @@ export default function TermsAndConditions() {
           By using our services, you acknowledge and accept that this limitation
           is a fair and reasonable allocation of risk.
         </p>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Exceptions
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           Nothing in this agreement limits liability for:
         </p>
@@ -162,25 +162,25 @@ export default function TermsAndConditions() {
           <li>Death or injury caused by negligence </li>
           <li>Fraud or fraudulent misrepresentation</li>
         </ul>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Reasonableness
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           By using this website, you agree that these exclusions and limitations
           are reasonable. If you disagree, you must not use the site.
         </p>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Intellectual Property
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           All content on this site—text, graphics, logos, UI, templates—is owned
           by Automotive Web Solutions or its licensors and protected by
           copyright and trademark laws. You may not reproduce or redistribute
           any content without written permission.
         </p>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Copyright Infringement Claims
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           To file a copyright claim, email us with:
         </p>
@@ -193,9 +193,9 @@ export default function TermsAndConditions() {
             Send claims to: <strong>automotivewebsolutions1@gmail.com</strong>{" "}
           </li>
         </ul>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Indemnity
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           You agree to indemnify and hold harmless Automotive Web Solutions and
           its team from all claims, liabilities, losses, or expenses arising out
@@ -206,9 +206,9 @@ export default function TermsAndConditions() {
           <li>Violation of any third-party rights </li>
           <li>Breach of these Terms </li>
         </ul>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Breaches
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           We may take any action we consider appropriate for breach of these
           Terms, including:
@@ -218,39 +218,39 @@ export default function TermsAndConditions() {
           <li>Reporting to law enforcement</li>
           <li>Initiating legal proceedings</li>
         </ul>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Assignment
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           You may not assign your rights under these Terms. We may assign or
           transfer our rights without restriction.
         </p>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Severability
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           If any provision is found unlawful or unenforceable, that part shall
           be deemed removed, but the rest shall remain in full effect.
         </p>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Entire Agreement
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           These Terms and Conditions, along with our Privacy Policy, constitute
           the full agreement between you and Automotive Web Solutions regarding
           site use.
         </p>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           External Links
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           Our site may include links to third-party websites. We do not control
           or endorse these sites and are not responsible for their content or
           practices.
         </p>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Miscellaneous
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           Nothing in this agreement establishes a partnership, joint venture, or
           agency between you and Automotive Web Solutions.
@@ -259,9 +259,9 @@ export default function TermsAndConditions() {
           Failure to enforce any provision shall not be deemed a waiver.
           Headings are for reference only.
         </p>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Data Collection and Usage
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           We may use tools like Google Analytics or Microsoft Clarity to collect
           behavioral data to improve your experience and our services.
@@ -270,9 +270,9 @@ export default function TermsAndConditions() {
           By using our site, you consent to the collection and processing of
           such data.
         </p>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Termination
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           Either party may terminate this agreement at any time. We may
           immediately block or suspend access for:
@@ -286,9 +286,9 @@ export default function TermsAndConditions() {
           Risk of harm to others Upon termination, all access is revoked, and
           content must be deleted.
         </p>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Governing Law & Jurisdiction
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           This agreement is governed by the laws of your jurisdiction. All
           disputes will be resolved exclusively in the courts of that

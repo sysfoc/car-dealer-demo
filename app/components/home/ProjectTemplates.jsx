@@ -10,7 +10,7 @@ const ProjectTemplates = () => {
   const dealers = [
     {
       id: 1,
-      name: "Autocar Dealer Theme Next Js Template",
+      name: "Automotive Car Dealership Theme One",
       image: "/demo-1.png",
       alt: "Car dealership showroom with multiple vehicles - Dealer One",
       price: 1000,
@@ -18,7 +18,7 @@ const ProjectTemplates = () => {
     },
     {
       id: 2,
-      name: "Website for Automotive Dealers Built to Sell Cars",
+      name: "Automotive Car Dealership Theme Two",
       image: "/demo-2.png",
       alt: "Exterior view of a modern car dealership - Dealer Two",
       price: 500,
@@ -26,7 +26,7 @@ const ProjectTemplates = () => {
     },
     {
       id: 3,
-      name: "Dealer Three",
+      name: "Automotive Car Dealership Theme Three",
       image: "/demo-3.webp",
       alt: "Luxury cars displayed at a high-end car dealership - Dealer Three",
       price: 2000,
@@ -155,7 +155,7 @@ const ProjectTemplates = () => {
                     className='size-auto'
                   />
                 </div>
-                <div className='py-3'>
+                <div className='px-2 py-3'>
                   <h3 className='text-center font-semibold text-xl'>
                     {dealer.name}
                   </h3>
@@ -191,7 +191,7 @@ const ProjectTemplates = () => {
                       theme.isActive && theme.themeName?.includes(dealer.name)
                   )
                     ? "Already Subscribed"
-                    : "Purchase Now"}
+                    : `Purchase Now At $${dealer.price}`}
                 </Button>
               </div>
             </div>
