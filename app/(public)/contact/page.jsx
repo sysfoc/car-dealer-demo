@@ -166,7 +166,7 @@ export default function ContactUs() {
                 Address
               </h3>
               <p className='text-gray-600 dark:text-gray-300'>
-                1234 Main Street, Suite 567, City Name, Country
+                Tariq Bin Ziad Colony, Street # 1, <strong>Sahiwal, Pakistan</strong>
               </p>
             </div>
             <div className='mb-4'>
@@ -182,16 +182,23 @@ export default function ContactUs() {
                 Phone
               </h3>
               <p className='text-gray-600 dark:text-gray-300'>
-                +1 (123) 456-7890
+                (+92) 300 6904440
+              </p>
+              <p className='text-gray-600 dark:text-gray-300'>
+                (+61) 466778515
               </p>
             </div>
-            <div className='mb-4'>
+            <div className='mb-4 flex flex-col gap-y-2'>
               <h3 className='text-lg font-medium text-gray-800 dark:text-white'>
                 Working Hours
               </h3>
               <p className='text-gray-600 dark:text-gray-300'>
                 Monday - Friday: 9:00 AM - 6:00 PM
               </p>
+              <p className='text-gray-600 dark:text-gray-300'>
+                Saturday: Closed
+              </p>
+              <p className='text-gray-600 dark:text-gray-300'>Sunday: Closed</p>
             </div>
           </div>
         </div>
@@ -202,7 +209,7 @@ export default function ContactUs() {
           <div className='overflow-hidden rounded-lg shadow-md'>
             <iframe
               className='h-96 w-full border-0'
-              src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345093775!2d144.95373531520247!3d-37.81720974202198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf5771f65c7df2a0!2sFederation%20Square!5e0!3m2!1sen!2sau!4v1615187682734!5m2!1sen!2sau'
+              src='https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d4995.515162886476!2d73.12134500000003!3d30.67271440000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2s!4v1751020101181!5m2!1sen!2s'
               allowFullScreen
               loading='lazy'
             ></iframe>

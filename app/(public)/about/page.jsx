@@ -29,7 +29,7 @@ export default function About() {
           Who We Are
         </h2>
         <p className='mb-4 text-gray-600 dark:text-white'>
-          Automotive Web Solutions is a powerful SaaS platform made by SYSFOC, a
+          Automotive Web Solutions is a powerful SaaS platform made by <strong>SYSFOC</strong>, a
           leading software and website development company. It is built
           especially for car dealerships. We help dealers create and grow their
           online presence with professional websites that we host, maintain, and

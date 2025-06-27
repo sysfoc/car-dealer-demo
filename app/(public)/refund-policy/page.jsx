@@ -11,93 +11,56 @@ export default function RefundPolicy() {
     <div className='min-h-screen bg-gray-50 py-10 dark:bg-gray-800'>
       <div className='mx-auto max-w-4xl rounded-lg bg-white p-8 shadow-md dark:bg-gray-700'>
         <h1 className='mb-6 text-center text-3xl font-bold text-gray-800 dark:text-white'>
-          Refund Policy
+          Automotive Web Solutions Refund Policy
         </h1>
         <p className='mb-4 text-gray-600 dark:text-white'>
-          At SYSFOC Car Dealer, customer satisfaction is our priority. This
-          Refund Policy outlines the conditions under which refunds are
-          processed for our services and products.
+          At Automotive Web Solutions, we are committed to your satisfaction.
+          That is why we offer a 7-day money-back guarantee on all our
+          subscription plans — no questions asked.
         </p>
         <h2 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
-          1. Eligibility for Refunds
+          Full Refund (Within 7 Days)
         </h2>
         <p className='mb-4 text-gray-600 dark:text-white'>
-          Refunds may be issued under the following conditions:
+          If you are not satisfied with our services, you can request a full
+          refund within 7 days of your subscription date, regardless of the plan
+          selected. Your payment will be refunded in full with no questions, no
+          forms, and no hassle.
         </p>
-        <ul className='list-disc pl-6 mb-4 text-gray-600 dark:text-white'>
-          <li>The product is defective or damaged upon delivery.</li>
-          <li>The service was not delivered as promised.</li>
-          <li>
-            A cancellation request is made within the allowed cancellation
-            period.
-          </li>
-        </ul>
-
-        <h2 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
-          2. Non-Refundable Items
-        </h2>
+        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+          Refunds After 7 Days
+        </h3>
         <p className='mb-4 text-gray-600 dark:text-white'>
-          Certain items and services are non-refundable, including but not
-          limited to:
-        </p>
-        <ul className='list-disc pl-6 mb-4 text-gray-600 dark:text-white'>
-          <li>Used or damaged vehicles after purchase.</li>
-          <li>Personalized or customized orders.</li>
-          <li>Digital products or services already provided.</li>
-        </ul>
-
-        <h2 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
-          3. Refund Process
-        </h2>
-        <p className='mb-4 text-gray-600 dark:text-white'>
-          To request a refund, please follow these steps:
+          If you request a refund after the 7-day window:
         </p>
         <ul className='list-disc pl-6 mb-4 text-gray-600 dark:text-white'>
           <li>
-            Contact our support team at sysfoc@gmail.com with your order
-            details.
-          </li>
-          <li>Provide proof of purchase and relevant documentation.</li>
-          <li>Allow up to 7 business days for processing your request.</li>
-        </ul>
-
-        <h2 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
-          4. Late or Missing Refunds
-        </h2>
-        <p className='mb-4 text-gray-600 dark:text-white'>
-          If you haven’t received your refund yet, please:
-        </p>
-        <ul className='list-disc pl-6 mb-4 text-gray-600 dark:text-white'>
-          <li>Check your bank account again.</li>
-          <li>
-            Contact your credit card provider, as refunds may take some time to
-            reflect.
+            <strong>Monthly Plan:</strong> We will charge for the current
+            month’s full subscription. No partial refund will be issued for the
+            remaining month.{" "}
           </li>
           <li>
-            If you’ve done all of this and still haven’t received your refund,
-            contact us at sysfoc@gmail.com.
+            <strong>Yearly Plan:</strong> We will deduct one full month’s fee as
+            the current (running) month’s charge. The remaining balance for the
+            unused months will be refunded to you.
           </li>
         </ul>
 
-        <h2 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
-          5. Updates to This Policy
-        </h2>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+          Simple, Hassle-Free Process
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
-          We reserve the right to modify this Refund Policy at any time. Any
-          changes will be posted on this page with an updated effective date.
+          We believe in fairness and transparency. Whether within or beyond 7
+          days, we promise a simple and smooth refund process without requiring
+          any justification, lengthy forms, or approval processes.
         </p>
-
-        <h2 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
-          6. Contact Us
-        </h2>
         <p className='mb-4 text-gray-600 dark:text-white'>
-          If you have any questions about our Refund Policy, please contact us
-          at sysfoc@gmail.com.
+          If you have any questions about this refund policy, feel free to
+          contact us at <strong>automotivewebsolutions1@gmail.com</strong>.
         </p>
-
         <div className='mt-8 border-t pt-4'>
           <p className='text-center text-sm text-gray-500 dark:text-white'>
-            © 2025 Dealer Website by SYSFOC Automotive. All rights reserved.
+            © 2025 automotivewebsolutions. All rights reserved.
           </p>
         </div>
       </div>
