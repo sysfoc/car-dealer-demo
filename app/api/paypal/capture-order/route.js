@@ -32,7 +32,7 @@ export async function POST(req) {
     let userId = "";
     let plan = "";
     let price = null;
-    let timePeriod = null;
+    let timePeriod = "";
 
     if (customId) {
       const parts = customId.split("__");

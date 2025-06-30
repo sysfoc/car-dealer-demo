@@ -1,15 +1,14 @@
 "use client";
 import { Button, Modal, ModalBody, ModalHeader } from "flowbite-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
+import { FaCcStripe } from "react-icons/fa6";
+import { SlPaypal } from "react-icons/sl";
 const AddOns = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [addOns, setAddOns] = useState([]);
 
@@ -188,7 +187,8 @@ const AddOns = () => {
                 className='w-full uppercase'
                 disabled={loading}
               >
-                Pay Using Stripe
+                <FaCcStripe fontSize={22} className='text-white' />
+                <span className='ml-3'>Pay Using Stripe</span>
               </Button>
               <Button
                 onClick={handlePaypalPayment}
@@ -196,7 +196,8 @@ const AddOns = () => {
                 className='w-full uppercase'
                 disabled={loading}
               >
-                Pay Using Paypal
+                <SlPaypal fontSize={20} className='text-white' />
+                <span className='ml-3'>Pay Using Paypal</span>
               </Button>
             </div>
           </div>

@@ -6,6 +6,8 @@ import { FaCheck } from "react-icons/fa6";
 import { AiOutlineEye } from "react-icons/ai";
 import { Button, Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { useSelector } from "react-redux";
+import { FaCcStripe } from "react-icons/fa6";
+import { SlPaypal } from "react-icons/sl";
 const ProjectTemplates = () => {
   const dealers = [
     {
@@ -218,7 +220,8 @@ const ProjectTemplates = () => {
                 className='w-full uppercase'
                 disabled={loading}
               >
-                Pay Using Stripe
+                <FaCcStripe fontSize={22} className='text-white' />
+                <span className='ml-3'>Pay Using Stripe</span>
               </Button>
               <Button
                 onClick={handlePaypalPayment}
@@ -226,7 +229,8 @@ const ProjectTemplates = () => {
                 className='w-full uppercase'
                 disabled={loading}
               >
-                Pay Using Paypal
+                <SlPaypal fontSize={20} className='text-white' />
+                <span className='ml-3'>Pay Using Paypal</span>
               </Button>
             </div>
           </div>

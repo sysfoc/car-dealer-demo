@@ -16,6 +16,9 @@ import {
 } from "flowbite-react";
 import { FaCheck } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { FaCcStripe } from "react-icons/fa6";
+import { SlPaypal } from "react-icons/sl";
+
 const PricingSection = () => {
   const [showModal, setShowModal] = useState(false);
   const [yearly, setYearly] = useState(false);
@@ -772,14 +775,16 @@ const PricingSection = () => {
                     color='dark'
                     className='w-full uppercase'
                   >
-                    Pay Using Stripe
+                    <FaCcStripe fontSize={22} className='text-white' />
+                    <span className='ml-3'>Pay Using Stripe</span>
                   </Button>
                   <Button
                     onClick={handlePaypalPayment}
                     color='blue'
                     className='w-full uppercase'
                   >
-                    Pay Using Paypal
+                    <SlPaypal fontSize={20} className='text-white' />
+                    <span className='ml-3'>Pay Using Paypal</span>
                   </Button>
                 </div>
               </div>
@@ -1341,8 +1346,8 @@ const PricingSection = () => {
                         <div className='flex items-center justify-center'>
                           <Button
                             disabled={
-                              subscription?.subscriptionType === "Yearly Basic" &&
-                              subscription?.isActive
+                              subscription?.subscriptionType ===
+                                "Yearly Basic" && subscription?.isActive
                             }
                             onClick={() =>
                               buySelectedPlan(
@@ -1356,8 +1361,8 @@ const PricingSection = () => {
                             color='dark'
                             className='w-full uppercase'
                           >
-                            {subscription?.subscriptionType === "Yearly Basic" &&
-                            subscription?.isActive
+                            {subscription?.subscriptionType ===
+                              "Yearly Basic" && subscription?.isActive
                               ? "Current Plan"
                               : "Buy Yearly Basic"}
                           </Button>
@@ -1367,8 +1372,8 @@ const PricingSection = () => {
                         <div className='flex items-center justify-center'>
                           <Button
                             disabled={
-                              subscription?.subscriptionType === "Yearly Standard" &&
-                              subscription?.isActive
+                              subscription?.subscriptionType ===
+                                "Yearly Standard" && subscription?.isActive
                             }
                             onClick={() =>
                               buySelectedPlan(
@@ -1382,8 +1387,8 @@ const PricingSection = () => {
                             color='dark'
                             className='w-full uppercase'
                           >
-                            {subscription?.subscriptionType === "Yearly Standard" &&
-                            subscription?.isActive
+                            {subscription?.subscriptionType ===
+                              "Yearly Standard" && subscription?.isActive
                               ? "Current Plan"
                               : "Buy Yearly Standard"}
                           </Button>
@@ -1393,8 +1398,8 @@ const PricingSection = () => {
                         <div className='flex items-center justify-center'>
                           <Button
                             disabled={
-                              subscription?.subscriptionType === "Yearly Premium" &&
-                              subscription?.isActive
+                              subscription?.subscriptionType ===
+                                "Yearly Premium" && subscription?.isActive
                             }
                             onClick={() =>
                               buySelectedPlan(
@@ -1408,8 +1413,8 @@ const PricingSection = () => {
                             color='dark'
                             className='w-full uppercase'
                           >
-                            {subscription?.subscriptionType === "Yearly Premium" &&
-                            subscription?.isActive
+                            {subscription?.subscriptionType ===
+                              "Yearly Premium" && subscription?.isActive
                               ? "Current Plan"
                               : "Buy Yearly Premium"}
                           </Button>
@@ -1435,14 +1440,16 @@ const PricingSection = () => {
                     color='dark'
                     className='w-full uppercase'
                   >
-                    Pay Using Stripe
+                    <FaCcStripe fontSize={22} className='text-white' />
+                    <span className='ml-3'>Pay Using Stripe</span>
                   </Button>
                   <Button
                     onClick={handlePaypalPayment}
                     color='blue'
                     className='w-full uppercase'
                   >
-                    Pay Using Paypal
+                    <SlPaypal fontSize={20} className='text-white' />
+                    <span className='ml-3'>Pay Using Paypal</span>
                   </Button>
                 </div>
               </div>
