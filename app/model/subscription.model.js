@@ -9,7 +9,14 @@ const subscriptionSchema = new mongoose.Schema(
     },
     subscriptionType: {
       type: String,
-      enum: ["Basic", "Standard", "Premium"],
+      enum: [
+        "Basic",
+        "Standard",
+        "Premium",
+        "Yearly Basic",
+        "Yearly Standard",
+        "Yearly Premium",
+      ],
       default: "Basic",
     },
     subscriptionPlan: {
@@ -32,5 +39,7 @@ const subscriptionSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Subscription = mongoose.models.Subscription ||mongoose.model("Subscription", subscriptionSchema);
+const Subscription =
+  mongoose.models.Subscription ||
+  mongoose.model("Subscription", subscriptionSchema);
 export default Subscription;

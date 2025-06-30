@@ -31,7 +31,11 @@ export default function PlanDetails() {
   };
 
   const handleCancel = async () => {
-    if (confirm("Are you sure you want to cancel your subscription? This will delete your current subscription plan.")) {
+    if (
+      confirm(
+        "Are you sure you want to cancel your subscription? This will delete your current subscription plan."
+      )
+    ) {
       setLoading(true);
       const res = await fetch(
         `/api/user/subscription/cancel/${subscription?._id}`,
@@ -70,7 +74,15 @@ export default function PlanDetails() {
                     ? "$99.99"
                     : subscription?.subscriptionType === "Standard"
                     ? "$249.99"
-                    : "$499.99"}
+                    : subscription?.subscriptionType === "Premium"
+                    ? "$499.99"
+                    : subscription?.subscriptionType === "Yearly Basic"
+                    ? "$764.99"
+                    : subscription?.subscriptionType === "Yearly Standard"
+                    ? "$2029.99"
+                    : subscription?.subscriptionType === "Yearly Premium"
+                    ? "$3559.99"
+                    : "N/A"}
                 </span>
               </div>
               <div className='flex justify-between border-b pb-2'>
@@ -115,7 +127,7 @@ export default function PlanDetails() {
             </div>
           </div>
         ) : (
-          <div className="text-center">
+          <div className='text-center'>
             <p className='text-red-600 mt-2'>
               You have no active subscription plan.
             </p>

@@ -10,7 +10,7 @@ const client = new paypal.core.PayPalHttpClient(environment);
 
 export async function POST(req) {
   try {
-    const { userId, plan, price } = await req.json();
+    const { userId, plan, price, timePeriod } = await req.json();
 
     if (!userId || !plan || !price) {
       return NextResponse.json(
@@ -31,7 +31,7 @@ export async function POST(req) {
               value: price.toString(),
             },
             description: `Subscription plan: ${plan}`,
-            custom_id: `${userId}__${plan}__${price}`,
+            custom_id: `${userId}__${plan}__${price}__${timePeriod}`,
           },
         ],
         application_context: {

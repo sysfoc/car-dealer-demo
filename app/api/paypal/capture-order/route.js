@@ -32,11 +32,12 @@ export async function POST(req) {
     let userId = "";
     let plan = "";
     let price = null;
+    let timePeriod = null;
 
     if (customId) {
       const parts = customId.split("__");
-      if (parts.length === 3) {
-        [userId, plan, price] = parts;
+      if (parts.length === 4) {
+        [userId, plan, price, timePeriod] = parts;
       }
     }
     if (plan.includes("add-on")) {
@@ -151,8 +152,13 @@ export async function POST(req) {
         {
           $set: {
             subscriptionType: plan,
-            subscriptionPlan: "Monthly",
+            subscriptionPlan: timePeriod,
             startDate: new Date(),
+            endDate: new Date(
+              Date.now() +
+                (timePeriod === "Yearly" ? 365 : 30) * 24 * 60 * 60 * 1000
+            ),
+            isActive: true,
           },
         },
         { upsert: true, new: true }
@@ -163,8 +169,9 @@ export async function POST(req) {
       userId,
       customerId: "Paypal-user",
       product: plan,
-      paymentMethod: "Stripe",
+      paymentMethod: "PayPal",
       productPrice: price,
+      productPlan: timePeriod || "Monthly",
       transactionDate: new Date(),
     });
 

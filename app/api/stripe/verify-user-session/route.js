@@ -29,6 +29,7 @@ export async function GET(req) {
   const userId = session.metadata?.userId;
   const plan = session.metadata?.plan;
   const price = Number(session.amount_total) / 100;
+  const timePeriod = session.metadata?.timePeriod;
 
   if (plan.includes("add-on")) {
     const existingAddon = await Addon.findOne({ userId, serviceName: plan });
@@ -134,6 +135,7 @@ export async function GET(req) {
   } else {
     const existingSubscription = await Subscription.findOne({
       userId,
+      subscriptionPlan: timePeriod,
       subscriptionType: plan,
     });
 
@@ -148,9 +150,12 @@ export async function GET(req) {
       {
         $set: {
           subscriptionType: plan,
-          subscriptionPlan: "Monthly",
+          subscriptionPlan: timePeriod,
           startDate: new Date(),
-          endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+          endDate: new Date(
+            Date.now() +
+              (timePeriod === "Yearly" ? 365 : 30) * 24 * 60 * 60 * 1000
+          ),
           isActive: true,
         },
       },
@@ -163,6 +168,7 @@ export async function GET(req) {
     product: plan,
     paymentMethod: "Stripe",
     productPrice: price,
+    productPlan: timePeriod || "Monthly",
     transactionDate: new Date(),
   });
 

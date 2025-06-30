@@ -13,14 +13,6 @@ const AddOns = () => {
   const [loading, setLoading] = useState(false);
   const [addOns, setAddOns] = useState([]);
 
-  useEffect(() => {
-    if (!currentUser) {
-      router.replace("/login");
-    }
-  }, [currentUser, router]);
-
-  if (!currentUser) return null;
-
   const services = [
     {
       id: 1,
@@ -53,14 +45,12 @@ const AddOns = () => {
 
   useEffect(() => {
     setLoading(true);
-    if (!currentUser) {
-      router.push("/login");
-    }
     if (currentUser?._id) {
       const fetchUserAddons = async () => {
         try {
           const response = await fetch("/api/user/add-ons/details");
           const data = await response.json();
+          setLoading(false);
           if (response.ok) {
             setAddOns(data.addons);
             setLoading(false);
@@ -148,28 +138,32 @@ const AddOns = () => {
                       <span className='px-5 py-2 rounded-md text-sm bg-gray-100'>
                         ${service.price}/month
                       </span>
-                      <Button
-                        className='w-full bg-red-600 hover:!bg-red-700 text-white'
-                        disabled={addOns.some(
-                          (addon) =>
-                            addon.isActive &&
-                            addon.serviceName?.includes(service.title)
-                        )}
-                        onClick={() =>
-                          buySelectedPlan(
-                            setSelectedPlan({
-                              plan: `${service.title} add-on`,
-                              price: `${service.price}`,
-                            })
+                      {currentUser && (
+                        <Button
+                          className='w-full bg-red-600 hover:!bg-red-700 text-white'
+                          disabled={addOns.some(
+                            (addon) =>
+                              addon.isActive &&
+                              addon.serviceName?.includes(service.title)
+                          )}
+                          onClick={() =>
+                            buySelectedPlan(
+                              setSelectedPlan({
+                                plan: `${service.title} add-on`,
+                                price: `${service.price}`,
+                              })
+                            )
+                          }
+                        >
+                          {addOns.some(
+                            (addon) =>
+                              addon.isActive &&
+                              addon.serviceName?.includes(service.title)
                           )
-                        }
-                      >
-                        {addOns.some(
-                          (addon) =>
-                            addon.isActive &&
-                            addon.serviceName?.includes(service.title)
-                        ) ? "Subscribed" : "Purchase"}
-                      </Button>
+                            ? "Subscribed"
+                            : "Purchase"}
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </div>
