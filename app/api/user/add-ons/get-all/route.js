@@ -4,7 +4,7 @@ import { config } from "@/app/api/utils/env-config";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
-
+import { sendEmail } from "@/app/api/utils/send-email";
 export async function GET() {
   await connectToDatabase();
   try {
@@ -33,10 +33,43 @@ export async function GET() {
 
     const updates = await Promise.all(
       addons.map(async (addon) => {
-        if (addon.expiredAt && new Date(addon.expiredAt) <= today && addon.isActive) {
-          addon.isActive = false;
+        const expiredDate = new Date(addon.expiredAt);
+
+        // 3 days before expiration
+        const threeDaysBefore = new Date(expiredDate);
+        threeDaysBefore.setDate(expiredDate.getDate() - 3);
+
+        // === Reminder 3 days before expiration ===
+        if (
+          addon.isActive &&
+          !addon.reminderSent &&
+          today >= threeDaysBefore &&
+          today < expiredDate
+        ) {
+          await sendEmail({
+            to: "hamzafullstackdev1@gmail.com", // assume addon has a userEmail field
+            subject: "Reminder: Addon Expiring Soon",
+            text: `Your addon will expire on ${expiredDate.toDateString()}. Please take necessary action.`,
+          });
+
+          addon.reminderSent = true;
           await addon.save();
         }
+
+        // === Expiration Handling ===
+        if (addon.isActive && expiredDate <= today && !addon.emailSent) {
+          addon.isActive = false;
+
+          await sendEmail({
+            to: "hamzafullstackdev1@gmail.com",
+            subject: "Addon Expired",
+            text: `Your addon expired has expired. Please renew to continue using the service.`,
+          });
+
+          addon.emailSent = true;
+          await addon.save();
+        }
+
         return addon;
       })
     );
