@@ -15,7 +15,7 @@ const ProjectTemplates = () => {
       name: "Automotive Car Dealership Theme One",
       image: "/demo-1.png",
       alt: "Car dealership showroom with multiple vehicles - Dealer One",
-      price: 1000,
+      price: 100,
       link: "https://car-dealer-app-nextjs1.vercel.app/",
     },
     {

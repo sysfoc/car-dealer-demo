@@ -33,6 +33,8 @@ export const themeSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
+    emailSent: { type: Boolean, default: false },
+    reminderSent: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
