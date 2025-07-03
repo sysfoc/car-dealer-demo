@@ -94,7 +94,6 @@ export async function GET() {
     );
     return NextResponse.json({ themes: updates }, { status: 200 });
   } catch (error) {
-    console.log(error);
     return NextResponse.json({ message: error.message }, { status: 500 });
   }
 }
