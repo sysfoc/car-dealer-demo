@@ -5,6 +5,8 @@ import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import { config } from "@/app/api/utils/env-config";
 import Notification from "@/app/model/notification.model";
+import User from "@/app/model/user.model";
+import { sendEmail } from "@/app/api/utils/send-email";
 
 export async function POST(req) {
   await connectToDatabase();
@@ -26,6 +28,7 @@ export async function POST(req) {
       return NextResponse.json({ error: "Invalid token" }, { status: 403 });
     }
     const id = decoded.id;
+    const user = await User.findById(id);
     await Refund.create({
       userId: id,
       orderId,
@@ -33,6 +36,11 @@ export async function POST(req) {
       email,
       refundMethod,
       reason,
+    });
+    await sendEmail({
+      to: config.emailReceiver,
+      subject: "Refund Request - Automotiv Web Solutions",
+      text: `A User has submitted a refund request, Please take neccessary actions:\nName: ${user.name}\nEmail: ${user.email}\nOrder ID: ${orderId}\nRequested Email: ${email}\nAmount: $${amount}\nRefund Method: ${refundMethod}\nReason: ${reason}`,
     });
     await Notification.create({
       type: "success",
