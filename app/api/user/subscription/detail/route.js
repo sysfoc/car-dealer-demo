@@ -41,18 +41,24 @@ export async function GET() {
       ) {
         await sendEmail({
           to: user.email,
-          subject: "Subscription Reminder",
-          text: `Dear user, your ${
-            subscription.subscriptionPlan
-          } subscription of ${
+          subject: `Your Subscription is Expiring Soon – Renew Now to Avoid Interruption`,
+          text: `Dear ${
+            user.name || "User"
+          },\n\nWe hope you're enjoying the benefits of your subscription with us.\nThis is a friendly reminder that your current subscription is set to expire on ${subscription.endDate.toLocaleDateString(
+            "en-US",
+            { month: "long", day: "numeric", year: "numeric" }
+          )}. To ensure uninterrupted access to all features and services, we recommend renewing your subscription before it expires.\nSubscription Details:\nSubscription Type: ${
             subscription.subscriptionType
-          } package will expire on ${new Date(
-            subscription.endDate.toLocaleDateString("en-US", {
-              year: "numeric",
+          }\nSubscription Plan: ${
+            subscription.subscriptionPlan
+          }\nExpiration Date: ${subscription.endDate.toLocaleDateString(
+            "en-US",
+            {
               month: "long",
               day: "numeric",
-            })
-          )}. Please renew before expiry to avoid service disruption.`,
+              year: "numeric",
+            }
+          )}\nTo renew your subscription, simply click the button below:\n[https://www.automotivewebsolutions.com/pricing]\nIf you have any questions or need assistance with the renewal process, please don’t hesitate to reach out to our support team.\nThank you for choosing us — we look forward to continuing to serve you.\n\nBest regards,\nAutomotiv Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
         });
 
         subscription.reminderSent = true;
@@ -62,8 +68,28 @@ export async function GET() {
         if (!subscription.emailSent) {
           await sendEmail({
             to: user.email,
-            subject: "Subscription Expired",
-            text: `Dear user, Your ${subscription.subscriptionPlan} of ${subscription.subscriptionType} package has expired. Please renew your subscription to continue using our services.`,
+            subject: `Your Subscription Has Expired – Reactivate to Continue Access`,
+            text: `Dear ${
+              user.name || "User"
+            },\nWe wanted to inform you that your subscription with Automotiv Web Solutions has expired as of ${subscription.endDate.toLocaleDateString(
+              "en-US",
+              {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              }
+            )}.\nAs a result, your access to premium features and services has been paused. To resume uninterrupted access and continue enjoying all benefits, we invite you to renew your subscription at your earliest convenience.\nSubscription Details:\nPlan: ${
+              subscription.subscriptionPlan
+            }\nSubscription Type: ${
+              subscription.subscriptionType
+            }\nExpiration Date: ${subscription.endDate.toLocaleDateString(
+              "en-US",
+              {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              }
+            )}\nStatus: Expired\nClick below to renew your subscription now:\n[https://www.automotivewebsolutions.com/pricing]\nIf you need any help or have questions about your account, our support team is here for you.\nThank you for being a valued part of our community. We’d love to have you back!\n\nWarm regards,\nAutomotiv Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
           });
           await sendEmail({
             to: config.emailReceiver,

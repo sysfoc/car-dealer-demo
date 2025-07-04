@@ -45,18 +45,19 @@ export async function GET() {
         ) {
           await sendEmail({
             to: user.email,
-            subject: "Reminder: Addon Expiring Soon",
-            text: `Your '${addon.serviceName}' addon will expire on ${new Date(
-              addon.expiredAt.toLocaleDateString("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              })
-            )} at ${addon.expiredAt.toLocaleTimeString("en-US", {
-              hour: "numeric",
-              minute: "numeric",
-              hour12: true,
-            })}. Please take necessary action.`,
+            subject: `Your Addon is Expiring Soon – Renew Now to Avoid Interruption`,
+            text: `Dear ${
+              user.name || "User"
+            },\n\nWe hope you're enjoying the benefits of your subscription with us.\nThis is a friendly reminder that your current subscription is set to expire in 3 days — on ${addon.expiredAt.toLocaleDateString(
+              "en-US",
+              { month: "long", day: "numeric", year: "numeric" }
+            )}. To ensure uninterrupted access to all features and services, we recommend renewing your subscription before it expires.\nSubscription Details:\nPlan: ${
+              addon.serviceName
+            }\nExpiration Date: ${addon.expiredAt.toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })}\nTo renew your subscription, simply click the button below:\n[https://www.automotivewebsolutions.com/add-ons]\nIf you have any questions or need assistance with the renewal process, please don’t hesitate to reach out to our support team.\nThank you for choosing us — we look forward to continuing to serve you.\n\nBest regards,\nAutomotiv Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
           });
 
           addon.reminderSent = true;
@@ -67,8 +68,23 @@ export async function GET() {
 
           await sendEmail({
             to: user.email,
-            subject: "Addon Expired",
-            text: `Your addon '${addon.serviceName}' has expired. Please renew to continue using the service.`,
+            subject: "Your Addon Has Expired – Reactivate to Continue Access",
+            text: `Dear ${
+              user.name || "User"
+            },\nWe wanted to inform you that your subscription with Automotiv Web Solutions has expired as of ${addon.expiredAt.toLocaleDateString(
+              "en-US",
+              {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              }
+            )}.\nAs a result, your access to premium features and services has been paused. To resume uninterrupted access and continue enjoying all benefits, we invite you to renew your subscription at your earliest convenience.\nSubscription Details:\nPlan: ${
+              addon.serviceName
+            }\nExpiration Date: ${addon.expiredAt.toLocaleDateString("en-US", {
+              month: "long",
+              day: "numeric",
+              year: "numeric",
+            })}\nStatus: Expired\nClick below to renew your subscription now:\n[https://www.automotivewebsolutions.com/add-ons]\nIf you need any help or have questions about your account, our support team is here for you.\nThank you for being a valued part of our community. We’d love to have you back!\n\nWarm regards,\nAutomotiv Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
           });
 
           await sendEmail({
