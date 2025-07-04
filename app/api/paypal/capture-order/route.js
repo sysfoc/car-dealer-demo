@@ -4,6 +4,8 @@ import Payment from "@/app/model/payment.model";
 import Subscription from "@/app/model/subscription.model";
 import Notification from "@/app/model/notification.model";
 import Addon from "@/app/model/addon.model";
+import User from "@/app/model/user.model";
+import { sendEmail } from "@/app/api/utils/send-email";
 
 const clientId = process.env.PAYPAL_SANDBOX_CLIENT_ID;
 const clientSecret = process.env.PAYPAL_SANDBOX_CLIENT_SECRET;
@@ -40,8 +42,16 @@ export async function POST(req) {
         [userId, plan, price, timePeriod] = parts;
       }
     }
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 400 });
+    }
     if (plan.includes("add-on")) {
-      const existingAddon = await Addon.findOne({ userId, serviceName: plan });
+      const existingAddon = await Addon.findOne({
+        userId: user._id,
+        serviceName: plan,
+      });
 
       if (existingAddon && existingAddon.isActive) {
         return NextResponse.json(
@@ -52,7 +62,7 @@ export async function POST(req) {
 
       if (existingAddon && !existingAddon.isActive) {
         await Addon.findOneAndUpdate(
-          { userId, serviceName: plan },
+          { userId: user._id, serviceName: plan },
           {
             $set: {
               isActive: true,
@@ -61,9 +71,16 @@ export async function POST(req) {
             },
           }
         );
-
+        await sendEmail({
+          to: user.email,
+          subject: "Addon Renewal",
+          text: `${user.name}! your "${plan.slice(
+            0,
+            -6
+          )}" add-on subscription has been renewed.`,
+        });
         await Notification.create({
-          userId,
+          userId: user._id,
           type: "success",
           title: "Addon Renewal",
           message: `You have successfully renewed your "${plan.slice(
@@ -73,16 +90,25 @@ export async function POST(req) {
         });
       } else {
         await Addon.create({
-          userId,
+          userId: user._id,
           serviceName: plan,
           servicePrice: price,
           subscribedAt: new Date(),
           expiredAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
           isActive: true,
         });
-
+        await sendEmail({
+          to: user.email,
+          subject: "Addon Subscription",
+          text: `${
+            user.name
+          }! you have successfully subscribed to "${plan.slice(
+            0,
+            -6
+          )}" add-on.`,
+        });
         await Notification.create({
-          userId,
+          userId: user._id,
           type: "success",
           title: "Addon Subscription",
           message: `You have successfully subscribed to "${plan.slice(
@@ -92,7 +118,10 @@ export async function POST(req) {
         });
       }
     } else if (plan.includes("theme")) {
-      const existingTheme = await Theme.findOne({ userId, themeName: plan });
+      const existingTheme = await Theme.findOne({
+        userId: user._id,
+        themeName: plan,
+      });
 
       if (existingTheme && existingTheme.isActive) {
         return NextResponse.json(
@@ -108,7 +137,7 @@ export async function POST(req) {
 
       if (existingTheme && !existingTheme.isActive) {
         await Theme.findOneAndUpdate(
-          { userId, themeName: plan },
+          { userId: user._id, themeName: plan },
           {
             $set: {
               isActive: true,
@@ -117,9 +146,16 @@ export async function POST(req) {
             },
           }
         );
-
+        await sendEmail({
+          to: user.email,
+          subject: "Theme Renewal",
+          text: `${user.name}! your "${plan.slice(
+            0,
+            -6
+          )}" theme subscription has been renewed.`,
+        });
         await Notification.create({
-          userId,
+          userId: user._id,
           type: "success",
           title: "Theme Renewal",
           message: `You have successfully renewed your "${plan.slice(
@@ -129,15 +165,22 @@ export async function POST(req) {
         });
       } else {
         await Theme.create({
-          userId,
+          userId: user._id,
           themeName: plan,
           themePrice: price,
           subscribedAt: new Date(),
           expiredAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
           isActive: true,
         });
+        await sendEmail({
+          to: user.email,
+          subject: "Theme Subscription",
+          text: `${
+            user.name
+          }! you have successfully subscribed to "${plan.slice(0, -6)}" theme.`,
+        });
         await Notification.create({
-          userId,
+          userId: user._id,
           type: "success",
           title: "Theme Subscription",
           message: `You have successfully subscribed to "${plan.slice(
@@ -148,7 +191,7 @@ export async function POST(req) {
       }
     } else {
       await Subscription.findOneAndUpdate(
-        { userId },
+        { userId: user._id },
         {
           $set: {
             subscriptionType: plan,
@@ -166,7 +209,7 @@ export async function POST(req) {
     }
 
     await Payment.create({
-      userId,
+      userId: user._id,
       customerId: "Paypal-user",
       product: plan,
       paymentMethod: "PayPal",
@@ -174,9 +217,13 @@ export async function POST(req) {
       productPlan: timePeriod || "Monthly",
       transactionDate: new Date(),
     });
-
+    await sendEmail({
+      to: user.email,
+      subject: "Subscription",
+      text: `${user.name}! you have successfully subscribed to "${plan}" plan.`,
+    });
     await Notification.create({
-      userId,
+      userId: user._id,
       type: "success",
       title: "Subscription",
       message: `You have successfully subscribed to "${plan}" plan.`,
