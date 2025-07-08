@@ -2,9 +2,9 @@
   <img src="/public/logo.png" alt="Company Logo" width="500"/>
 </p>
 
-# **Car Dealer Theme Display Site**
+# **Automotive Web Solutions**
 
-Welcome to Car Dealers Display Site! We are a team of innovators, creators, and problem-solvers committed to crafting meaningful digital experiences. Our mission is to empower businesses and individuals by delivering high-quality, reliable, and scalable solutions that drive success in an ever-evolving digital landscape.
+Welcome to Automotive Web Solutions! We are a team of innovators, creators, and problem-solvers committed to crafting meaningful digital experiences. Our mission is to empower businesses and individuals by delivering high-quality, reliable, and scalable solutions that drive success in an ever-evolving digital landscape.
 
 ---
 
