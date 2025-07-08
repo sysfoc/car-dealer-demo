@@ -15,7 +15,7 @@ const AddOns = () => {
   const services = [
     {
       id: 1,
-      image: "/07.png",
+      image: "/09.png",
       alt: "Feature 7 - Google Fonts Integration",
       title: "Content Writing",
       description:
@@ -33,7 +33,7 @@ const AddOns = () => {
     },
     {
       id: 3,
-      image: "/09.png",
+      image: "/07.png",
       alt: "Feature 9 - Social Media Marketing",
       title: "Social Media Marketing",
       description:

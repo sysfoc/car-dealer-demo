@@ -66,9 +66,9 @@ const Features = () => {
     },
     {
       id: 12,
-      title: "Ajax Contact Form",
+      title: "Contact Form",
       image: "/12.png",
-      alt: "Feature 12 - Ajax Contact Form",
+      alt: "Feature 12 - Contact Form",
     },
     {
       id: 13,
