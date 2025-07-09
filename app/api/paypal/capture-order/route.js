@@ -5,6 +5,7 @@ import Subscription from "@/app/model/subscription.model";
 import Notification from "@/app/model/notification.model";
 import Addon from "@/app/model/addon.model";
 import User from "@/app/model/user.model";
+import { connectToDatabase } from "@/app/api/utils/db";
 import { sendEmail } from "@/app/api/utils/send-email";
 
 const clientId = process.env.PAYPAL_SANDBOX_CLIENT_ID;
@@ -14,6 +15,7 @@ const environment = new paypal.core.SandboxEnvironment(clientId, clientSecret);
 const client = new paypal.core.PayPalHttpClient(environment);
 
 export async function POST(req) {
+  await connectToDatabase();
   try {
     const { orderID } = await req.json();
 

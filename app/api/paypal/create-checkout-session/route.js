@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import paypal from "@paypal/checkout-server-sdk";
 import User from "@/app/model/user.model";
+import { connectToDatabase } from "@/app/api/utils/db";
 
 const clientId = process.env.PAYPAL_SANDBOX_CLIENT_ID;
 const clientSecret = process.env.PAYPAL_SANDBOX_CLIENT_SECRET;
@@ -9,6 +10,7 @@ const environment = new paypal.core.SandboxEnvironment(clientId, clientSecret);
 const client = new paypal.core.PayPalHttpClient(environment);
 
 export async function POST(req) {
+  await connectToDatabase();
   try {
     const { userId, plan, price, timePeriod } = await req.json();
 
@@ -19,6 +21,9 @@ export async function POST(req) {
       );
     }
     const userExist = await User.findById(userId);
+    if (!userExist) {
+      return NextResponse.json({ message: "User not found" }, { status: 404 });
+    }
     if (userExist) {
       const request = new paypal.orders.OrdersCreateRequest();
       request.prefer("return=representation");
@@ -28,7 +33,7 @@ export async function POST(req) {
           {
             amount: {
               currency_code: "USD",
-              value: price.toString(),
+              value: price.toFixed(2),
             },
             description: `Subscription plan: ${plan}`,
             custom_id: `${userId}__${plan}__${price}__${timePeriod}`,
@@ -37,6 +42,8 @@ export async function POST(req) {
         application_context: {
           return_url: `${process.env.BASE_URL}/payment/success`,
           cancel_url: `${process.env.BASE_URL}/failed-payment`,
+          user_action: "PAY_NOW",
+          brand_name: "Automotive Web Solutions",
         },
       });
 
