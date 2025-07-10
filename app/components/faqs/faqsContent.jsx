@@ -59,13 +59,13 @@ const faqsContent = () => {
                 </div>
               </div>
               <div
-                className={`overflow-hidden transition-all duration-500 ease-in-out px-6 border-t bg-white/80 dark:bg-gray-800 ${
+                className={`overflow-hidden transition-all duration-500 ease-in-out px-3 md:px-6 border-t bg-white/80 dark:bg-gray-800 ${
                   isCategoryOpen
                     ? "opacity-100 max-h-[1000px] py-5"
                     : "opacity-0 max-h-0 py-0"
                 }`}
               >
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                   {faq.questions.map((question, qIndex) => {
                     const key = `${catIndex}-${qIndex}`;
                     const isQuestionOpen = openQuestions[key];
@@ -73,7 +73,7 @@ const faqsContent = () => {
                     return (
                       <div key={key} className='transition-all'>
                         <div
-                          className='mb-2 flex justify-between gap-3 cursor-pointer'
+                          className='flex justify-between p-3 gap-3 cursor-pointer border border-gray-200 dark:border-gray-700 rounded-md'
                           onClick={() => toggleQuestion(catIndex, qIndex)}
                         >
                           <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
@@ -94,9 +94,9 @@ const faqsContent = () => {
                           </div>
                         </div>
                         <div
-                          className={`transition-all duration-300 ease-in-out ${
+                          className={`transition-all duration-300 ease-in-out border-x border-b border-gray-200 rounded-b-md dark:border-gray-700 px-3 ${
                             isQuestionOpen
-                              ? "opacity-100 max-h-[500px] mt-1"
+                              ? "opacity-100 max-h-[500px]"
                               : "opacity-0 max-h-0 overflow-hidden"
                           }`}
                         >
@@ -113,7 +113,7 @@ const faqsContent = () => {
                             ) : (
                               <p
                                 key={idx}
-                                className='text-gray-600 dark:text-gray-400 mb-2'
+                                className='py-3 text-gray-600 dark:text-gray-400 mb-2'
                               >
                                 {block}
                               </p>
