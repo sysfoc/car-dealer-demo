@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/public/logo.png" alt="Company Logo" width="500"/>
+  <img src="/public/logo.png" alt="Company Logo" width="300"/>
 </p>
 
 # **Automotive Web Solutions**
@@ -13,10 +13,9 @@ Welcome to Automotive Web Solutions! We are a team of innovators, creators, and 
 1. [Our Mission](#our-mission)
 2. [Features](#features)
 3. [Tech Stack](#tech-stack)
-4. [Installation](#installation)
-5. [Folder Structure](#folder-structure)
-6. [Contributors](#contributors)
-7. [License](#license)
+4. [Folder Structure](#folder-structure)
+5. [Contributors](#contributors)
+6. [License](#license)
 
 ---
 
@@ -46,47 +45,6 @@ At our core, we aim to bridge the gap between technology and creativity. Our goa
 - **Database:** MongoDB, Firebase
 - **Payment Methods:** Stripe, Paypal
 - **Authentication:** JSON Web Tokens (JWT), bcrypt
-
----
-
-## **Installation**
-
-Follow these steps to set up the project locally:
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/sysfoc/car-dealer-demo.git
-   cd car-dealer-demo
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-3. Set up environment variables:
-
-   - Create a `.env` file in the `root` directory.
-   - Add the following variables:
-     ```env
-     BASE_URL=your-domain-name
-     MONGODB_URI=your-mongodb-url
-     DB_NAME=mongodb-database-name
-     SALT_ROUNDS=salt-rounds-int
-     JWT_SECRET_KEY=your-jwt-key
-     NEXT_PUBLIC_FIREBASE_API_KEY=your-firebase-api-key
-     STRIPE_SECRET_KEY=your-stripe-secret
-     PAYPAL_SANDBOX_CLIENT_ID=your-paypal-client-id
-     PAYPAL_SANDBOX_CLIENT_SECRET=your-paypal-secret
-     ```
-
-4. Start the application:
-   ```bash
-   # Start the project
-   npm run dev
-   ```
 
 ---
 
