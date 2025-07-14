@@ -97,7 +97,7 @@ const PricingSection = () => {
           <h1 className='text-2xl font-bold md:text-4xl'>
             Choose a Plan That Fits Your Dealership
           </h1>
-          <p className='mt-3 text-center'>Join 1000+ Happy Users</p>
+          <p className='mt-3 text-center'>We're excited to serve you!</p>
           {!currentUser && (
             <div>
               <p className='text-red-600 my-2 text-sm font-semibold'>
