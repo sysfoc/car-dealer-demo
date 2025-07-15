@@ -30,9 +30,9 @@ export default function CookiePolicy() {
           on your device for a specified period).
         </p>
 
-        <h2 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           2. How We Use Cookies
-        </h2>
+        </h3>
         <p className='mb-4 text-gray-600 dark:text-white'>We use cookies to:</p>
         <ul className='list-disc pl-6 mb-4 text-gray-600 dark:text-white'>
           <li>Ensure our website functions properly.</li>
@@ -41,9 +41,9 @@ export default function CookiePolicy() {
           <li>Provide personalized content and advertising.</li>
         </ul>
 
-        <h2 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           3. Types of Cookies We Use
-        </h2>
+        </h4>
         <ul className='list-disc pl-6 mb-4 text-gray-600 dark:text-white'>
           <li>
             <strong>Essential Cookies:</strong> Necessary for website
@@ -63,9 +63,9 @@ export default function CookiePolicy() {
           </li>
         </ul>
 
-        <h2 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           4. Third-Party Cookies
-        </h2>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           We may allow third-party services, such as analytics providers and
           advertisers, to set cookies on our site to help analyze traffic and
@@ -73,9 +73,9 @@ export default function CookiePolicy() {
           privacy policies governing the use of cookies.
         </p>
 
-        <h2 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           5. Managing Your Cookie Preferences
-        </h2>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           You can control and manage cookie settings in your browser. You may
           choose to block or delete cookies; however, doing so may affect
@@ -90,17 +90,17 @@ export default function CookiePolicy() {
           For more details, consult your browser’s help section.
         </p>
 
-        <h2 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           6. Changes to This Policy
-        </h2>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           We may update this Cookie Policy from time to time. Any changes will
           be posted on this page with a revised effective date. Please review
           this policy periodically to stay informed about how we use cookies.
         </p>
-        <h2 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           7. Contact Us
-        </h2>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           If you have any questions regarding this Cookie Policy, please contact
           us at sysfoc@gmail.com.

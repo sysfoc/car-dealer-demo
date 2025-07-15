@@ -32,6 +32,7 @@ export async function GET(req) {
   const plan = session.metadata?.plan;
   const price = Number(session.amount_total) / 100;
   const timePeriod = session.metadata?.timePeriod;
+  const paymentId = session.payment_intent;
 
   const user = await User.findById(userId);
   if (!user) {
@@ -207,6 +208,7 @@ export async function GET(req) {
   await Payment.create({
     userId: user._id,
     customerId: session.customer,
+    paymentId: paymentId,
     product: plan,
     paymentMethod: "Stripe",
     productPrice: price,

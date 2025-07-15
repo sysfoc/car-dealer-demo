@@ -20,7 +20,6 @@ export default function ViewInvoice() {
   const invoiceRef = useRef(null);
   const params = useParams();
   const [invoice, setInvoice] = useState(null);
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const fetchInvoiceDetails = async () => {
@@ -30,7 +29,6 @@ export default function ViewInvoice() {
       const data = await res.json();
       if (res.ok) {
         setInvoice(data.transaction);
-        setUser(data.user);
       }
     };
     if (params.id) {
@@ -100,8 +98,10 @@ export default function ViewInvoice() {
             <div>
               <h3 className='font-semibold'>Invoice To:</h3>
               <div className='flex flex-col mt-1'>
-                <p className='text-sm text-gray-500'>{user?.name}</p>
-                <p className='text-sm text-gray-500'>{user?.email}</p>
+                <p className='text-sm text-gray-500'>{invoice?.userId?.name}</p>
+                <p className='text-sm text-gray-500'>
+                  {invoice?.userId?.email}
+                </p>
                 <p className='text-sm text-gray-500'>Pakistan</p>
               </div>
             </div>

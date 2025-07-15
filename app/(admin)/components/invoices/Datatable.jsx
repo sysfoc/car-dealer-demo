@@ -56,31 +56,38 @@ const Datatable = () => {
                 </TableCell>
               </TableRow>
             )}
-            {transactions.length > 0 && transactions.map((transaction) => (
-              <TableRow key={transaction?._id}>
-                <TableCell>{transaction?._id}</TableCell>
-                <TableCell>
-                  {new Date(transaction?.transactionDate).toLocaleDateString(
-                    "en-US",
-                    { year: "numeric", month: "long", day: "numeric" }
-                  )}
-                </TableCell>
-                <TableCell>{transaction?.product}</TableCell>
-                <TableCell>${transaction?.productPrice}</TableCell>
-                <TableCell>{transaction?.paymentMethod}</TableCell>
-                <TableCell>
-                  <div className='flex items-center gap-2'>
-                    <Link
-                      href={`/dashboard/invoices/view/${transaction?._id}`}
-                      className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'
-                      title='View'
-                    >
-                      <FaEye className='w-3 h-3' />
-                    </Link>
-                  </div>
+            {(transactions.length > 0 &&
+              transactions.map((transaction) => (
+                <TableRow key={transaction?._id}>
+                  <TableCell>{transaction?._id}</TableCell>
+                  <TableCell>
+                    {new Date(transaction?.transactionDate).toLocaleDateString(
+                      "en-US",
+                      { year: "numeric", month: "long", day: "numeric" }
+                    )}
+                  </TableCell>
+                  <TableCell>{transaction?.product}</TableCell>
+                  <TableCell>${transaction?.productPrice}</TableCell>
+                  <TableCell>{transaction?.paymentMethod}</TableCell>
+                  <TableCell>
+                    <div className='flex items-center gap-2'>
+                      <Link
+                        href={`/dashboard/invoices/view/${transaction?._id}`}
+                        className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'
+                        title='View'
+                      >
+                        <FaEye className='w-3 h-3' />
+                      </Link>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))) || (
+              <TableRow>
+                <TableCell colSpan={6} className='text-center'>
+                  No transactions found
                 </TableCell>
               </TableRow>
-            )) || <TableRow><TableCell colSpan={6} className='text-center'>No transactions found</TableCell></TableRow>}
+            )}
           </TableBody>
         </Table>
       </div>

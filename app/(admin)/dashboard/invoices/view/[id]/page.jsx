@@ -21,7 +21,6 @@ export default function ViewInvoice() {
   const invoiceRef = useRef(null);
   const params = useParams();
   const [invoice, setInvoice] = useState(null);
-  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -34,7 +33,6 @@ export default function ViewInvoice() {
       setLoading(false);
       if (res.ok) {
         setInvoice(data.transaction);
-        setUser(data.user);
       }
     };
     if (params.id) {
@@ -118,8 +116,12 @@ export default function ViewInvoice() {
                 <Spinner size='lg' />
               ) : (
                 <div className='flex flex-col mt-1'>
-                  <p className='text-sm text-gray-500'>{user?.name}</p>
-                  <p className='text-sm text-gray-500'>{user?.email}</p>
+                  <p className='text-sm text-gray-500'>
+                    {invoice?.userId?.name}
+                  </p>
+                  <p className='text-sm text-gray-500'>
+                    {invoice?.userId?.email}
+                  </p>
                   <p className='text-sm text-gray-500'>Pakistan</p>
                 </div>
               )}

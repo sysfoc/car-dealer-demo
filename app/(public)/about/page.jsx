@@ -3,14 +3,16 @@ import Link from "next/link";
 
 export const metadata = {
   title: "All-in-One Website Solution for Car Dealers – No Coding Needed",
-  description: "Automotive Web Solutions helps car dealers launch and manage professional websites with zero tech hassle. We host, update, and support—just subscribe and sell cars.",
+  description:
+    "Automotive Web Solutions helps car dealers launch and manage professional websites with zero tech hassle. We host, update, and support—just subscribe and sell cars.",
 };
 export default function About() {
   return (
     <div className='min-h-screen bg-gray-50 py-10 dark:bg-gray-800'>
       <div className='mx-auto max-w-4xl rounded-lg bg-white p-8 shadow-md dark:bg-gray-700'>
         <h1 className='mb-6 text-center text-3xl font-bold text-gray-800 dark:text-white'>
-          About Automotive Web Solutions – Your Stress-Free Car Dealer Website Partner 
+          About Automotive Web Solutions – Your Stress-Free Car Dealer Website
+          Partner
         </h1>
         <p className='mb-4 text-gray-600 dark:text-white'>
           Welcome to Automotive Web Solutions – your all-in-one, easy-to-use
@@ -29,14 +31,14 @@ export default function About() {
           Who We Are
         </h2>
         <p className='mb-4 text-gray-600 dark:text-white'>
-          Automotive Web Solutions is a powerful SaaS platform made by <strong>SYSFOC</strong>, a
-          leading software and website development company. It is built
-          especially for car dealerships. We help dealers create and grow their
-          online presence with professional websites that we host, maintain, and
-          update for them. Customers pay a simple subscription fee to use our
-          services. You don’t need to worry about servers, security, or
-          software—we take care of everything so you can focus on selling cars
-          instead of managing a website.
+          Automotive Web Solutions is a powerful SaaS platform made by{" "}
+          <strong>SYSFOC</strong>, a leading software and website development
+          company. It is built especially for car dealerships. We help dealers
+          create and grow their online presence with professional websites that
+          we host, maintain, and update for them. Customers pay a simple
+          subscription fee to use our services. You don’t need to worry about
+          servers, security, or software—we take care of everything so you can
+          focus on selling cars instead of managing a website.
         </p>
         <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Our Hassle-Free Subscription Model
@@ -59,9 +61,9 @@ export default function About() {
             No Code, No Headaches – We manage everything behind the scenes
           </li>
         </ul>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           What We Offer
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           We know that no two dealerships are the same. That is why we provide
           flexible, scalable solutions tailored to your business:
@@ -87,9 +89,9 @@ export default function About() {
             Risk-Free Trial – Try us for 7 days with our money-back guarantee.
           </li>
         </ul>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Why Choose Us?
-        </h3>
+        </h4>
         <ul className='list-disc pl-6 mb-4 text-gray-600 dark:text-white'>
           <li>
             All-in-One Subscription – One payment covers hosting, updates,
@@ -105,9 +107,9 @@ export default function About() {
             dealership’s size and needs
           </li>
         </ul>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Our Commitment to You
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           Your dealership deserves a website that works just as hard as you do.
           With Automotive Web Solutions, your subscription ensures:
@@ -125,9 +127,9 @@ export default function About() {
           Join hundreds of dealerships who trust Automotive Web Solutions to
           power their online success.
         </p>
-        <h3 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
+        <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
           Ready to Get Started?
-        </h3>
+        </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           Launch your dealer website in minutes—no code, no stress.
         </p>
