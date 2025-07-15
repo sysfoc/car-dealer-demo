@@ -76,10 +76,10 @@ export async function POST(req) {
         await sendEmail({
           to: user.email,
           subject: "Addon Renewal",
-          text: `${user.name}! your "${plan.slice(
+          text: `You have successfully renewed your "${plan.slice(
             0,
             -6
-          )}" add-on subscription has been renewed.`,
+          )}" add-on subscription.\nThank you for continuing to use our services. Your subscription has been extended, and all associated features remain active. If you have any questions or need support, feel free to reach out to us.\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
         });
         await Notification.create({
           userId: user._id,
@@ -101,13 +101,13 @@ export async function POST(req) {
         });
         await sendEmail({
           to: user.email,
-          subject: "Addon Subscription",
-          text: `${
-            user.name
-          }! you have successfully subscribed to "${plan.slice(
+          subject: "Addon Subscription – Activation & Details",
+          text: `Dear ${
+            user.name || "User"
+          },\n\nI hope this message finds you well.\nWe would like to inform you that your Addon Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nAddon Name: ${plan.slice(
             0,
             -6
-          )}" add-on.`,
+          )}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sysfoc@gmail.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
         });
         await Notification.create({
           userId: user._id,
@@ -151,10 +151,10 @@ export async function POST(req) {
         await sendEmail({
           to: user.email,
           subject: "Theme Renewal",
-          text: `${user.name}! your "${plan.slice(
+          text: `You have successfully renewed your "${plan.slice(
             0,
             -6
-          )}" theme subscription has been renewed.`,
+          )}" theme subscription.\nThank you for continuing to use our services. Your subscription has been extended, and all associated features remain active. If you have any questions or need support, feel free to reach out to us.\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
         });
         await Notification.create({
           userId: user._id,
@@ -177,9 +177,12 @@ export async function POST(req) {
         await sendEmail({
           to: user.email,
           subject: "Theme Subscription",
-          text: `${
-            user.name
-          }! you have successfully subscribed to "${plan.slice(0, -6)}" theme.`,
+          text: `Dear ${
+            user.name || "User"
+          },\n\nI hope this message finds you well.\nWe would like to inform you that your Theme Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nTheme Name: ${plan.slice(
+            0,
+            -6
+          )}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sysfoc@gmail.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
         });
         await Notification.create({
           userId: user._id,
@@ -222,7 +225,12 @@ export async function POST(req) {
     await sendEmail({
       to: user.email,
       subject: "Subscription",
-      text: `${user.name}! you have successfully subscribed to "${plan}" plan.`,
+      text: `Dear ${
+        user.name || "User"
+      },\n\nI hope this message finds you well.\nWe would like to inform you that your Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nSubscription Name: ${plan.slice(
+        0,
+        -6
+      )}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sysfoc@gmail.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
     });
     await Notification.create({
       userId: user._id,
