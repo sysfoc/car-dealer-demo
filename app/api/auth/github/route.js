@@ -64,6 +64,7 @@ export async function POST(req) {
         name: name,
         email: email,
         signupMethod: "github",
+        isVerified: true,
         password: await hashedPassword(generatedPassword),
         profileImg: profileImg,
       });

@@ -2,7 +2,8 @@ import { connectToDatabase } from "@/app/api/utils/db";
 import User from "@/app/model/user.model";
 import { NextResponse } from "next/server";
 import { hashedPassword } from "@/app/api/utils/hashing";
-
+import { nanoid } from "nanoid";
+import { sendEmail } from "@/app/api/utils/send-email";
 export async function POST(req) {
   await connectToDatabase();
   const { name, email, password, profileImg, billingDetails } =
@@ -40,15 +41,29 @@ export async function POST(req) {
       );
     } else {
       const encryptedPassword = await hashedPassword(password);
+      const verifyToken = nanoid();
+      const verifyTokenExpiry = Date.now() + 3600000;
+      const verifyUrl = `${process.env.BASE_URL}/verify-email?token=${verifyToken}&email=${email}`;
       await User.create({
         name,
         email,
         password: encryptedPassword,
         profileImg,
         billingDetails,
+        verifyToken,
+        verifyTokenExpiry,
+      });
+
+      await sendEmail({
+        to: email,
+        subject: "Verify your email - Automotiv Web Solutions",
+        text: `Please click the link below to verify your email address:\n${verifyUrl}\n\nIf you did not request this email, please ignore it.`,
       });
       return NextResponse.json(
-        { message: "User created successfully" },
+        {
+          message:
+            "Please check your email! We have sent you a verification link. Once you verify your email, you can log in to your account.",
+        },
         { status: 201 }
       );
     }

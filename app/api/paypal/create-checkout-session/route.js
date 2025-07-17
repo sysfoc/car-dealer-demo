@@ -33,7 +33,7 @@ export async function POST(req) {
           {
             amount: {
               currency_code: "USD",
-              value: price.toFixed(2),
+              value: price.toString(),
             },
             description: `Subscription plan: ${plan}`,
             custom_id: `${userId}__${plan}__${price}__${timePeriod}`,

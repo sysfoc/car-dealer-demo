@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Alert, Button, Label, TextInput, Spinner } from "flowbite-react";
 import Google from "@/app/components/auth/Google";
 import Github from "@/app/components/auth/Github";
-import { useRouter } from "next/navigation";
 import { HiInformationCircle } from "react-icons/hi";
 import Link from "next/link";
 
@@ -11,8 +10,9 @@ const Register = () => {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   const handleChange = (e) => {
     setFormData({
@@ -35,7 +35,8 @@ const Register = () => {
       const data = await res.json();
       setLoading(false);
       if (res.ok) {
-        router.push("/login");
+        setSuccess(true);
+        setSuccessMessage(data.message);
       } else {
         setError(true);
         setErrorMessage(data.message);
@@ -53,6 +54,11 @@ const Register = () => {
         <h2 className='mb-6 text-center text-2xl font-bold text-gray-700'>
           Create an Account
         </h2>
+        {success && (
+          <Alert className='mb-3' color='success' icon={HiInformationCircle}>
+            <span className='font-medium'>{successMessage}</span>
+          </Alert>
+        )}
         {error && (
           <Alert className='mb-3' color='failure' icon={HiInformationCircle}>
             <span className='font-medium'>{errorMessage}</span>
@@ -129,6 +135,6 @@ const Register = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Register
+export default Register;

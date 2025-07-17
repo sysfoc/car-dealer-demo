@@ -23,6 +23,12 @@ export async function POST(req) {
   }
   try {
     const isUserExist = await User.findOne({ email });
+    if (!isUserExist.isVerified) {
+      return NextResponse.json(
+        { message: "Please check your email and verify your account first!" },
+        { status: 400 }
+      );
+    }
     if (!isUserExist) {
       return NextResponse.json(
         { message: "User does not exist" },

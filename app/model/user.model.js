@@ -24,7 +24,7 @@ const userScheama = new mongoose.Schema(
       enum: ["user", "admin"],
       default: "user",
     },
-    signupMethod:{
+    signupMethod: {
       type: String,
       enum: ["email", "google", "github"],
       default: "email",
@@ -34,6 +34,9 @@ const userScheama = new mongoose.Schema(
       default:
         "https://static.vecteezy.com/system/resources/previews/043/361/860/large_2x/hand-drawnman-avatar-profile-icon-for-social-networks-forums-and-dating-sites-user-avatar-profile-placeholder-anonymous-user-male-no-photo-web-template-default-user-picture-profile-male-symbol-free-vector.jpg",
     },
+    isVerified: { type: Boolean, default: false },
+    verifyToken: String,
+    verifyTokenExpiry: Date,
   },
   { timestamps: true }
 );

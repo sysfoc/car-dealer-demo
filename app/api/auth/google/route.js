@@ -63,6 +63,7 @@ export async function POST(req) {
       const newUser = new User({
         name: name,
         email: email,
+        isVerified: true,
         signupMethod: "google",
         password: await hashedPassword(generatedPassword),
         profileImg: profileImg,

@@ -2,7 +2,7 @@
 import { Sidebar } from "flowbite-react";
 import { HiChartPie, HiOutlineMinusSm, HiOutlinePlusSm } from "react-icons/hi";
 import { TiFlowMerge } from "react-icons/ti";
-import { MdSubscriptions, MdOutlinePayment } from "react-icons/md";
+import { MdSubscriptions } from "react-icons/md";
 import { IoMdNotifications } from "react-icons/io";
 import { BiSupport } from "react-icons/bi";
 import { IoSettings } from "react-icons/io5";
