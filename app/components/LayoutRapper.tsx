@@ -19,12 +19,12 @@ export default function LayoutWrapper({
 
   if (isDashboardRoute) {
     return (
-      <div className="flex h-screen">
-        <Social/>
+      <div className='flex h-screen'>
+        <Social />
         <AdminSidebar />
-        <div className="w-full px-5 h-screen overflow-y-scroll">
-          <header className="bg-white">
-            <UserButton/>
+        <div className='w-full px-5 h-screen overflow-y-scroll'>
+          <header className='bg-white'>
+            <UserButton />
           </header>
           <div>{children}</div>
         </div>
@@ -34,14 +34,14 @@ export default function LayoutWrapper({
 
   if (isUserRoute) {
     return (
-      <div className="flex h-screen">
-        <Social/>
+      <div className='flex h-screen'>
+        <Social />
         <UserSidebar />
-        <div className="w-full px-5 h-screen overflow-y-scroll">
-          <header className="bg-white">
-            <AdminButton/>
+        <div className='w-full px-5 h-screen overflow-y-scroll'>
+          <header className='bg-white'>
+            <AdminButton />
           </header>
-          <div className="mt-4">{children}</div>
+          <div className='mt-4'>{children}</div>
         </div>
       </div>
     );
@@ -49,7 +49,7 @@ export default function LayoutWrapper({
 
   return (
     <div>
-      <Social/>
+      <Social />
       <Header />
       {children}
       <Footerr />

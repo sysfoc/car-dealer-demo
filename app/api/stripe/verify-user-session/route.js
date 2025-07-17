@@ -94,7 +94,7 @@ export async function GET(req) {
         subject: "Addon Subscription – Activation & Details",
         text: `Dear ${
           user.name || "User"
-        },\n\nI hope this message finds you well.\nWe would like to inform you that your Addon Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nAddon Name: ${plan.slice(
+        },\n\nWe would like to inform you that your Addon Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nAddon Name: ${plan.slice(
           0,
           -6
         )}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sysfoc@gmail.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
@@ -164,7 +164,7 @@ export async function GET(req) {
         subject: "Theme Subscription",
         text: `Dear ${
           user.name || "User"
-        },\n\nI hope this message finds you well.\nWe would like to inform you that your Theme Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nTheme Name: ${plan.slice(
+        },\n\nWe would like to inform you that your Theme Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nTheme Name: ${plan.slice(
           0,
           -6
         )}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sysfoc@gmail.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
@@ -208,6 +208,17 @@ export async function GET(req) {
       },
       { upsert: true, new: true }
     );
+
+    await sendEmail({
+      to: user.email,
+      subject: "Subscription",
+      text: `Dear ${
+        user.name || "User"
+      },\n\nWe would like to inform you that your Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nSubscription Name: ${plan.slice(
+        0,
+        -6
+      )}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sysfoc@gmail.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
+    });
   }
   await Payment.create({
     userId: user._id,
@@ -218,16 +229,6 @@ export async function GET(req) {
     productPrice: price,
     productPlan: timePeriod || "Monthly",
     transactionDate: new Date(),
-  });
-  await sendEmail({
-    to: user.email,
-    subject: "Subscription",
-    text: `Dear ${
-      user.name || "User"
-    },\n\nI hope this message finds you well.\nWe would like to inform you that your Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nSubscription Name: ${plan.slice(
-      0,
-      -6
-    )}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sysfoc@gmail.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
   });
   await Notification.create({
     userId: user._id,

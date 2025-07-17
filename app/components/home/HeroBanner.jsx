@@ -9,7 +9,7 @@ const HeroBanner = () => {
         src='/banner.webp'
         alt='hero-banner-image'
         fill
-        fetchPriority="high"
+        fetchPriority='high'
         priority
         quality={80}
         className='object-cover object-center -z-10'

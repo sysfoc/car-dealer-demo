@@ -7,7 +7,6 @@ import {
   NavbarToggle,
 } from "flowbite-react";
 import React, { useState, useEffect } from "react";
-import { BiPurchaseTag } from "react-icons/bi";
 import Image from "next/image";
 import Link from "next/link";
 import { useSelector } from "react-redux";
