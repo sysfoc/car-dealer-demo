@@ -9,7 +9,6 @@ import {
   TextInput,
 } from "flowbite-react";
 import Head from "next/head";
-import Image from "next/image";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { IoMdAlarm } from "react-icons/io";
@@ -100,12 +99,11 @@ const page = () => {
             {loading ? (
               <Spinner size='xl' className='mx-auto' />
             ) : (
-              <Image
+              <img
                 src={blog.image || "/banner.webp"}
                 alt={`${blog.title}-img`}
                 width={500}
                 height={300}
-                priority
                 className='size-full'
               />
             )}

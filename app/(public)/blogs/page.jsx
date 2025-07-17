@@ -1,7 +1,6 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdAlarm } from "react-icons/io";
 
 const page = () => {
@@ -28,7 +27,7 @@ const page = () => {
             >
               <Link href={`/blogs/${blog.slug}`}>
                 <div>
-                  <Image
+                  <img
                     src={blog.image}
                     alt='blog-image'
                     width={500}

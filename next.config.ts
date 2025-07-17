@@ -18,6 +18,11 @@ const nextConfig: NextConfig = {
         hostname: "static.vecteezy.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "automotivewebsolutions.com",
+        pathname: "/**",
+      },
     ],
   },
 };
