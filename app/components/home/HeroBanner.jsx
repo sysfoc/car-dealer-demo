@@ -15,22 +15,22 @@ const HeroBanner = () => {
         className='object-cover object-center -z-10'
       />
       <div className='absolute inset-0 bg-[#050b20b8] mix-blend-multiply -z-10' />
-      <div className='absolute top-10 left-10 sm:left-14 text-white'>
-        <span>The Smart Way to Sell Vehicles</span>
-      </div>
       <div className='w-[95%] md:w-[75%] text-center'>
         <h1 className='text-white text-4xl sm:text-5xl font-bold leading-10 md:!leading-[3.5rem]'>
-          A "hassle-free" SaaS platform That Puts Your Dealership in the Fast
-          Lane
+          Launch Your Car Dealer Website in Minutes – No Code, No Hassle
         </h1>
-        <p className='py-4 text-white'>
-          We help bring potential customers to your door-step. Start your
-          journey to higher profits today! Let&apos;s Get Started!
+        <p className='pt-4 text-white'>
+          A powerful SaaS platform designed for car dealerships.
         </p>
-        <div className='flex items-center justify-center'>
+        <p className='pt-1 text-white'>
+          Automotive Web Solutions makes it fast, easy, and stress — free for car
+          dealers to launch and manage professional websites — no tech skills
+          required.
+        </p>
+        <div className='mt-5 flex items-center justify-center'>
           <Link
             href={"#templates"}
-            className='bg-red-600 text-white px-4 py-2 rounded-md mt-3 flex items-center gap-2'
+            className='bg-red-600 text-white px-4 py-2 rounded-md flex items-center gap-2'
           >
             View Demos <MdArrowOutward fontSize={20} />
           </Link>

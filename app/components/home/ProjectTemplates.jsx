@@ -4,30 +4,8 @@ import React from "react";
 import { FaCheck } from "react-icons/fa6";
 import { AiOutlineEye } from "react-icons/ai";
 import { Button } from "flowbite-react";
+import { dealers } from "@/lib/themes/theme";
 const ProjectTemplates = () => {
-  const dealers = [
-    {
-      id: 1,
-      name: "Windscreen",
-      image: "/demo-1.png",
-      alt: "Car dealership showroom with multiple vehicles - Dealer One",
-      link: "https://car-dealer-app-nextjs1.vercel.app/",
-    },
-    {
-      id: 2,
-      name: "Front Seat",
-      image: "/demo-2.png",
-      alt: "Exterior view of a modern car dealership - Dealer Two",
-      link: "https://car-dealer-app-nextjs-demo2.vercel.app/",
-    },
-    {
-      id: 3,
-      name: "Cruise Control",
-      image: "/demo-3.webp",
-      alt: "Luxury cars displayed at a high-end car dealership - Dealer Three",
-      link: "/",
-    },
-  ];
   return (
     <section id='templates' className='my-14 mx-4 md:mx-12'>
       <div className='py-5 flex items-center justify-center'>
