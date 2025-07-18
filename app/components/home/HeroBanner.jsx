@@ -29,7 +29,7 @@ const HeroBanner = () => {
         </p>
         <div className='flex items-center justify-center'>
           <Link
-            href={"/add-ons"}
+            href={"#templates"}
             className='bg-red-600 text-white px-4 py-2 rounded-md mt-3 flex items-center gap-2'
           >
             View Demos <MdArrowOutward fontSize={20} />

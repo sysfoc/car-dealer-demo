@@ -33,6 +33,7 @@ export async function GET(req) {
   const price = Number(session.amount_total) / 100;
   const timePeriod = session.metadata?.timePeriod;
   const paymentId = session.payment_intent;
+  const themes = JSON.parse(session.metadata?.theme);
 
   const user = await User.findById(userId);
   if (!user) {
@@ -109,76 +110,6 @@ export async function GET(req) {
         )}" add-on.`,
       });
     }
-  } else if (plan.includes("theme")) {
-    const existingTheme = await Theme.findOne({
-      userId: user._id,
-      themeName: plan,
-    });
-
-    if (existingTheme && existingTheme.isActive) {
-      return NextResponse.json(
-        { error: `You already have the "${plan}" theme subscribed.` },
-        { status: 400 }
-      );
-    }
-
-    if (existingTheme && !existingTheme.isActive) {
-      await Theme.findOneAndUpdate(
-        { userId: user._id, themeName: plan },
-        {
-          $set: {
-            isActive: true,
-            subscribedAt: new Date(),
-            expiredAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-          },
-        }
-      );
-      await sendEmail({
-        to: user.email,
-        subject: "Theme Renewal",
-        text: `You have successfully renewed your "${plan.slice(
-          0,
-          -6
-        )}" theme subscription.\nThank you for continuing to use our services. Your subscription has been extended, and all associated features remain active. If you have any questions or need support, feel free to reach out to us.\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
-      });
-      await Notification.create({
-        userId: user._id,
-        type: "success",
-        title: "Theme Renewal",
-        message: `You have successfully renewed your "${plan.slice(
-          0,
-          -6
-        )}" theme subscription.`,
-      });
-    } else {
-      await Theme.create({
-        userId: user._id,
-        themeName: plan,
-        themePrice: price,
-        subscribedAt: new Date(),
-        expiredAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-        isActive: true,
-      });
-      await sendEmail({
-        to: user.email,
-        subject: "Theme Subscription",
-        text: `Dear ${
-          user.name || "User"
-        },\n\nWe would like to inform you that your Theme Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nTheme Name: ${plan.slice(
-          0,
-          -6
-        )}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sysfoc@gmail.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
-      });
-      await Notification.create({
-        userId,
-        type: "success",
-        title: "Theme Subscription",
-        message: `You have successfully subscribed to "${plan.slice(
-          0,
-          -6
-        )}" theme.`,
-      });
-    }
   } else {
     const existingSubscription = await Subscription.findOne({
       userId: user._id,
@@ -192,12 +123,32 @@ export async function GET(req) {
         { status: 400 }
       );
     }
+    const themeDocs = await Promise.all(
+      themes.map((themeName) =>
+        Theme.findOneAndUpdate(
+          { userId: user._id, themeName },
+          {
+            $set: {
+              isActive: true,
+              subscribedAt: new Date(),
+              expiredAt: new Date(
+                Date.now() +
+                  (timePeriod === "Yearly" ? 365 : 30) * 24 * 60 * 60 * 1000
+              ),
+            },
+          },
+          { upsert: true, new: true }
+        )
+      )
+    );
+    const themeIds = themeDocs.map((themeDoc) => themeDoc._id);
     await Subscription.findOneAndUpdate(
       { userId: user._id },
       {
         $set: {
           subscriptionType: plan,
           subscriptionPlan: timePeriod,
+          themes: themeIds,
           startDate: new Date(),
           endDate: new Date(
             Date.now() +
@@ -214,10 +165,7 @@ export async function GET(req) {
       subject: "Subscription",
       text: `Dear ${
         user.name || "User"
-      },\n\nWe would like to inform you that your Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nSubscription Name: ${plan.slice(
-        0,
-        -6
-      )}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sysfoc@gmail.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
+      },\n\nWe would like to inform you that your Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nSubscription Name: ${plan}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sysfoc@gmail.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
     });
   }
   await Payment.create({

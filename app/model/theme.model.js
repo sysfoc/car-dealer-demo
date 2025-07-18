@@ -12,10 +12,6 @@ export const themeSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    themePrice: {
-      type: Number,
-      required: true,
-    },
     isActive: {
       type: Boolean,
       default: false,
@@ -33,8 +29,6 @@ export const themeSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
-    emailSent: { type: Boolean, default: false },
-    reminderSent: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

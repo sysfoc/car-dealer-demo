@@ -6,19 +6,12 @@ import User from "@/app/model/user.model";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export async function POST(req) {
   await connectToDatabase();
-  const { userId, plan, price, timePeriod } = await req.json();
+  const { userId, plan, themes, price, timePeriod } = await req.json();
   try {
     const userExist = await User.findById(userId);
     if (userExist) {
       const customer = await stripe.customers.create({
         email: userExist.email,
-        address: {
-          city: "Sahiwal",
-          country: "Pakistan",
-          line1: "Sahiwal",
-          postal_code: "44000",
-          state: "Punjab",
-        },
         name: userExist.name,
       });
       const session = await stripe.checkout.sessions.create({
@@ -41,6 +34,7 @@ export async function POST(req) {
               unit_amount: Math.round(price * 100),
               product_data: {
                 name: plan,
+                description: `Themes: ${themes.join(", ")}`,
               },
             },
           },
@@ -49,6 +43,7 @@ export async function POST(req) {
           userId,
           plan,
           price,
+          theme: JSON.stringify(themes),
           timePeriod,
         },
       });

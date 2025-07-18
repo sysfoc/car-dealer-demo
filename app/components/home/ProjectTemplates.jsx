@@ -1,116 +1,35 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FaCheck } from "react-icons/fa6";
 import { AiOutlineEye } from "react-icons/ai";
-import { Button, Modal, ModalBody, ModalHeader } from "flowbite-react";
-import { useSelector } from "react-redux";
-import { FaCcStripe } from "react-icons/fa6";
-import { SlPaypal } from "react-icons/sl";
+import { Button } from "flowbite-react";
 const ProjectTemplates = () => {
   const dealers = [
     {
       id: 1,
-      name: "Automotive Car Dealership Theme One",
+      name: "Windscreen",
       image: "/demo-1.png",
       alt: "Car dealership showroom with multiple vehicles - Dealer One",
-      price: 100,
       link: "https://car-dealer-app-nextjs1.vercel.app/",
     },
     {
       id: 2,
-      name: "Automotive Car Dealership Theme Two",
+      name: "Front Seat",
       image: "/demo-2.png",
       alt: "Exterior view of a modern car dealership - Dealer Two",
-      price: 500,
       link: "https://car-dealer-app-nextjs-demo2.vercel.app/",
     },
     {
       id: 3,
-      name: "Automotive Car Dealership Theme Three",
+      name: "Cruise Control",
       image: "/demo-3.webp",
       alt: "Luxury cars displayed at a high-end car dealership - Dealer Three",
-      price: 2000,
       link: "/",
     },
   ];
-  const [selectedPlan, setSelectedPlan] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const { currentUser } = useSelector((state) => state.user);
-  const [loading, setLoading] = useState(false);
-  const [themes, setThemes] = useState([]);
-  const buySelectedPlan = () => {
-    setShowModal(true);
-  };
-
-  useEffect(() => {
-    const fetchUserThemes = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch("/api/user/themes/details", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const data = await response.json();
-        setLoading(false);
-        if (response.ok) {
-          setThemes(data.themes);
-          setLoading(false);
-        }
-        if (response.status === 404) {
-          setLoading(false);
-        }
-      } catch (error) {
-        console.error(error.message);
-      }
-    };
-    fetchUserThemes();
-  }, []);
-
-  const handleStripePayment = async () => {
-    setLoading(true);
-    const res = await fetch("/api/stripe/create-checkout-session", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: currentUser?._id,
-        plan: selectedPlan?.plan,
-        price: selectedPlan?.price,
-      }),
-    });
-    const data = await res.json();
-    setLoading(false);
-    if (res.ok) {
-      window.location.href = data.url;
-    }
-  };
-
-  const handlePaypalPayment = async () => {
-    setLoading(true);
-    const res = await fetch("/api/paypal/create-checkout-session", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: currentUser?._id,
-        plan: selectedPlan?.plan,
-        price: selectedPlan?.price,
-      }),
-    });
-    const data = await res.json();
-    setLoading(false);
-    if (res.ok) {
-      window.location.href = data.url;
-    }
-  };
   return (
-    <section className='my-14 mx-4 md:mx-12'>
+    <section id='templates' className='my-14 mx-4 md:mx-12'>
       <div className='py-5 flex items-center justify-center'>
         <div className='text-center w-full md:w-[50%]'>
           <h2 className='text-3xl sm:text-4xl font-semibold'>
@@ -170,72 +89,19 @@ const ProjectTemplates = () => {
                     View Demo
                   </button>
                 </Link>
-                <Button
-                  disabled={themes.some(
-                    (theme) =>
-                      theme.isActive && theme.themeName?.includes(dealer.name)
-                  )}
-                  onClick={() =>
-                    buySelectedPlan(
-                      setSelectedPlan({
-                        plan: `${dealer.name} theme`,
-                        price: `${dealer.price}`,
-                      })
-                    )
-                  }
-                  size='sm'
-                  className={`${
-                    !currentUser && "hidden"
-                  } bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-red-700`}
-                >
-                  {themes.some(
-                    (theme) =>
-                      theme.isActive && theme.themeName?.includes(dealer.name)
-                  )
-                    ? "Already Subscribed"
-                    : `Purchase Now At $${dealer.price}`}
-                </Button>
+                <Link href={`/pricing`}>
+                  <Button
+                    size='sm'
+                    className='bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-red-700'
+                  >
+                    Purchase now
+                  </Button>
+                </Link>
               </div>
             </div>
           ))}
         </div>
       </div>
-      <Modal show={showModal} onClose={() => setShowModal(false)}>
-        <ModalHeader>
-          <p>
-            Select Payment Method For {selectedPlan?.plan.slice(0, -6)} at $
-            {selectedPlan?.price}
-          </p>
-        </ModalHeader>
-        <ModalBody>
-          <div
-            className={`${
-              !currentUser && "hidden"
-            } w-full py-10 flex items-center justifiy-center`}
-          >
-            <div className='w-full flex flex-col gap-4'>
-              <Button
-                onClick={handleStripePayment}
-                color='dark'
-                className='w-full uppercase'
-                disabled={loading}
-              >
-                <FaCcStripe fontSize={22} className='text-white' />
-                <span className='ml-3'>Pay Using Stripe</span>
-              </Button>
-              <Button
-                onClick={handlePaypalPayment}
-                color='blue'
-                className='w-full uppercase'
-                disabled={loading}
-              >
-                <SlPaypal fontSize={20} className='text-white' />
-                <span className='ml-3'>Pay Using Paypal</span>
-              </Button>
-            </div>
-          </div>
-        </ModalBody>
-      </Modal>
     </section>
   );
 };

@@ -7,6 +7,7 @@ const subscriptionSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    themes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Theme" }],
     subscriptionType: {
       type: String,
       enum: [

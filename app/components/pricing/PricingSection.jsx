@@ -4,6 +4,7 @@ import {
   Button,
   Modal,
   ModalBody,
+  ModalFooter,
   ModalHeader,
   Spinner,
   Table,
@@ -18,17 +19,45 @@ import { FaCheck } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { FaCcStripe } from "react-icons/fa6";
 import { SlPaypal } from "react-icons/sl";
-
+import { dealers } from "@/lib/themes/theme";
+import Link from "next/link";
+import { AiOutlineEye } from "react-icons/ai";
+import Image from "next/image";
 const PricingSection = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [showThemeModal, setShowThemeModal] = useState(false);
   const [yearly, setYearly] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [subscription, setSubscription] = useState(null);
   const [loading, setLoading] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
+  const [selectedTheme, setSelectedTheme] = useState([]);
 
   const buySelectedPlan = () => {
-    setShowModal(true);
+    setShowThemeModal(true);
+    setSelectedTheme([]);
+  };
+
+  const handleSelectedTheme = (theme, selectedPlan) => {
+    let maxThemes = 1;
+    if (selectedPlan === "Standard" || selectedPlan === "Yearly Standard")
+      maxThemes = 2;
+    if (selectedPlan === "Premium" || selectedPlan === "Yearly Premium")
+      maxThemes = 3;
+    setSelectedTheme((prevThemes) => {
+      const alreadySelected = prevThemes.includes(theme);
+      let updatedThemes = alreadySelected
+        ? prevThemes.filter((t) => t !== theme)
+        : [...prevThemes, theme];
+      if (updatedThemes.length > maxThemes) {
+        updatedThemes = updatedThemes.slice(-maxThemes);
+      }
+      return updatedThemes;
+    });
+  };
+
+  const handleProceedToPayment = () => {
+    setShowPaymentModal(true);
   };
 
   useEffect(() => {
@@ -62,6 +91,7 @@ const PricingSection = () => {
       body: JSON.stringify({
         userId: currentUser?._id,
         plan: selectedPlan?.plan,
+        themes: selectedTheme,
         price: selectedPlan?.price,
         timePeriod: selectedPlan?.timePeriod,
       }),
@@ -760,7 +790,82 @@ const PricingSection = () => {
               </TableBody>
             </Table>
           </div>
-          <Modal show={showModal} onClose={() => setShowModal(false)}>
+          <Modal
+            size='3xl'
+            show={showThemeModal}
+            onClose={() => setShowThemeModal(false)}
+          >
+            <ModalHeader>
+              <p>Please select a theme for a {selectedPlan?.plan} plan</p>
+            </ModalHeader>
+            <ModalBody>
+              <div className='w-full py-5 flex items-center justifiy-center'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                  {dealers.map((dealer) => (
+                    <div
+                      key={dealer.id}
+                      className='relative rounded-md shadow-lg transition-transform duration-300 hover:-translate-y-4 group'
+                    >
+                      {selectedTheme.includes(dealer.name) && (
+                        <span className='p-2 bg-green-600 rounded-md text-sm text-white absolute top-2 left-2'>
+                          Selected
+                        </span>
+                      )}
+                      <Link href={dealer.link} target='_blank'>
+                        <div className='p-4 bg-white'>
+                          <Image
+                            src={dealer.image}
+                            alt={dealer.alt}
+                            width={500}
+                            height={500}
+                            className='size-auto'
+                          />
+                        </div>
+                        <div className='px-2 py-3'>
+                          <h3 className='text-center font-semibold text-xl'>
+                            {dealer.name}
+                          </h3>
+                        </div>
+                      </Link>
+                      <div className='absolute inset-0 bg-black bg-opacity-50 flex flex-col gap-y-4 justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+                        <Link href={dealer.link} target='_blank'>
+                          <button className='flex items-center gap-2 bg-white text-black font-semibold py-2 px-4 rounded-md shadow-md hover:bg-gray-200'>
+                            <AiOutlineEye className='text-lg' />
+                            View Demo
+                          </button>
+                        </Link>
+                        <Button
+                          onClick={() =>
+                            handleSelectedTheme(dealer.name, selectedPlan?.plan)
+                          }
+                          size='sm'
+                          className='bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-red-700'
+                        >
+                          {selectedTheme.includes(dealer.name)
+                            ? "Unselect Theme"
+                            : "Select Theme"}
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                onClick={() => handleProceedToPayment()}
+                disabled={selectedTheme.length === 0}
+                color='dark'
+                className='w-full uppercase'
+              >
+                Proceed To Payment
+              </Button>
+            </ModalFooter>
+          </Modal>
+          <Modal
+            show={showPaymentModal}
+            onClose={() => setShowPaymentModal(false)}
+          >
             <ModalHeader>
               <p>
                 Select Payment Method For {selectedPlan?.plan} at $
@@ -768,7 +873,7 @@ const PricingSection = () => {
               </p>
             </ModalHeader>
             <ModalBody>
-              <div className='w-full py-10 flex items-center justifiy-center'>
+              <div className='w-full py-5 flex items-center justifiy-center'>
                 <div className='w-full flex flex-col gap-4'>
                   <Button
                     onClick={handleStripePayment}
@@ -1425,7 +1530,82 @@ const PricingSection = () => {
               </TableBody>
             </Table>
           </div>
-          <Modal show={showModal} onClose={() => setShowModal(false)}>
+          <Modal
+            size='3xl'
+            show={showThemeModal}
+            onClose={() => setShowThemeModal(false)}
+          >
+            <ModalHeader>
+              <p>Please select a theme for a {selectedPlan?.plan} plan</p>
+            </ModalHeader>
+            <ModalBody>
+              <div className='w-full py-5 flex items-center justifiy-center'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                  {dealers.map((dealer) => (
+                    <div
+                      key={dealer.id}
+                      className='relative rounded-md shadow-lg transition-transform duration-300 hover:-translate-y-4 group'
+                    >
+                      {selectedTheme.includes(dealer.name) && (
+                        <span className='p-2 bg-green-600 rounded-md text-sm text-white absolute top-2 left-2'>
+                          Selected
+                        </span>
+                      )}
+                      <Link href={dealer.link} target='_blank'>
+                        <div className='p-4 bg-white'>
+                          <Image
+                            src={dealer.image}
+                            alt={dealer.alt}
+                            width={500}
+                            height={500}
+                            className='size-auto'
+                          />
+                        </div>
+                        <div className='px-2 py-3'>
+                          <h3 className='text-center font-semibold text-xl'>
+                            {dealer.name}
+                          </h3>
+                        </div>
+                      </Link>
+                      <div className='absolute inset-0 bg-black bg-opacity-50 flex flex-col gap-y-4 justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+                        <Link href={dealer.link} target='_blank'>
+                          <button className='flex items-center gap-2 bg-white text-black font-semibold py-2 px-4 rounded-md shadow-md hover:bg-gray-200'>
+                            <AiOutlineEye className='text-lg' />
+                            View Demo
+                          </button>
+                        </Link>
+                        <Button
+                          onClick={() =>
+                            handleSelectedTheme(dealer.name, selectedPlan?.plan)
+                          }
+                          size='sm'
+                          className='bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-red-700'
+                        >
+                          {selectedTheme.includes(dealer.name)
+                            ? "Unselect Theme"
+                            : "Select Theme"}
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                onClick={() => handleProceedToPayment()}
+                disabled={selectedTheme.length === 0}
+                color='dark'
+                className='w-full uppercase'
+              >
+                Proceed To Payment
+              </Button>
+            </ModalFooter>
+          </Modal>
+          <Modal
+            show={showPaymentModal}
+            onClose={() => setShowPaymentModal(false)}
+          >
             <ModalHeader>
               <p>
                 Select Payment Method For {selectedPlan?.plan} at $

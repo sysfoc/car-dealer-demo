@@ -65,7 +65,7 @@ export default function Themes() {
                     <span className='font-medium'>Note:</span> Your subscription
                     for{" "}
                     <span className='font-semibold'>
-                      {theme?.themeName.slice(0, -6)}
+                      {theme?.themeName}
                     </span>{" "}
                     is expiring on{" "}
                     {new Date(theme?.expiredAt).toLocaleDateString("en-US", {
@@ -104,7 +104,7 @@ export default function Themes() {
                   <div className='w-full flex items-end justify-between flex-wrap md:flex-nowrap gap-5'>
                     <div className='flex flex-col gap-1'>
                       <h3 className='text-xl font-semibold'>
-                        {theme?.themeName.slice(0, -6)}
+                        {theme?.themeName}
                       </h3>
                       <p>
                         Status:{" "}
@@ -138,10 +138,7 @@ export default function Themes() {
                           .toLowerCase()}
                       </p>
                     </div>
-                    <div className='flex flex-col gap-3'>
-                      <span className='px-5 py-2 rounded-md text-sm bg-gray-100'>
-                        ${theme?.themePrice}/month
-                      </span>
+                    <div className='flex flex-col'>
                       <Button
                         onClick={() => handleThemeStatus(theme)}
                         size='sm'
