@@ -13,6 +13,7 @@ const Social = () => {
             width={50}
             height={50}
             className='cursor-pointer animate-pulse hover:animate-none'
+            style={{userSelect: "none", WebkitUserDrag: "none", touchAction: "none"}}
           />
         </Link>
       </div>

@@ -7,6 +7,7 @@ import { IoClose } from "react-icons/io5";
 export default function PaymentSuccessPage() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
+  const data = searchParams.get("data");
   const [status, setStatus] = useState("Verifying payment...");
   const navigate = useRouter();
 
@@ -17,11 +18,11 @@ export default function PaymentSuccessPage() {
       const res = await fetch("/api/paypal/capture-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ orderID: token }),
+        body: JSON.stringify({ token, data }),
       });
 
-      const data = await res.json();
-      if (res.ok && data.status === "success") {
+      const result = await res.json();
+      if (res.ok && result.status === "success") {
         setStatus("Payment successfull!");
         navigate.push("/user/dashboard");
       } else {

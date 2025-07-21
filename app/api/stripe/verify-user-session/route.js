@@ -33,7 +33,10 @@ export async function GET(req) {
   const price = Number(session.amount_total) / 100;
   const timePeriod = session.metadata?.timePeriod;
   const paymentId = session.payment_intent;
-  const themes = JSON.parse(session.metadata?.theme);
+  let themes;
+  if (!plan.includes("add-on")) {
+    themes = JSON.parse(session.metadata?.theme);
+  }
 
   const user = await User.findById(userId);
   if (!user) {

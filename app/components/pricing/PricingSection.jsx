@@ -110,6 +110,7 @@ const PricingSection = () => {
       body: JSON.stringify({
         userId: currentUser?._id,
         plan: selectedPlan?.plan,
+        themes: selectedTheme,
         price: selectedPlan?.price,
         timePeriod: selectedPlan?.timePeriod,
       }),
@@ -195,6 +196,28 @@ const PricingSection = () => {
                 </TableHeadCell>
               </TableHead>
               <TableBody className='text-left'>
+                <TableRow className='w-min bg-white'>
+                  <TableCell>
+                    <div>
+                      <p className='text-sm'>Themes Subscriptions</p>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className='flex items-center justify-center'>
+                      <b>1</b>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className='flex items-center justify-center'>
+                      <b>Upto 2</b>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className='flex items-center justify-center'>
+                      <b>Upto 3</b>
+                    </div>
+                  </TableCell>
+                </TableRow>
                 <TableRow className='w-min bg-white'>
                   <TableCell>
                     <div>
@@ -913,6 +936,7 @@ const PricingSection = () => {
                       ($764.<sup>99</sup>
                       <sub className='text-xs font-normal'>/year</sub>)
                     </h3>
+                    <span className='text-red-600'>Saves upto $135 on 15% OFF</span>
                   </div>
                 </TableHeadCell>
                 <TableHeadCell>
@@ -922,6 +946,7 @@ const PricingSection = () => {
                       ($2,029.<sup>99</sup>
                       <sub className='text-xs font-normal'>/year</sub>)
                     </h3>
+                   <span className='text-red-600'>Saves upto $358 on 15% OFF</span>
                   </div>
                 </TableHeadCell>
                 <TableHeadCell>
@@ -931,10 +956,33 @@ const PricingSection = () => {
                       ($3,559.<sup>99</sup>
                       <sub className='text-xs font-normal'>/year</sub>)
                     </h3>
+                    <span className='text-red-600'>Saves upto $628 on 15% OFF</span>
                   </div>
                 </TableHeadCell>
               </TableHead>
               <TableBody className='text-left'>
+                <TableRow className='w-min bg-white'>
+                  <TableCell>
+                    <div>
+                      <p className='text-sm'>Themes Subscription</p>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className='flex items-center justify-center'>
+                      <b>1</b>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className='flex items-center justify-center'>
+                      <b>Upto 2</b>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className='flex items-center justify-center'>
+                      <b>Upto 3</b>
+                    </div>
+                  </TableCell>
+                </TableRow>
                 <TableRow className='w-min bg-white'>
                   <TableCell>
                     <div>

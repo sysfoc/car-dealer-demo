@@ -34,7 +34,7 @@ export async function POST(req) {
               unit_amount: Math.round(price * 100),
               product_data: {
                 name: plan,
-                description: `Themes: ${themes.join(", ")}`,
+                description: `Themes: ${themes?.join(", ") || "Add-ons"}`,
               },
             },
           },
@@ -50,6 +50,7 @@ export async function POST(req) {
       return NextResponse.json({ url: session.url }, { status: 200 });
     }
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

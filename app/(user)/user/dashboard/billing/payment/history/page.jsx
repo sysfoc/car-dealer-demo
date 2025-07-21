@@ -29,7 +29,7 @@ export default function PaymentHistory() {
         const res = await fetch("/api/user/payments/get-transactions");
         const data = await res.json();
         setloading(false);
-        if(res.ok){
+        if (res.ok) {
           setTransactions(data.transactions);
           setloading(false);
         }
@@ -59,36 +59,32 @@ export default function PaymentHistory() {
             <TableHeadCell>Action</TableHeadCell>
           </TableHead>
           <TableBody>
-            {
-              loading && (
-                <TableRow>
-                  <TableCell colSpan={6} className='text-center'>
-                    <Spinner size="lg" />
-                  </TableCell>
-                </TableRow>
-              )
-            }
-            {
-              transactions.map((transaction) => (
-                <TableRow key={transaction._id}>
-                  <TableCell>{transaction._id}</TableCell>
-                  <TableCell>
-                    {new Date(transaction.transactionDate).toLocaleDateString(
-                      "en-US",
-                      { year: "numeric", month: "long", day: "numeric" }
-                    )}
-                  </TableCell>
-                  <TableCell>{transaction.product}</TableCell>
-                  <TableCell>${transaction.productPrice}</TableCell>
-                  <TableCell>{transaction.paymentMethod}</TableCell>
-                  <TableCell>
-                    <Button onClick={() => handleViewTransaction(transaction)}>
-                      <FaEye />
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))
-            }
+            {loading && (
+              <TableRow>
+                <TableCell colSpan={6} className='text-center'>
+                  <Spinner size='lg' />
+                </TableCell>
+              </TableRow>
+            )}
+            {transactions.map((transaction) => (
+              <TableRow key={transaction._id}>
+                <TableCell>{transaction._id}</TableCell>
+                <TableCell>
+                  {new Date(transaction.transactionDate).toLocaleDateString(
+                    "en-US",
+                    { year: "numeric", month: "long", day: "numeric" }
+                  )}
+                </TableCell>
+                <TableCell>{transaction.product}</TableCell>
+                <TableCell>${transaction.productPrice}</TableCell>
+                <TableCell>{transaction.paymentMethod}</TableCell>
+                <TableCell>
+                  <Button onClick={() => handleViewTransaction(transaction)}>
+                    <FaEye />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
         <Modal show={openModal} onClose={() => setOpenModal(false)}>
@@ -101,35 +97,39 @@ export default function PaymentHistory() {
               <div className='space-y-3'>
                 <p>
                   <strong>Transaction ID: </strong>
-                  {selectedTransaction._id}
+                  {selectedTransaction?._id}
+                </p>
+                <p>
+                  <strong>Payment ID: </strong>
+                  {selectedTransaction?.paymentId}
                 </p>
                 <p>
                   <strong>Customer ID: </strong>
-                  {selectedTransaction.customerId}
+                  {selectedTransaction?.customerId}
                 </p>
                 <p>
                   <strong>Date:</strong>{" "}
-                  {new Date(selectedTransaction.transactionDate).toLocaleDateString(
-                    "en-US",
-                    { year: "numeric", month: "long", day: "numeric" }
-                  )}
+                  {new Date(
+                    selectedTransaction?.transactionDate
+                  ).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
                 </p>
                 <p>
                   <strong>Purchased plan:</strong>{" "}
-                  {selectedTransaction.product} Package
+                  {selectedTransaction?.product} Package
                 </p>
                 <p>
-                  <strong>Amount:</strong> $
-                  {selectedTransaction.productPrice}
+                  <strong>Amount:</strong> ${selectedTransaction?.productPrice}
                 </p>
                 <p>
-                  <strong>Plan:</strong> {selectedTransaction.productPlan}
+                  <strong>Plan:</strong> {selectedTransaction?.productPlan}
                 </p>
                 <p>
                   <strong>Status:</strong>{" "}
-                  <span
-                    className={`px-3 py-1 text-white rounded bg-green-500`}
-                  >
+                  <span className={`px-3 py-1 text-white rounded bg-green-500`}>
                     completed
                   </span>
                 </p>

@@ -5,6 +5,7 @@ import Subscription from "@/app/model/subscription.model";
 import Notification from "@/app/model/notification.model";
 import Addon from "@/app/model/addon.model";
 import User from "@/app/model/user.model";
+import Theme from "@/app/model/theme.model";
 import { connectToDatabase } from "@/app/api/utils/db";
 import { sendEmail } from "@/app/api/utils/send-email";
 
@@ -17,33 +18,21 @@ const client = new paypal.core.PayPalHttpClient(environment);
 export async function POST(req) {
   await connectToDatabase();
   try {
-    const { orderID } = await req.json();
-
-    if (!orderID) {
-      return NextResponse.json({ error: "Missing orderID" }, { status: 400 });
+    const { token, data } = await req.json();
+    if (!token || !data) {
+      return NextResponse.json(
+        { error: "Missing token or payload" },
+        { status: 400 }
+      );
     }
 
-    const request = new paypal.orders.OrdersCaptureRequest(orderID);
-    request.requestBody({});
+    const payloadStr = Buffer.from(data, "base64").toString();
+    const { userId, plan, price, timePeriod, themes } = JSON.parse(payloadStr);
 
-    const capture = await client.execute(request);
+    const captureRequest = new paypal.orders.OrdersCaptureRequest(token);
+    captureRequest.requestBody({});
+    const capture = await client.execute(captureRequest);
 
-    const purchaseUnit = capture.result.purchase_units?.[0];
-    const customId =
-      purchaseUnit?.payments?.captures?.[0]?.custom_id ||
-      purchaseUnit?.custom_id;
-
-    let userId = "";
-    let plan = "";
-    let price = null;
-    let timePeriod = "";
-
-    if (customId) {
-      const parts = customId.split("__");
-      if (parts.length === 4) {
-        [userId, plan, price, timePeriod] = parts;
-      }
-    }
     const user = await User.findById(userId);
 
     if (!user) {
@@ -119,88 +108,45 @@ export async function POST(req) {
           )}" add-on.`,
         });
       }
-    } else if (plan.includes("theme")) {
-      const existingTheme = await Theme.findOne({
+    } else {
+      const existingSubscription = await Subscription.findOne({
         userId: user._id,
-        themeName: plan,
+        subscriptionPlan: timePeriod,
+        subscriptionType: plan,
       });
 
-      if (existingTheme && existingTheme.isActive) {
+      if (existingSubscription && existingSubscription.isActive) {
         return NextResponse.json(
-          {
-            error: `You already have the "${plan.slice(
-              0,
-              -6
-            )}" theme subscribed.`,
-          },
+          { error: "You already have an active subscription." },
           { status: 400 }
         );
       }
-
-      if (existingTheme && !existingTheme.isActive) {
-        await Theme.findOneAndUpdate(
-          { userId: user._id, themeName: plan },
-          {
-            $set: {
-              isActive: true,
-              subscribedAt: new Date(),
-              expiredAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+      const themeDocs = await Promise.all(
+        themes.map((themeName) =>
+          Theme.findOneAndUpdate(
+            { userId: user._id, themeName },
+            {
+              $set: {
+                isActive: true,
+                subscribedAt: new Date(),
+                expiredAt: new Date(
+                  Date.now() +
+                    (timePeriod === "Yearly" ? 365 : 30) * 24 * 60 * 60 * 1000
+                ),
+              },
             },
-          }
-        );
-        await sendEmail({
-          to: user.email,
-          subject: "Theme Renewal",
-          text: `You have successfully renewed your "${plan.slice(
-            0,
-            -6
-          )}" theme subscription.\nThank you for continuing to use our services. Your subscription has been extended, and all associated features remain active. If you have any questions or need support, feel free to reach out to us.\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
-        });
-        await Notification.create({
-          userId: user._id,
-          type: "success",
-          title: "Theme Renewal",
-          message: `You have successfully renewed your "${plan.slice(
-            0,
-            -6
-          )}" theme subscription.`,
-        });
-      } else {
-        await Theme.create({
-          userId: user._id,
-          themeName: plan,
-          themePrice: price,
-          subscribedAt: new Date(),
-          expiredAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-          isActive: true,
-        });
-        await sendEmail({
-          to: user.email,
-          subject: "Theme Subscription",
-          text: `Dear ${
-            user.name || "User"
-          },\n\nWe would like to inform you that your Theme Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nTheme Name: ${plan.slice(
-            0,
-            -6
-          )}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sysfoc@gmail.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
-        });
-        await Notification.create({
-          userId: user._id,
-          type: "success",
-          title: "Theme Subscription",
-          message: `You have successfully subscribed to "${plan.slice(
-            0,
-            -6
-          )}" theme.`,
-        });
-      }
-    } else {
+            { upsert: true, new: true }
+          )
+        )
+      );
+      const themeIds = themeDocs.map((themeDoc) => themeDoc._id);
       await Subscription.findOneAndUpdate(
         { userId: user._id },
         {
           $set: {
             subscriptionType: plan,
             subscriptionPlan: timePeriod,
+            themes: themeIds,
             startDate: new Date(),
             endDate: new Date(
               Date.now() +
@@ -217,10 +163,7 @@ export async function POST(req) {
         subject: "Subscription",
         text: `Dear ${
           user.name || "User"
-        },\n\nWe would like to inform you that your Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nSubscription Name: ${plan.slice(
-          0,
-          -6
-        )}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sysfoc@gmail.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
+        },\n\nWe would like to inform you that your Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nSubscription Name: ${plan}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sysfoc@gmail.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
       });
     }
 
