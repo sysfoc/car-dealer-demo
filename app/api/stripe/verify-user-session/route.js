@@ -175,7 +175,9 @@ export async function GET(req) {
     userId: user._id,
     customerId: session.customer,
     paymentId: paymentId,
-    product: plan,
+    product: `${plan}${themes?.length > 0 ? " Themes: ":""}${
+      themes?.length > 0 ? ` (${themes?.join(", ")})` : ""
+    }`,
     paymentMethod: "Stripe",
     productPrice: price,
     productPlan: timePeriod || "Monthly",

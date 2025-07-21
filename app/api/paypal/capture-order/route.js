@@ -170,7 +170,9 @@ export async function POST(req) {
     await Payment.create({
       userId: user._id,
       customerId: "Paypal-user",
-      product: plan,
+      product: `${plan}${themes?.length > 0 ? " Themes: " : ""}${
+        themes?.length > 0 ? ` (${themes?.join(", ")})` : ""
+      }`,
       paymentMethod: "PayPal",
       productPrice: price,
       productPlan: timePeriod || "Monthly",
