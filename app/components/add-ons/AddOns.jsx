@@ -5,12 +5,21 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FaCcStripe } from "react-icons/fa6";
 import { SlPaypal } from "react-icons/sl";
+import { IoIosArrowDown } from "react-icons/io";
+import ContentWriting from "./content/ContentWritting";
+import SEO from "./content/Seo";
+import SocialMedia from "./content/SocialMedia";
 const AddOns = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
   const [loading, setLoading] = useState(false);
   const [addOns, setAddOns] = useState([]);
+  const [activeId, setActiveId] = useState(null);
+
+  const toggleDropdown = (id) => {
+    setActiveId((prev) => (prev === id ? null : id));
+  };
 
   const services = [
     {
@@ -19,8 +28,9 @@ const AddOns = () => {
       alt: "Feature 7 - Google Fonts Integration",
       title: "Content Writing",
       description:
-        "Sysfoc car dealer provides full of features for creating a perfect Business website. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit optio dicta nihil excepturi magni!",
+        "We create clear, engaging, and SEO-friendly content tailored for car dealers — designed to increase traffic, build authority, and turn visitors into customers.",
       price: 300,
+      detail: <ContentWriting />,
     },
     {
       id: 2,
@@ -28,8 +38,9 @@ const AddOns = () => {
       alt: "Feature 8 - SEO Optimization",
       title: "SEO Optimization",
       description:
-        "Optimize your website for better search rankings and online visibility. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit optio dicta nihil excepturi magni!",
+        "Our SEO services will improve your website so it appears higher on Google when people search for Vehicles. The higher your site appears, the more people click and visit — which means more leads and more sales.",
       price: 500,
+      detail: <SEO />,
     },
     {
       id: 3,
@@ -37,8 +48,9 @@ const AddOns = () => {
       alt: "Feature 9 - Social Media Marketing",
       title: "Social Media Marketing",
       description:
-        "Boost your brand's for better search rankings and online visibility. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit optio dicta nihil excepturi magni",
+        "We manage your Facebook and Instagram and other social media accounts to build your online presence, engage local buyers, and generate more leads — all while you focus on running your business.",
       price: 400,
+      detail: <SocialMedia />,
     },
   ];
 
@@ -164,6 +176,28 @@ const AddOns = () => {
                         </Button>
                       )}
                     </div>
+                  </div>
+                </div>
+                <div>
+                  <div
+                    className='mt-2 flex items-center justify-center cursor-pointer'
+                    onClick={() => toggleDropdown(service.id)}
+                  >
+                    <IoIosArrowDown
+                      fontSize={26}
+                      className={`text-gray-500 transition-transform duration-300 ${
+                        activeId === service.id ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
+                  <div
+                    className={`transition-all duration-300 ease-in-out overflow-auto ${
+                      activeId === service.id
+                        ? "max-h-[500px] opacity-100"
+                        : "max-h-0 opacity-0"
+                    }`}
+                  >
+                    {service?.detail}
                   </div>
                 </div>
               </div>
