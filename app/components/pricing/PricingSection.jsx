@@ -26,6 +26,7 @@ import Image from "next/image";
 const PricingSection = () => {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showThemeModal, setShowThemeModal] = useState(false);
+  const [showInstructionModal, setShowInstructionModal] = useState(false);
   const [yearly, setYearly] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [subscription, setSubscription] = useState(null);
@@ -63,6 +64,7 @@ const PricingSection = () => {
   useEffect(() => {
     setLoading(true);
     if (currentUser?._id) {
+      setShowInstructionModal(true);
       const fetchUserSubscription = async () => {
         try {
           const response = await fetch("/api/user/subscription/detail");
@@ -123,6 +125,78 @@ const PricingSection = () => {
 
   return (
     <section className='mx-4 my-10 sm:mx-8'>
+      {showInstructionModal && (
+        <Modal show={showInstructionModal}>
+          <ModalHeader>Instructions</ModalHeader>
+          <ModalBody>
+            <div>
+              <p className='text-red-600 text-sm'>
+                Please read the instructions carefully before proceeding to
+                payment.
+              </p>
+              <div className='mt-2'>
+                <div>
+                  <h3 className='mt-2 font-semibold'>
+                    Next Steps After Your Purchase
+                  </h3>
+                  <p className='font-semibold'>
+                    Option 1: Let Us Handle Everything
+                  </p>
+                  <ul className='list-disc list-inside ml-5'>
+                    <li>Your domain name (e.g., yourdomain.com)</li>
+                    <li>
+                      Your domain registrar (Godady,namecheap,hostinger etc)
+                    </li>
+                    <li>Your Cloudflare username/email and password</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className='font-semibold'>
+                    Option 2: You Manage Your Own Cloudflare
+                  </p>
+                  <p>
+                    If you prefer to handle the Cloudflare and DNS setup
+                    yourself:
+                  </p>
+                  <ul className='list-disc list-inside ml-5'>
+                    <li>
+                      We will provide you with the necessary DNS records
+                      (A/CNAME, TXT, etc.)
+                    </li>
+                    <li>
+                      You can add them manually in your Cloudflare account or
+                      with your registrar
+                    </li>
+                  </ul>
+                </div>
+                <ul className='mt-2 list-[alpha] list-inside'>
+                  <li>
+                    Once the payment is made, you will receive a confirmation
+                    email.
+                  </li>
+                  <li>
+                    You will be redirected to the dashboard after successful
+                    payment.
+                  </li>
+                  <li>
+                    If you have any questions or need further assistance, please
+                    contact our support team.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </ModalBody>
+          <ModalFooter>
+            <Button
+              className='mx-auto'
+              color='success'
+              onClick={() => setShowInstructionModal(false)}
+            >
+              I've read the instructions and understood
+            </Button>
+          </ModalFooter>
+        </Modal>
+      )}
       <div className='text-center'>
         <div className='mt-5'>
           <h1 className='text-2xl font-bold md:text-4xl'>
@@ -936,7 +1010,9 @@ const PricingSection = () => {
                       ($764.<sup>99</sup>
                       <sub className='text-xs font-normal'>/year</sub>)
                     </h3>
-                    <span className='text-red-600'>Saves upto $135 on 15% OFF</span>
+                    <span className='text-red-600'>
+                      Saves upto $135 on 15% OFF
+                    </span>
                   </div>
                 </TableHeadCell>
                 <TableHeadCell>
@@ -946,7 +1022,9 @@ const PricingSection = () => {
                       ($2,029.<sup>99</sup>
                       <sub className='text-xs font-normal'>/year</sub>)
                     </h3>
-                   <span className='text-red-600'>Saves upto $358 on 15% OFF</span>
+                    <span className='text-red-600'>
+                      Saves upto $358 on 15% OFF
+                    </span>
                   </div>
                 </TableHeadCell>
                 <TableHeadCell>
@@ -956,7 +1034,9 @@ const PricingSection = () => {
                       ($3,559.<sup>99</sup>
                       <sub className='text-xs font-normal'>/year</sub>)
                     </h3>
-                    <span className='text-red-600'>Saves upto $628 on 15% OFF</span>
+                    <span className='text-red-600'>
+                      Saves upto $628 on 15% OFF
+                    </span>
                   </div>
                 </TableHeadCell>
               </TableHead>
