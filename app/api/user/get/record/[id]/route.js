@@ -7,7 +7,6 @@ import Billing from "@/app/model/billing.model";
 import Refund from "@/app/model/refund.model";
 import Payment from "@/app/model/payment.model";
 import Support from "@/app/model/support.model";
-import Theme from "@/app/model/theme.model";
 import { NextResponse } from "next/server";
 
 export async function GET(req, { params }) {
