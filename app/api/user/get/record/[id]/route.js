@@ -7,6 +7,7 @@ import Billing from "@/app/model/billing.model";
 import Refund from "@/app/model/refund.model";
 import Payment from "@/app/model/payment.model";
 import Support from "@/app/model/support.model";
+import Theme from "@/app/model/theme.model";
 import { NextResponse } from "next/server";
 
 export async function GET(req, { params }) {
@@ -14,15 +15,17 @@ export async function GET(req, { params }) {
   const { id } = params;
   const user = await User.findById(id).select("-password");
   if (user) {
-    const addons = await Addon.find({ userId: id }).select("-userId");
-    const subscription = await Subscription.find({ userId: id }).populate(
-      "themes"
-    );
-    const domain = await Domain.find({ userId: id }).select("-userId");
-    const billing = await Billing.findOne({ userId: id }).select("-userId");
-    const refunds = await Refund.find({ userId: id }).select("-userId");
-    const payments = await Payment.find({ userId: id }).select("-userId");
-    const support = await Support.find({ userId: id }).select("-userId");
+    const [addons, subscription, domain, billing, refunds, payments, support] =
+      await Promise.all([
+        Addon.find({ userId: id }).select("-userId").lean(),
+        Subscription.find({ userId: id }).populate("themes").lean(),
+        Domain.find({ userId: id }).select("-userId").lean(),
+        Billing.findOne({ userId: id }).select("-userId").lean(),
+        Refund.find({ userId: id }).select("-userId").lean(),
+        Payment.find({ userId: id }).select("-userId").lean(),
+        Support.find({ userId: id }).select("-userId").lean(),
+      ]);
+
     const record = {
       user,
       addons,
