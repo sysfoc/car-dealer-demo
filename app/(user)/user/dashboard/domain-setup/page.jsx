@@ -1,6 +1,55 @@
-import { Button, Label, TextInput } from "flowbite-react";
+"use client";
+import { Alert, Button, Label, TextInput } from "flowbite-react";
+import { useState } from "react";
 
 export default function DomainSetup() {
+  const [formData, setFormData] = useState({
+    domainName: "",
+    domainRegistrar: "",
+    domainUsername: "",
+    domainPassword: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const handleFormData = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await fetch("/api/user/domain/registration", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      setLoading(false);
+      if (res.ok) {
+        setLoading(false);
+        setError(false);
+        setSuccess(true);
+        setSuccessMessage(data.message);
+        setFormData({
+          domainName: "",
+          domainRegistrar: "",
+          domainUsername: "",
+          domainPassword: "",
+        });
+        location.reload();
+      } else {
+        setLoading(false);
+        setError(true);
+        setErrorMessage(data.message);
+      }
+    } catch (error) {
+      setLoading(false);
+      setError(true);
+      setErrorMessage(error.message);
+    }
+  };
   return (
     <section className='my-10'>
       <div className='flex flex-col gap-1'>
@@ -15,7 +64,21 @@ export default function DomainSetup() {
             Option 1: DNS settings for cloudflare manually done by our
             developers
           </h2>
-          <form className='mt-3'>
+          <form className='mt-3' onSubmit={handleFormData}>
+            {error && (
+              <Alert color='failure'>
+                <span>
+                  <span className='font-medium'>Error!</span> {errorMessage}
+                </span>
+              </Alert>
+            )}
+            {success && (
+              <Alert color='success'>
+                <span>
+                  <span className='font-medium'>Success!</span> {successMessage}
+                </span>
+              </Alert>
+            )}
             <div className='grid grid-cols-1 gap-x-5 gap-y-3 sm:grid-cols-2'>
               <div>
                 <Label htmlFor='domain' value='Domain name:' />
@@ -25,6 +88,9 @@ export default function DomainSetup() {
                   id='domain'
                   placeholder='https://yourdomain.com'
                   required
+                  onChange={(e) =>
+                    setFormData({ ...formData, domainName: e.target.value })
+                  }
                   className='block w-full rounded-md border-gray-300 shadow-sm sm:text-sm'
                 />
               </div>
@@ -36,6 +102,12 @@ export default function DomainSetup() {
                   id='domain-registrar'
                   placeholder='Godady, namecheap, hostinger etc'
                   required
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      domainRegistrar: e.target.value,
+                    })
+                  }
                   className='block w-full rounded-md border-gray-300 shadow-sm sm:text-sm'
                 />
               </div>
@@ -47,6 +119,9 @@ export default function DomainSetup() {
                   id='username'
                   placeholder='Your cloudflare username or email'
                   required
+                  onChange={(e) =>
+                    setFormData({ ...formData, domainUsername: e.target.value })
+                  }
                   className='block w-full rounded-md border-gray-300 shadow-sm sm:text-sm'
                 />
               </div>
@@ -58,6 +133,9 @@ export default function DomainSetup() {
                   id='password'
                   placeholder='Your cloudflare password'
                   required
+                  onChange={(e) =>
+                    setFormData({ ...formData, domainPassword: e.target.value })
+                  }
                   className='block w-full rounded-md border-gray-300 shadow-sm sm:text-sm'
                 />
               </div>
@@ -66,6 +144,7 @@ export default function DomainSetup() {
               <Button
                 type='submit'
                 color='failure'
+                disabled={loading}
                 className='w-full flex items-center justify-center'
               >
                 Submit
