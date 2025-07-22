@@ -826,7 +826,7 @@ const PricingSection = () => {
                             {subscription?.subscriptionType === "Basic" &&
                             subscription?.isActive
                               ? "Current Plan"
-                              : "Buy Basic"}
+                              : "Subscribe Basic"}
                           </Button>
                         </div>
                       </TableCell>
@@ -852,7 +852,7 @@ const PricingSection = () => {
                             {subscription?.subscriptionType === "Standard" &&
                             subscription?.isActive
                               ? "Current Plan"
-                              : "Buy Standard"}
+                              : "Subscribe Standard"}
                           </Button>
                         </div>
                       </TableCell>
@@ -878,7 +878,7 @@ const PricingSection = () => {
                             {subscription?.subscriptionType === "Premium" &&
                             subscription?.isActive
                               ? "Current Plan"
-                              : "Buy Premium"}
+                              : "Subscribe Premium"}
                           </Button>
                         </div>
                       </TableCell>
@@ -1597,7 +1597,7 @@ const PricingSection = () => {
                             {subscription?.subscriptionType ===
                               "Yearly Basic" && subscription?.isActive
                               ? "Current Plan"
-                              : "Buy Yearly Basic"}
+                              : "Subscribe Yearly Basic"}
                           </Button>
                         </div>
                       </TableCell>
@@ -1623,7 +1623,7 @@ const PricingSection = () => {
                             {subscription?.subscriptionType ===
                               "Yearly Standard" && subscription?.isActive
                               ? "Current Plan"
-                              : "Buy Yearly Standard"}
+                              : "Subscribe Yearly Standard"}
                           </Button>
                         </div>
                       </TableCell>
@@ -1649,7 +1649,7 @@ const PricingSection = () => {
                             {subscription?.subscriptionType ===
                               "Yearly Premium" && subscription?.isActive
                               ? "Current Plan"
-                              : "Buy Yearly Premium"}
+                              : "Subscribe Yearly Premium"}
                           </Button>
                         </div>
                       </TableCell>

@@ -172,7 +172,7 @@ const AddOns = () => {
                               addon.serviceName?.includes(service.title)
                           )
                             ? "Subscribed"
-                            : "Purchase"}
+                            : "Subscribe Now"}
                         </Button>
                       )}
                     </div>

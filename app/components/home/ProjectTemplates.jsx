@@ -72,7 +72,7 @@ const ProjectTemplates = () => {
                     size='sm'
                     className='bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-red-700'
                   >
-                    Purchase now
+                    Subscribe
                   </Button>
                 </Link>
               </div>
