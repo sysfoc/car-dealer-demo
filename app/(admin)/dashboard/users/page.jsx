@@ -18,7 +18,6 @@ import {
 
 export default function Users() {
   const [selectedUser, setSelectedUser] = useState(null);
-  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [getAllUsers, setGetAllUsers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -40,11 +39,6 @@ export default function Users() {
     };
     fetchUsers();
   }, []);
-  const handleViewUser = (user) => {
-    setError(false);
-    setSelectedUser(user);
-    setIsDetailModalOpen(true);
-  };
   const handleDeleteUser = (user) => {
     setError(false);
     setIsDeleteModalOpen(true);
@@ -112,13 +106,14 @@ export default function Users() {
                 </TableCell>
                 <TableCell>
                   <div key={user?._id} className='flex items-center gap-2'>
-                    <button
-                      className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'
-                      title='View'
-                      onClick={() => handleViewUser(user)}
-                    >
-                      <FaEye className='w-3 h-3' />
-                    </button>
+                    <Link href={`/dashboard/users/view/${user?._id}`}>
+                      <button
+                        className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'
+                        title='View'
+                      >
+                        <FaEye className='w-3 h-3' />
+                      </button>
+                    </Link>
                     <Link href={`/dashboard/users/edit/${user?._id}`}>
                       <button
                         className='p-2 bg-yellow-500 text-white rounded hover:bg-yellow-600'
@@ -141,40 +136,6 @@ export default function Users() {
           </TableBody>
         </Table>
         {loading && <Spinner size='xl' color='blue' />}
-        <Modal
-          show={isDetailModalOpen}
-          onClose={() => setIsDetailModalOpen(false)}
-        >
-          <Modal.Header>User Details</Modal.Header>
-          <Modal.Body>
-            {selectedUser ? (
-              <div className='space-y-2'>
-                <p>
-                  <strong>User ID:</strong> {selectedUser?._id}
-                </p>
-                <p>
-                  <strong>Name:</strong> {selectedUser?.name}
-                </p>
-                <p>
-                  <strong>Email:</strong> {selectedUser?.email}
-                </p>
-                <p>
-                  <strong>Role:</strong> {selectedUser?.role}
-                </p>
-                <p>
-                  <strong>Signup Method:</strong> {selectedUser?.signupMethod}
-                </p>
-              </div>
-            ) : (
-              <p>No user selected.</p>
-            )}
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={() => setIsOpen(false)} color='gray'>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
         <Modal
           show={isDeleteModalOpen}
           onClose={() => setIsDeleteModalOpen(false)}
