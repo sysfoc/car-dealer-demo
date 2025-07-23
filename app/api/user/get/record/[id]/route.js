@@ -7,6 +7,7 @@ import Billing from "@/app/model/billing.model";
 import Refund from "@/app/model/refund.model";
 import Payment from "@/app/model/payment.model";
 import Support from "@/app/model/support.model";
+import "@/app/model/theme.model";
 import { NextResponse } from "next/server";
 
 export async function GET(req, { params }) {
@@ -21,7 +22,10 @@ export async function GET(req, { params }) {
         Domain.find({ userId: id }).select("-userId").lean(),
         Billing.findOne({ userId: id }).select("-userId").lean(),
         Refund.find({ userId: id }).select("-userId").lean(),
-        Payment.find({ userId: id }).select("-userId").lean(),
+        Payment.find({ userId: id })
+          .sort({ createdAt: -1 })
+          .select("-userId")
+          .lean(),
         Support.find({ userId: id }).select("-userId").lean(),
       ]);
 
