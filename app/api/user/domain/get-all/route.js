@@ -2,7 +2,7 @@ import { connectToDatabase } from "@/app/api/utils/db";
 import Domain from "@/app/model/domain.model";
 import { NextResponse } from "next/server";
 
-export async function GET(req) {
+export async function GET() {
   await connectToDatabase();
   const domains = await Domain.find({}).sort({ createdAt: -1 });
   if (!domains) {
