@@ -100,7 +100,7 @@ export default function Users() {
               <TableRow key={user._id}>
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
-                <TableCell>{user.role}</TableCell>
+                <TableCell className="capitalize">{user.role}</TableCell>
                 <TableCell className='capitalize'>
                   {user.signupMethod}
                 </TableCell>

@@ -45,7 +45,7 @@ export default function viewUser() {
       ) : (
         <section className='my-5 flex flex-col gap-5'>
           <div className='bg-white px-5 py-4 rounded-md shadow'>
-            <div className='flex items-center justify-between gap-4'>
+            <div className='flex flex-wrap items-center justify-between gap-4'>
               <div className='w-[120px] h-[120px] rounded-full overflow-hidden'>
                 <Image
                   src={`${record?.user?.profileImg || "/logo.png"}`}
@@ -103,220 +103,233 @@ export default function viewUser() {
             <div>
               <h2 className='text-lg font-semibold'>Domains</h2>
             </div>
-            <Table className='mt-4' striped>
-              <TableHead>
-                <TableHeadCell>Domain</TableHeadCell>
-                <TableHeadCell>Registrar</TableHeadCell>
-                <TableHeadCell>Username</TableHeadCell>
-                <TableHeadCell>Password</TableHeadCell>
-                <TableHeadCell>Status</TableHeadCell>
-                <TableHeadCell>Date</TableHeadCell>
-              </TableHead>
-              <TableBody>
-                {record?.domain?.length > 0 ? (
-                  record?.domain?.map((domain) => (
-                    <TableRow key={domain._id}>
-                      <TableCell title={domain.domainName}>
-                        {domain.domainName}
-                      </TableCell>
-                      <TableCell title={domain.domainRegistrar}>
-                        {domain.domainRegistrar}
-                      </TableCell>
-                      <TableCell title={domain.domainUsername}>
-                        {domain.domainUsername}
-                      </TableCell>
-                      <TableCell title={domain.domainPassword}>
-                        {domain.domainPassword}
-                      </TableCell>
-                      <TableCell title={domain.domainStatus}>
-                        {domain.domainStatus}
-                      </TableCell>
-                      <TableCell title={domain.createdAt}>
-                        {new Date(domain.createdAt).toLocaleDateString(
-                          "en-US",
-                          {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          }
-                        )}
+            <div className='overflow-x-auto'>
+              <Table className='mt-4' striped>
+                <TableHead>
+                  <TableHeadCell>Domain</TableHeadCell>
+                  <TableHeadCell>Registrar</TableHeadCell>
+                  <TableHeadCell>Username</TableHeadCell>
+                  <TableHeadCell>Password</TableHeadCell>
+                  <TableHeadCell>Status</TableHeadCell>
+                  <TableHeadCell>Date</TableHeadCell>
+                </TableHead>
+                <TableBody>
+                  {record?.domain?.length > 0 ? (
+                    record?.domain?.map((domain) => (
+                      <TableRow key={domain._id}>
+                        <TableCell title={domain.domainName}>
+                          {domain.domainName}
+                        </TableCell>
+                        <TableCell title={domain.domainRegistrar}>
+                          {domain.domainRegistrar}
+                        </TableCell>
+                        <TableCell title={domain.domainUsername}>
+                          {domain.domainUsername}
+                        </TableCell>
+                        <TableCell title={domain.domainPassword}>
+                          {domain.domainPassword}
+                        </TableCell>
+                        <TableCell title={domain.domainStatus}>
+                          {domain.domainStatus}
+                        </TableCell>
+                        <TableCell title={domain.createdAt}>
+                          {new Date(domain.createdAt).toLocaleDateString(
+                            "en-US",
+                            {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            }
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={6} className='text-center'>
+                        No domains found
                       </TableCell>
                     </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={6} className='text-center'>
-                      No domains found
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
           </div>
           <div className='bg-white px-5 py-4 rounded-md shadow'>
             <div>
               <h2 className='text-lg font-semibold'>Billing Details</h2>
             </div>
-            <Table className='mt-4' striped>
-              <TableHead>
-                <TableHeadCell>Name</TableHeadCell>
-                <TableHeadCell>Email</TableHeadCell>
-                <TableHeadCell>Address</TableHeadCell>
-                <TableHeadCell>Phone</TableHeadCell>
-                <TableHeadCell>Date</TableHeadCell>
-              </TableHead>
-              <TableBody>
-                {record?.billing ? (
-                  <TableRow key={record._id}>
-                    <TableCell title={record.billing.fullName}>
-                      {record.billing.fullName}
-                    </TableCell>
-                    <TableCell title={record.billing.email}>
-                      {record.billing.email}
-                    </TableCell>
-                    <TableCell title={record.billing.address}>
-                      {record.billing.address}
-                    </TableCell>
-                    <TableCell title={record.billing.phone}>
-                      {record.billing.phone}
-                    </TableCell>
-                    <TableCell title={record.billing.createdAt}>
-                      {new Date(record.billing.createdAt).toLocaleDateString(
-                        "en-US",
-                        { year: "numeric", month: "long", day: "numeric" }
-                      )}
-                    </TableCell>
-                  </TableRow>
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={6} className='text-center'>
-                      No billing details found
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
+            <div className='overflow-x-auto'>
+              <Table className='mt-4' striped>
+                <TableHead>
+                  <TableHeadCell>Name</TableHeadCell>
+                  <TableHeadCell>Email</TableHeadCell>
+                  <TableHeadCell>Address</TableHeadCell>
+                  <TableHeadCell>Phone</TableHeadCell>
+                  <TableHeadCell>Date</TableHeadCell>
+                </TableHead>
+                <TableBody>
+                  {record?.billing ? (
+                    <TableRow key={record._id}>
+                      <TableCell title={record.billing.fullName}>
+                        {record.billing.fullName}
+                      </TableCell>
+                      <TableCell title={record.billing.email}>
+                        {record.billing.email}
+                      </TableCell>
+                      <TableCell title={record.billing.address}>
+                        {record.billing.address}
+                      </TableCell>
+                      <TableCell title={record.billing.phone}>
+                        {record.billing.phone}
+                      </TableCell>
+                      <TableCell title={record.billing.createdAt}>
+                        {new Date(record.billing.createdAt).toLocaleDateString(
+                          "en-US",
+                          { year: "numeric", month: "long", day: "numeric" }
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={6} className='text-center'>
+                        No billing details found
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
           </div>
           <div className='bg-white px-5 py-4 rounded-md shadow'>
             <div>
               <h2 className='text-lg font-semibold'>Payment History</h2>
             </div>
-            <Table className='mt-4' striped>
-              <TableHead>
-                <TableHeadCell>Payment ID</TableHeadCell>
-                <TableHeadCell>Product</TableHeadCell>
-                <TableHeadCell>Price</TableHeadCell>
-                <TableHeadCell>Duration</TableHeadCell>
-                <TableHeadCell>Method</TableHeadCell>
-                <TableHeadCell>Date</TableHeadCell>
-              </TableHead>
-              <TableBody>
-                {record?.payments?.length > 0 ? (
-                  record?.payments?.map((payment) => (
-                    <TableRow key={payment._id}>
-                      <TableCell title={payment.paymentId}>
-                        {payment.paymentId}
-                      </TableCell>
-                      <TableCell title={payment.product}>
-                        {payment.product}
-                      </TableCell>
-                      <TableCell title={payment.productPrice}>
-                        ${payment.productPrice}
-                      </TableCell>
-                      <TableCell title={payment.productPlan}>
-                        {payment.productPlan}
-                      </TableCell>
-                      <TableCell title={payment.paymentMethod}>
-                        {payment.paymentMethod}
-                      </TableCell>
-                      <TableCell title={payment.createdAt}>
-                        {new Date(payment.createdAt).toLocaleDateString(
-                          "en-US",
-                          {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          }
-                        )}
+            <div className='overflow-x-auto'>
+              <Table className='mt-4' striped>
+                <TableHead>
+                  <TableHeadCell>Customer ID</TableHeadCell>
+                  <TableHeadCell>Payment ID</TableHeadCell>
+                  <TableHeadCell>Product</TableHeadCell>
+                  <TableHeadCell>Price</TableHeadCell>
+                  <TableHeadCell>Duration</TableHeadCell>
+                  <TableHeadCell>Method</TableHeadCell>
+                  <TableHeadCell>Date</TableHeadCell>
+                </TableHead>
+                <TableBody>
+                  {record?.payments?.length > 0 ? (
+                    record?.payments?.map((payment) => (
+                      <TableRow key={payment._id}>
+                        <TableCell title={payment.customerId}>
+                          {payment.customerId}
+                        </TableCell>
+                        <TableCell title={payment.paymentId}>
+                          {payment.paymentId}
+                        </TableCell>
+                        <TableCell title={payment.product}>
+                          {payment.product}
+                        </TableCell>
+                        <TableCell title={payment.productPrice}>
+                          ${payment.productPrice}
+                        </TableCell>
+                        <TableCell title={payment.productPlan}>
+                          {payment.productPlan}
+                        </TableCell>
+                        <TableCell title={payment.paymentMethod}>
+                          {payment.paymentMethod}
+                        </TableCell>
+                        <TableCell title={payment.createdAt}>
+                          {new Date(payment.createdAt).toLocaleDateString(
+                            "en-US",
+                            {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            }
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={6} className='text-center'>
+                        No payment history found
                       </TableCell>
                     </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={6} className='text-center'>
-                      No payment history found
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
           </div>
           <div className='bg-white px-5 py-4 rounded-md shadow'>
             <div>
               <h2 className='text-lg font-semibold'>Subscriptions</h2>
             </div>
-            <Table className='mt-4' striped>
-              <TableHead>
-                <TableHeadCell>Product</TableHeadCell>
-                <TableHeadCell>Duration</TableHeadCell>
-                <TableHeadCell>Status</TableHeadCell>
-                <TableHeadCell>Subscribed At</TableHeadCell>
-                <TableHeadCell>Expired At</TableHeadCell>
-              </TableHead>
-              <TableBody>
-                {record?.subscription?.length > 0 ? (
-                  record?.subscription?.map((subscription) => (
-                    <TableRow key={subscription._id}>
-                      <TableCell title={subscription?.subscriptionType}>
-                        {subscription?.subscriptionType}
-                      </TableCell>
-                      <TableCell title={subscription?.subscriptionPlan}>
-                        {subscription?.subscriptionPlan}
-                      </TableCell>
-                      <TableCell
-                        title={
-                          subscription?.isActive === true
+            <div className='overflow-x-auto'>
+              <Table className='mt-4' striped>
+                <TableHead>
+                  <TableHeadCell>Product</TableHeadCell>
+                  <TableHeadCell>Duration</TableHeadCell>
+                  <TableHeadCell>Status</TableHeadCell>
+                  <TableHeadCell>Subscribed At</TableHeadCell>
+                  <TableHeadCell>Expired At</TableHeadCell>
+                </TableHead>
+                <TableBody>
+                  {record?.subscription?.length > 0 ? (
+                    record?.subscription?.map((subscription) => (
+                      <TableRow key={subscription._id}>
+                        <TableCell title={subscription?.subscriptionType}>
+                          {subscription?.subscriptionType}
+                        </TableCell>
+                        <TableCell title={subscription?.subscriptionPlan}>
+                          {subscription?.subscriptionPlan}
+                        </TableCell>
+                        <TableCell
+                          title={
+                            subscription?.isActive === true
+                              ? "Active"
+                              : "Inactive"
+                          }
+                        >
+                          {subscription?.isActive === true
                             ? "Active"
-                            : "Inactive"
-                        }
-                      >
-                        {subscription?.isActive === true
-                          ? "Active"
-                          : "Inactive"}
-                      </TableCell>
-                      <TableCell title={subscription?.startDate}>
-                        {new Date(subscription?.startDate).toLocaleDateString(
-                          "en-US",
-                          { year: "numeric", month: "long", day: "numeric" }
-                        )}
-                      </TableCell>
-                      <TableCell title={subscription?.endDate}>
-                        {new Date(subscription?.endDate).toLocaleDateString(
-                          "en-US",
-                          { year: "numeric", month: "long", day: "numeric" }
-                        )}
+                            : "Inactive"}
+                        </TableCell>
+                        <TableCell title={subscription?.startDate}>
+                          {new Date(subscription?.startDate).toLocaleDateString(
+                            "en-US",
+                            { year: "numeric", month: "long", day: "numeric" }
+                          )}
+                        </TableCell>
+                        <TableCell title={subscription?.endDate}>
+                          {new Date(subscription?.endDate).toLocaleDateString(
+                            "en-US",
+                            { year: "numeric", month: "long", day: "numeric" }
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={6} className='text-center'>
+                        No subscriptions found
                       </TableCell>
                     </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={6} className='text-center'>
-                      No subscriptions found
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
           </div>
           <div className='bg-white px-5 py-4 rounded-md shadow'>
             <div>
               <h2 className='text-lg font-semibold'>Themes</h2>
             </div>
-            <div>
+            <div className='overflow-x-auto'>
               <Table className='mt-4' striped>
                 <TableHead>
                   <TableHeadCell>Theme name</TableHeadCell>
                   <TableHeadCell>Status</TableHeadCell>
+                  <TableHeadCell>Current Status</TableHeadCell>
                   <TableHeadCell>Subscribed At</TableHeadCell>
                   <TableHeadCell>Expired At</TableHeadCell>
                 </TableHead>
@@ -334,6 +347,13 @@ export default function viewUser() {
                           }
                         >
                           {theme?.isActive === true ? "Active" : "Inactive"}
+                        </TableCell>
+                        <TableCell
+                          title={
+                            theme?.activeTheme === true ? "Active" : "Inactive"
+                          }
+                        >
+                          {theme?.activeTheme === true ? "Active" : "Inactive"}
                         </TableCell>
                         <TableCell title={theme?.createdAt}>
                           {new Date(theme?.createdAt).toLocaleDateString(
@@ -370,111 +390,186 @@ export default function viewUser() {
           </div>
           <div className='bg-white px-5 py-4 rounded-md shadow'>
             <div>
-              <h2 className='text-lg font-semibold'>Refund History</h2>
+              <h2 className='text-lg font-semibold'>Add-ons</h2>
             </div>
-            <Table className='mt-4' striped>
-              <TableHead>
-                <TableHeadCell>Order Id</TableHeadCell>
-                <TableHeadCell>Email</TableHeadCell>
-                <TableHeadCell>Amount</TableHeadCell>
-                <TableHeadCell>Reason</TableHeadCell>
-                <TableHeadCell>Method</TableHeadCell>
-                <TableHeadCell>Status</TableHeadCell>
-                <TableHeadCell>Date</TableHeadCell>
-              </TableHead>
-              <TableBody>
-                {record?.refunds?.length > 0 ? (
-                  record?.refunds?.map((refund) => (
-                    <TableRow key={refund._id}>
-                      <TableCell title={refund?.orderId}>
-                        {refund?.orderId}
-                      </TableCell>
-                      <TableCell title={refund?.email}>
-                        {refund?.email}
-                      </TableCell>
-                      <TableCell title={refund?.amount}>
-                        ${refund?.amount}
-                      </TableCell>
-                      <TableCell title={refund?.reason}>
-                        {refund?.reason}
-                      </TableCell>
-                      <TableCell title={refund?.refundMethod}>
-                        {refund?.refundMethod}
-                      </TableCell>
-                      <TableCell title={refund?.status}>
-                        {refund?.status}
-                      </TableCell>
-                      <TableCell title={refund?.createdAt}>
-                        {new Date(refund?.createdAt).toLocaleDateString(
-                          "en-US",
-                          {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
+            <div className='overflow-x-auto'>
+              <Table className='mt-4' striped>
+                <TableHead>
+                  <TableHeadCell>Addon</TableHeadCell>
+                  <TableHeadCell>Price</TableHeadCell>
+                  <TableHeadCell>Status</TableHeadCell>
+                  <TableHeadCell>Current Status</TableHeadCell>
+                  <TableHeadCell>Subscribed At</TableHeadCell>
+                  <TableHeadCell>Expired At</TableHeadCell>
+                </TableHead>
+                <TableBody>
+                  {record?.subscription && record?.addons?.length > 0 ? (
+                    record?.addons?.map((addon) => (
+                      <TableRow key={addon?._id}>
+                        <TableCell title={addon?.serviceName}>
+                          {addon?.serviceName}
+                        </TableCell>
+                        <TableCell title={addon?.servicePrice}>
+                          ${addon?.servicePrice}
+                        </TableCell>
+                        <TableCell
+                          title={
+                            addon?.isActive === true ? "Active" : "Inactive"
                           }
-                        )}
+                        >
+                          {addon?.isActive === true ? "Active" : "Inactive"}
+                        </TableCell>
+                        <TableCell
+                          title={
+                            addon?.activeAddon === true ? "Active" : "Inactive"
+                          }
+                        >
+                          {addon?.activeAddon === true ? "Active" : "Inactive"}
+                        </TableCell>
+                        <TableCell title={addon?.subscribedAt}>
+                          {new Date(addon?.subscribedAt).toLocaleDateString(
+                            "en-US",
+                            {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            }
+                          )}
+                        </TableCell>
+                        <TableCell title={addon?.expiredAt}>
+                          {new Date(addon?.expiredAt).toLocaleDateString(
+                            "en-US",
+                            {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            }
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={5} className='text-center'>
+                        No Addon found
                       </TableCell>
                     </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={7} className='text-center'>
-                      No refund history found
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+          <div className='bg-white px-5 py-4 rounded-md shadow'>
+            <div>
+              <h2 className='text-lg font-semibold'>Refund History</h2>
+            </div>
+            <div className='overflow-x-auto'>
+              <Table className='mt-4' striped>
+                <TableHead>
+                  <TableHeadCell>Order Id</TableHeadCell>
+                  <TableHeadCell>Email</TableHeadCell>
+                  <TableHeadCell>Amount</TableHeadCell>
+                  <TableHeadCell>Reason</TableHeadCell>
+                  <TableHeadCell>Method</TableHeadCell>
+                  <TableHeadCell>Status</TableHeadCell>
+                  <TableHeadCell>Date</TableHeadCell>
+                </TableHead>
+                <TableBody>
+                  {record?.refunds?.length > 0 ? (
+                    record?.refunds?.map((refund) => (
+                      <TableRow key={refund._id}>
+                        <TableCell title={refund?.orderId}>
+                          {refund?.orderId}
+                        </TableCell>
+                        <TableCell title={refund?.email}>
+                          {refund?.email}
+                        </TableCell>
+                        <TableCell title={refund?.amount}>
+                          ${refund?.amount}
+                        </TableCell>
+                        <TableCell title={refund?.reason}>
+                          {refund?.reason}
+                        </TableCell>
+                        <TableCell title={refund?.refundMethod}>
+                          {refund?.refundMethod}
+                        </TableCell>
+                        <TableCell title={refund?.status}>
+                          {refund?.status}
+                        </TableCell>
+                        <TableCell title={refund?.createdAt}>
+                          {new Date(refund?.createdAt).toLocaleDateString(
+                            "en-US",
+                            {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            }
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={7} className='text-center'>
+                        No refund history found
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
           </div>
           <div className='bg-white px-5 py-4 rounded-md shadow'>
             <div>
               <h2 className='text-lg font-semibold'>Support Tickets</h2>
             </div>
-            <Table className='mt-4' striped>
-              <TableHead>
-                <TableHeadCell>Subject</TableHeadCell>
-                <TableHeadCell>Description</TableHeadCell>
-                <TableHeadCell>Status</TableHeadCell>
-                <TableHeadCell>Reply</TableHeadCell>
-                <TableHeadCell>Created At</TableHeadCell>
-              </TableHead>
-              <TableBody>
-                {record?.support?.length > 0 ? (
-                  record?.support?.map((support) => (
-                    <TableRow key={support._id}>
-                      <TableCell title={support?.subject}>
-                        {support?.subject}
-                      </TableCell>
-                      <TableCell title={support?.description}>
-                        {support?.description}
-                      </TableCell>
-                      <TableCell title={support?.status}>
-                        {support?.status}
-                      </TableCell>
-                      <TableCell title={support?.reply}>
-                        {support?.reply}
-                      </TableCell>
-                      <TableCell title={support?.createdAt}>
-                        {new Date(support?.createdAt).toLocaleDateString(
-                          "en-US",
-                          {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
-                          }
-                        )}
+            <div className='overflow-x-auto'>
+              <Table className='mt-4' striped>
+                <TableHead>
+                  <TableHeadCell>Subject</TableHeadCell>
+                  <TableHeadCell>Description</TableHeadCell>
+                  <TableHeadCell>Status</TableHeadCell>
+                  <TableHeadCell>Reply</TableHeadCell>
+                  <TableHeadCell>Created At</TableHeadCell>
+                </TableHead>
+                <TableBody>
+                  {record?.support?.length > 0 ? (
+                    record?.support?.map((support) => (
+                      <TableRow key={support._id}>
+                        <TableCell title={support?.subject}>
+                          {support?.subject}
+                        </TableCell>
+                        <TableCell title={support?.description}>
+                          {support?.description}
+                        </TableCell>
+                        <TableCell title={support?.status}>
+                          {support?.status}
+                        </TableCell>
+                        <TableCell title={support?.reply}>
+                          {support?.reply}
+                        </TableCell>
+                        <TableCell title={support?.createdAt}>
+                          {new Date(support?.createdAt).toLocaleDateString(
+                            "en-US",
+                            {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            }
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={6} className='text-center'>
+                        No support tickets found
                       </TableCell>
                     </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={6} className='text-center'>
-                      No support tickets found
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
           </div>
         </section>
       )}

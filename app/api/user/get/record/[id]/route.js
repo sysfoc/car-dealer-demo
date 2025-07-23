@@ -17,16 +17,28 @@ export async function GET(req, { params }) {
   if (user) {
     const [addons, subscription, domain, billing, refunds, payments, support] =
       await Promise.all([
-        Addon.find({ userId: id }).select("-userId").lean(),
+        Addon.find({ userId: id })
+          .sort({ createdAt: -1 })
+          .select("-userId")
+          .lean(),
         Subscription.find({ userId: id }).populate("themes").lean(),
-        Domain.find({ userId: id }).select("-userId").lean(),
+        Domain.find({ userId: id })
+          .sort({ createdAt: -1 })
+          .select("-userId")
+          .lean(),
         Billing.findOne({ userId: id }).select("-userId").lean(),
-        Refund.find({ userId: id }).select("-userId").lean(),
+        Refund.find({ userId: id })
+          .sort({ createdAt: -1 })
+          .select("-userId")
+          .lean(),
         Payment.find({ userId: id })
           .sort({ createdAt: -1 })
           .select("-userId")
           .lean(),
-        Support.find({ userId: id }).select("-userId").lean(),
+        Support.find({ userId: id })
+          .sort({ createdAt: -1 })
+          .select("-userId")
+          .lean(),
       ]);
 
     const record = {
