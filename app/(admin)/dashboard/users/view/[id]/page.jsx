@@ -350,10 +350,10 @@ export default function viewUser() {
                         </TableCell>
                         <TableCell
                           title={
-                            theme?.activeTheme === true ? "Active" : "Inactive"
+                            theme?.activeTheme === true ? "Live" : "Disabled"
                           }
                         >
-                          {theme?.activeTheme === true ? "Active" : "Inactive"}
+                          {theme?.activeTheme === true ? "Live" : "Disabled"}
                         </TableCell>
                         <TableCell title={theme?.createdAt}>
                           {new Date(theme?.createdAt).toLocaleDateString(
@@ -421,10 +421,10 @@ export default function viewUser() {
                         </TableCell>
                         <TableCell
                           title={
-                            addon?.activeAddon === true ? "Active" : "Inactive"
+                            addon?.activeAddon === true ? "Live" : "Disabled"
                           }
                         >
-                          {addon?.activeAddon === true ? "Active" : "Inactive"}
+                          {addon?.activeAddon === true ? "Live" : "Disabled"}
                         </TableCell>
                         <TableCell title={addon?.subscribedAt}>
                           {new Date(addon?.subscribedAt).toLocaleDateString(

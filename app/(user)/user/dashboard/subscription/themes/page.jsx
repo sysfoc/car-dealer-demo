@@ -1,6 +1,6 @@
 "use client";
 
-import { Alert, Button, Spinner } from "flowbite-react";
+import { Alert, Button, Spinner, ToggleSwitch } from "flowbite-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -52,7 +52,7 @@ export default function Themes() {
           </div>
         </div>
       </section>
-      <div className='w-full'>
+      <div className='mb-5 w-full'>
         <div className='mx-auto flex flex-col items-center gap-5'>
           {loading && (
             <Spinner aria-label='Loading Spinner' size='xl' color='blue' />
@@ -64,10 +64,8 @@ export default function Themes() {
                   <span>
                     <span className='font-medium'>Note:</span> Your subscription
                     for{" "}
-                    <span className='font-semibold'>
-                      {theme?.themeName}
-                    </span>{" "}
-                    is expiring on{" "}
+                    <span className='font-semibold'>{theme?.themeName}</span> is
+                    expiring on{" "}
                     {new Date(theme?.expiredAt).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "long",
@@ -101,23 +99,14 @@ export default function Themes() {
                     </div>
                   )}
                 <div className='flex items-center gap-8 flex-wrap md:flex-nowrap'>
-                  <div className='w-full flex items-end justify-between flex-wrap md:flex-nowrap gap-5'>
-                    <div className='flex flex-col gap-1'>
+                  {theme?.activeTheme && <div className="absolute top-1 left-1">
+                    <span className="text-xs bg-yellow-100 px-2 py-1 text-yellow-500 font-semibold rounded capitalize">Live</span>
+                  </div>}
+                  <div className='w-full flex items-center justify-between flex-wrap md:flex-nowrap gap-5'>
+                    <div className='py-2 flex flex-col gap-1'>
                       <h3 className='text-xl font-semibold'>
                         {theme?.themeName}
                       </h3>
-                      <p>
-                        Status:{" "}
-                        {theme?.activeTheme ? (
-                          <span className='text-green-600 font-semibold'>
-                            Active
-                          </span>
-                        ) : (
-                          <span className='text-red-600 font-semibold'>
-                            Inactive
-                          </span>
-                        )}
-                      </p>
                       <p className='text-sm'>
                         Subscribed At:{" "}
                         {new Date(theme?.subscribedAt).toLocaleDateString(
@@ -138,18 +127,10 @@ export default function Themes() {
                           .toLowerCase()}
                       </p>
                     </div>
-                    <div className='flex flex-col'>
-                      <Button
-                        onClick={() => handleThemeStatus(theme)}
-                        size='sm'
-                        className={`${
-                          theme?.activeTheme
-                            ? "bg-red-500 hover:!bg-red-600"
-                            : "bg-green-500 hover:!bg-green-600"
-                        }`}
-                      >
-                        {theme?.activeTheme ? "Deactivate" : "Activate"}
-                      </Button>
+                    <div className='flex flex-col gap-2'>
+                      <div className='flex items-center justify-end'>
+                        <ToggleSwitch color="failure" checked={theme?.activeTheme} onChange={() => handleThemeStatus(theme)} />
+                      </div>
                     </div>
                   </div>
                 </div>

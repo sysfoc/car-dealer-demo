@@ -18,7 +18,7 @@ export const themeSchema = new mongoose.Schema(
     },
     activeTheme: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     subscribedAt: {
       type: Date,
