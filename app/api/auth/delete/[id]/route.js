@@ -1,7 +1,7 @@
 import User from "@/app/model/user.model";
 import Notification from "@/app/model/notification.model";
 import Payment from "@/app/model/payment.model";
-import Billing from "@/app/model/billing.model";
+import Domain from "@/app/model/domain.model";
 import Refund from "@/app/model/refund.model";
 import Subscription from "@/app/model/subscription.model";
 import Addon from "@/app/model/addon.model";
@@ -19,7 +19,7 @@ export async function DELETE(req, { params }) {
     return NextResponse.json({ message: "User not found" }, { status: 404 });
   }
   await Notification.deleteMany({ userId: id });
-  await Billing.deleteMany({ userId: id });
+  await Domain.deleteMany({ userId: id });
   await Payment.deleteMany({ userId: id });
   await Refund.deleteMany({ userId: id });
   await Addon.deleteMany({ userId: id });
