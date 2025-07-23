@@ -3,7 +3,6 @@ import User from "@/app/model/user.model";
 import Addon from "@/app/model/addon.model";
 import Subscription from "@/app/model/subscription.model";
 import Domain from "@/app/model/domain.model";
-import Billing from "@/app/model/billing.model";
 import Refund from "@/app/model/refund.model";
 import Payment from "@/app/model/payment.model";
 import Support from "@/app/model/support.model";
@@ -15,7 +14,7 @@ export async function GET(req, { params }) {
   const { id } = params;
   const user = await User.findById(id).select("-password");
   if (user) {
-    const [addons, subscription, domain, billing, refunds, payments, support] =
+    const [addons, subscription, domain, refunds, payments, support] =
       await Promise.all([
         Addon.find({ userId: id })
           .sort({ createdAt: -1 })
@@ -26,7 +25,6 @@ export async function GET(req, { params }) {
           .sort({ createdAt: -1 })
           .select("-userId")
           .lean(),
-        Billing.findOne({ userId: id }).select("-userId").lean(),
         Refund.find({ userId: id })
           .sort({ createdAt: -1 })
           .select("-userId")
@@ -46,7 +44,6 @@ export async function GET(req, { params }) {
       addons,
       subscription,
       domain,
-      billing,
       refunds,
       payments,
       support,

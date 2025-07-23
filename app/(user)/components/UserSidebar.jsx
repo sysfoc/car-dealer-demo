@@ -132,12 +132,6 @@ const UserSidebar = () => {
             >
               Payment History
             </Sidebar.Item>
-            <Sidebar.Item
-              href='/user/dashboard/billing/details'
-              className='hover:!bg-gray-100 hover:!text-black'
-            >
-              Billing Details
-            </Sidebar.Item>
           </Sidebar.Collapse>
           <Sidebar.Collapse
             icon={IoSettings}

@@ -157,52 +157,6 @@ export default function viewUser() {
           </div>
           <div className='bg-white px-5 py-4 rounded-md shadow'>
             <div>
-              <h2 className='text-lg font-semibold'>Billing Details</h2>
-            </div>
-            <div className='overflow-x-auto'>
-              <Table className='mt-4' striped>
-                <TableHead>
-                  <TableHeadCell>Name</TableHeadCell>
-                  <TableHeadCell>Email</TableHeadCell>
-                  <TableHeadCell>Address</TableHeadCell>
-                  <TableHeadCell>Phone</TableHeadCell>
-                  <TableHeadCell>Date</TableHeadCell>
-                </TableHead>
-                <TableBody>
-                  {record?.billing ? (
-                    <TableRow key={record._id}>
-                      <TableCell title={record.billing.fullName}>
-                        {record.billing.fullName}
-                      </TableCell>
-                      <TableCell title={record.billing.email}>
-                        {record.billing.email}
-                      </TableCell>
-                      <TableCell title={record.billing.address}>
-                        {record.billing.address}
-                      </TableCell>
-                      <TableCell title={record.billing.phone}>
-                        {record.billing.phone}
-                      </TableCell>
-                      <TableCell title={record.billing.createdAt}>
-                        {new Date(record.billing.createdAt).toLocaleDateString(
-                          "en-US",
-                          { year: "numeric", month: "long", day: "numeric" }
-                        )}
-                      </TableCell>
-                    </TableRow>
-                  ) : (
-                    <TableRow>
-                      <TableCell colSpan={6} className='text-center'>
-                        No billing details found
-                      </TableCell>
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
-            </div>
-          </div>
-          <div className='bg-white px-5 py-4 rounded-md shadow'>
-            <div>
               <h2 className='text-lg font-semibold'>Payment History</h2>
             </div>
             <div className='overflow-x-auto'>
