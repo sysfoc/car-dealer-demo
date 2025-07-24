@@ -27,8 +27,27 @@ export async function DELETE(req, { params }) {
   await Contact.deleteMany({ userId: id });
   await Support.deleteMany({ userId: id });
   await Theme.deleteMany({ userId: id });
-  return NextResponse.json(
+
+  const response = NextResponse.json(
     { message: "User deleted successfully" },
     { status: 200 }
   );
+  
+  response.cookies.set({
+    name: "token",
+    value: "",
+    path: "/",
+    maxAge: 0,
+    httpOnly: true,
+  });
+
+  response.cookies.set({
+    name: "admin",
+    value: "",
+    path: "/",
+    maxAge: 0,
+    httpOnly: true,
+  });
+
+  return response;
 }
