@@ -1,5 +1,5 @@
 "use client";
-import { Alert, Button, Label, TextInput } from "flowbite-react";
+import { Alert, Button, Label, Textarea, TextInput } from "flowbite-react";
 import { useState } from "react";
 
 export default function DomainSetup() {
@@ -53,17 +53,70 @@ export default function DomainSetup() {
   return (
     <section className='my-10'>
       <div className='flex flex-col gap-1'>
-        <h1 className='text-2xl font-bold'>Domain Setup</h1>
+        <h1 className='text-2xl font-bold'>
+          Domain setup options for your Car Dealer website
+        </h1>
         <p className='text-gray-500 text-sm'>
-          Please select one of the following options
+          Please choose one of the following domain setup options so we can
+          proceed with launching your car dealer website.
         </p>
       </div>
       <div className='mt-5'>
-        <div className='bg-white p-5 rounded-md shadow'>
-          <h2 className='text-lg font-semibold'>
-            Option 1: DNS settings for cloudflare manually done by our
-            developers
-          </h2>
+        <h2 className='bg-gray-100 px-3 py-4 rounded-t-md border border-gray-200 text-lg font-semibold'>
+          Option 1: Let us setup a new Domain for you
+        </h2>
+        <div className='bg-white p-5 rounded-b-md shadow'>
+          <div>
+            <p className='text-gray-500 text-sm'>
+              If you don&apos;t have a domain, no worries! just suggest few
+              domain names you would like, and we will handle the registration
+              process for you.
+            </p>
+          </div>
+          <div className='p-2 rounded-md mt-2'>
+            <h3 className='font-semibold'>Important Notes:</h3>
+            <ul className='my-2 flex flex-col gap-1 list-disc list-inside'>
+              <li className='text-gray-600 text-sm'>
+                Additional charges may apply for domain purchase and
+                registration process.
+              </li>
+              <li className='text-gray-600 text-sm'>
+                We will check availablity and register it on your behalf.
+              </li>
+              <li className='text-gray-600 text-sm'>
+                Tip: Keep it short, Brandable and easy to remember.
+              </li>
+            </ul>
+          </div>
+          <form>
+            <div>
+              <Textarea
+                rows={4}
+                placeholder='xyzcars.com, auscars.com, myusedcars.com'
+                className='mt-3'
+              />
+            </div>
+            <div className='mt-4'>
+              <Button
+                type='submit'
+                color='failure'
+                className='w-full cursor-pointer'
+              >
+                Submit
+              </Button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div className='mt-5'>
+        <h2 className='bg-gray-100 p-4 rounded-t-md border border-gray-200 text-lg font-semibold'>
+          Option 2: Use your existing domain (Cloudflare DNS setup)
+        </h2>
+        <div className='bg-white p-5 rounded-b-md shadow'>
+          <p className='text-gray-500 text-sm'>
+            If you already own a Domain and want our developers to configure it
+            via <strong>Cloudflare</strong>, Please fill out the details below
+          </p>
           <form className='mt-3' onSubmit={handleFormData}>
             {error && (
               <Alert color='failure'>
@@ -81,7 +134,7 @@ export default function DomainSetup() {
             )}
             <div className='grid grid-cols-1 gap-x-5 gap-y-3 sm:grid-cols-2'>
               <div>
-                <Label htmlFor='domain' value='Domain name:' />
+                <Label htmlFor='domain' value='Domain Name:' />
                 <TextInput
                   type='url'
                   name='domain'
@@ -95,12 +148,12 @@ export default function DomainSetup() {
                 />
               </div>
               <div>
-                <Label htmlFor='domain-registrar' value='Domain registrar:' />
+                <Label htmlFor='domain-registrar' value='Domain Registrar:' />
                 <TextInput
                   type='text'
                   name='domain-registrar'
                   id='domain-registrar'
-                  placeholder='Godady, namecheap, hostinger etc'
+                  placeholder='Godady, Namecheap, Hostinger etc'
                   required
                   onChange={(e) =>
                     setFormData({
@@ -112,7 +165,10 @@ export default function DomainSetup() {
                 />
               </div>
               <div>
-                <Label htmlFor='username' value='Username/Email:' />
+                <Label
+                  htmlFor='username'
+                  value='Username/Email for Registrar:'
+                />
                 <TextInput
                   type='text'
                   name='username'
@@ -131,7 +187,7 @@ export default function DomainSetup() {
                   type='password'
                   name='password'
                   id='password'
-                  placeholder='Your cloudflare password'
+                  placeholder='Your domain login password'
                   required
                   onChange={(e) =>
                     setFormData({ ...formData, domainPassword: e.target.value })
@@ -149,36 +205,13 @@ export default function DomainSetup() {
               >
                 Submit
               </Button>
+              <p className='mt-2 text-gray-500 text-sm'>
+                <strong>Note: </strong>Your credentials are kept strictly
+                confidential and only used for initial DNS setup. You may change
+                your password after setup.
+              </p>
             </div>
           </form>
-        </div>
-      </div>
-      <div className='mt-5'>
-        <div className='bg-white p-5 rounded-md shadow'>
-          <div>
-            <h2 className='text-lg font-semibold'>
-              Option 2: DNS settings managed by Buyer
-            </h2>
-            <p className='text-gray-500 text-sm'>
-              Add the below nameservers in your DNS setting, your domain will
-              only get connected with our server when you add below nameserver
-              in your dns setting
-            </p>
-          </div>
-          <div className='bg-gray-100 p-4 rounded-md mt-3'>
-            <ul className='list-disc list-inside'>
-              <li className='text-gray-600 text-sm'>
-                henrik.ns.cloudflare.com
-              </li>
-              <li className='text-gray-600 text-sm'>ruth.ns.cloudflare.com</li>
-              <li className='text-gray-600 text-sm'>
-                dorthy.ns.cloudflare.com
-              </li>
-              <li className='text-gray-600 text-sm'>
-                wesley.ns.cloudflare.com
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
     </section>
