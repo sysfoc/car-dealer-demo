@@ -4,11 +4,49 @@ import Addon from "@/app/model/addon.model";
 import "@/app/model/user.model";
 import { sendEmail } from "@/app/api/utils/send-email";
 import { config } from "@/app/api/utils/env-config";
+import { cookies } from "next/headers";
+import jwt from "jsonwebtoken";
 
 export async function GET() {
   try {
     await dbConnect();
+    const cookieStore = await cookies();
 
+    const token = cookieStore.get("token")?.value;
+    const adminToken = cookieStore.get("admin")?.value;
+
+    if (!token || !adminToken) {
+      return NextResponse.json(
+        { error: "Unauthorized access" },
+        { status: 403 }
+      );
+    }
+
+    let decodedUser, decodedAdmin;
+
+    try {
+      decodedUser = jwt.verify(token, config.jwtSecretKey);
+    } catch (err) {
+      return NextResponse.json(
+        { error: "Invalid user token" },
+        { status: 403 }
+      );
+    }
+
+    try {
+      decodedAdmin = jwt.verify(adminToken, config.jwtSecretKey);
+    } catch (err) {
+      return NextResponse.json(
+        { error: "Invalid admin token" },
+        { status: 403 }
+      );
+    }
+    if (!decodedUser?.id || !decodedAdmin?.admin) {
+      return NextResponse.json(
+        { error: "Unauthorized access" },
+        { status: 403 }
+      );
+    }
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 

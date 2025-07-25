@@ -1,5 +1,5 @@
 import { connectToDatabase } from "@/app/api/utils/db";
-import Payment from "@/app/model/payment.model";
+import User from "@/app/model/user.model";
 import { NextResponse } from "next/server";
 import { config } from "@/app/api/utils/env-config";
 import { cookies } from "next/headers";
@@ -31,12 +31,9 @@ export async function GET() {
   if (!decodedUser?.id || !decodedAdmin?.admin) {
     return NextResponse.json({ error: "Unauthorized access" }, { status: 403 });
   }
-  const transactions = await Payment.find({}).sort({ createdAt: -1 });
-  if (!transactions) {
-    return NextResponse.json(
-      { message: "No transactions found" },
-      { status: 404 }
-    );
+  const users = await User.find({}).sort({ createdAt: -1 });
+  if (!users) {
+    return NextResponse.json({ message: "No users found" }, { status: 404 });
   }
-  return NextResponse.json({ transactions }, { status: 200 });
+  return NextResponse.json({ users }, { status: 200 });
 }
