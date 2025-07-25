@@ -27,13 +27,13 @@ export async function GET(req, { params }) {
 
   try {
     decodedUser = jwt.verify(token, config.jwtSecretKey);
-  } catch (err) {
+  } catch {
     return NextResponse.json({ error: "Invalid user token" }, { status: 403 });
   }
 
   try {
     decodedAdmin = jwt.verify(adminToken, config.jwtSecretKey);
-  } catch (err) {
+  } catch {
     return NextResponse.json({ error: "Invalid admin token" }, { status: 403 });
   }
   if (!decodedUser?.id || !decodedAdmin?.admin) {

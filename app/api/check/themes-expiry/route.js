@@ -26,7 +26,7 @@ export async function GET() {
 
     try {
       decodedUser = jwt.verify(token, config.jwtSecretKey);
-    } catch (err) {
+    } catch {
       return NextResponse.json(
         { error: "Invalid user token" },
         { status: 403 }
@@ -35,7 +35,7 @@ export async function GET() {
 
     try {
       decodedAdmin = jwt.verify(adminToken, config.jwtSecretKey);
-    } catch (err) {
+    } catch {
       return NextResponse.json(
         { error: "Invalid admin token" },
         { status: 403 }
@@ -161,8 +161,7 @@ export async function GET() {
       expirationsSent,
       rowsAffected,
     });
-  } catch (error) {
-    console.error("Theme Expiry Job Error:", error);
+  } catch {
     return NextResponse.json(
       { success: false, error: "Internal Server Error" },
       { status: 500 }
