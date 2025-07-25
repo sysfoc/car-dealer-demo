@@ -116,11 +116,19 @@ const Header = () => {
           </NavbarLink>
         </NavbarCollapse>
         <div className='hidden md:flex items-center gap-5'>
-          <Link href='/user/dashboard'>
-            <Button size='md' className='w-full bg-red-600 hover:!bg-red-700'>
-              {currentUser ? "Dashboard" : "Login"}
-            </Button>
-          </Link>
+          {currentUser ? (
+            <Link href='/user/dashboard'>
+              <Button size='md' className='w-full bg-red-600 hover:!bg-red-700'>
+                Dashboard
+              </Button>
+            </Link>
+          ) : (
+            <Link href='/login'>
+              <Button size='md' className='w-full bg-red-600 hover:!bg-red-700'>
+                Login
+              </Button>
+            </Link>
+          )}
         </div>
       </Navbar>
     </>

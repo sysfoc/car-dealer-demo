@@ -69,7 +69,7 @@ const Github = () => {
         className='w-full flex items-center justify-center gap-2 bg-black text-white hover:!bg-gray-800'
       >
         <FaGithub className='text-xl mr-2' />{" "}
-        {loading ? "Loading..." : "Sign in with Github"}
+        {loading ? "Loading..." : "Continue with Github"}
       </Button>
     </>
   );
