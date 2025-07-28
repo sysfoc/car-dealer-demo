@@ -7,8 +7,13 @@ import Notification from "@/app/model/notification.model";
 import jwt from "jsonwebtoken";
 export async function POST(req) {
   await connectToDatabase();
-  const { domainName, domainRegistrar, domainUsername, domainPassword } =
-    await req.json();
+  const {
+    domainName,
+    domainRegistrar,
+    domainUsername,
+    domainPassword,
+    customDomain,
+  } = await req.json();
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
   if (!token) {
@@ -19,11 +24,13 @@ export async function POST(req) {
     return NextResponse.json({ error: "Invalid token" }, { status: 403 });
   }
   const id = decoded.id;
-  if (!domainName || !domainRegistrar || !domainUsername || !domainPassword) {
-    return NextResponse.json(
-      { message: "Please fill complete form" },
-      { status: 400 }
-    );
+  if (!customDomain) {
+    if (!domainName || !domainRegistrar || !domainUsername || !domainPassword) {
+      return NextResponse.json(
+        { message: "Please fill complete form" },
+        { status: 400 }
+      );
+    }
   }
   try {
     await Domain.create({
@@ -33,6 +40,7 @@ export async function POST(req) {
       domainStatus: "Pending",
       domainUsername,
       domainPassword,
+      customDomain,
     });
     await Notification.create({
       type: "success",

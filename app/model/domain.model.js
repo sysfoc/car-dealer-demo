@@ -9,12 +9,10 @@ const domainSchema = new mongoose.Schema(
     },
     domainName: {
       type: String,
-      required: true,
       trim: true,
     },
     domainRegistrar: {
       type: String,
-      required: true,
       trim: true,
     },
     domainStatus: {
@@ -24,12 +22,14 @@ const domainSchema = new mongoose.Schema(
     },
     domainUsername: {
       type: String,
-      required: true,
       trim: true,
     },
     domainPassword: {
       type: String,
-      required: true,
+      trim: true,
+    },
+    customDomain: {
+      type: String,
       trim: true,
     },
   },

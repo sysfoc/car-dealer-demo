@@ -11,9 +11,11 @@ export default function DomainSetup() {
   });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [customDomainSuccess, setCustomDomainSuccess] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [customDomain, setCustomDomain] = useState("");
   const handleFormData = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -39,6 +41,34 @@ export default function DomainSetup() {
           domainPassword: "",
         });
         location.reload();
+      } else {
+        setLoading(false);
+        setError(true);
+        setErrorMessage(data.message);
+      }
+    } catch (error) {
+      setLoading(false);
+      setError(true);
+      setErrorMessage(error.message);
+    }
+  };
+  const handleCustomDomain = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("/api/user/domain/registration", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ customDomain }),
+      });
+      const data = await res.json();
+      setLoading(false);
+      if (res.ok) {
+        setLoading(false);
+        setError(false);
+        setCustomDomainSuccess(data.message);
+        setCustomDomain("");
       } else {
         setLoading(false);
         setError(true);
@@ -88,10 +118,19 @@ export default function DomainSetup() {
               </li>
             </ul>
           </div>
-          <form>
+          <form onSubmit={handleCustomDomain}>
+            {customDomainSuccess && (
+              <Alert color='success'>
+                <span>
+                  <span className='font-medium'>Success!</span>{" "}
+                  {customDomainSuccess}
+                </span>
+              </Alert>
+            )}
             <div>
               <Textarea
                 rows={4}
+                onChange={(e) => setCustomDomain(e.target.value)}
                 placeholder='xyzcars.com, auscars.com, myusedcars.com'
                 className='mt-3'
               />
@@ -100,6 +139,7 @@ export default function DomainSetup() {
               <Button
                 type='submit'
                 color='failure'
+                disabled={loading}
                 className='w-full cursor-pointer'
               >
                 Submit

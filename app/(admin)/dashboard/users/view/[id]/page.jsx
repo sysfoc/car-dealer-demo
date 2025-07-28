@@ -110,6 +110,7 @@ export default function viewUser() {
                   <TableHeadCell>Registrar</TableHeadCell>
                   <TableHeadCell>Username</TableHeadCell>
                   <TableHeadCell>Password</TableHeadCell>
+                  <TableHeadCell>Custom Domain</TableHeadCell>
                   <TableHeadCell>Status</TableHeadCell>
                   <TableHeadCell>Date</TableHeadCell>
                 </TableHead>
@@ -128,6 +129,9 @@ export default function viewUser() {
                         </TableCell>
                         <TableCell title={domain.domainPassword}>
                           {domain.domainPassword}
+                        </TableCell>
+                        <TableCell title={domain?.customDomain}>
+                          {domain?.customDomain}
                         </TableCell>
                         <TableCell title={domain.domainStatus}>
                           {domain.domainStatus}
