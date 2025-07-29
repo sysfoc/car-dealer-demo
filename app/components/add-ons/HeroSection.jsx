@@ -1,6 +1,4 @@
 import React from "react";
-import Link from "next/link";
-import { MdArrowOutward } from "react-icons/md";
 const HeroSection = () => {
   return (
     <section className='my-10 w-full flex items-center justify-center relative'>

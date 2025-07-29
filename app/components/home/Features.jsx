@@ -3,7 +3,7 @@ import React from "react";
 
 const Features = () => {
   const features = [
-    { id: 1, title: "08 Demos", image: "/01.png", alt: "Feature 1 - 08 Demos" },
+    { id: 1, title: "03 Demos", image: "/01.png", alt: "Feature 1 - 03 Demos" },
     {
       id: 2,
       title: "30+ Inner Pages",
@@ -83,7 +83,7 @@ const Features = () => {
         <div className='text-center w-full md:w-[50%]'>
           <h3 className='text-3xl sm:text-4xl font-semibold'>Core Features</h3>
           <p className='my-2 text-gray-500'>
-            Sysfoc car dealer provides full of features for creating a perfect
+            Automotive Web Solutions provides full of features for creating a perfect
             Business websites.
           </p>
         </div>

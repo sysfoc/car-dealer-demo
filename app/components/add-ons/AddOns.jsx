@@ -128,7 +128,7 @@ const AddOns = () => {
             {services.map((service) => (
               <div
                 key={service.id}
-                className='w-full shadow-md px-8 py-6 rounded-lg bg-white'
+                className='w-full shadow-md px-8 py-6 rounded-lg bg-white border-t-4 border-[#e56c16]'
               >
                 <div className='flex items-center gap-8 flex-wrap md:flex-nowrap'>
                   <div className='w-[100px] h-[100px] flex-shrink-0'>
@@ -151,7 +151,7 @@ const AddOns = () => {
                       </span>
                       {currentUser && (
                         <Button
-                          className='w-full bg-red-600 hover:!bg-red-700 text-white'
+                          className='w-full bg-[#e56c16] hover:!bg-[#e56c16]/90 text-white'
                           disabled={addOns.some(
                             (addon) =>
                               addon.isActive &&
@@ -172,7 +172,7 @@ const AddOns = () => {
                               addon.serviceName?.includes(service.title)
                           )
                             ? "Subscribed"
-                            : "Subscribe Now"}
+                            : "Subscribe"}
                         </Button>
                       )}
                     </div>
@@ -185,7 +185,7 @@ const AddOns = () => {
                   >
                     <IoIosArrowDown
                       fontSize={26}
-                      className={`text-gray-500 transition-transform duration-300 ${
+                      className={`text-[#e56c16] transition-transform duration-300 ${
                         activeId === service.id ? "rotate-180" : ""
                       }`}
                     />
@@ -193,7 +193,7 @@ const AddOns = () => {
                   <div
                     className={`transition-all duration-300 ease-in-out overflow-auto ${
                       activeId === service.id
-                        ? "max-h-[500px] opacity-100"
+                        ? "max-h-[500px] opacity-100 bg-[#e56c16]/5 p-5"
                         : "max-h-0 opacity-0"
                     }`}
                   >

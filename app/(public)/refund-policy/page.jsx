@@ -56,11 +56,11 @@ export default function RefundPolicy() {
         </p>
         <p className='mb-4 text-gray-600 dark:text-white'>
           If you have any questions about this refund policy, feel free to
-          contact us at <strong>automotivewebsolutions1@gmail.com</strong>.
+          contact us at <strong>sales@automotivewebsolutions.com</strong>.
         </p>
         <div className='mt-8 border-t pt-4'>
           <p className='text-center text-sm text-gray-500 dark:text-white'>
-            © 2025 automotivewebsolutions. All rights reserved.
+            © 2025 All rights reserved. AutomotiveWebSolutions by SYSFOC
           </p>
         </div>
       </div>

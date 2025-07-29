@@ -145,7 +145,7 @@ export default function Privacy() {
           <strong className='font-semibold text-gray-800 dark:text-white'>
             Please note:
           </strong>
-          the platform code and infrastructure are proprietary and remain the
+          The platform code and infrastructure are proprietary and remain the
           property of Automotive Web Solutions. Full website code or hosting
           transfer is not included with your subscription.
         </p>
@@ -180,7 +180,7 @@ export default function Privacy() {
         </p>
         <ul className='list-disc pl-6 mb-4 text-gray-600 dark:text-white'>
           <li>
-            Email: <strong>automotivewebsolutions1@gmail.com</strong>
+            Email: <strong>sales@automotivewebsolutions.com</strong>
           </li>
           <li>
             Website: <strong>https://automotivewebsolutions.com</strong>
@@ -188,7 +188,7 @@ export default function Privacy() {
         </ul>
         <div className='mt-8 border-t pt-4'>
           <p className='text-center text-sm text-gray-500 dark:text-white'>
-            © 2025 automotivewebsolutions. All rights reserved.
+            © 2025 All rights reserved. AutomotiveWebSolutions by SYSFOC
           </p>
         </div>
       </div>

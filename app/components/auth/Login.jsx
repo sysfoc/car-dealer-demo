@@ -88,7 +88,7 @@ const Login = () => {
           <Button
             disabled={loading}
             type='submit'
-            color='blue'
+            color='warning'
             className='w-full'
           >
             {loading ? (
@@ -98,7 +98,7 @@ const Login = () => {
             )}
           </Button>
         </form>
-        <div className='relative my-5 flex items-center'>
+        <div className='relative my-4 flex items-center'>
           <div className='flex-grow border-t border-gray-300'></div>
           <span className='mx-4 flex-shrink text-gray-600'>or</span>
           <div className='flex-grow border-t border-gray-300'></div>
@@ -110,8 +110,8 @@ const Login = () => {
         <div className='mt-3'>
           <span className='text-sm'>
             Don't have an account?{" "}
-            <Link className='text-blue-600' href='/register'>
-              Sign Up
+            <Link className='text-[#e56c16]' href='/register'>
+              Register Here
             </Link>
           </span>
         </div>

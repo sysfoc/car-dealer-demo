@@ -66,7 +66,7 @@ const Header = () => {
           >
             <Link
               href='/'
-              className='relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:bg-red-500 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full'
+              className='relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:bg-[#e56c16] after:transition-all after:duration-300 after:ease-in-out hover:after:w-full'
             >
               Home
             </Link>
@@ -77,7 +77,7 @@ const Header = () => {
           >
             <Link
               href='/pricing'
-              className='relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:bg-red-500 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full'
+              className='relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:bg-[#e56c16] after:transition-all after:duration-300 after:ease-in-out hover:after:w-full'
             >
               Pricing
             </Link>
@@ -88,7 +88,7 @@ const Header = () => {
           >
             <Link
               href='/add-ons'
-              className='relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:bg-red-500 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full'
+              className='relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:bg-[#e56c16] after:transition-all after:duration-300 after:ease-in-out hover:after:w-full'
             >
               Add-ons
             </Link>
@@ -99,7 +99,7 @@ const Header = () => {
           >
             <Link
               href='/register'
-              className='relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:bg-red-500 after:transition-all after:duration-300 after:ease-in-out hover:after:w-full'
+              className='relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:bg-[#e56c16] after:transition-all after:duration-300 after:ease-in-out hover:after:w-full'
             >
               Create an account
             </Link>
@@ -108,23 +108,43 @@ const Header = () => {
             as={"div"}
             className='relative hover:text-blue-950 md:hover:text-blue-950 md:hidden'
           >
-            <Link href='/user/dashboard'>
-              <Button size='md' className='w-full bg-red-600 hover:!bg-red-700'>
-                {currentUser ? "Dashboard" : "Login"}
-              </Button>
-            </Link>
+            {currentUser ? (
+              <Link href='/user/dashboard'>
+                <Button
+                  size='md'
+                  className='w-full bg-[#e56c16] hover:!bg-[#e56c16]/90'
+                >
+                  Dashboard
+                </Button>
+              </Link>
+            ) : (
+              <Link href='/login'>
+                <Button
+                  size='md'
+                  className='w-full bg-[#e56c16] hover:!bg-[#e56c16]/90'
+                >
+                  Login
+                </Button>
+              </Link>
+            )}
           </NavbarLink>
         </NavbarCollapse>
         <div className='hidden md:flex items-center gap-5'>
           {currentUser ? (
             <Link href='/user/dashboard'>
-              <Button size='md' className='w-full bg-red-600 hover:!bg-red-700'>
+              <Button
+                size='md'
+                className='w-full bg-[#e56c16] hover:!bg-[#e56c16]/90'
+              >
                 Dashboard
               </Button>
             </Link>
           ) : (
             <Link href='/login'>
-              <Button size='md' className='w-full bg-red-600 hover:!bg-red-700'>
+              <Button
+                size='md'
+                className='w-full bg-[#e56c16] hover:!bg-[#e56c16]/90'
+              >
                 Login
               </Button>
             </Link>

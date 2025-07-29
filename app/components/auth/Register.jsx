@@ -104,18 +104,18 @@ const Register = () => {
           <Button
             disabled={loading}
             type='submit'
-            color='blue'
+            color='warning'
             className='w-full'
           >
             {loading ? (
               <Spinner color='warning' aria-label='Spinning' size='md' />
             ) : (
-              "Signup"
+              "Register Now"
             )}
           </Button>
         </form>
 
-        <div className='relative my-5 flex items-center'>
+        <div className='relative my-4 flex items-center'>
           <div className='flex-grow border-t border-gray-300'></div>
           <span className='mx-4 flex-shrink text-gray-600'>or</span>
           <div className='flex-grow border-t border-gray-300'></div>
@@ -127,7 +127,7 @@ const Register = () => {
         <div className='mt-3'>
           <span className='text-sm'>
             Already have an account?{" "}
-            <Link className='text-blue-600' href='/login'>
+            <Link className='text-[#e56c16]' href='/login'>
               Login now
             </Link>
           </span>

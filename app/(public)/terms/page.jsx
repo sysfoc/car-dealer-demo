@@ -50,8 +50,8 @@ export default function TermsAndConditions() {
             Show, display, or perform any material from the website in public
             without the prior written authorization of
             <strong>https://automotivewebsolutions.com</strong> (to request such
-            approval, please send us an email to 
-            <strong>automotivewebsolutions1@gmail.com</strong>)
+            approval, please send us an email to{" "}
+            <strong>sales@automotivewebsolutions.com</strong>)
           </li>
           <li>
             Redistribute, reproduce, duplicate, copy, or otherwise exploit
@@ -190,7 +190,7 @@ export default function TermsAndConditions() {
           <li>Your contact details </li>
           <li>A sworn statement under penalty of perjury</li>
           <li>
-            Send claims to: <strong>automotivewebsolutions1@gmail.com</strong>{" "}
+            Send claims to: <strong>sales@automotivewebsolutions.com</strong>{" "}
           </li>
         </ul>
         <h4 className='mb-4 mt-6 text-xl font-semibold text-gray-800 dark:text-white'>
@@ -296,7 +296,7 @@ export default function TermsAndConditions() {
         </p>
         <div className='mt-8 border-t pt-4'>
           <p className='text-center text-sm text-gray-500 dark:text-white'>
-            © 2025 automotivewebsolutions. All rights reserved.
+            © 2025 All rights reserved. AutomotiveWebSolutions by SYSFOC
           </p>
         </div>
       </div>

@@ -14,7 +14,7 @@ export default function CookiePolicy() {
           Cookies Policy
         </h1>
         <p className='mb-4 text-gray-600 dark:text-white'>
-          SYSFOC CAR Dealer uses cookies and similar tracking technologies to
+          Automotive Web Solutions uses cookies and similar tracking technologies to
           enhance your experience on our website. This Cookie Policy explains
           what cookies are, how we use them, and how you can manage your
           preferences.
@@ -103,12 +103,12 @@ export default function CookiePolicy() {
         </h4>
         <p className='mb-4 text-gray-600 dark:text-white'>
           If you have any questions regarding this Cookie Policy, please contact
-          us at sysfoc@gmail.com.
+          us at <strong>sales@automotivewebsolutions.com</strong>.
         </p>
 
         <div className='mt-8 border-t pt-4'>
           <p className='text-center text-sm text-gray-500 dark:text-white'>
-            © 2025 Dealer Website by SYSFOC Automotive. All rights reserved.
+            © 2025 All rights reserved. AutomotiveWebSolutions by SYSFOC
           </p>
         </div>
       </div>

@@ -18,14 +18,14 @@ const Services = () => {
       description:
         "Enjoy free lifetime reliable updates going with your purchase.",
       icon: <MdBrowserUpdated fontSize={30} className='text-white' />,
-      bgColor: "bg-red-600",
+      bgColor: "bg-[#e56c16]",
     },
     {
       id: 2,
       title: "Expansive Knowledge base",
       description: "You can check any time our powerful documentation.",
       icon: <IoDocumentsOutline fontSize={30} className='text-white' />,
-      bgColor: "bg-blue-600",
+      bgColor: "bg-[#e56c16]",
     },
     {
       id: 3,
@@ -33,7 +33,7 @@ const Services = () => {
       description:
         "Enjoy free lifetime reliable updates and six months free support.",
       icon: <BiLike fontSize={30} className='text-white' />,
-      bgColor: "bg-green-600",
+      bgColor: "bg-[#e56c16]",
     },
   ];
   return (
@@ -52,11 +52,11 @@ const Services = () => {
           </p>
           <div className='flex items-center justify-center my-3'>
             <div className='flex items-center gap-6'>
-              <FaCcPaypal fontSize={40} className='text-gray-500' />
-              <FaCcStripe fontSize={40} className='text-gray-500' />
-              <FaCcVisa fontSize={40} className='text-gray-500' />
-              <FaCcMastercard fontSize={40} className='text-gray-500' />
-              <SiAmericanexpress fontSize={35} className='text-gray-500' />
+              <FaCcPaypal fontSize={40} className='text-[#e56c16]' />
+              <FaCcStripe fontSize={40} className='text-[#e56c16]' />
+              <FaCcVisa fontSize={40} className='text-[#e56c16]' />
+              <FaCcMastercard fontSize={40} className='text-[#e56c16]' />
+              <SiAmericanexpress fontSize={35} className='text-[#e56c16]' />
             </div>
           </div>
         </div>

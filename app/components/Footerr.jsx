@@ -29,7 +29,7 @@ const Footerr = () => {
         <div className='w-full sm:flex sm:items-center sm:justify-between'>
           <Footer.Copyright
             href='https://sysfoc.com'
-            by='Project of Sysfoc'
+            by='All rights reserved. AutomotiveWebSolutions by SYSFOC'
             year={2025}
           />
           <div className='mt-4 flex space-x-6 sm:mt-0 sm:justify-center'>

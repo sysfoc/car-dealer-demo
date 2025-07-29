@@ -22,17 +22,17 @@ const ProjectTemplates = () => {
       <div className='flex items-center justify-center'>
         <div className='flex items-center gap-x-10 gap-y-5 justify-between flex-wrap'>
           <div className='flex items-center gap-3'>
-            <FaCheck fontSize={20} className='text-red-600' />
+            <FaCheck fontSize={20} className='text-[#e56c16]' />
             <span className='font-semibold'>Tailwind Css Supported</span>
           </div>
           <div className='flex items-center gap-3'>
-            <FaCheck fontSize={20} className='text-red-600' />
+            <FaCheck fontSize={20} className='text-[#e56c16]' />
             <span className='font-semibold'>
               Change Fonts & Colors Globally
             </span>
           </div>
           <div className='flex items-center gap-3'>
-            <FaCheck fontSize={20} className='text-red-600' />
+            <FaCheck fontSize={20} className='text-[#e56c16]' />
             <span className='font-semibold'>Fully Responsive Layout</span>
           </div>
         </div>
@@ -70,9 +70,9 @@ const ProjectTemplates = () => {
                 <Link href={`/pricing`}>
                   <Button
                     size='sm'
-                    className='bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-red-700'
+                    className='bg-[#e56c16] text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-[#e56c16]/80'
                   >
-                    Subscribe
+                    Subscribe Now
                   </Button>
                 </Link>
               </div>

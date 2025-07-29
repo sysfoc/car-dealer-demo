@@ -129,14 +129,19 @@ const Form = () => {
                   id='message'
                   name='message'
                   placeholder='Write your suggestion here'
-                  className='w-full'
+                  className='w-full focus:border-[#e56c16] focus:ring-[#e56c16]'
                   rows={5}
                   required
                   onChange={handleChange}
                 />
               </div>
               <div className='flex items-center justify-center'>
-                <Button disabled={loading} type='submit' color='blue' size='md'>
+                <Button
+                  disabled={loading}
+                  type='submit'
+                  className='w-full bg-[#e56c16] hover:!bg-[#e56c16]/80'
+                  size='md'
+                >
                   {loading ? <Spinner size='sm' color='white' /> : "Submit"}
                 </Button>
               </div>
