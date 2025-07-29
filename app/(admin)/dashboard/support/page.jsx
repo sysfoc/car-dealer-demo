@@ -48,25 +48,28 @@ export default function Support() {
                 </TableCell>
               </TableRow>
             )}
-            {issues.length > 0 && issues?.map((issue) => (
-              <TableRow key={issue?._id}>
-                <TableCell>{issue?.subject}</TableCell>
-                <TableCell>{issue?.description.slice(0, 60)}</TableCell>
-                <TableCell>{issue?.status}</TableCell>
-                <TableCell>
-                  {new Date(issue?.createdAt).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </TableCell>
-                <TableCell>
-                  <Link href={`/dashboard/support/update/${issue?._id}`}>
-                    <Button size='sm'>Update</Button>
-                  </Link>
-                </TableCell>
-              </TableRow>
-            )) || (
+            {(issues.length > 0 &&
+              issues?.map((issue) => (
+                <TableRow key={issue?._id}>
+                  <TableCell className='capitalize'>{issue?.subject}</TableCell>
+                  <TableCell className='capitalize'>
+                    {issue?.description.slice(0, 60)}
+                  </TableCell>
+                  <TableCell className='capitalize'>{issue?.status}</TableCell>
+                  <TableCell>
+                    {new Date(issue?.createdAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </TableCell>
+                  <TableCell>
+                    <Link href={`/dashboard/support/update/${issue?._id}`}>
+                      <Button size='sm'>Update</Button>
+                    </Link>
+                  </TableCell>
+                </TableRow>
+              ))) || (
               <TableRow>
                 <TableCell colSpan={5} className='text-center'>
                   No issues found

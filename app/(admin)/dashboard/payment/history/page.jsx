@@ -136,7 +136,7 @@ export default function PaymentHistory() {
                 </p>
                 <p>
                   <strong>Status:</strong>{" "}
-                  <span className={`px-3 py-1 text-white rounded bg-green-500`}>
+                  <span className={`px-3 py-1 text-white rounded bg-green-500 capitalize`}>
                     completed
                   </span>
                 </p>

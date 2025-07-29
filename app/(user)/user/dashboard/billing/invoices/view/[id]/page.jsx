@@ -98,21 +98,25 @@ export default function ViewInvoice() {
             <div>
               <h3 className='font-semibold'>Invoice To:</h3>
               <div className='flex flex-col mt-1'>
-                <p className='text-sm text-gray-500'>{invoice?.userId?.name}</p>
-                <p className='text-sm text-gray-500'>
+                <p className='text-sm text-gray-500 uppercase'>
+                  {invoice?.userId?.name}
+                </p>
+                <p className='text-sm text-gray-500 uppercase'>
                   {invoice?.userId?.email}
                 </p>
-                <p className='text-sm text-gray-500'>Pakistan</p>
+                <p className='text-sm text-gray-500 uppercase'>Pakistan</p>
               </div>
             </div>
             <div className='text-end'>
               <h3 className='font-semibold'>Pay To:</h3>
               <div className='flex flex-col mt-1'>
-                <p className='text-sm text-gray-500'>Sysfoc</p>
-                <p className='text-sm text-gray-500'>
-                  Tariq Bin Ziad, Sahiwal, pakistan
+                <p className='text-sm text-gray-500 uppercase'>Sysfoc</p>
+                <p className='text-sm text-gray-500 uppercase'>
+                  Automotive Web Solutions
                 </p>
-                <p className='text-sm text-gray-500'>sysfoc@email.com</p>
+                <p className='text-sm text-gray-500 uppercase'>
+                  sales@automotivewebsolutions.com
+                </p>
               </div>
             </div>
           </div>

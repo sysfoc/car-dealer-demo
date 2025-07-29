@@ -133,10 +133,10 @@ export default function ViewInvoice() {
               ) : (
                 <div className='flex flex-col mt-1'>
                   <p className='text-sm text-gray-500 uppercase'>Sysfoc</p>
-                  <p className='text-sm text-gray-500'>
+                  <p className='text-sm text-gray-500 uppercase'>
                     Automotive Web Solutions
                   </p>
-                  <p className='text-sm text-gray-500'>sales@automotivewebsolutions.com</p>
+                  <p className='text-sm text-gray-500 uppercase'>sales@automotivewebsolutions.com</p>
                 </div>
               )}
             </div>

@@ -64,7 +64,7 @@ const OrdersTable = () => {
                 key={index}
                 className='bg-white dark:border-gray-700 dark:bg-gray-800'
               >
-                <TableCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white'>
+                <TableCell className='whitespace-nowrap font-medium text-gray-900 dark:text-white capitalize'>
                   {data?.name}
                 </TableCell>
                 <TableCell>{data?.email}</TableCell>

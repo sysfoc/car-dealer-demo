@@ -98,9 +98,9 @@ export default function Users() {
           <TableBody>
             {getAllUsers.map((user) => (
               <TableRow key={user._id}>
-                <TableCell>{user.name}</TableCell>
+                <TableCell className='capitalize'>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
-                <TableCell className="capitalize">{user.role}</TableCell>
+                <TableCell className='capitalize'>{user.role}</TableCell>
                 <TableCell className='capitalize'>
                   {user.signupMethod}
                 </TableCell>
