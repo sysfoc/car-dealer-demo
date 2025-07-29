@@ -4,7 +4,7 @@ import React from "react";
 
 const Social = () => {
   return (
-    <div className='fixed bottom-2 right-2 z-50 flex items-center justify-center gap-4 py-2'>
+    <div className='fixed bottom-10 right-2 z-50 flex items-center justify-center gap-4 py-2'>
       <div>
         <Link href='https://wa.me/923006904440' target='_blank'>
           <Image

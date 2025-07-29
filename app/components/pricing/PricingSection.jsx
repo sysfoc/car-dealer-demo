@@ -857,7 +857,7 @@ const PricingSection = () => {
                             handleSelectedTheme(dealer.name, selectedPlan?.plan)
                           }
                           size='sm'
-                          className='bg-[#e56c16] text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-[#e56c16]/80'
+                          className='bg-[#e56c16] text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-[#e56c16]/90'
                         >
                           {selectedTheme.includes(dealer.name)
                             ? "Unselect Theme"
@@ -1625,7 +1625,7 @@ const PricingSection = () => {
                             handleSelectedTheme(dealer.name, selectedPlan?.plan)
                           }
                           size='sm'
-                          className='bg-[#e56c16] text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-[#e56c16]/80'
+                          className='bg-[#e56c16] text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-[#e56c16]/90'
                         >
                           {selectedTheme.includes(dealer.name)
                             ? "Unselect Theme"

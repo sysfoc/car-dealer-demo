@@ -116,13 +116,13 @@ export default function ViewInvoice() {
                 <Spinner size='lg' />
               ) : (
                 <div className='flex flex-col mt-1'>
-                  <p className='text-sm text-gray-500'>
+                  <p className='text-sm text-gray-500 uppercase'>
                     {invoice?.userId?.name}
                   </p>
-                  <p className='text-sm text-gray-500'>
+                  <p className='text-sm text-gray-500 uppercase'>
                     {invoice?.userId?.email}
                   </p>
-                  <p className='text-sm text-gray-500'>Pakistan</p>
+                  <p className='text-sm text-gray-500 uppercase'>Pakistan</p>
                 </div>
               )}
             </div>
@@ -132,11 +132,11 @@ export default function ViewInvoice() {
                 <Spinner size='lg' />
               ) : (
                 <div className='flex flex-col mt-1'>
-                  <p className='text-sm text-gray-500'>Sysfoc</p>
+                  <p className='text-sm text-gray-500 uppercase'>Sysfoc</p>
                   <p className='text-sm text-gray-500'>
-                    Tariq Bin Ziad, Sahiwal, pakistan
+                    Automotive Web Solutions
                   </p>
-                  <p className='text-sm text-gray-500'>sysfoc@email.com</p>
+                  <p className='text-sm text-gray-500'>sales@automotivewebsolutions.com</p>
                 </div>
               )}
             </div>

@@ -7,6 +7,7 @@ import {
   Textarea,
   TextInput,
 } from "flowbite-react";
+import Image from "next/image";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 export default function ContactUs() {
@@ -163,37 +164,41 @@ export default function ContactUs() {
             </p>
             <div className='mb-4'>
               <h3 className='text-lg font-medium text-gray-800 dark:text-white'>
-                Address
+                Email:
               </h3>
               <p className='text-gray-600 dark:text-gray-300'>
-                Tariq Bin Ziad Colony, Street # 1, <strong>Sahiwal, Pakistan</strong>
+                sales@automotivewebsolutions.com
               </p>
             </div>
             <div className='mb-4'>
               <h3 className='text-lg font-medium text-gray-800 dark:text-white'>
-                Email
+                Phone:
               </h3>
-              <p className='text-gray-600 dark:text-gray-300'>
-                sysfoc@gmail.com
-              </p>
-            </div>
-            <div className='mb-4'>
-              <h3 className='text-lg font-medium text-gray-800 dark:text-white'>
-                Phone
-              </h3>
-              <p className='text-gray-600 dark:text-gray-300'>
-                (+92) 300 6904440
-              </p>
+              <div className='flex items-center gap-2'>
+                <Image
+                  src={"/whatsapp.png"}
+                  alt='whatsapp-icon'
+                  width={24}
+                  height={24}
+                  className='object-cover object-center'
+                />
+                <p className='text-gray-600 dark:text-gray-300'>
+                  (+92) 300 6904440
+                </p>
+              </div>
               <p className='text-gray-600 dark:text-gray-300'>
                 (+61) 466778515
               </p>
             </div>
             <div className='mb-4 flex flex-col gap-y-2'>
               <h3 className='text-lg font-medium text-gray-800 dark:text-white'>
-                Working Hours
+                Working Hours:
               </h3>
               <p className='text-gray-600 dark:text-gray-300'>
-                Monday - Friday: 9:00 AM - 6:00 PM
+                Monday - Thursday: 9:00 AM - 5:00 PM
+              </p>
+              <p className='text-gray-600 dark:text-gray-300'>
+                Friday: 9:00 AM - 6:00 PM
               </p>
               <p className='text-gray-600 dark:text-gray-300'>
                 Saturday: Closed

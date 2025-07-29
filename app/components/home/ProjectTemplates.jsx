@@ -70,7 +70,7 @@ const ProjectTemplates = () => {
                 <Link href={`/pricing`}>
                   <Button
                     size='sm'
-                    className='bg-[#e56c16] text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-[#e56c16]/80'
+                    className='bg-[#e56c16] text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-[#e56c16]/90'
                   >
                     Subscribe Now
                   </Button>

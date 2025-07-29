@@ -57,7 +57,7 @@ export async function GET() {
               month: "long",
               day: "numeric",
               year: "numeric",
-            })}\nTo renew your subscription, simply click the button below:\n[https://www.automotivewebsolutions.com/add-ons]\nIf you have any questions or need assistance with the renewal process, please don’t hesitate to reach out to our support team.\nThank you for choosing us — we look forward to continuing to serve you.\n\nBest regards,\nAutomotiv Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
+            })}\nTo renew your subscription, simply click the button below:\n[https://www.automotivewebsolutions.com/add-ons]\nIf you have any questions or need assistance with the renewal process, please don’t hesitate to reach out to our support team.\nThank you for choosing us — we look forward to continuing to serve you.\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\nsales@automotivewebsolutions.com\nhttps://www.automotivewebsolutions.com`,
           });
 
           addon.reminderSent = true;
@@ -71,7 +71,7 @@ export async function GET() {
             subject: "Your Addon Has Expired – Reactivate to Continue Access",
             text: `Dear ${
               user.name || "User"
-            },\nWe wanted to inform you that your subscription with Automotiv Web Solutions has expired as of ${addon.expiredAt.toLocaleDateString(
+            },\nWe wanted to inform you that your subscription with Automotive Web Solutions has expired as of ${addon.expiredAt.toLocaleDateString(
               "en-US",
               {
                 month: "long",
@@ -84,7 +84,7 @@ export async function GET() {
               month: "long",
               day: "numeric",
               year: "numeric",
-            })}\nStatus: Expired\nClick below to renew your subscription now:\n[https://www.automotivewebsolutions.com/add-ons]\nIf you need any help or have questions about your account, our support team is here for you.\nThank you for being a valued part of our community. We’d love to have you back!\n\nWarm regards,\nAutomotiv Web Solutions\nCustomer Support Team\ninfo@sysfoc.com\nhttps://www.automotivewebsolutions.com`,
+            })}\nStatus: Expired\nClick below to renew your subscription now:\n[https://www.automotivewebsolutions.com/add-ons]\nIf you need any help or have questions about your account, our support team is here for you.\nThank you for being a valued part of our community. We’d love to have you back!\n\nWarm regards,\nAutomotive Web Solutions\nCustomer Support Team\nsales@automotivewebsolutions.com\nhttps://www.automotivewebsolutions.com`,
           });
 
           await sendEmail({

@@ -1,15 +1,9 @@
 import React from "react";
-import {
-  FaCcPaypal,
-  FaCcStripe,
-  FaCcVisa,
-  FaCcMastercard,
-} from "react-icons/fa";
-import { SiAmericanexpress } from "react-icons/si";
 import { BiLike } from "react-icons/bi";
 import { IoDocumentsOutline } from "react-icons/io5";
 import { MdBrowserUpdated } from "react-icons/md";
 import { HR } from "flowbite-react";
+import Image from "next/image";
 const Services = () => {
   const features = [
     {
@@ -51,12 +45,27 @@ const Services = () => {
             happily refund 100% of your purchase. Happiness. Guaranteed.
           </p>
           <div className='flex items-center justify-center my-3'>
-            <div className='flex items-center gap-6'>
-              <FaCcPaypal fontSize={40} className='text-[#e56c16]' />
-              <FaCcStripe fontSize={40} className='text-[#e56c16]' />
-              <FaCcVisa fontSize={40} className='text-[#e56c16]' />
-              <FaCcMastercard fontSize={40} className='text-[#e56c16]' />
-              <SiAmericanexpress fontSize={35} className='text-[#e56c16]' />
+            <div className='flex flex-wrap items-center gap-5'>
+              {[
+                "PayPal-logo.png",
+                "Stripe-logo.png",
+                "Visa-logo.png",
+                "MasterCard-logo.png",
+                "American-express-logo.png",
+              ].map((logo, index) => (
+                <div
+                  key={index}
+                  className='w-20 h-20 flex items-center justify-center bg-white rounded'
+                >
+                  <Image
+                    src={`/payment-icons/${logo}`}
+                    alt={`${logo.slice(0, -4)}`}
+                    width={64}
+                    height={64}
+                    className='object-contain'
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>
