@@ -1,5 +1,5 @@
-import type { Montserrat } from "next";
-import { Poppins } from "next/font/google";
+import type { Metadata } from "next";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "@/app/components/LayoutRapper";
 import StoreProvider from "@/app/StoreProvider";
