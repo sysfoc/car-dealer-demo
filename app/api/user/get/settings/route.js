@@ -6,7 +6,7 @@ import { config } from "@/app/api/utils/env-config";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 
-export async function GET(req) {
+export async function GET() {
   await connectToDatabase();
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
