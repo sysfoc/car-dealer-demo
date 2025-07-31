@@ -151,6 +151,12 @@ const UserSidebar = () => {
             }}
           >
             <Sidebar.Item
+              href='/user/dashboard/settings/general'
+              className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
+            >
+              General
+            </Sidebar.Item>
+            <Sidebar.Item
               href='/user/dashboard/settings/profile'
               className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
             >

@@ -16,43 +16,10 @@ const AddOns = () => {
   const [loading, setLoading] = useState(false);
   const [addOns, setAddOns] = useState([]);
   const [activeId, setActiveId] = useState(null);
-
+  const [selectedCurrency, setSelectedCurrency] = useState({});
   const toggleDropdown = (id) => {
     setActiveId((prev) => (prev === id ? null : id));
   };
-
-  const services = [
-    {
-      id: 1,
-      image: "/09.png",
-      alt: "Feature 7 - Google Fonts Integration",
-      title: "Content Writing",
-      description:
-        "We create clear, engaging, and SEO-friendly content tailored for car dealers — designed to increase traffic, build authority, and turn visitors into customers.",
-      price: 300,
-      detail: <ContentWriting />,
-    },
-    {
-      id: 2,
-      image: "/08.png",
-      alt: "Feature 8 - SEO Optimization",
-      title: "SEO Optimization",
-      description:
-        "Our SEO services will improve your website so it appears higher on Google when people search for Vehicles. The higher your site appears, the more people click and visit — which means more leads and more sales.",
-      price: 500,
-      detail: <SEO />,
-    },
-    {
-      id: 3,
-      image: "/07.png",
-      alt: "Feature 9 - Social Media Marketing",
-      title: "Social Media Marketing",
-      description:
-        "We manage your Facebook and Instagram and other social media accounts to build your online presence, engage local buyers, and generate more leads — all while you focus on running your business.",
-      price: 400,
-      detail: <SocialMedia />,
-    },
-  ];
 
   useEffect(() => {
     setLoading(true);
@@ -76,6 +43,79 @@ const AddOns = () => {
       fetchUserAddons();
     }
   }, [currentUser]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response1 = await fetch("/api/user/get/settings");
+        const data1 = await response1.json();
+
+        if (response1.ok && data1.settings?.currency) {
+          const currency = data1.settings.currency;
+          const response2 = await fetch(
+            `/api/payment/currencies/get/currency-name/${currency}`
+          );
+          const data2 = await response2.json();
+
+          if (response2.ok) {
+            setSelectedCurrency(data2.currency);
+          }
+        }
+
+        setLoading(false);
+      } catch (error) {
+        console.error(error.message);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const services = [
+    {
+      id: 1,
+      image: "/09.png",
+      alt: "Feature 7 - Google Fonts Integration",
+      title: "Content Writing",
+      description:
+        "We create clear, engaging, and SEO-friendly content tailored for car dealers — designed to increase traffic, build authority, and turn visitors into customers.",
+      price: selectedCurrency?.currency
+        ? `${selectedCurrency?.country} ${(
+            85186.76 / selectedCurrency?.price
+          ).toFixed(2)}`
+        : "$300",
+      detail: <ContentWriting />,
+    },
+    {
+      id: 2,
+      image: "/08.png",
+      alt: "Feature 8 - SEO Optimization",
+      title: "SEO Optimization",
+      description:
+        "Our SEO services will improve your website so it appears higher on Google when people search for Vehicles. The higher your site appears, the more people click and visit — which means more leads and more sales.",
+      price: selectedCurrency?.currency
+        ? `${selectedCurrency?.country} ${(
+            141977.93 / selectedCurrency?.price
+          ).toFixed(2)}`
+        : "$500",
+      detail: <SEO />,
+    },
+    {
+      id: 3,
+      image: "/07.png",
+      alt: "Feature 9 - Social Media Marketing",
+      title: "Social Media Marketing",
+      description:
+        "We manage your Facebook and Instagram and other social media accounts to build your online presence, engage local buyers, and generate more leads — all while you focus on running your business.",
+      price: selectedCurrency?.currency
+        ? `${selectedCurrency?.country} ${(
+            113582.35 / selectedCurrency?.price
+          ).toFixed(2)}`
+        : "$400",
+      detail: <SocialMedia />,
+    },
+  ];
   const buySelectedPlan = () => {
     setShowModal(true);
   };
@@ -146,8 +186,8 @@ const AddOns = () => {
                       <p className='text-gray-500'>{service.description}</p>
                     </div>
                     <div className='flex flex-col gap-3'>
-                      <span className='px-5 py-2 rounded-md text-sm bg-gray-100'>
-                        ${service.price}/month
+                      <span className='px-5 py-2 rounded-md whitespace-nowrap text-sm bg-gray-100'>
+                        {service.price} / Month
                       </span>
                       {currentUser && (
                         <Button
