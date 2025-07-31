@@ -43,19 +43,30 @@ const OrdersTable = () => {
       <div className='overflow-x-auto'>
         <Table>
           <TableHead>
-            <TableHeadCell>Users</TableHeadCell>
-            <TableHeadCell>Gmail</TableHeadCell>
-            <TableHeadCell>Provider</TableHeadCell>
-            <TableHeadCell>Role</TableHeadCell>
-            <TableHeadCell>
-              <span>Actions</span>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Users
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Gmail
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Provider
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Role
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Actions
             </TableHeadCell>
           </TableHead>
           <TableBody className='divide-y'>
             {loading && (
               <TableRow>
                 <TableCell colSpan={5} className='text-center'>
-                  <Spinner size='lg' aria-label='Center-aligned spinner example' />
+                  <Spinner
+                    size='lg'
+                    aria-label='Center-aligned spinner example'
+                  />
                 </TableCell>
               </TableRow>
             )}
@@ -74,15 +85,17 @@ const OrdersTable = () => {
                 <TableCell>
                   <span
                     className={`${
-                      data?.role === "admin" ? "bg-[#15CA20]" : "bg-red-600"
-                    } rounded-lg p-2 text-xs text-white capitalize`}
+                      data?.role === "admin"
+                        ? "bg-[#15CA20]"
+                        : "bg-[#182641]/80"
+                    } rounded p-2 text-xs text-white capitalize`}
                   >
                     {data?.role}
                   </span>
                 </TableCell>
                 <TableCell>
                   <Button
-                    color='gray'
+                    className='bg-[#182641] hover:!bg-[#182641]/90'
                     size='sm'
                     onClick={() => handleViewButton(data)}
                   >
@@ -94,7 +107,11 @@ const OrdersTable = () => {
           </TableBody>
         </Table>
         <Modal show={openModal} onClose={() => setOpenModal(false)}>
-          <Modal.Header>{selectedUser?.name} Profile</Modal.Header>
+          <Modal.Header>
+            <h2 className='text-[#182641] font-semibold'>
+              {selectedUser?.name} Profile
+            </h2>
+          </Modal.Header>
           <Modal.Body>
             {!selectedUser ? (
               <Spinner size='lg' />
@@ -115,7 +132,9 @@ const OrdersTable = () => {
             )}
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={() => setOpenModal(false)}>Close</Button>
+            <Button color='failure' onClick={() => setOpenModal(false)}>
+              Close
+            </Button>
           </Modal.Footer>
         </Modal>
       </div>

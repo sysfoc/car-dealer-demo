@@ -7,23 +7,51 @@ html {
 }
 
 .sidebar div {
-  background-color: white !important;
-  color: black !important;
+  background-color: #fa7123 !important;
+  color: white !important;
 }
 
 .sidebar div svg {
-  fill: black !important;
+  fill: white !important;
+  color: white !important;
 }
 
-.dynamic-content ul, .dynamic-content ul li {
+.admin-sidebar div {
+  background-color: #182641 !important;
+  color: white !important;
+}
+
+.admin-sidebar div svg {
+  fill: white !important;
+  color: white !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: auto;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #fa7123;
+  border-radius: 6px;
+  border: 2px solid #f0f0f0;
+}
+
+.dynamic-content ul,
+.dynamic-content ul li {
   list-style-type: disc !important;
   list-style-position: inside;
 }
-.dynamic-content ol, .dynamic-content ol li {
+.dynamic-content ol,
+.dynamic-content ol li {
   list-style-type: disc !important;
   list-style-position: inside;
 }
-.dynamic-content a{
+.dynamic-content a {
   color: red;
   text-decoration: underline;
 }

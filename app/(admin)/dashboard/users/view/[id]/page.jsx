@@ -40,7 +40,7 @@ export default function viewUser() {
     <>
       {loading ? (
         <div className='flex justify-center items-center'>
-          <div className='animate-spin rounded-full h-32 w-32 border-t-4 border-blue-500'></div>
+          <div className='animate-spin rounded-full h-32 w-32 border-t-4 border-[#182641]'></div>
         </div>
       ) : (
         <section className='my-5 flex flex-col gap-5'>
@@ -103,16 +103,16 @@ export default function viewUser() {
             <div>
               <h2 className='text-lg font-semibold'>Domains</h2>
             </div>
-            <div className='overflow-x-auto'>
+            <div>
               <Table className='mt-4' striped>
                 <TableHead>
-                  <TableHeadCell>Domain</TableHeadCell>
-                  <TableHeadCell>Registrar</TableHeadCell>
-                  <TableHeadCell>Username</TableHeadCell>
-                  <TableHeadCell>Password</TableHeadCell>
-                  <TableHeadCell>Custom Domain</TableHeadCell>
-                  <TableHeadCell>Status</TableHeadCell>
-                  <TableHeadCell>Date</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Domain</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Registrar</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Username</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Password</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Custom Domain</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Status</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Date</TableHeadCell>
                 </TableHead>
                 <TableBody>
                   {record?.domain?.length > 0 ? (
@@ -163,16 +163,16 @@ export default function viewUser() {
             <div>
               <h2 className='text-lg font-semibold'>Payment History</h2>
             </div>
-            <div className='overflow-x-auto'>
+            <div className="overflow-x-auto">
               <Table className='mt-4' striped>
                 <TableHead>
-                  <TableHeadCell>Customer ID</TableHeadCell>
-                  <TableHeadCell>Payment ID</TableHeadCell>
-                  <TableHeadCell>Product</TableHeadCell>
-                  <TableHeadCell>Price</TableHeadCell>
-                  <TableHeadCell>Duration</TableHeadCell>
-                  <TableHeadCell>Method</TableHeadCell>
-                  <TableHeadCell>Date</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Customer ID</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Payment ID</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Product</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Price</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Duration</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Method</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Date</TableHeadCell>
                 </TableHead>
                 <TableBody>
                   {record?.payments?.length > 0 ? (
@@ -223,14 +223,14 @@ export default function viewUser() {
             <div>
               <h2 className='text-lg font-semibold'>Subscriptions</h2>
             </div>
-            <div className='overflow-x-auto'>
+            <div>
               <Table className='mt-4' striped>
                 <TableHead>
-                  <TableHeadCell>Product</TableHeadCell>
-                  <TableHeadCell>Duration</TableHeadCell>
-                  <TableHeadCell>Status</TableHeadCell>
-                  <TableHeadCell>Subscribed At</TableHeadCell>
-                  <TableHeadCell>Expired At</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Product</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Duration</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Status</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Subscribed At</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Expired At</TableHeadCell>
                 </TableHead>
                 <TableBody>
                   {record?.subscription?.length > 0 ? (
@@ -282,14 +282,14 @@ export default function viewUser() {
             <div>
               <h2 className='text-lg font-semibold'>Themes</h2>
             </div>
-            <div className='overflow-x-auto'>
+            <div>
               <Table className='mt-4' striped>
                 <TableHead>
-                  <TableHeadCell>Theme name</TableHeadCell>
-                  <TableHeadCell>Status</TableHeadCell>
-                  <TableHeadCell>Current Status</TableHeadCell>
-                  <TableHeadCell>Subscribed At</TableHeadCell>
-                  <TableHeadCell>Expired At</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Theme name</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Status</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Current Status</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Subscribed At</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Expired At</TableHeadCell>
                 </TableHead>
                 <TableBody>
                   {record?.subscription &&
@@ -350,15 +350,15 @@ export default function viewUser() {
             <div>
               <h2 className='text-lg font-semibold'>Add-ons</h2>
             </div>
-            <div className='overflow-x-auto'>
+            <div>
               <Table className='mt-4' striped>
                 <TableHead>
-                  <TableHeadCell>Addon</TableHeadCell>
-                  <TableHeadCell>Price</TableHeadCell>
-                  <TableHeadCell>Status</TableHeadCell>
-                  <TableHeadCell>Current Status</TableHeadCell>
-                  <TableHeadCell>Subscribed At</TableHeadCell>
-                  <TableHeadCell>Expired At</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Addon</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Price</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Status</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Current Status</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Subscribed At</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Expired At</TableHeadCell>
                 </TableHead>
                 <TableBody>
                   {record?.subscription && record?.addons?.length > 0 ? (
@@ -421,16 +421,16 @@ export default function viewUser() {
             <div>
               <h2 className='text-lg font-semibold'>Refund History</h2>
             </div>
-            <div className='overflow-x-auto'>
+            <div>
               <Table className='mt-4' striped>
                 <TableHead>
-                  <TableHeadCell>Order Id</TableHeadCell>
-                  <TableHeadCell>Email</TableHeadCell>
-                  <TableHeadCell>Amount</TableHeadCell>
-                  <TableHeadCell>Reason</TableHeadCell>
-                  <TableHeadCell>Method</TableHeadCell>
-                  <TableHeadCell>Status</TableHeadCell>
-                  <TableHeadCell>Date</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Order Id</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Email</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Amount</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Reason</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Method</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Status</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Date</TableHeadCell>
                 </TableHead>
                 <TableBody>
                   {record?.refunds?.length > 0 ? (
@@ -481,14 +481,14 @@ export default function viewUser() {
             <div>
               <h2 className='text-lg font-semibold'>Support Tickets</h2>
             </div>
-            <div className='overflow-x-auto'>
+            <div>
               <Table className='mt-4' striped>
                 <TableHead>
-                  <TableHeadCell>Subject</TableHeadCell>
-                  <TableHeadCell>Description</TableHeadCell>
-                  <TableHeadCell>Status</TableHeadCell>
-                  <TableHeadCell>Reply</TableHeadCell>
-                  <TableHeadCell>Created At</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Subject</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Description</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Status</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Reply</TableHeadCell>
+                  <TableHeadCell className="!bg-[#182641] text-white">Created At</TableHeadCell>
                 </TableHead>
                 <TableBody>
                   {record?.support?.length > 0 ? (

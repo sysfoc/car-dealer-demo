@@ -41,12 +41,12 @@ const Datatable = () => {
         </div>
         <Table>
           <TableHead>
-            <TableHeadCell>Transaction ID</TableHeadCell>
-            <TableHeadCell>Date</TableHeadCell>
-            <TableHeadCell>Product</TableHeadCell>
-            <TableHeadCell>Amount</TableHeadCell>
-            <TableHeadCell>Payment Method</TableHeadCell>
-            <TableHeadCell>Action</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Transaction ID</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Date</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Product</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Amount</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Payment Method</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Action</TableHeadCell>
           </TableHead>
           <TableBody>
             {loading && (
@@ -73,7 +73,7 @@ const Datatable = () => {
                     <div className='flex items-center gap-2'>
                       <Link
                         href={`/dashboard/invoices/view/${transaction?._id}`}
-                        className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'
+                        className='p-2 bg-[#182641] text-white rounded hover:!bg-[#182641]/90'
                         title='View'
                       >
                         <FaEye className='w-3 h-3' />

@@ -32,11 +32,11 @@ export default function Domains() {
       <div className='overflow-x-auto mt-5'>
         <Table>
           <TableHead>
-            <TableHeadCell>Domain</TableHeadCell>
-            <TableHeadCell>Registrar</TableHeadCell>
-            <TableHeadCell>Username</TableHeadCell>
-            <TableHeadCell>Password</TableHeadCell>
-            <TableHeadCell>Date</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Domain</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Registrar</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Username</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Password</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Date</TableHeadCell>
           </TableHead>
           <TableBody>
             {domains.map((domain) => {

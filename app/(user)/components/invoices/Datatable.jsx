@@ -72,7 +72,7 @@ const Datatable = () => {
                   <div className='flex items-center gap-2'>
                     <Link
                       href={`/user/dashboard/billing/invoices/view/${transaction?._id}`}
-                      className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'
+                      className='p-2 bg-[#fb8b4c] text-white rounded hover:!bg-[#fb8b4c]/90'
                       title='View'
                     >
                       <FaEye className='w-3 h-3' />

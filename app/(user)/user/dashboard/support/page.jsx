@@ -62,8 +62,11 @@ export default function Support() {
           Need help with your billing or subscription? Contact our support team.
         </p>
         <div className='mt-4 flex gap-3'>
-          <a href='https://mail.google.com/mail/?view=cm&fs=1&to=sysfoc@gmail.com' target="_blank">
-            <Button color='blue'>
+          <a
+            href='https://mail.google.com/mail/?view=cm&fs=1&to=sysfoc@gmail.com'
+            target='_blank'
+          >
+            <Button className='bg-[#e56c16] hover:!bg-[#e56c16]'>
               <HiOutlineMail className='mr-2' /> Email Support
             </Button>
           </a>
@@ -117,8 +120,7 @@ export default function Support() {
           </Table.Body>
         </Table>
         <Button
-          color='gray'
-          className='mt-4 w-full'
+          className='mt-4 w-full bg-[#e56c16] hover:!bg-[#e56c16]'
           onClick={() => setIsModalOpen(true)}
         >
           <HiPlus className='mr-2' /> Create New Ticket
@@ -128,26 +130,35 @@ export default function Support() {
         <Modal.Header>Create Support Ticket</Modal.Header>
         <Modal.Body>
           <form onSubmit={createTicket}>
-            <div className='space-y-4'>
-              <Label htmlFor='subject'>Subject</Label>
-              <TextInput
-                id='subject'
-                name='subject'
-                required
-                onChange={handleChange}
-              />
-              <Label htmlFor='description'>Description</Label>
-              <Textarea
-                id='description'
-                name='description'
-                required
-                onChange={handleChange}
-                rows={4}
-              />
+            <div className='space-y-3'>
+              <div>
+                <Label htmlFor='subject'>Subject</Label>
+                <TextInput
+                  id='subject'
+                  name='subject'
+                  required
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <Label htmlFor='description'>Description</Label>
+                <Textarea
+                  id='description'
+                  name='description'
+                  required
+                  onChange={handleChange}
+                  rows={4}
+                />
+              </div>
             </div>
             <div className='mt-4 flex items-center justify-end gap-4'>
-              <Button type='submit'>Submit</Button>
-              <Button color='gray' onClick={() => setIsModalOpen(false)}>
+              <Button
+                type='submit'
+                className='bg-[#e56c16] hover:!bg-[#e56c16]'
+              >
+                Submit
+              </Button>
+              <Button color='failure' onClick={() => setIsModalOpen(false)}>
                 Cancel
               </Button>
             </div>

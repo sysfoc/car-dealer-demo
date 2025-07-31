@@ -16,7 +16,7 @@ const AdminSidebar = () => {
   return (
     <Sidebar
       aria-label='Sidebar of a dashboard'
-      className='hidden md:block w-[18rem] h-screen shadow sidebar'
+      className='hidden md:block w-[18rem] h-screen shadow admin-sidebar'
     >
       <Sidebar.Logo href='/dashboard'>Admin Dashboard</Sidebar.Logo>
       <Sidebar.Items>
@@ -24,56 +24,56 @@ const AdminSidebar = () => {
           <Sidebar.Item
             href='/dashboard'
             icon={HiChartPie}
-            className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
+            className='!text-white hover:!bg-[#344b76] hover:!text-white'
           >
             Dashboard
           </Sidebar.Item>
           <Sidebar.Item
             href='/dashboard/invoices'
             icon={HiViewBoards}
-            className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
+            className='!text-white hover:!bg-[#344b76] hover:!text-white'
           >
             Invoice
           </Sidebar.Item>
           <Sidebar.Item
             href='/dashboard/users'
             icon={HiUser}
-            className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
+            className='!text-white hover:!bg-[#344b76] hover:!text-white'
           >
             Users
           </Sidebar.Item>
           <Sidebar.Item
             href='/dashboard/domains'
             icon={GrDomain}
-            className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
+            className='!text-white hover:!bg-[#344b76] hover:!text-white'
           >
             Domains
           </Sidebar.Item>
           <Sidebar.Item
             href='/dashboard/payment/history'
             icon={HiShoppingBag}
-            className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
+            className='!text-white hover:!bg-[#344b76] hover:!text-white'
           >
             Payment History
           </Sidebar.Item>
           <Sidebar.Item
             href='/dashboard/refund/requests'
             icon={HiArrowSmRight}
-            className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
+            className='!text-white hover:!bg-[#344b76] hover:!text-white'
           >
             Refund requests
           </Sidebar.Item>
           <Sidebar.Item
             href='/dashboard/support'
             icon={BiSupport}
-            className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
+            className='!text-white hover:!bg-[#344b76] hover:!text-white'
           >
             Support
           </Sidebar.Item>
           <Sidebar.Item
             href='/dashboard/blogs'
             icon={FaBlog}
-            className='hover:!bg-[#0dcaf021] hover:!text-[#2899b0]'
+            className='!text-white hover:!bg-[#344b76] hover:!text-white'
           >
             Blogs
           </Sidebar.Item>

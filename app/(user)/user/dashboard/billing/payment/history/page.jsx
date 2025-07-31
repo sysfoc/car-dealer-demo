@@ -79,7 +79,7 @@ export default function PaymentHistory() {
                 <TableCell>${transaction.productPrice}</TableCell>
                 <TableCell>{transaction.paymentMethod}</TableCell>
                 <TableCell>
-                  <Button onClick={() => handleViewTransaction(transaction)}>
+                  <Button className="bg-[#fb8b4c] hover:!bg-[#fb8b4c]/90" onClick={() => handleViewTransaction(transaction)}>
                     <FaEye />
                   </Button>
                 </TableCell>

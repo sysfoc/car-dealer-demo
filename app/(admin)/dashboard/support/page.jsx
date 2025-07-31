@@ -34,11 +34,11 @@ export default function Support() {
       <div className='my-5'>
         <Table>
           <TableHead>
-            <TableHeadCell>Subject</TableHeadCell>
-            <TableHeadCell>Message</TableHeadCell>
-            <TableHeadCell>Status</TableHeadCell>
-            <TableHeadCell>Date</TableHeadCell>
-            <TableHeadCell>Actions</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Subject</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Message</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Status</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Date</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Actions</TableHeadCell>
           </TableHead>
           <TableBody className='divide-y'>
             {loading && (
@@ -65,7 +65,7 @@ export default function Support() {
                   </TableCell>
                   <TableCell>
                     <Link href={`/dashboard/support/update/${issue?._id}`}>
-                      <Button size='sm'>Update</Button>
+                      <Button size='sm' className="bg-green-500 hover:!bg-green-600">Update</Button>
                     </Link>
                   </TableCell>
                 </TableRow>

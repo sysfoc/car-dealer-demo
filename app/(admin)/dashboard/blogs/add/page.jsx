@@ -99,7 +99,7 @@ export default function AddBlog() {
           <Link href={"/dashboard/blogs"}>
             <Button
               size='md'
-              className='bg-blue-500 hover:!bg-blue-600 text-white rounded-md'
+              className='bg-[#e56c16] hover:!bg-[#e56c16] text-white rounded-md'
             >
               Go Back
             </Button>
@@ -203,8 +203,7 @@ export default function AddBlog() {
             <Button
               disabled={loading}
               type='submit'
-              color='dark'
-              className='w-full'
+              className='w-full bg-[#182641] hover:!bg-[#182641]/90 text-white rounded-md'
             >
               Submit
             </Button>

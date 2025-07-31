@@ -138,9 +138,8 @@ export default function DomainSetup() {
             <div className='mt-4'>
               <Button
                 type='submit'
-                color='failure'
                 disabled={loading}
-                className='w-full cursor-pointer'
+                className='w-full cursor-pointer bg-[#e56c16] hover:!bg-[#e56c16]/90'
               >
                 Submit
               </Button>
@@ -239,9 +238,8 @@ export default function DomainSetup() {
             <div className='mt-5'>
               <Button
                 type='submit'
-                color='failure'
                 disabled={loading}
-                className='w-full flex items-center justify-center'
+                className='w-full cursor-pointer bg-[#e56c16] hover:!bg-[#e56c16]/90'
               >
                 Submit
               </Button>

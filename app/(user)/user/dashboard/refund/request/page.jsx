@@ -50,19 +50,17 @@ export default function RefundRequest() {
   };
 
   return (
-    <div className='flex justify-center items-center min-h-screen'>
+    <div className='flex justify-center items-center min-h-screen my-10'>
       <Card className='max-w-lg w-full shadow-lg border border-gray-200'>
         <h2 className='text-2xl font-semibold text-center mb-4 text-gray-800'>
           Refund Request
         </h2>
-        {
-          error && (
-            <Alert color="failure">
-              <strong className='font-bold'>Error!</strong>
-              <span className='block sm:inline'>{errorMessage}</span>
-            </Alert>
-          )
-        }
+        {error && (
+          <Alert color='failure'>
+            <strong className='font-bold'>Error!</strong>
+            <span className='block sm:inline'>{errorMessage}</span>
+          </Alert>
+        )}
         <form onSubmit={handleSubmit} className='space-y-4'>
           <div>
             <Label
@@ -141,8 +139,7 @@ export default function RefundRequest() {
           <Button
             disabled={loading}
             type='submit'
-            color='blue'
-            className='w-full'
+            className='w-full cursor-pointer bg-[#e56c16] hover:!bg-[#e56c16]/90'
           >
             Submit Request
           </Button>

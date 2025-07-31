@@ -51,12 +51,24 @@ export default function PaymentHistory() {
         </div>
         <Table>
           <TableHead>
-            <TableHeadCell>Transaction ID</TableHeadCell>
-            <TableHeadCell>Date</TableHeadCell>
-            <TableHeadCell>Product</TableHeadCell>
-            <TableHeadCell>Amount</TableHeadCell>
-            <TableHeadCell>Payment Method</TableHeadCell>
-            <TableHeadCell>Action</TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Transaction ID
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Date
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Product
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Amount
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Payment Method
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Action
+            </TableHeadCell>
           </TableHead>
           <TableBody>
             {loading && (
@@ -80,7 +92,10 @@ export default function PaymentHistory() {
                   <TableCell>${transaction.productPrice}</TableCell>
                   <TableCell>{transaction.paymentMethod}</TableCell>
                   <TableCell>
-                    <Button onClick={() => handleViewTransaction(transaction)}>
+                    <Button
+                      className='!bg-[#182641] hover:!bg-[#182641]/90'
+                      onClick={() => handleViewTransaction(transaction)}
+                    >
                       <FaEye />
                     </Button>
                   </TableCell>
@@ -96,8 +111,10 @@ export default function PaymentHistory() {
         </Table>
         <Modal show={openModal} onClose={() => setOpenModal(false)}>
           <ModalHeader>
-            Transaction Details of{" "}
-            {selectedTransaction ? selectedTransaction._id : ""}
+            <h2 className='text-lg font-semibold text-[#182641]'>
+              Transaction Details of{" "}
+              {selectedTransaction ? selectedTransaction._id : ""}
+            </h2>
           </ModalHeader>
           <ModalBody>
             {selectedTransaction ? (
@@ -136,7 +153,9 @@ export default function PaymentHistory() {
                 </p>
                 <p>
                   <strong>Status:</strong>{" "}
-                  <span className={`px-3 py-1 text-white rounded bg-green-500 capitalize`}>
+                  <span
+                    className={`px-3 py-1 text-white rounded bg-green-500 capitalize`}
+                  >
                     completed
                   </span>
                 </p>
@@ -146,7 +165,7 @@ export default function PaymentHistory() {
             )}
           </ModalBody>
           <ModalFooter>
-            <Button color='gray' onClick={() => setOpenModal(false)}>
+            <Button color='failure' onClick={() => setOpenModal(false)}>
               Close
             </Button>
           </ModalFooter>

@@ -117,8 +117,7 @@ export default function CreateUsers() {
             <Button
               disabled={loading}
               type='submit'
-              color='blue'
-              className='w-full'
+              className='w-full !bg-[#182641] hover:!bg-[#182641]'
             >
               Create User
             </Button>

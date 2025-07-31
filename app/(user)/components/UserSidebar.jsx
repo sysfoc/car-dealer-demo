@@ -26,21 +26,21 @@ const UserSidebar = () => {
           <Sidebar.Item
             href='/user/dashboard'
             icon={HiChartPie}
-            className='hover:!bg-gray-100 hover:!text-black'
+            className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
           >
             Dashboard
           </Sidebar.Item>
           <Sidebar.Item
             href='/user/dashboard/domain-setup'
             icon={GrDomain}
-            className='hover:!bg-gray-100 hover:!text-black'
+            className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
           >
             Domain setup
           </Sidebar.Item>
           <Sidebar.Collapse
             icon={MdSubscriptions}
             label='Subscription'
-            className='hover:!bg-gray-100 hover:!text-black'
+           className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
             renderChevronIcon={(theme, open) => {
               const IconComponent = open ? HiOutlineMinusSm : HiOutlinePlusSm;
 
@@ -56,19 +56,19 @@ const UserSidebar = () => {
           >
             <Sidebar.Item
               href='/user/dashboard/subscription/details'
-              className='hover:!bg-gray-100 hover:!text-black'
+              className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
             >
               Upgrade Plan
             </Sidebar.Item>
             <Sidebar.Item
               href='/user/dashboard/subscription/add-ons'
-              className='hover:!bg-gray-100 hover:!text-black'
+              className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
             >
               Add-ons
             </Sidebar.Item>
             <Sidebar.Item
               href='/user/dashboard/subscription/themes'
-              className='hover:!bg-gray-100 hover:!text-black'
+              className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
             >
               Themes
             </Sidebar.Item>
@@ -76,7 +76,7 @@ const UserSidebar = () => {
           <Sidebar.Collapse
             icon={RiRefundFill}
             label='Refund'
-            className='hover:!bg-gray-100 hover:!text-black'
+            className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
             renderChevronIcon={(theme, open) => {
               const IconComponent = open ? HiOutlineMinusSm : HiOutlinePlusSm;
 
@@ -92,13 +92,13 @@ const UserSidebar = () => {
           >
             <Sidebar.Item
               href='/user/dashboard/refund/request'
-              className='hover:!bg-gray-100 hover:!text-black'
+              className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
             >
               Refund Request
             </Sidebar.Item>
             <Sidebar.Item
               href='/user/dashboard/refund/cancel-subscription'
-              className='hover:!bg-gray-100 hover:!text-black'
+              className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
             >
               Cancel Subscription
             </Sidebar.Item>
@@ -106,7 +106,7 @@ const UserSidebar = () => {
           <Sidebar.Collapse
             icon={FaMoneyBill1}
             label='Billings'
-            className='hover:!bg-gray-100 hover:!text-black'
+            className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
             renderChevronIcon={(theme, open) => {
               const IconComponent = open ? HiOutlineMinusSm : HiOutlinePlusSm;
 
@@ -122,13 +122,13 @@ const UserSidebar = () => {
           >
             <Sidebar.Item
               href='/user/dashboard/billing/invoices'
-              className='hover:!bg-gray-100 hover:!text-black'
+              className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
             >
               Invoices
             </Sidebar.Item>
             <Sidebar.Item
               href='/user/dashboard/billing/payment/history'
-              className='hover:!bg-gray-100 hover:!text-black'
+              className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
             >
               Payment History
             </Sidebar.Item>
@@ -136,7 +136,7 @@ const UserSidebar = () => {
           <Sidebar.Collapse
             icon={IoSettings}
             label='Settings'
-            className='hover:!bg-gray-100 hover:!text-black'
+            className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
             renderChevronIcon={(theme, open) => {
               const IconComponent = open ? HiOutlineMinusSm : HiOutlinePlusSm;
 
@@ -152,13 +152,13 @@ const UserSidebar = () => {
           >
             <Sidebar.Item
               href='/user/dashboard/settings/profile'
-              className='hover:!bg-gray-100 hover:!text-black'
+              className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
             >
               Profile
             </Sidebar.Item>
             <Sidebar.Item
               href='/user/dashboard/settings/security'
-              className='hover:!bg-gray-100 hover:!text-black'
+              className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
             >
               Security
             </Sidebar.Item>
@@ -166,14 +166,14 @@ const UserSidebar = () => {
           <Sidebar.Item
             href='/user/dashboard/notifications'
             icon={IoMdNotifications}
-            className='hover:!bg-gray-100 hover:!text-black'
+            className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
           >
             Notifications
           </Sidebar.Item>
           <Sidebar.Item
             href='/user/dashboard/support'
             icon={BiSupport}
-            className='hover:!bg-gray-100 hover:!text-black'
+            className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
           >
             Support
           </Sidebar.Item>

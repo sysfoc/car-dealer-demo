@@ -138,7 +138,7 @@ export default function EditBlog() {
                 type='text'
                 id='slug'
                 name='slug'
-                placeholder='slug' 
+                placeholder='slug'
                 readOnly
                 value={formData.slug || ""}
               />
@@ -204,8 +204,7 @@ export default function EditBlog() {
             <Button
               disabled={loading}
               type='submit'
-              color='dark'
-              className='w-full'
+              className='w-full bg-[#182641] hover:!bg-[#182641] text-white rounded-md'
             >
               Submit
             </Button>

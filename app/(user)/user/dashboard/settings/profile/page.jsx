@@ -123,7 +123,7 @@ export default function UserProfile() {
                 defaultValue={currentUser?.email}
                 placeholder='johndoe@gmail.com'
                 required
-                onChange={handleChange}
+                disabled
               />
             </div>
             <div>
@@ -140,8 +140,7 @@ export default function UserProfile() {
               <Button
                 disabled={loading}
                 type='submit'
-                color='blue'
-                className='mt-3 w-full'
+                className='mt-3 w-full bg-[#e56c16] hover:!bg-[#e56c16]/90'
               >
                 Save Changes
               </Button>

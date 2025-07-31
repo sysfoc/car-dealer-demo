@@ -126,8 +126,7 @@ export default function EditUsers() {
             <Button
               disabled={loading}
               type='submit'
-              color='blue'
-              className='w-full'
+              className='w-full bg-[#182641] hover:bg-[#182641]/90'
             >
               Update
             </Button>

@@ -79,12 +79,24 @@ export default function page() {
 
         <Table>
           <TableHead>
-            <TableHeadCell>Transaction Id</TableHeadCell>
-            <TableHeadCell>Email</TableHeadCell>
-            <TableHeadCell>Amount</TableHeadCell>
-            <TableHeadCell>Status</TableHeadCell>
-            <TableHeadCell>Date</TableHeadCell>
-            <TableHeadCell>Actions</TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Transaction Id
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Email
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Amount
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Status
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Date
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Actions
+            </TableHeadCell>
           </TableHead>
           <TableBody>
             {loading && (
@@ -115,14 +127,14 @@ export default function page() {
                       className='flex items-center gap-2'
                     >
                       <button
-                        className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'
+                        className='p-2 bg-[#182641] text-white rounded hover:!bg-[#182641]/90'
                         title='View'
                         onClick={() => showRefundDetails(refundRequest)}
                       >
                         <FaEye className='w-3 h-3' />
                       </button>
                       <Button
-                        color='info'
+                        className='bg-green-500 hover:bg-green-600 text-white'
                         size='xs'
                         onClick={() => editRefundDetails(refundRequest)}
                       >
@@ -146,40 +158,40 @@ export default function page() {
         onClose={() => setShowRefundDetailModal(false)}
       >
         <Modal.Header>
-          <span className='text-lg font-medium text-gray-900 dark:text-white'>
+          <span className='text-lg font-semibold text-[#182641] dark:text-white'>
             Refund request details against Transaction Id:{" "}
             {selectedRefundRequest?.orderId}
           </span>
         </Modal.Header>
         <Modal.Body>
-          <p className='mb-2 text-gray-500 dark:text-gray-400'>
+          <p className='mb-2 text-[#182641] dark:text-gray-400'>
             <span className='font-semibold'>Transaction Id:</span>{" "}
             {selectedRefundRequest?.orderId}
           </p>
-          <p className='mb-2 text-gray-500 dark:text-gray-400'>
+          <p className='mb-2 text-[#182641] dark:text-gray-400'>
             <span className='font-semibold'>Email:</span>{" "}
             {selectedRefundRequest?.email}
           </p>
-          <p className='mb-2 text-gray-500 dark:text-gray-400'>
+          <p className='mb-2 text-[#182641] dark:text-gray-400'>
             <span className='font-semibold'>Amount:</span> $
             {selectedRefundRequest?.amount}
           </p>
-          <p className='mb-2 text-gray-500 dark:text-gray-400'>
+          <p className='mb-2 text-[#182641] dark:text-gray-400'>
             <span className='font-semibold'>Refund Reason:</span>{" "}
             {selectedRefundRequest?.reason}
           </p>
-          <p className='mb-2 text-gray-500 dark:text-gray-400 capitalize'>
+          <p className='mb-2 text-[#182641] dark:text-gray-400 capitalize'>
             <span className='font-semibold'>Prefered Refund Method:</span>{" "}
             {selectedRefundRequest?.refundMethod}
           </p>
-          <p className='mb-2 text-gray-500 dark:text-gray-400'>
+          <p className='mb-2 text-[#182641] dark:text-gray-400'>
             <span className='font-semibold'>Dated:</span>{" "}
             {new Date(selectedRefundRequest?.createdAt).toLocaleDateString(
               "en-US",
               { year: "numeric", month: "long", day: "numeric" }
             )}
           </p>
-          <p className='mb-2 text-gray-500 dark:text-gray-400'>
+          <p className='mb-2 text-[#182641] dark:text-gray-400'>
             <span className='font-semibold'>Status:</span>{" "}
             {selectedRefundRequest?.status}
           </p>
@@ -190,7 +202,7 @@ export default function page() {
         onClose={() => setShowEditRefundModal(false)}
       >
         <Modal.Header>
-          <span className='text-lg font-medium text-gray-900 dark:text-white'>
+          <span className='text-lg font-semibold text-[#182641] dark:text-white'>
             Edit Refund Request
           </span>
         </Modal.Header>
@@ -227,7 +239,11 @@ export default function page() {
                 Rejected
               </option>
             </Select>
-            <Button className='mt-4' size='md' type='submit'>
+            <Button
+              className='mt-4 !bg-[#182641] hover:!bg-[#182641]/90 text-white'
+              size='md'
+              type='submit'
+            >
               Update
             </Button>
           </form>

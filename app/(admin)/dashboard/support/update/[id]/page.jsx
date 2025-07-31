@@ -135,7 +135,7 @@ export default function UpdateSupport() {
                 />
               </div>
               <div className='mt-3 flex flex-col'>
-                <Button type='submit'>Update</Button>
+                <Button type='submit' className="!bg-[#182641] hover:!bg-[#182641]/90">Update</Button>
               </div>
             </form>
           </div>

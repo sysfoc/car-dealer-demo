@@ -78,9 +78,9 @@ export default function Users() {
       <div>
         <div className='flex items-center justify-between'>
           <h2 className='text-xl font-semibold mb-4'>Users List</h2>
-          <div>
+          <div className='mb-3'>
             <Link href='/dashboard/users/create'>
-              <Button size='sm' color='blue'>
+              <Button size='sm' className='bg-[#e56c16] hover:!bg-[#e56c16]/90'>
                 Add User
               </Button>
             </Link>
@@ -89,11 +89,11 @@ export default function Users() {
 
         <Table>
           <TableHead>
-            <TableHeadCell>Username</TableHeadCell>
-            <TableHeadCell>Email</TableHeadCell>
-            <TableHeadCell>Role</TableHeadCell>
-            <TableHeadCell>Signup Method</TableHeadCell>
-            <TableHeadCell>Actions</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Username</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Email</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Role</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Signup Method</TableHeadCell>
+            <TableHeadCell className="!bg-[#182641] text-white">Actions</TableHeadCell>
           </TableHead>
           <TableBody>
             {getAllUsers.map((user) => (
@@ -108,7 +108,7 @@ export default function Users() {
                   <div key={user?._id} className='flex items-center gap-2'>
                     <Link href={`/dashboard/users/view/${user?._id}`}>
                       <button
-                        className='p-2 bg-blue-600 text-white rounded hover:bg-blue-700'
+                        className='p-2 rounded bg-[#182641] hover:!bg-[#182641]/90 text-white'
                         title='View'
                       >
                         <FaEye className='w-3 h-3' />
@@ -116,14 +116,14 @@ export default function Users() {
                     </Link>
                     <Link href={`/dashboard/users/edit/${user?._id}`}>
                       <button
-                        className='p-2 bg-yellow-500 text-white rounded hover:bg-yellow-600'
+                        className='p-2 bg-green-500 hover:!bg-green-600 text-white rounded'
                         title='Edit'
                       >
                         <FaEdit className='w-3 h-3' />
                       </button>
                     </Link>
                     <button
-                      className='p-2 bg-red-500 text-white rounded hover:bg-red-600'
+                      className='p-2 bg-red-600 text-white rounded hover:bg-red-700'
                       title='Delete'
                       onClick={() => handleDeleteUser(user)}
                     >
@@ -148,10 +148,13 @@ export default function Users() {
             </p>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={() => setIsDeleteModalOpen(false)} color='gray'>
+            <Button onClick={() => setIsDeleteModalOpen(false)} color='dark'>
               Cancel
             </Button>
-            <Button onClick={() => deleteUser(selectedUser?._id)} color='red'>
+            <Button
+              onClick={() => deleteUser(selectedUser?._id)}
+              color='failure'
+            >
               Delete
             </Button>
           </Modal.Footer>

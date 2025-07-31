@@ -172,16 +172,14 @@ export default function ViewInvoice() {
           <div className='my-5 flex items-center justify-center'>
             <div className='flex items-center gap-3'>
               <Button
-                color='green'
                 onClick={() => window.print()}
-                className='mt-4 flex items-center'
+                className='mt-4 flex items-center bg-transparent border border-[#fb8b4c] text-[#fb8b4c] hover:text-white hover:!bg-[#fb8b4c]/90'
               >
                 <IoIosPrint fontSize={22} className='mr-2' /> Print Invoice
               </Button>
               <Button
-                gradientDuoTone='greenToBlue'
                 onClick={handleDownloadPDF}
-                className='mt-4 flex items-center'
+                className='mt-4 flex items-center bg-[#fb8b4c] hover:!bg-[#fb8b4c]/90'
               >
                 <FaDownload fontSize={22} className='mr-2' /> Download Invoice
               </Button>

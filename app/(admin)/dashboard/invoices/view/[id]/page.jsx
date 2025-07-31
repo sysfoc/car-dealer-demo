@@ -136,7 +136,9 @@ export default function ViewInvoice() {
                   <p className='text-sm text-gray-500 uppercase'>
                     Automotive Web Solutions
                   </p>
-                  <p className='text-sm text-gray-500 uppercase'>sales@automotivewebsolutions.com</p>
+                  <p className='text-sm text-gray-500 uppercase'>
+                    sales@automotivewebsolutions.com
+                  </p>
                 </div>
               )}
             </div>
@@ -202,16 +204,14 @@ export default function ViewInvoice() {
             {!loading && (
               <div className='flex items-center gap-3'>
                 <Button
-                  color='green'
                   onClick={() => window.print()}
-                  className='mt-4 flex items-center'
+                  className='mt-4 flex items-center bg-transparent border border-[#182641] text-[#182641] hover:text-white hover:!bg-[#182641]/90'
                 >
                   <IoIosPrint fontSize={22} className='mr-2' /> Print Invoice
                 </Button>
                 <Button
-                  gradientDuoTone='greenToBlue'
                   onClick={handleDownloadPDF}
-                  className='mt-4 flex items-center'
+                  className='mt-4 flex items-center bg-[#182641] hover:!bg-[#182641]/90'
                 >
                   <FaDownload fontSize={22} className='mr-2' /> Download Invoice
                 </Button>

@@ -37,13 +37,13 @@ export default function Blog() {
   return (
     <section className='my-5 p-5'>
       <div>
-        <div className='flex items-center justify-between'>
+        <div className='flex items-center justify-between mb-3'>
           <h2 className='text-2xl font-semibold mb-4'>Blogs</h2>
           <div>
             <Link href={"/dashboard/blogs/add"}>
               <Button
                 size='md'
-                className='bg-blue-500 hover:!bg-blue-600 text-white rounded-md'
+                className='bg-[#e56c16] hover:!bg-[#e56c16]/90 text-white rounded-md'
               >
                 Add Blog
               </Button>
@@ -54,11 +54,21 @@ export default function Blog() {
       <div>
         <Table>
           <TableHead>
-            <TableHeadCell>Title</TableHeadCell>
-            <TableHeadCell>Slug</TableHeadCell>
-            <TableHeadCell>Author</TableHeadCell>
-            <TableHeadCell>Date</TableHeadCell>
-            <TableHeadCell>Action</TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Title
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Slug
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Author
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Date
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Action
+            </TableHeadCell>
           </TableHead>
           <TableBody className='divide-y'>
             {formData &&
@@ -78,14 +88,14 @@ export default function Blog() {
                     <Link href={`/dashboard/blogs/edit/${item.slug}`}>
                       <Button
                         size='sm'
-                        className='bg-blue-500 hover:!bg-blue-600 text-white rounded-md'
+                        className='bg-[#182641] hover:!bg-[#182641]/90 text-white rounded-md'
                       >
                         Edit
                       </Button>
                     </Link>
                     <Button
                       size='sm'
-                      onClick={()=>handleDelete(item._id)}
+                      onClick={() => handleDelete(item._id)}
                       className='bg-red-500 hover:!bg-red-600 text-white rounded-md'
                     >
                       Delete
