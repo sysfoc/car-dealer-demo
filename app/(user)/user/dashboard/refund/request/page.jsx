@@ -139,7 +139,7 @@ export default function RefundRequest() {
           <Button
             disabled={loading}
             type='submit'
-            className='w-full cursor-pointer bg-[#e56c16] hover:!bg-[#e56c16]/90'
+            className='w-full cursor-pointer bg-[#fa7123] hover:!bg-[#fa7123]/90'
           >
             Submit Request
           </Button>

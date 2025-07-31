@@ -140,7 +140,7 @@ export default function UserProfile() {
               <Button
                 disabled={loading}
                 type='submit'
-                className='mt-3 w-full bg-[#e56c16] hover:!bg-[#e56c16]/90'
+                className='mt-3 w-full bg-[#fa7123] hover:!bg-[#fa7123]/90'
               >
                 Save Changes
               </Button>

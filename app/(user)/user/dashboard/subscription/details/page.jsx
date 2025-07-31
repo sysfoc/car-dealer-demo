@@ -113,7 +113,7 @@ export default function PlanDetails() {
               <button
                 disabled={loading}
                 onClick={handleUpgrade}
-                className='px-4 py-2 bg-[#e56c16] hover:!bg-[#e56c16]/90 text-white rounded-lg shadow hover:bg-blue-700'
+                className='px-4 py-2 bg-[#fa7123] hover:!bg-[#fa7123]/90 text-white rounded-lg shadow hover:bg-blue-700'
               >
                 Upgrade Plan
               </button>
@@ -134,7 +134,7 @@ export default function PlanDetails() {
             <button
               disabled={loading}
               onClick={handleUpgrade}
-              className='mt-3 px-4 py-2 bg-[#e56c16] text-white rounded-lg shadow hover:!bg-[#e56c16]/90'
+              className='mt-3 px-4 py-2 bg-[#fa7123] text-white rounded-lg shadow hover:!bg-[#fa7123]/90'
             >
               Upgrade Plan
             </button>

@@ -37,8 +37,8 @@ export default function ProfileSecurity() {
         <h2 className='text-xl font-semibold'>Audit Logs</h2>
         <Table striped className='mt-4'>
           <TableHead>
-            <TableHeadCell>Date</TableHeadCell>
-            <TableHeadCell>Activity</TableHeadCell>
+            <TableHeadCell className="!bg-[#fa7123] text-white">Date</TableHeadCell>
+            <TableHeadCell className="!bg-[#fa7123] text-white">Activity</TableHeadCell>
           </TableHead>
           <TableBody>
             {loading && (

@@ -92,7 +92,7 @@ export default function DomainSetup() {
         </p>
       </div>
       <div className='mt-5'>
-        <h2 className='bg-gray-100 px-3 py-4 rounded-t-md border border-gray-200 text-lg font-semibold'>
+        <h2 className='bg-[#fa7123] text-white px-3 py-4 rounded-t-md border border-[#fa7123]/90 text-lg font-semibold'>
           Option 1: Let us setup a new Domain for you
         </h2>
         <div className='bg-white p-5 rounded-b-md shadow'>
@@ -139,7 +139,7 @@ export default function DomainSetup() {
               <Button
                 type='submit'
                 disabled={loading}
-                className='w-full cursor-pointer bg-[#e56c16] hover:!bg-[#e56c16]/90'
+                className='w-full cursor-pointer bg-[#fa7123] hover:!bg-[#fa7123]/90'
               >
                 Submit
               </Button>
@@ -148,7 +148,7 @@ export default function DomainSetup() {
         </div>
       </div>
       <div className='mt-5'>
-        <h2 className='bg-gray-100 p-4 rounded-t-md border border-gray-200 text-lg font-semibold'>
+        <h2 className='bg-[#fa7123] text-white p-4 rounded-t-md border border-[#fa7123]/90 text-lg font-semibold'>
           Option 2: Use your existing domain (Cloudflare DNS setup)
         </h2>
         <div className='bg-white p-5 rounded-b-md shadow'>
@@ -239,7 +239,7 @@ export default function DomainSetup() {
               <Button
                 type='submit'
                 disabled={loading}
-                className='w-full cursor-pointer bg-[#e56c16] hover:!bg-[#e56c16]/90'
+                className='w-full cursor-pointer bg-[#fa7123] hover:!bg-[#fa7123]/90'
               >
                 Submit
               </Button>

@@ -66,7 +66,7 @@ export default function Support() {
             href='https://mail.google.com/mail/?view=cm&fs=1&to=sysfoc@gmail.com'
             target='_blank'
           >
-            <Button className='bg-[#e56c16] hover:!bg-[#e56c16]'>
+            <Button className='bg-[#fa7123] hover:!bg-[#fa7123]'>
               <HiOutlineMail className='mr-2' /> Email Support
             </Button>
           </a>
@@ -76,9 +76,9 @@ export default function Support() {
         <h2 className='text-xl font-semibold'>Support Tickets</h2>
         <Table className='mt-4'>
           <Table.Head>
-            <Table.HeadCell>Date</Table.HeadCell>
-            <Table.HeadCell>Subject</Table.HeadCell>
-            <Table.HeadCell>Status</Table.HeadCell>
+            <Table.HeadCell className="bg-[#fa7123] text-white">Date</Table.HeadCell>
+            <Table.HeadCell className="bg-[#fa7123] text-white">Subject</Table.HeadCell>
+            <Table.HeadCell className="bg-[#fa7123] text-white">Status</Table.HeadCell>
           </Table.Head>
           <Table.Body className='divide-y'>
             {loading && (
@@ -120,7 +120,7 @@ export default function Support() {
           </Table.Body>
         </Table>
         <Button
-          className='mt-4 w-full bg-[#e56c16] hover:!bg-[#e56c16]'
+          className='mt-4 w-full bg-[#fa7123] hover:!bg-[#fa7123]'
           onClick={() => setIsModalOpen(true)}
         >
           <HiPlus className='mr-2' /> Create New Ticket
@@ -154,7 +154,7 @@ export default function Support() {
             <div className='mt-4 flex items-center justify-end gap-4'>
               <Button
                 type='submit'
-                className='bg-[#e56c16] hover:!bg-[#e56c16]'
+                className='bg-[#fa7123] hover:!bg-[#fa7123]'
               >
                 Submit
               </Button>
