@@ -80,11 +80,7 @@ const AddOns = () => {
       title: "Content Writing",
       description:
         "We create clear, engaging, and SEO-friendly content tailored for car dealers — designed to increase traffic, build authority, and turn visitors into customers.",
-      price: selectedCurrency?.currency
-        ? `${selectedCurrency?.country} ${(
-            85186.76 / selectedCurrency?.price
-          ).toFixed(2)}`
-        : "$300",
+      price: 300,
       detail: <ContentWriting />,
     },
     {
@@ -94,11 +90,7 @@ const AddOns = () => {
       title: "SEO Optimization",
       description:
         "Our SEO services will improve your website so it appears higher on Google when people search for Vehicles. The higher your site appears, the more people click and visit — which means more leads and more sales.",
-      price: selectedCurrency?.currency
-        ? `${selectedCurrency?.country} ${(
-            141977.93 / selectedCurrency?.price
-          ).toFixed(2)}`
-        : "$500",
+      price: 500,
       detail: <SEO />,
     },
     {
@@ -108,11 +100,7 @@ const AddOns = () => {
       title: "Social Media Marketing",
       description:
         "We manage your Facebook and Instagram and other social media accounts to build your online presence, engage local buyers, and generate more leads — all while you focus on running your business.",
-      price: selectedCurrency?.currency
-        ? `${selectedCurrency?.country} ${(
-            113582.35 / selectedCurrency?.price
-          ).toFixed(2)}`
-        : "$400",
+      price: 400,
       detail: <SocialMedia />,
     },
   ];
@@ -187,7 +175,16 @@ const AddOns = () => {
                     </div>
                     <div className='flex flex-col gap-3'>
                       <span className='px-5 py-2 rounded-md whitespace-nowrap text-sm bg-gray-100'>
-                        {service.price} / Month
+                        {selectedCurrency?.country
+                          ? `${selectedCurrency?.currency} ${(service.price ===
+                            300
+                              ? 85124.18 / selectedCurrency?.price
+                              : service.price === 500
+                              ? 141873.63 / selectedCurrency?.price
+                              : 113498.91 / selectedCurrency?.price
+                            ).toFixed(2)}`
+                          : `$ ${service.price}`}{" "}
+                        / Month
                       </span>
                       {currentUser && (
                         <Button
@@ -248,8 +245,15 @@ const AddOns = () => {
       <Modal show={showModal} onClose={() => setShowModal(false)}>
         <ModalHeader>
           <p>
-            Select Payment Method For {selectedPlan?.plan} at $
-            {selectedPlan?.price}
+            Select Payment Method For {selectedPlan?.plan} at{" "}
+            {selectedCurrency?.country
+              ? `${selectedCurrency?.currency} ${(selectedPlan?.price === 300
+                  ? 85124.18 / selectedCurrency?.price
+                  : selectedPlan?.price === 500
+                  ? 141873.63 / selectedCurrency?.price
+                  : 113498.91 / selectedCurrency?.price
+                ).toFixed(2)}`
+              : `$ ${selectedPlan?.price}`}
           </p>
         </ModalHeader>
         <ModalBody>
