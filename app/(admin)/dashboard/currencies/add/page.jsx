@@ -3,13 +3,13 @@ import { Button, Label, TextInput, Card, Select, Alert } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function CreateUsers() {
+export default function AddCurrency() {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
   const [success, setSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
   const handleChange = (e) => {
     setFormData({
@@ -21,7 +21,7 @@ export default function CreateUsers() {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await fetch("/api/auth/register", {
+      const res = await fetch("/api/payment/currencies/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,7 +34,7 @@ export default function CreateUsers() {
         setError(false);
         setSuccess(true);
         setSuccessMessage(data.message);
-        router.push("/dashboard/users");
+        router.push("/dashboard/currencies");
         setFormData({});
       } else {
         setLoading(false);
@@ -51,7 +51,7 @@ export default function CreateUsers() {
   };
   return (
     <div className='flex items-center justify-center min-h-screen p-4'>
-      <Card className='w-full max-w-lg p-6 shadow-lg'>
+      <Card className='w-full max-w-2xl p-4 shadow-lg'>
         {success && (
           <Alert color='success'>
             <span className='block sm:inline'>{successMessage}</span>
@@ -63,7 +63,7 @@ export default function CreateUsers() {
           </Alert>
         )}
         <h2 className='text-2xl font-bold text-gray-800 text-center mb-6'>
-          Create New User
+          Add new currency
         </h2>
         <form className='space-y-4' onSubmit={handleSubmitForm}>
           <div>
@@ -72,48 +72,52 @@ export default function CreateUsers() {
               id='name'
               type='text'
               name='name'
-              autoComplete='on'
-              placeholder='Enter name'
+              placeholder='Pakistan'
               required
               onChange={handleChange}
             />
           </div>
           <div>
-            <Label htmlFor='email' value='Email' />
+            <Label htmlFor='country' value='Short Code' />
             <TextInput
-              id='email'
-              type='email'
-              name='email'
-              autoComplete='on'
-              placeholder='Enter email'
+              id='country'
+              type='text'
+              name='country'
+              placeholder='PK'
               required
               onChange={handleChange}
             />
           </div>
           <div>
-            <Label htmlFor='password' value='Password' />
+            <Label htmlFor='currency' value='Currency' />
             <TextInput
-              id='password'
-              type='password'
-              name='password'
-              placeholder='********'
+              id='currency'
+              type='text'
+              name='currency'
+              placeholder='PKR'
               required
               onChange={handleChange}
             />
           </div>
           <div>
-            <Label htmlFor='role' value='Role' />
-            <Select
-              id='role'
-              name='role'
+            <Label htmlFor='symbol' value='Symbol' />
+            <TextInput
+              id='symbol'
+              name='symbol'
               required
-              placeholder='Select role'
+              placeholder='PKR, $ etc'
               onChange={handleChange}
-            >
-              <option value=''>Select Role</option>
-              <option value='user'>User</option>
-              <option value='admin'>Admin</option>
-            </Select>
+            />
+          </div>
+          <div>
+            <Label htmlFor='price' value='Price' />
+            <TextInput
+              id='price'
+              name='number'
+              required
+              placeholder='283.92'
+              onChange={handleChange}
+            />
           </div>
           <div className='flex justify-end'>
             <Button
@@ -121,7 +125,7 @@ export default function CreateUsers() {
               type='submit'
               className='w-full !bg-[#182641] hover:!bg-[#182641]/90'
             >
-              Create User
+              Add Currency
             </Button>
           </div>
         </form>

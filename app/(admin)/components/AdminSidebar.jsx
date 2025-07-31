@@ -3,6 +3,7 @@
 import { Sidebar } from "flowbite-react";
 import { BiSupport } from "react-icons/bi";
 import { FaBlog } from "react-icons/fa6";
+import { FaBitcoin } from "react-icons/fa";
 import { GrDomain } from "react-icons/gr";
 import {
   HiArrowSmRight,
@@ -62,6 +63,13 @@ const AdminSidebar = () => {
             className='!text-white hover:!bg-[#344b76] hover:!text-white'
           >
             Refund requests
+          </Sidebar.Item>
+          <Sidebar.Item
+            href='/dashboard/currencies'
+            icon={FaBitcoin }
+            className='!text-white hover:!bg-[#344b76] hover:!text-white'
+          >
+            Currencies
           </Sidebar.Item>
           <Sidebar.Item
             href='/dashboard/support'

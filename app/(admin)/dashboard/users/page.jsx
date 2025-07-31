@@ -89,13 +89,33 @@ export default function Users() {
 
         <Table>
           <TableHead>
-            <TableHeadCell className="!bg-[#182641] text-white">Username</TableHeadCell>
-            <TableHeadCell className="!bg-[#182641] text-white">Email</TableHeadCell>
-            <TableHeadCell className="!bg-[#182641] text-white">Role</TableHeadCell>
-            <TableHeadCell className="!bg-[#182641] text-white">Signup Method</TableHeadCell>
-            <TableHeadCell className="!bg-[#182641] text-white">Actions</TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Username
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Email
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Role
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Signup Method
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Actions
+            </TableHeadCell>
           </TableHead>
           <TableBody>
+            {loading && (
+              <TableRow>
+                <TableCell colSpan={6} className='text-center'>
+                  <Spinner
+                    size='lg'
+                    aria-label='Center-aligned spinner example'
+                  />
+                </TableCell>
+              </TableRow>
+            )}
             {getAllUsers.map((user) => (
               <TableRow key={user._id}>
                 <TableCell className='capitalize'>{user.name}</TableCell>
@@ -135,7 +155,6 @@ export default function Users() {
             ))}
           </TableBody>
         </Table>
-        {loading && <Spinner size='xl' color='blue' />}
         <Modal
           show={isDeleteModalOpen}
           onClose={() => setIsDeleteModalOpen(false)}
