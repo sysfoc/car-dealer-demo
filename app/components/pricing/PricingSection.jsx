@@ -220,9 +220,8 @@ const PricingSection = () => {
                       (
                       {selectedCurrency?.country ? (
                         (() => {
-                          const converted = (
-                            (74.99 * 283.75) /
-                            selectedCurrency.price
+                          const converted = Number(
+                            74.99 * selectedCurrency.price
                           ).toFixed(2);
                           const [main, sup] = converted.split(".");
                           return (
@@ -248,9 +247,8 @@ const PricingSection = () => {
                       (
                       {selectedCurrency?.country ? (
                         (() => {
-                          const converted = (
-                            (199.99 * 283.75) /
-                            selectedCurrency.price
+                          const converted = Number(
+                            199.99 * selectedCurrency.price
                           ).toFixed(2);
                           const [main, sup] = converted.split(".");
                           return (
@@ -276,9 +274,8 @@ const PricingSection = () => {
                       (
                       {selectedCurrency?.country ? (
                         (() => {
-                          const converted = (
-                            (349.99 * 283.75) /
-                            selectedCurrency.price
+                          const converted = Number(
+                            349.99 * selectedCurrency.price
                           ).toFixed(2);
                           const [main, sup] = converted.split(".");
                           return (
@@ -994,9 +991,8 @@ const PricingSection = () => {
                 Select Payment Method For {selectedPlan?.plan} at{" "}
                 {selectedCurrency?.country ? (
                   (() => {
-                    const converted = (
-                      (selectedPlan?.price * 283.75) /
-                      selectedCurrency?.price
+                    const converted = Number(
+                      selectedPlan?.price * selectedCurrency?.price
                     ).toFixed(2);
                     const [main, sup] = converted.split(".");
                     return (
@@ -1051,9 +1047,8 @@ const PricingSection = () => {
                       (
                       {selectedCurrency?.country ? (
                         (() => {
-                          const converted = (
-                            (764.99 * 283.75) /
-                            selectedCurrency.price
+                          const converted = Number(
+                            764.99 * selectedCurrency.price
                           ).toFixed(2);
                           const [main, sup] = converted.split(".");
                           return (
@@ -1074,9 +1069,8 @@ const PricingSection = () => {
                       Saves upto{" "}
                       {selectedCurrency?.country ? (
                         (() => {
-                          const converted = (
-                            (135 * 283.75) /
-                            selectedCurrency.price
+                          const converted = Number(
+                            135 * selectedCurrency.price
                           ).toFixed(2);
                           const [main, sup] = converted.split(".");
                           return (
@@ -1099,9 +1093,8 @@ const PricingSection = () => {
                       (
                       {selectedCurrency?.country ? (
                         (() => {
-                          const converted = (
-                            (2029.99 * 283.75) /
-                            selectedCurrency.price
+                          const converted = Number(
+                            2029.99 * selectedCurrency.price
                           ).toFixed(2);
                           const [main, sup] = converted.split(".");
                           return (
@@ -1123,8 +1116,7 @@ const PricingSection = () => {
                       {selectedCurrency?.country ? (
                         (() => {
                           const converted = (
-                            (358 * 283.75) /
-                            selectedCurrency.price
+                            358 * selectedCurrency.price
                           ).toFixed(2);
                           const [main, sup] = converted.split(".");
                           return (
@@ -1148,8 +1140,7 @@ const PricingSection = () => {
                       {selectedCurrency?.country ? (
                         (() => {
                           const converted = (
-                            (3558.99 * 283.75) /
-                            selectedCurrency.price
+                            3558.99 * selectedCurrency.price
                           ).toFixed(2);
                           const [main, sup] = converted.split(".");
                           return (
@@ -1171,8 +1162,7 @@ const PricingSection = () => {
                       {selectedCurrency?.country ? (
                         (() => {
                           const converted = (
-                            (628 * 283.75) /
-                            selectedCurrency.price
+                            628 * selectedCurrency.price
                           ).toFixed(2);
                           const [main, sup] = converted.split(".");
                           return (
@@ -1885,9 +1875,8 @@ const PricingSection = () => {
                 Select Payment Method For {selectedPlan?.plan} at{" "}
                 {selectedCurrency?.country ? (
                   (() => {
-                    const converted = (
-                      (selectedPlan?.price * 283.75) /
-                      selectedCurrency?.price
+                    const converted = Number(
+                      selectedPlan?.price * selectedCurrency?.price
                     ).toFixed(2);
                     const [main, sup] = converted.split(".");
                     return (

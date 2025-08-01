@@ -194,9 +194,8 @@ const AddOns = () => {
                     <div className='flex flex-col gap-3'>
                       <span className='px-5 py-2 rounded-md whitespace-nowrap text-sm bg-gray-100'>
                         {selectedCurrency?.country
-                          ? `${selectedCurrency?.currency} ${(
-                              (service?.price * 283.75) /
-                              selectedCurrency?.price
+                          ? `${selectedCurrency?.currency} ${Number(
+                              service?.price * selectedCurrency?.price
                             ).toFixed(2)}`
                           : `USD ${service.price}`}{" "}
                         / Month
@@ -262,9 +261,8 @@ const AddOns = () => {
           <p>
             Select Payment Method For {selectedPlan?.plan} at{" "}
             {selectedCurrency?.country
-              ? `${selectedCurrency?.currency} ${(
-                  (selectedPlan?.price * 283.75) /
-                  selectedCurrency?.price
+              ? `${selectedCurrency?.currency} ${Number(
+                  selectedPlan?.price * selectedCurrency?.price
                 ).toFixed(2)}`
               : `USD ${selectedPlan?.price}`}
           </p>
