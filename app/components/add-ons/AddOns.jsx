@@ -20,6 +20,28 @@ const AddOns = () => {
   const toggleDropdown = (id) => {
     setActiveId((prev) => (prev === id ? null : id));
   };
+  const fetchIpAndCurrency = async () => {
+    try {
+      const response1 = await fetch("api/track/ip");
+      const data1 = await response1.json();
+
+      if (response1.ok && data1?.country_code) {
+        const country = data1.country_code;
+        const response2 = await fetch(
+          `/api/payment/currencies/get/country/${country}`
+        );
+        const data2 = await response2.json();
+
+        if (response2.ok) {
+          setSelectedCurrency(data2.country);
+        }
+      }
+
+      setLoading(false);
+    } catch {
+      setLoading(false);
+    }
+  };
   const fetchUserAddons = async () => {
     try {
       const response = await fetch("/api/user/add-ons/details");
@@ -63,6 +85,8 @@ const AddOns = () => {
     if (currentUser?._id) {
       fetchUserAddons();
       fetchData();
+    } else {
+      fetchIpAndCurrency();
     }
   }, [currentUser]);
 

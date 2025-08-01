@@ -60,6 +60,28 @@ const PricingSection = () => {
   const handleProceedToPayment = () => {
     setShowPaymentModal(true);
   };
+  const fetchIpAndCurrency = async () => {
+    try {
+      const response1 = await fetch("api/track/ip");
+      const data1 = await response1.json();
+
+      if (response1.ok && data1?.country_code) {
+        const country = data1.country_code;
+        const response2 = await fetch(
+          `/api/payment/currencies/get/country/${country}`
+        );
+        const data2 = await response2.json();
+
+        if (response2.ok) {
+          setSelectedCurrency(data2.country);
+        }
+      }
+
+      setLoading(false);
+    } catch {
+      setLoading(false);
+    }
+  };
   const fetchUserSubscription = async () => {
     try {
       const response = await fetch("/api/user/subscription/detail");
@@ -103,8 +125,11 @@ const PricingSection = () => {
     if (currentUser?._id) {
       fetchUserSubscription();
       fetchData();
+    } else {
+      fetchIpAndCurrency();
     }
   }, [currentUser]);
+
   const handleStripePayment = async () => {
     const res = await fetch("/api/stripe/create-checkout-session", {
       method: "POST",
