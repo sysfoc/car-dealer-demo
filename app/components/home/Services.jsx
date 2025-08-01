@@ -12,14 +12,14 @@ const Services = () => {
       description:
         "Enjoy free lifetime reliable updates going with your purchase.",
       icon: <MdBrowserUpdated fontSize={30} className='text-white' />,
-      bgColor: "bg-[#e56c16]",
+      bgColor: "bg-[#fa7123]",
     },
     {
       id: 2,
       title: "Expansive Knowledge base",
       description: "You can check any time our powerful documentation.",
       icon: <IoDocumentsOutline fontSize={30} className='text-white' />,
-      bgColor: "bg-[#e56c16]",
+      bgColor: "bg-[#fa7123]",
     },
     {
       id: 3,
@@ -27,7 +27,7 @@ const Services = () => {
       description:
         "Enjoy free lifetime reliable updates and six months free support.",
       icon: <BiLike fontSize={30} className='text-white' />,
-      bgColor: "bg-[#e56c16]",
+      bgColor: "bg-[#fa7123]",
     },
   ];
   return (

@@ -30,7 +30,7 @@ const HeroBanner = () => {
         <div className='mt-5 flex items-center justify-center'>
           <Link
             href={"#templates"}
-            className='bg-[#e56c16] text-white px-4 py-2 rounded-md flex items-center gap-2'
+            className='bg-[#fa7123] hover:!bg-[#fa7123]/90 text-white px-4 py-2 rounded-md flex items-center gap-2'
           >
             View Demos <MdArrowOutward fontSize={20} />
           </Link>

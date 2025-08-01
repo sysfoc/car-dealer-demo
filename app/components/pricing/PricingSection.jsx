@@ -191,7 +191,7 @@ const PricingSection = () => {
         </div>
       </div>
       <div className='my-8 flex items-center justify-center'>
-        <div className='w-full sm:w-[400px] rounded-lg border-t-4 bg-white border-[#e56c16] p-8 shadow-md'>
+        <div className='w-full sm:w-[400px] rounded-lg border-t-4 bg-white border-[#fa7123] p-8 shadow-md'>
           <h2 className='text-center'>Subscription Term</h2>
           <div className='flex items-center justify-center'>
             <div className='mt-4 flex flex-row items-center gap-5'>
@@ -212,12 +212,12 @@ const PricingSection = () => {
           <div className='w-full overflow-x-scroll md:overflow-hidden shadow rounded-lg'>
             <Table striped className='min-w-[700px] md:w-full table-fixed'>
               <TableHead className='text-center'>
-                <TableHeadCell className='bg-[#e56c16] text-white'>
+                <TableHeadCell className='bg-[#fa7123] text-white'>
                   <div>
                     <h2 className='text-xl'>Features</h2>
                   </div>
                 </TableHeadCell>
-                <TableHeadCell className='bg-[#e56c16] text-white'>
+                <TableHeadCell className='bg-[#fa7123] text-white'>
                   <div>
                     <h2 className='text-xl'>Basic</h2>
                     <h3 className='text-lg'>
@@ -244,7 +244,7 @@ const PricingSection = () => {
                     </h3>
                   </div>
                 </TableHeadCell>
-                <TableHeadCell className='bg-[#e56c16] text-white'>
+                <TableHeadCell className='bg-[#fa7123] text-white'>
                   <div>
                     <h2 className='text-xl'>Standard</h2>
                     <h3 className='text-lg'>
@@ -271,7 +271,7 @@ const PricingSection = () => {
                     </h3>
                   </div>
                 </TableHeadCell>
-                <TableHeadCell className='bg-[#e56c16] text-white'>
+                <TableHeadCell className='bg-[#fa7123] text-white'>
                   <div>
                     <h2 className='text-xl'>Premium</h2>
                     <h3 className='text-lg'>
@@ -299,7 +299,7 @@ const PricingSection = () => {
                   </div>
                 </TableHeadCell>
               </TableHead>
-              <TableBody className='text-left [&_tr:nth-child(odd)]:bg-[#e56c16]/10 text-gray-700'>
+              <TableBody className='text-left [&_tr:nth-child(odd)]:bg-[#fa7123]/10 text-gray-700'>
                 <TableRow className='w-min bg-white'>
                   <TableCell>
                     <div>
@@ -850,7 +850,7 @@ const PricingSection = () => {
                                 })
                               )
                             }
-                            className='w-full uppercase bg-[#e56c16] hover:!bg-[#e56c16]/90 text-white focus:ring-2 focus:ring-offset-2 focus:ring-[#e56c16]'
+                            className='w-full uppercase bg-[#fa7123] hover:!bg-[#fa7123]/90 text-white focus:ring-2 focus:ring-offset-2 focus:ring-[#fa7123]'
                           >
                             {subscription?.subscriptionType === "Basic" &&
                             subscription?.isActive
@@ -875,7 +875,7 @@ const PricingSection = () => {
                                 })
                               )
                             }
-                            className='w-full uppercase bg-[#e56c16] hover:!bg-[#e56c16]/90 text-white focus:ring-2 focus:ring-offset-2 focus:ring-[#e56c16]'
+                            className='w-full uppercase bg-[#fa7123] hover:!bg-[#fa7123]/90 text-white focus:ring-2 focus:ring-offset-2 focus:ring-[#fa7123]'
                           >
                             {subscription?.subscriptionType === "Standard" &&
                             subscription?.isActive
@@ -900,7 +900,7 @@ const PricingSection = () => {
                                 })
                               )
                             }
-                            className='w-full uppercase bg-[#e56c16] hover:!bg-[#e56c16]/90 text-white focus:ring-2 focus:ring-offset-2 focus:ring-[#e56c16]'
+                            className='w-full uppercase bg-[#fa7123] hover:!bg-[#fa7123]/90 text-white focus:ring-2 focus:ring-offset-2 focus:ring-[#fa7123]'
                           >
                             {subscription?.subscriptionType === "Premium" &&
                             subscription?.isActive
@@ -931,7 +931,7 @@ const PricingSection = () => {
                       className='relative rounded-md shadow-lg transition-transform duration-300 hover:-translate-y-4 group'
                     >
                       {selectedTheme.includes(dealer.name) && (
-                        <span className='p-2 bg-[#e56c16] rounded-md text-sm text-white absolute top-2 left-2'>
+                        <span className='p-2 bg-[#fa7123] rounded-md text-sm text-white absolute top-2 left-2'>
                           Selected
                         </span>
                       )}
@@ -963,7 +963,7 @@ const PricingSection = () => {
                             handleSelectedTheme(dealer.name, selectedPlan?.plan)
                           }
                           size='sm'
-                          className='bg-[#e56c16] text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-[#e56c16]/90'
+                          className='bg-[#fa7123] text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-[#fa7123]/90'
                         >
                           {selectedTheme.includes(dealer.name)
                             ? "Unselect Theme"
@@ -1039,12 +1039,12 @@ const PricingSection = () => {
           <div className='w-full overflow-x-scroll md:overflow-hidden shadow rounded-lg'>
             <Table striped className='min-w-[700px] md:w-full table-fixed'>
               <TableHead className='text-center'>
-                <TableHeadCell className='bg-[#e56c16] text-white'>
+                <TableHeadCell className='bg-[#fa7123] text-white'>
                   <div>
                     <h2 className='text-xl'>Features</h2>
                   </div>
                 </TableHeadCell>
-                <TableHeadCell className='bg-[#e56c16] text-white'>
+                <TableHeadCell className='bg-[#fa7123] text-white'>
                   <div>
                     <h2 className='text-xl'>Basic</h2>
                     <h3 className='text-lg'>
@@ -1090,7 +1090,7 @@ const PricingSection = () => {
                     </span>
                   </div>
                 </TableHeadCell>
-                <TableHeadCell className='bg-[#e56c16] text-white'>
+                <TableHeadCell className='bg-[#fa7123] text-white'>
                   <div>
                     <h2 className='text-xl'>Standard</h2>
                     <h3 className='text-lg'>
@@ -1136,7 +1136,7 @@ const PricingSection = () => {
                     </span>
                   </div>
                 </TableHeadCell>
-                <TableHeadCell className='bg-[#e56c16] text-white'>
+                <TableHeadCell className='bg-[#fa7123] text-white'>
                   <div>
                     <h2 className='text-xl'>Premium</h2>
                     <h3 className='text-lg'>
@@ -1183,7 +1183,7 @@ const PricingSection = () => {
                   </div>
                 </TableHeadCell>
               </TableHead>
-              <TableBody className='text-left [&_tr:nth-child(odd)]:bg-[#e56c16]/10 text-gray-700'>
+              <TableBody className='text-left [&_tr:nth-child(odd)]:bg-[#fa7123]/10 text-gray-700'>
                 <TableRow className='w-min bg-white'>
                   <TableCell>
                     <div>
@@ -1734,7 +1734,7 @@ const PricingSection = () => {
                                 })
                               )
                             }
-                            className='w-full uppercase bg-[#e56c16] hover:!bg-[#e56c16]/90 text-white focus:ring-2 focus:ring-offset-2 focus:ring-[#e56c16]'
+                            className='w-full uppercase bg-[#fa7123] hover:!bg-[#fa7123]/90 text-white focus:ring-2 focus:ring-offset-2 focus:ring-[#fa7123]'
                           >
                             {subscription?.subscriptionType ===
                               "Yearly Basic" && subscription?.isActive
@@ -1759,7 +1759,7 @@ const PricingSection = () => {
                                 })
                               )
                             }
-                            className='w-full uppercase bg-[#e56c16] hover:!bg-[#e56c16]/90 text-white focus:ring-2 focus:ring-offset-2 focus:ring-[#e56c16]'
+                            className='w-full uppercase bg-[#fa7123] hover:!bg-[#fa7123]/90 text-white focus:ring-2 focus:ring-offset-2 focus:ring-[#fa7123]'
                           >
                             {subscription?.subscriptionType ===
                               "Yearly Standard" && subscription?.isActive
@@ -1784,7 +1784,7 @@ const PricingSection = () => {
                                 })
                               )
                             }
-                            className='w-full uppercase bg-[#e56c16] hover:!bg-[#e56c16]/90 text-white focus:ring-2 focus:ring-offset-2 focus:ring-[#e56c16]'
+                            className='w-full uppercase bg-[#fa7123] hover:!bg-[#fa7123]/90 text-white focus:ring-2 focus:ring-offset-2 focus:ring-[#fa7123]'
                           >
                             {subscription?.subscriptionType ===
                               "Yearly Premium" && subscription?.isActive
@@ -1815,7 +1815,7 @@ const PricingSection = () => {
                       className='relative rounded-md shadow-lg transition-transform duration-300 hover:-translate-y-4 group'
                     >
                       {selectedTheme.includes(dealer.name) && (
-                        <span className='p-2 bg-[#e56c16] rounded-md text-sm text-white absolute top-2 left-2'>
+                        <span className='p-2 bg-[#fa7123] rounded-md text-sm text-white absolute top-2 left-2'>
                           Selected
                         </span>
                       )}
@@ -1847,7 +1847,7 @@ const PricingSection = () => {
                             handleSelectedTheme(dealer.name, selectedPlan?.plan)
                           }
                           size='sm'
-                          className='bg-[#e56c16] text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-[#e56c16]/90'
+                          className='bg-[#fa7123] text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-[#fa7123]/90'
                         >
                           {selectedTheme.includes(dealer.name)
                             ? "Unselect Theme"

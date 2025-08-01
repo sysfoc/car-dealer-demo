@@ -88,8 +88,7 @@ const Login = () => {
           <Button
             disabled={loading}
             type='submit'
-            color='warning'
-            className='w-full'
+            className='w-full bg-[#fa7123] hover:!bg-[#fa7123]/90'
           >
             {loading ? (
               <Spinner color='warning' aria-label='Spinning' size='md' />
@@ -110,7 +109,7 @@ const Login = () => {
         <div className='mt-3'>
           <span className='text-sm'>
             Don't have an account?{" "}
-            <Link className='text-[#e56c16]' href='/register'>
+            <Link className='text-[#fa7123]' href='/register'>
               Register Here
             </Link>
           </span>

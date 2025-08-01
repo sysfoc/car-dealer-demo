@@ -3,6 +3,7 @@ import { usePathname } from "next/navigation";
 import Header from "@/app/components/Header";
 import Footerr from "@/app/components/Footerr";
 import Social from "@/app/components/Social";
+import Cookie from "@/app/components/Cookies";
 import AdminSidebar from "@/app/(admin)/components/AdminSidebar";
 import UserButton from "@/app/(admin)/components/dashboard/UserButton";
 import UserSidebar from "@/app/(user)/components/UserSidebar";
@@ -27,6 +28,7 @@ export default function LayoutWrapper({
             <UserButton />
           </header>
           <div>{children}</div>
+          <Cookie />
         </div>
       </div>
     );
@@ -42,6 +44,7 @@ export default function LayoutWrapper({
             <AdminButton />
           </header>
           <div className='mt-4'>{children}</div>
+          <Cookie />
         </div>
       </div>
     );
@@ -52,6 +55,7 @@ export default function LayoutWrapper({
       <Social />
       <Header />
       {children}
+      <Cookie />
       <Footerr />
     </div>
   );

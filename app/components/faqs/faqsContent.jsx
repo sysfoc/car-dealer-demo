@@ -44,7 +44,7 @@ const faqsContent = () => {
                 </h2>
                 <div className='flex flex-row gap-3'>
                   <div>
-                    <span className='bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded'>
+                    <span className='bg-[#fa7123] text-white text-xs font-medium px-2.5 py-1.5 rounded'>
                       {faq.category}
                     </span>
                   </div>

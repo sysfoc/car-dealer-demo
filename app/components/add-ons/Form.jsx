@@ -129,7 +129,7 @@ const Form = () => {
                   id='message'
                   name='message'
                   placeholder='Write your suggestion here'
-                  className='w-full focus:border-[#e56c16] focus:ring-[#e56c16]'
+                  className='w-full focus:border-[#fa7123] focus:ring-[#fa7123]'
                   rows={5}
                   required
                   onChange={handleChange}
@@ -139,7 +139,7 @@ const Form = () => {
                 <Button
                   disabled={loading}
                   type='submit'
-                  className='w-full bg-[#e56c16] hover:!bg-[#e56c16]/80'
+                  className='w-full bg-[#fa7123] hover:!bg-[#fa7123]/80'
                   size='md'
                 >
                   {loading ? <Spinner size='sm' color='white' /> : "Submit"}

@@ -148,8 +148,7 @@ export default function ContactUs() {
               <Button
                 disabled={loading}
                 type='submit'
-                color={"blue"}
-                className='w-full'
+                className='w-full bg-[#fa7123] hover:!bg-[#fa7123]/90'
               >
                 {loading ? <Spinner size='sm' color='white' /> : "Send Message"}
               </Button>

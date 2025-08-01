@@ -104,8 +104,7 @@ const Register = () => {
           <Button
             disabled={loading}
             type='submit'
-            color='warning'
-            className='w-full'
+            className='w-full bg-[#fa7123] hover:!bg-[#fa7123]/90'
           >
             {loading ? (
               <Spinner color='warning' aria-label='Spinning' size='md' />
@@ -127,7 +126,7 @@ const Register = () => {
         <div className='mt-3'>
           <span className='text-sm'>
             Already have an account?{" "}
-            <Link className='text-[#e56c16]' href='/login'>
+            <Link className='text-[#fa7123]' href='/login'>
               Login now
             </Link>
           </span>

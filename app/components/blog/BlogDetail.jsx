@@ -7,9 +7,8 @@ import {
   Textarea,
   TextInput,
 } from "flowbite-react";
-import Head from "next/head";
 import { useParams } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { IoMdAlarm } from "react-icons/io";
 
 const BlogDetail = ({ blog }) => {
