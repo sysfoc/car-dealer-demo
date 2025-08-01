@@ -150,22 +150,26 @@ const PricingSection = () => {
     }
   };
   const handlePaypalPayment = async () => {
-    const res = await fetch("/api/paypal/create-checkout-session", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: currentUser?._id,
-        plan: selectedPlan?.plan,
-        themes: selectedTheme,
-        price: selectedPlan?.price,
-        timePeriod: selectedPlan?.timePeriod,
-      }),
-    });
-    const data = await res.json();
-    if (res.ok) {
-      window.location.href = data.url;
+    try {
+      const res = await fetch("/api/paypal/create-checkout-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: currentUser?._id,
+          plan: selectedPlan?.plan,
+          themes: selectedTheme,
+          price: selectedPlan?.price,
+          timePeriod: selectedPlan?.timePeriod,
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      alert("Something went wrong. Please try again.");
     }
   };
 

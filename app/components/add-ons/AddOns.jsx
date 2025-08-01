@@ -148,21 +148,26 @@ const AddOns = () => {
 
   const handlePaypalPayment = async () => {
     setLoading(true);
-    const res = await fetch("/api/paypal/create-checkout-session", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: currentUser?._id,
-        plan: selectedPlan?.plan,
-        price: selectedPlan?.price,
-      }),
-    });
-    const data = await res.json();
-    setLoading(false);
-    if (res.ok) {
-      window.location.href = data.url;
+    try {
+      const res = await fetch("/api/paypal/create-checkout-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: currentUser?._id,
+          plan: selectedPlan?.plan,
+          price: selectedPlan?.price,
+          timePeriod: "Monthly",
+        }),
+      });
+      const data = await res.json();
+      setLoading(false);
+      if (res.ok) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      alert("Something went wrong. Please try again.");
     }
   };
 
