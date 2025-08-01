@@ -32,6 +32,7 @@ const PricingSection = () => {
   const [loading, setLoading] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
   const [selectedTheme, setSelectedTheme] = useState([]);
+  const [selectedCurrency, setSelectedCurrency] = useState({});
 
   const buySelectedPlan = () => {
     setShowThemeModal(true);
@@ -59,27 +60,49 @@ const PricingSection = () => {
   const handleProceedToPayment = () => {
     setShowPaymentModal(true);
   };
+  const fetchUserSubscription = async () => {
+    try {
+      const response = await fetch("/api/user/subscription/detail");
+      const data = await response.json();
+      setLoading(false);
+      if (response.ok) {
+        setSubscription(data.subscription);
+        setLoading(false);
+      }
+      if (response.status === 404) {
+        setLoading(false);
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+  const fetchData = async () => {
+    try {
+      const response1 = await fetch("/api/user/get/settings");
+      const data1 = await response1.json();
 
+      if (response1.ok && data1.settings?.currency) {
+        const currency = data1.settings.currency;
+        const response2 = await fetch(
+          `/api/payment/currencies/get/currency-name/${currency}`
+        );
+        const data2 = await response2.json();
+
+        if (response2.ok) {
+          setSelectedCurrency(data2.currency);
+        }
+      }
+
+      setLoading(false);
+    } catch {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
     setLoading(true);
     if (currentUser?._id) {
-      const fetchUserSubscription = async () => {
-        try {
-          const response = await fetch("/api/user/subscription/detail");
-          const data = await response.json();
-          setLoading(false);
-          if (response.ok) {
-            setSubscription(data.subscription);
-            setLoading(false);
-          }
-          if (response.status === 404) {
-            setLoading(false);
-          }
-        } catch (error) {
-          alert(error.message);
-        }
-      };
       fetchUserSubscription();
+      fetchData();
     }
   }, [currentUser]);
   const handleStripePayment = async () => {
@@ -169,7 +192,26 @@ const PricingSection = () => {
                   <div>
                     <h2 className='text-xl'>Basic</h2>
                     <h3 className='text-lg'>
-                      ($74.<sup>99</sup>
+                      (
+                      {selectedCurrency?.country ? (
+                        (() => {
+                          const converted = (
+                            (74.99 * 283.75) /
+                            selectedCurrency.price
+                          ).toFixed(2);
+                          const [main, sup] = converted.split(".");
+                          return (
+                            <>
+                              {selectedCurrency.currency} {main}.
+                              <sup>{sup}</sup>
+                            </>
+                          );
+                        })()
+                      ) : (
+                        <>
+                          USD 74.<sup>99</sup>
+                        </>
+                      )}
                       <sub className='text-xs font-normal'>/month</sub>)
                     </h3>
                   </div>
@@ -178,7 +220,26 @@ const PricingSection = () => {
                   <div>
                     <h2 className='text-xl'>Standard</h2>
                     <h3 className='text-lg'>
-                      ($199.<sup>99</sup>
+                      (
+                      {selectedCurrency?.country ? (
+                        (() => {
+                          const converted = (
+                            (199.99 * 283.75) /
+                            selectedCurrency.price
+                          ).toFixed(2);
+                          const [main, sup] = converted.split(".");
+                          return (
+                            <>
+                              {selectedCurrency.currency} {main}.
+                              <sup>{sup}</sup>
+                            </>
+                          );
+                        })()
+                      ) : (
+                        <>
+                          USD 199.<sup>99</sup>
+                        </>
+                      )}
                       <sub className='text-xs font-normal'>/month</sub>)
                     </h3>
                   </div>
@@ -187,7 +248,26 @@ const PricingSection = () => {
                   <div>
                     <h2 className='text-xl'>Premium</h2>
                     <h3 className='text-lg'>
-                      ($349.<sup>99</sup>
+                      (
+                      {selectedCurrency?.country ? (
+                        (() => {
+                          const converted = (
+                            (349.99 * 283.75) /
+                            selectedCurrency.price
+                          ).toFixed(2);
+                          const [main, sup] = converted.split(".");
+                          return (
+                            <>
+                              {selectedCurrency.currency} {main}.
+                              <sup>{sup}</sup>
+                            </>
+                          );
+                        })()
+                      ) : (
+                        <>
+                          USD 349.<sup>99</sup>
+                        </>
+                      )}
                       <sub className='text-xs font-normal'>/month</sub>)
                     </h3>
                   </div>
@@ -886,8 +966,23 @@ const PricingSection = () => {
           >
             <ModalHeader>
               <p>
-                Select Payment Method For {selectedPlan?.plan} at $
-                {selectedPlan?.price}
+                Select Payment Method For {selectedPlan?.plan} at{" "}
+                {selectedCurrency?.country ? (
+                  (() => {
+                    const converted = (
+                      (selectedPlan?.price * 283.75) /
+                      selectedCurrency?.price
+                    ).toFixed(2);
+                    const [main, sup] = converted.split(".");
+                    return (
+                      <>
+                        {selectedCurrency?.currency} {main}.<sup>{sup}</sup>
+                      </>
+                    );
+                  })()
+                ) : (
+                  <>USD {selectedPlan?.price}</>
+                )}
               </p>
             </ModalHeader>
             <ModalBody>
@@ -928,11 +1023,47 @@ const PricingSection = () => {
                   <div>
                     <h2 className='text-xl'>Basic</h2>
                     <h3 className='text-lg'>
-                      ($764.<sup>99</sup>
+                      (
+                      {selectedCurrency?.country ? (
+                        (() => {
+                          const converted = (
+                            (764.99 * 283.75) /
+                            selectedCurrency.price
+                          ).toFixed(2);
+                          const [main, sup] = converted.split(".");
+                          return (
+                            <>
+                              {selectedCurrency.currency} {main}.
+                              <sup>{sup}</sup>
+                            </>
+                          );
+                        })()
+                      ) : (
+                        <>
+                          USD 764.<sup>99</sup>
+                        </>
+                      )}
                       <sub className='text-xs font-normal'>/year</sub>)
                     </h3>
                     <span className='text-white animate-pulse'>
-                      Saves upto $135 on 15% OFF
+                      Saves upto{" "}
+                      {selectedCurrency?.country ? (
+                        (() => {
+                          const converted = (
+                            (135 * 283.75) /
+                            selectedCurrency.price
+                          ).toFixed(2);
+                          const [main, sup] = converted.split(".");
+                          return (
+                            <>
+                              {selectedCurrency.currency} {main}.{sup}
+                            </>
+                          );
+                        })()
+                      ) : (
+                        <>USD 135</>
+                      )}{" "}
+                      on 15% OFF
                     </span>
                   </div>
                 </TableHeadCell>
@@ -940,11 +1071,47 @@ const PricingSection = () => {
                   <div>
                     <h2 className='text-xl'>Standard</h2>
                     <h3 className='text-lg'>
-                      ($2,029.<sup>99</sup>
+                      (
+                      {selectedCurrency?.country ? (
+                        (() => {
+                          const converted = (
+                            (2029.99 * 283.75) /
+                            selectedCurrency.price
+                          ).toFixed(2);
+                          const [main, sup] = converted.split(".");
+                          return (
+                            <>
+                              {selectedCurrency.currency} {main}.
+                              <sup>{sup}</sup>
+                            </>
+                          );
+                        })()
+                      ) : (
+                        <>
+                          USD 2029.<sup>99</sup>
+                        </>
+                      )}
                       <sub className='text-xs font-normal'>/year</sub>)
                     </h3>
                     <span className='text-white animate-pulse'>
-                      Saves upto $358 on 15% OFF
+                      Saves upto{" "}
+                      {selectedCurrency?.country ? (
+                        (() => {
+                          const converted = (
+                            (358 * 283.75) /
+                            selectedCurrency.price
+                          ).toFixed(2);
+                          const [main, sup] = converted.split(".");
+                          return (
+                            <>
+                              {selectedCurrency.currency} {main}.{sup}
+                            </>
+                          );
+                        })()
+                      ) : (
+                        <>USD 358</>
+                      )}{" "}
+                      on 15% OFF
                     </span>
                   </div>
                 </TableHeadCell>
@@ -952,11 +1119,47 @@ const PricingSection = () => {
                   <div>
                     <h2 className='text-xl'>Premium</h2>
                     <h3 className='text-lg'>
-                      ($3,559.<sup>99</sup>
+                      (
+                      {selectedCurrency?.country ? (
+                        (() => {
+                          const converted = (
+                            (3558.99 * 283.75) /
+                            selectedCurrency.price
+                          ).toFixed(2);
+                          const [main, sup] = converted.split(".");
+                          return (
+                            <>
+                              {selectedCurrency.currency} {main}.
+                              <sup>{sup}</sup>
+                            </>
+                          );
+                        })()
+                      ) : (
+                        <>
+                          USD 3558.<sup>99</sup>
+                        </>
+                      )}
                       <sub className='text-xs font-normal'>/year</sub>)
                     </h3>
                     <span className='text-white animate-pulse'>
-                      Saves upto $628 on 15% OFF
+                      Saves upto{" "}
+                      {selectedCurrency?.country ? (
+                        (() => {
+                          const converted = (
+                            (628 * 283.75) /
+                            selectedCurrency.price
+                          ).toFixed(2);
+                          const [main, sup] = converted.split(".");
+                          return (
+                            <>
+                              {selectedCurrency.currency} {main}.{sup}
+                            </>
+                          );
+                        })()
+                      ) : (
+                        <>USD 628</>
+                      )}{" "}
+                      on 15% OFF
                     </span>
                   </div>
                 </TableHeadCell>
@@ -1654,8 +1857,23 @@ const PricingSection = () => {
           >
             <ModalHeader>
               <p>
-                Select Payment Method For {selectedPlan?.plan} at $
-                {selectedPlan?.price}
+                Select Payment Method For {selectedPlan?.plan} at{" "}
+                {selectedCurrency?.country ? (
+                  (() => {
+                    const converted = (
+                      (selectedPlan?.price * 283.75) /
+                      selectedCurrency?.price
+                    ).toFixed(2);
+                    const [main, sup] = converted.split(".");
+                    return (
+                      <>
+                        {selectedCurrency?.currency} {main}.<sup>{sup}</sup>
+                      </>
+                    );
+                  })()
+                ) : (
+                  <>USD {selectedPlan?.price}</>
+                )}
               </p>
             </ModalHeader>
             <ModalBody>

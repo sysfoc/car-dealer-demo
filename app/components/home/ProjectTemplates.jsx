@@ -28,7 +28,7 @@ const ProjectTemplates = () => {
           <div className='flex items-center gap-3'>
             <FaCheck fontSize={20} className='text-[#e56c16]' />
             <span className='font-semibold'>
-              Change Fonts & Colors Globally
+              Control Themes in Dashboard
             </span>
           </div>
           <div className='flex items-center gap-3'>

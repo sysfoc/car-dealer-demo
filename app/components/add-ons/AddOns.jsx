@@ -20,57 +20,51 @@ const AddOns = () => {
   const toggleDropdown = (id) => {
     setActiveId((prev) => (prev === id ? null : id));
   };
+  const fetchUserAddons = async () => {
+    try {
+      const response = await fetch("/api/user/add-ons/details");
+      const data = await response.json();
+      setLoading(false);
+      if (response.ok) {
+        setAddOns(data.addons);
+        setLoading(false);
+      }
+      if (response.status === 404) {
+        setLoading(false);
+      }
+    } catch {
+      setLoading(false);
+    }
+  };
+  const fetchData = async () => {
+    try {
+      const response1 = await fetch("/api/user/get/settings");
+      const data1 = await response1.json();
 
+      if (response1.ok && data1.settings?.currency) {
+        const currency = data1.settings.currency;
+        const response2 = await fetch(
+          `/api/payment/currencies/get/currency-name/${currency}`
+        );
+        const data2 = await response2.json();
+
+        if (response2.ok) {
+          setSelectedCurrency(data2.currency);
+        }
+      }
+
+      setLoading(false);
+    } catch {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
     setLoading(true);
     if (currentUser?._id) {
-      const fetchUserAddons = async () => {
-        try {
-          const response = await fetch("/api/user/add-ons/details");
-          const data = await response.json();
-          setLoading(false);
-          if (response.ok) {
-            setAddOns(data.addons);
-            setLoading(false);
-          }
-          if (response.status === 404) {
-            setLoading(false);
-          }
-        } catch (error) {
-          console.error(error.message);
-        }
-      };
       fetchUserAddons();
+      fetchData();
     }
   }, [currentUser]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response1 = await fetch("/api/user/get/settings");
-        const data1 = await response1.json();
-
-        if (response1.ok && data1.settings?.currency) {
-          const currency = data1.settings.currency;
-          const response2 = await fetch(
-            `/api/payment/currencies/get/currency-name/${currency}`
-          );
-          const data2 = await response2.json();
-
-          if (response2.ok) {
-            setSelectedCurrency(data2.currency);
-          }
-        }
-
-        setLoading(false);
-      } catch (error) {
-        console.error(error.message);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const services = [
     {
@@ -176,14 +170,11 @@ const AddOns = () => {
                     <div className='flex flex-col gap-3'>
                       <span className='px-5 py-2 rounded-md whitespace-nowrap text-sm bg-gray-100'>
                         {selectedCurrency?.country
-                          ? `${selectedCurrency?.currency} ${(service.price ===
-                            300
-                              ? 85124.18 / selectedCurrency?.price
-                              : service.price === 500
-                              ? 141873.63 / selectedCurrency?.price
-                              : 113498.91 / selectedCurrency?.price
+                          ? `${selectedCurrency?.currency} ${(
+                              (service?.price * 283.75) /
+                              selectedCurrency?.price
                             ).toFixed(2)}`
-                          : `$ ${service.price}`}{" "}
+                          : `USD ${service.price}`}{" "}
                         / Month
                       </span>
                       {currentUser && (
@@ -247,13 +238,11 @@ const AddOns = () => {
           <p>
             Select Payment Method For {selectedPlan?.plan} at{" "}
             {selectedCurrency?.country
-              ? `${selectedCurrency?.currency} ${(selectedPlan?.price === 300
-                  ? 85124.18 / selectedCurrency?.price
-                  : selectedPlan?.price === 500
-                  ? 141873.63 / selectedCurrency?.price
-                  : 113498.91 / selectedCurrency?.price
+              ? `${selectedCurrency?.currency} ${(
+                  (selectedPlan?.price * 283.75) /
+                  selectedCurrency?.price
                 ).toFixed(2)}`
-              : `$ ${selectedPlan?.price}`}
+              : `USD ${selectedPlan?.price}`}
           </p>
         </ModalHeader>
         <ModalBody>
