@@ -45,7 +45,7 @@ const Services = () => {
             happily refund 100% of your purchase. Happiness. Guaranteed.
           </p>
           <div className='flex items-center justify-center my-3'>
-            <div className='flex flex-wrap items-center gap-5'>
+            <div className='flex flex-wrap items-center justify-around gap-5'>
               {[
                 "PayPal-logo.png",
                 "Stripe-logo.png",
@@ -55,7 +55,7 @@ const Services = () => {
               ].map((logo, index) => (
                 <div
                   key={index}
-                  className='w-20 h-20 flex items-center justify-center bg-white rounded'
+                  className='w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center bg-white rounded'
                 >
                   <Image
                     src={`/payment-icons/${logo}`}

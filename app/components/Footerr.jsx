@@ -7,13 +7,22 @@ import {
   BsPinterest,
   BsTwitter,
 } from "react-icons/bs";
+import Image from "next/image";
+import Link from "next/link";
 
 const Footerr = () => {
   return (
     <Footer container>
       <div className='w-full text-center'>
-        <div className='w-full justify-between sm:flex sm:items-center sm:justify-between'>
-          <Footer.Brand href='/' src='/logo.png' alt='car-dealer-logo' />
+        <div className='w-full flex flex-col sm:flex-row items-center justify-between gap-y-6'>
+          <Link href='/'>
+            <Image
+              width={150}
+              height={100}
+              src='/logo.png'
+              alt='automotive-web-solutions-logo'
+            />
+          </Link>
           <Footer.LinkGroup className='gap-y-2'>
             <Footer.Link href='/about'>About</Footer.Link>
             <Footer.Link href='/contact'>Contact</Footer.Link>
@@ -32,7 +41,7 @@ const Footerr = () => {
             by='All rights reserved. AutomotiveWebSolutions by SYSFOC'
             year={2025}
           />
-          <div className='mt-4 flex space-x-6 sm:mt-0 sm:justify-center'>
+          <div className='mt-4 flex space-x-6 sm:mt-0 justify-center'>
             <Footer.Icon
               href='https://www.facebook.com/people/Automotive-web-solutions/61577244887965/'
               icon={BsFacebook}

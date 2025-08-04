@@ -72,9 +72,15 @@ const Features = () => {
     },
     {
       id: 13,
-      title: "24/7 Support",
+      title: "Multilingual Support",
       image: "/13.png",
-      alt: "Feature 13 - 24/7 Support",
+      alt: "Feature 13 - Contact Form",
+    },
+    {
+      id: 14,
+      title: "24/7 Support",
+      image: "/14.png",
+      alt: "Feature 14 - 24/7 Support",
     },
   ];
   return (
@@ -89,11 +95,11 @@ const Features = () => {
         </div>
       </div>
       <div className='my-6 mx-4 md:mx-12'>
-        <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5 sm:gap-8'>
+        <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5'>
           {features.map((feature) => (
             <div
               key={feature.id}
-              className='group rounded-md shadow-lg px-3 py-8'
+              className='group rounded-md shadow-lg px-3 py-5'
             >
               <div className='flex items-center justify-center'>
                 <Image

@@ -24,7 +24,7 @@ export default function LayoutWrapper({
         <Social />
         <AdminSidebar />
         <div className='w-full px-5 h-screen overflow-y-scroll'>
-          <header className='bg-white'>
+          <header className='mt-16 sm:mt-0 bg-white'>
             <UserButton />
           </header>
           <div>{children}</div>
@@ -40,7 +40,7 @@ export default function LayoutWrapper({
         <Social />
         <UserSidebar />
         <div className='w-full px-5 h-screen overflow-y-scroll'>
-          <header className='bg-white'>
+          <header className='mt-16 sm:mt-0 bg-white'>
             <AdminButton />
           </header>
           <div className='mt-4'>{children}</div>

@@ -112,7 +112,7 @@ const Header = () => {
               <Link href='/user/dashboard'>
                 <Button
                   size='md'
-                  className='w-full bg-[#e56c16] hover:!bg-[#e56c16]/90'
+                  className='w-full bg-[#fa7123] hover:!bg-[#fa7123]/90'
                 >
                   Dashboard
                 </Button>
@@ -121,7 +121,7 @@ const Header = () => {
               <Link href='/login'>
                 <Button
                   size='md'
-                  className='w-full bg-[#e56c16] hover:!bg-[#e56c16]/90'
+                  className='w-full bg-[#fa7123] hover:!bg-[#fa7123]/90'
                 >
                   Login
                 </Button>

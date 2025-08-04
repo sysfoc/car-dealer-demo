@@ -134,7 +134,9 @@ export default function About() {
           Launch your dealer website in minutes—no code, no stress.
         </p>
         <Link href={"/pricing"}>
-          <Button color='dark'>See Pricing Plans</Button>
+          <Button className='bg-[#fa7123] hover:!bg-[#fa7123]/90'>
+            See Pricing Plans
+          </Button>
         </Link>
         <div className='mt-8 border-t pt-4'>
           <p className='text-center text-sm text-gray-500 dark:text-white'>
