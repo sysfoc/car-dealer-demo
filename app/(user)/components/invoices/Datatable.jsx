@@ -39,50 +39,52 @@ const Datatable = () => {
         <div className='flex items-center justify-between'>
           <h2 className='text-xl font-semibold mb-4'>Previous Transactions</h2>
         </div>
-        <Table>
-          <TableHead>
-            <TableHeadCell>Transaction ID</TableHeadCell>
-            <TableHeadCell>Date</TableHeadCell>
-            <TableHeadCell>Product</TableHeadCell>
-            <TableHeadCell>Amount</TableHeadCell>
-            <TableHeadCell>Payment Method</TableHeadCell>
-            <TableHeadCell>Action</TableHeadCell>
-          </TableHead>
-          <TableBody>
-            {loading && (
-              <TableRow>
-                <TableCell colSpan={6} className='text-center'>
-                  <Spinner size='lg' />
-                </TableCell>
-              </TableRow>
-            )}
-            {transactions.map((transaction) => (
-              <TableRow key={transaction?._id}>
-                <TableCell>{transaction?._id}</TableCell>
-                <TableCell>
-                  {new Date(transaction?.transactionDate).toLocaleDateString(
-                    "en-US",
-                    { year: "numeric", month: "long", day: "numeric" }
-                  )}
-                </TableCell>
-                <TableCell>{transaction?.product}</TableCell>
-                <TableCell>${transaction?.productPrice}</TableCell>
-                <TableCell>{transaction?.paymentMethod}</TableCell>
-                <TableCell>
-                  <div className='flex items-center gap-2'>
-                    <Link
-                      href={`/user/dashboard/billing/invoices/view/${transaction?._id}`}
-                      className='p-2 bg-[#fb8b4c] text-white rounded hover:!bg-[#fb8b4c]/90'
-                      title='View'
-                    >
-                      <FaEye className='w-3 h-3' />
-                    </Link>
-                  </div>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <div className='overflow-x-auto'>
+          <Table>
+            <TableHead>
+              <TableHeadCell>Transaction ID</TableHeadCell>
+              <TableHeadCell>Date</TableHeadCell>
+              <TableHeadCell>Product</TableHeadCell>
+              <TableHeadCell>Amount</TableHeadCell>
+              <TableHeadCell>Payment Method</TableHeadCell>
+              <TableHeadCell>Action</TableHeadCell>
+            </TableHead>
+            <TableBody>
+              {loading && (
+                <TableRow>
+                  <TableCell colSpan={6} className='text-center'>
+                    <Spinner size='lg' />
+                  </TableCell>
+                </TableRow>
+              )}
+              {transactions.map((transaction) => (
+                <TableRow key={transaction?._id}>
+                  <TableCell>{transaction?._id}</TableCell>
+                  <TableCell>
+                    {new Date(transaction?.transactionDate).toLocaleDateString(
+                      "en-US",
+                      { year: "numeric", month: "long", day: "numeric" }
+                    )}
+                  </TableCell>
+                  <TableCell>{transaction?.product}</TableCell>
+                  <TableCell>${transaction?.productPrice}</TableCell>
+                  <TableCell>{transaction?.paymentMethod}</TableCell>
+                  <TableCell>
+                    <div className='flex items-center gap-2'>
+                      <Link
+                        href={`/user/dashboard/billing/invoices/view/${transaction?._id}`}
+                        className='p-2 bg-[#fb8b4c] text-white rounded hover:!bg-[#fb8b4c]/90'
+                        title='View'
+                      >
+                        <FaEye className='w-3 h-3' />
+                      </Link>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </div>
     </div>
   );

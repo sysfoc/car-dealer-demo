@@ -95,7 +95,7 @@ export default function DomainSetup() {
         <h2 className='bg-[#fa7123] text-white px-3 py-4 rounded-t-md border border-[#fa7123]/90 text-lg font-semibold'>
           Option 1: Let us setup a new Domain for you
         </h2>
-        <div className='bg-white p-5 rounded-b-md shadow'>
+        <div className='bg-white p-3 md:p-5 rounded-b-md shadow'>
           <div>
             <p className='text-gray-500 text-sm'>
               If you don&apos;t have a domain, no worries! just suggest few
@@ -151,7 +151,7 @@ export default function DomainSetup() {
         <h2 className='bg-[#fa7123] text-white p-4 rounded-t-md border border-[#fa7123]/90 text-lg font-semibold'>
           Option 2: Use your existing domain (Cloudflare DNS setup)
         </h2>
-        <div className='bg-white p-5 rounded-b-md shadow'>
+        <div className='bg-white p-3 md:p-5 rounded-b-md shadow'>
           <p className='text-gray-500 text-sm'>
             If you already own a Domain and want our developers to configure it
             via <strong>Cloudflare</strong>, Please fill out the details below

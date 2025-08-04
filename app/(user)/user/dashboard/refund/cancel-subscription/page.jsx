@@ -61,7 +61,7 @@ export default function CancelSubscription() {
         )}
         {subscription && (
           <>
-            <h2 className='text-2xl font-semibold text-center mb-4 text-gray-800'>
+            <h2 className='text-2xl font-semibold text-center mb-2 text-gray-800'>
               Cancel Subscription
             </h2>
             {!canceled ? (
@@ -71,7 +71,7 @@ export default function CancelSubscription() {
                   {subscription?.subscriptionType} subscription? Your access
                   will end on <strong>{formattedDate}</strong>.
                 </p>
-                <div className='flex justify-center gap-4'>
+                <div className='flex justify-center gap-3'>
                   <Button color='failure' onClick={() => setConfirmed(true)}>
                     Yes, Cancel
                   </Button>

@@ -69,7 +69,7 @@ export default function UserProfile() {
           </span>
         </Alert>
       )}
-      <div className='bg-white border-b p-4 flex items-center justify-between'>
+      <div className='bg-white border-b p-4 flex items-center justify-between gap-3 flex-wrap'>
         <h2 className='font-semibold text-xl'>Manage Profile</h2>
         <div className="flex items-center gap-3">
           <LogoutButton />

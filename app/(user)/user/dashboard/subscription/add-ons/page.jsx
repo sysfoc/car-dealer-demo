@@ -57,12 +57,12 @@ export default function Addons() {
           </div>
         </div>
       </section>
-      <div className='w-full'>
+      <div className='my-5 w-full'>
         <div className='mx-auto flex flex-col items-center gap-5'>
           {loading && (
             <Spinner aria-label='Loading Spinner' size='xl' color='blue' />
           )}
-          <div className='w-[90%] flex flex-col gap-3 shadow-md px-8 py-6 rounded-lg bg-white'>
+          <div className='w-full md:w-[90%] flex flex-col gap-3 shadow-md px-4 py-3 md:px-8 md:py-6 rounded-lg bg-white'>
             <Alert color='info'>
               <span>
                 <span className='font-medium'>Note:</span> You can activate or
@@ -96,7 +96,7 @@ export default function Addons() {
             addOns.map((addon) => (
               <div
                 key={addon?._id}
-                className='relative w-[90%] shadow-md px-8 py-6 rounded-lg bg-white'
+                className='relative w-full md:w-[90%] shadow-md px-4 py-3 md:px-8 md:py-6 rounded-lg bg-white'
               >
                 {addon?.expiredAt &&
                   new Date(addon?.expiredAt) < new Date() && (
@@ -156,7 +156,7 @@ export default function Addons() {
                           .toLowerCase()}
                       </p>
                     </div>
-                    <div className='flex flex-col gap-3'>
+                    <div className='flex flex-row md:flex-col gap-3'>
                       <span className='px-5 py-2 rounded-md text-sm bg-gray-100'>
                         ${addon?.servicePrice}/month
                       </span>
@@ -177,7 +177,7 @@ export default function Addons() {
               </div>
             ))
           ) : (
-            <div className='w-[90%] shadow-md px-8 py-6 rounded-lg bg-white'>
+            <div className='w-full md:w-[90%] shadow-md px-4 py-3 md:px-8 md:py-6 rounded-lg bg-white'>
               <p className='text-center font-semibold'>
                 No add-ons found! Please purchase one from{" "}
                 <Link href={"/add-ons"} className='text-red-600'>

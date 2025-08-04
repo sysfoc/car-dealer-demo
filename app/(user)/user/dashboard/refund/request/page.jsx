@@ -51,8 +51,8 @@ export default function RefundRequest() {
 
   return (
     <div className='flex justify-center items-center min-h-screen my-10'>
-      <Card className='max-w-lg w-full shadow-lg border border-gray-200'>
-        <h2 className='text-2xl font-semibold text-center mb-4 text-gray-800'>
+      <Card className='w-full md:max-w-lg w-full shadow-lg border border-gray-200'>
+        <h2 className='text-2xl font-semibold text-center mb-2 text-gray-800'>
           Refund Request
         </h2>
         {error && (

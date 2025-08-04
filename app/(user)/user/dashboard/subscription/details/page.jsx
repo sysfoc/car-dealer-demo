@@ -50,7 +50,7 @@ export default function PlanDetails() {
 
   return (
     <div className='max-w-3xl mx-auto my-5'>
-      <Card className='p-6 shadow-lg'>
+      <Card className='shadow-lg'>
         <h2 className='text-2xl font-semibold text-gray-900'>
           Current Subscription Plan
         </h2>
@@ -85,31 +85,9 @@ export default function PlanDetails() {
                     : "N/A"}
                 </span>
               </div>
-              <div className='flex justify-between border-b pb-2'>
-                <span className='font-medium text-gray-800'>
-                  Storage Limit:
-                </span>
-                <span className='text-gray-700'>
-                  {subscription?.subscriptionType === "Basic"
-                    ? "10 GB"
-                    : subscription?.subscriptionType === "Standard"
-                    ? "25 GB"
-                    : "50 GB"}
-                </span>
-              </div>
-              <div className='flex justify-between border-b pb-2'>
-                <span className='font-medium text-gray-800'>User Limit:</span>
-                <span className='text-gray-700'>
-                  {subscription?.subscriptionType === "Basic"
-                    ? "Upto 2"
-                    : subscription?.subscriptionType === "Standard"
-                    ? "Upto 5"
-                    : "Upto 10"}
-                </span>
-              </div>
             </div>
 
-            <div className='mt-6 flex gap-4'>
+            <div className='mt-6 flex gap-3'>
               <button
                 disabled={loading}
                 onClick={handleUpgrade}

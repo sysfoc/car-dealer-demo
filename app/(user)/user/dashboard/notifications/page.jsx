@@ -44,7 +44,7 @@ export default function Notifications() {
 
   return (
     <div className='space-y-6'>
-      <Card className='p-5 shadow-lg border border-gray-200'>
+      <Card className='shadow-lg border border-gray-200'>
         <h2 className='text-2xl font-semibold text-gray-800'>
           Notifications & Alerts
         </h2>

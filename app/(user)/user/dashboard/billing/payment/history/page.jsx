@@ -49,44 +49,61 @@ export default function PaymentHistory() {
         <div className='flex items-center justify-between'>
           <h2 className='text-xl font-semibold mb-4'>Transactions</h2>
         </div>
-        <Table>
-          <TableHead>
-            <TableHeadCell className="bg-[#fa7123] text-white">Transaction ID</TableHeadCell>
-            <TableHeadCell className="bg-[#fa7123] text-white">Date</TableHeadCell>
-            <TableHeadCell className="bg-[#fa7123] text-white">Product</TableHeadCell>
-            <TableHeadCell className="bg-[#fa7123] text-white">Amount</TableHeadCell>
-            <TableHeadCell className="bg-[#fa7123] text-white">Payment Method</TableHeadCell>
-            <TableHeadCell className="bg-[#fa7123] text-white">Action</TableHeadCell>
-          </TableHead>
-          <TableBody>
-            {loading && (
-              <TableRow>
-                <TableCell colSpan={6} className='text-center'>
-                  <Spinner size='lg' />
-                </TableCell>
-              </TableRow>
-            )}
-            {transactions.map((transaction) => (
-              <TableRow key={transaction._id}>
-                <TableCell>{transaction._id}</TableCell>
-                <TableCell>
-                  {new Date(transaction.transactionDate).toLocaleDateString(
-                    "en-US",
-                    { year: "numeric", month: "long", day: "numeric" }
-                  )}
-                </TableCell>
-                <TableCell>{transaction.product}</TableCell>
-                <TableCell>${transaction.productPrice}</TableCell>
-                <TableCell>{transaction.paymentMethod}</TableCell>
-                <TableCell>
-                  <Button className="bg-[#fb8b4c] hover:!bg-[#fb8b4c]/90" onClick={() => handleViewTransaction(transaction)}>
-                    <FaEye />
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <div className='overflow-x-auto'>
+          <Table>
+            <TableHead>
+              <TableHeadCell className='bg-[#fa7123] text-white'>
+                Transaction ID
+              </TableHeadCell>
+              <TableHeadCell className='bg-[#fa7123] text-white'>
+                Date
+              </TableHeadCell>
+              <TableHeadCell className='bg-[#fa7123] text-white'>
+                Product
+              </TableHeadCell>
+              <TableHeadCell className='bg-[#fa7123] text-white'>
+                Amount
+              </TableHeadCell>
+              <TableHeadCell className='bg-[#fa7123] text-white'>
+                Payment Method
+              </TableHeadCell>
+              <TableHeadCell className='bg-[#fa7123] text-white'>
+                Action
+              </TableHeadCell>
+            </TableHead>
+            <TableBody>
+              {loading && (
+                <TableRow>
+                  <TableCell colSpan={6} className='text-center'>
+                    <Spinner size='lg' />
+                  </TableCell>
+                </TableRow>
+              )}
+              {transactions.map((transaction) => (
+                <TableRow key={transaction._id}>
+                  <TableCell>{transaction._id}</TableCell>
+                  <TableCell>
+                    {new Date(transaction.transactionDate).toLocaleDateString(
+                      "en-US",
+                      { year: "numeric", month: "long", day: "numeric" }
+                    )}
+                  </TableCell>
+                  <TableCell>{transaction.product}</TableCell>
+                  <TableCell>${transaction.productPrice}</TableCell>
+                  <TableCell>{transaction.paymentMethod}</TableCell>
+                  <TableCell>
+                    <Button
+                      className='bg-[#fb8b4c] hover:!bg-[#fb8b4c]/90'
+                      onClick={() => handleViewTransaction(transaction)}
+                    >
+                      <FaEye />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
         <Modal show={openModal} onClose={() => setOpenModal(false)}>
           <ModalHeader>
             Transaction Details of{" "}

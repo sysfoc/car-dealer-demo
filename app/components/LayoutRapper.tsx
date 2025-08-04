@@ -23,7 +23,7 @@ export default function LayoutWrapper({
       <div className='flex h-screen'>
         <Social />
         <AdminSidebar />
-        <div className='w-full px-5 h-screen overflow-y-scroll'>
+        <div className='w-full px-3 md:px-5 h-screen overflow-y-scroll'>
           <header className='mt-16 sm:mt-0 bg-white'>
             <UserButton />
           </header>
@@ -39,7 +39,7 @@ export default function LayoutWrapper({
       <div className='flex h-screen'>
         <Social />
         <UserSidebar />
-        <div className='w-full px-5 h-screen overflow-y-scroll'>
+        <div className='w-full px-3 md:px-5 h-screen overflow-y-scroll'>
           <header className='mt-16 sm:mt-0 bg-white'>
             <AdminButton />
           </header>

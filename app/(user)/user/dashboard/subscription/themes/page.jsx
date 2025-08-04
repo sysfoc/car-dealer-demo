@@ -57,7 +57,7 @@ export default function Themes() {
           {loading && (
             <Spinner aria-label='Loading Spinner' size='xl' color='blue' />
           )}
-          <div className='w-[90%] flex flex-col gap-3 shadow-md px-8 py-6 rounded-lg bg-white'>
+          <div className='w-full md:w-[90%] flex flex-col gap-3 shadow-md px-4 py-3 md:px-8 md:py-6 rounded-lg bg-white'>
             {themes.length > 0 &&
               themes.map((theme) => (
                 <Alert key={theme?._id} color='failure'>
@@ -85,7 +85,7 @@ export default function Themes() {
             themes.map((theme) => (
               <div
                 key={theme?._id}
-                className='relative w-[90%] shadow-md px-8 py-6 rounded-lg bg-white'
+                className='relative w-full md:w-[90%] shadow-md px-4 py-5 md:px-8 md:py-6 rounded-lg bg-white'
               >
                 {theme?.expiredAt &&
                   new Date(theme?.expiredAt) < new Date() && (
@@ -137,7 +137,7 @@ export default function Themes() {
               </div>
             ))
           ) : (
-            <div className='w-[90%] shadow-md px-8 py-6 rounded-lg bg-white'>
+            <div className='w-full md:w-[90%] shadow-md px-4 md:px-8 py-3 md:py-6 rounded-lg bg-white'>
               <p className='text-center font-semibold'>
                 No theme found! Please purchase one from{" "}
                 <Link href={"/"} className='text-red-600'>
