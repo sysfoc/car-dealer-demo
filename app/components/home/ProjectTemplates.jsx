@@ -56,7 +56,7 @@ const ProjectTemplates = () => {
                 </div>
                 <div className='px-2 py-3'>
                   <h3 className='text-center font-semibold text-xl'>
-                    {dealer.name}
+                    Theme: <span className="text-[#fa7123]">{dealer.name}</span>
                   </h3>
                 </div>
               </Link>

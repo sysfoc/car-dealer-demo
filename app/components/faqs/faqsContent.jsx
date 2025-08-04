@@ -39,12 +39,12 @@ const faqsContent = () => {
                 className='flex items-center justify-between gap-4 bg-white px-6 py-5 dark:bg-gray-800 cursor-pointer'
                 onClick={() => toggleCategory(catIndex)}
               >
-                <h2 className='text-[22px] font-semibold text-gray-900 dark:text-white'>
+                <h2 className='text-lg md:text-[22px] font-semibold text-gray-900 dark:text-white'>
                   {faq.categoryHeader}
                 </h2>
                 <div className='flex flex-row gap-3'>
                   <div>
-                    <span className='bg-[#fa7123] text-white text-xs font-medium px-2.5 py-1.5 rounded'>
+                    <span className='bg-[#fa7123] whitespace-nowrap text-white text-xs font-medium px-2.5 py-1.5 rounded'>
                       {faq.category}
                     </span>
                   </div>
@@ -76,7 +76,7 @@ const faqsContent = () => {
                           className='flex justify-between p-3 gap-3 cursor-pointer border border-gray-200 dark:border-gray-700 rounded-md'
                           onClick={() => toggleQuestion(catIndex, qIndex)}
                         >
-                          <h3 className='text-lg font-semibold text-gray-900 dark:text-white'>
+                          <h3 className='md:text-lg font-semibold text-gray-900 dark:text-white'>
                             {question.question}
                           </h3>
                           <div>

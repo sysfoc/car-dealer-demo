@@ -42,12 +42,12 @@ const Datatable = () => {
         <div className='overflow-x-auto'>
           <Table>
             <TableHead>
-              <TableHeadCell>Transaction ID</TableHeadCell>
-              <TableHeadCell>Date</TableHeadCell>
-              <TableHeadCell>Product</TableHeadCell>
-              <TableHeadCell>Amount</TableHeadCell>
-              <TableHeadCell>Payment Method</TableHeadCell>
-              <TableHeadCell>Action</TableHeadCell>
+              <TableHeadCell className="bg-[#fa7123] text-white">Transaction ID</TableHeadCell>
+              <TableHeadCell className="bg-[#fa7123] text-white">Date</TableHeadCell>
+              <TableHeadCell className="bg-[#fa7123] text-white">Product</TableHeadCell>
+              <TableHeadCell className="bg-[#fa7123] text-white">Amount</TableHeadCell>
+              <TableHeadCell className="bg-[#fa7123] text-white">Payment Method</TableHeadCell>
+              <TableHeadCell className="bg-[#fa7123] text-white">Action</TableHeadCell>
             </TableHead>
             <TableBody>
               {loading && (
