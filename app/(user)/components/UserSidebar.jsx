@@ -12,12 +12,34 @@ import { RiRefundFill } from "react-icons/ri";
 import { FaMoneyBill1 } from "react-icons/fa6";
 import { GrDomain } from "react-icons/gr";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useSelector } from "react-redux";
+import { CiLogout } from "react-icons/ci";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutSuccess } from "@/lib/features/user/userSlice";
+import { useRouter } from "next/navigation";
 
 const UserSidebar = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
+  const handleLogout = async () => {
+    try {
+      const res = await fetch("/api/auth/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      await res.json();
+      if (res.ok) {
+        dispatch(logoutSuccess());
+        router.push("/login");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <div className='md:hidden p-4 flex justify-between items-center bg-white shadow fixed top-0 w-full z-50'>
@@ -212,6 +234,13 @@ const UserSidebar = () => {
                 className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
               >
                 Support
+              </Sidebar.Item>
+              <Sidebar.Item
+                icon={CiLogout}
+                className='!text-white hover:!bg-[#fb8b4c] hover:!text-white cursor-pointer'
+                onClick={handleLogout}
+              >
+                Logout
               </Sidebar.Item>
             </Sidebar.ItemGroup>
           </Sidebar.Items>

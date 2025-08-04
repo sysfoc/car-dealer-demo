@@ -67,7 +67,7 @@ const Login = () => {
               id='email'
               type='email'
               autoComplete='on'
-              placeholder='john@gmail.com'
+              placeholder='Enter your email'
               required
               onChange={handleChange}
             />
@@ -78,7 +78,7 @@ const Login = () => {
             <TextInput
               id='password'
               type='password'
-              placeholder='********'
+              placeholder='Enter your password'
               required
               autoComplete='on'
               onChange={handleChange}

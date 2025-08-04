@@ -70,7 +70,7 @@ const Register = () => {
             <TextInput
               id='name'
               type='text'
-              placeholder='John Doe'
+              placeholder='Enter your full name'
               required
               autoComplete='on'
               onChange={handleChange}
@@ -83,7 +83,7 @@ const Register = () => {
               id='email'
               type='email'
               autoComplete='on'
-              placeholder='john@gmail.com'
+              placeholder='Enter your email'
               required
               onChange={handleChange}
             />
@@ -94,7 +94,7 @@ const Register = () => {
             <TextInput
               id='password'
               type='password'
-              placeholder='********'
+              placeholder='Enter a strong password'
               required
               autoComplete='on'
               onChange={handleChange}

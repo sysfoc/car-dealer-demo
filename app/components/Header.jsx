@@ -98,10 +98,21 @@ const Header = () => {
             className='relative hover:text-blue-950 md:hover:text-blue-950'
           >
             <Link
+              href='/contact'
+              className='relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:bg-[#e56c16] after:transition-all after:duration-300 after:ease-in-out hover:after:w-full'
+            >
+              Contact Sales Team
+            </Link>
+          </NavbarLink>
+          <NavbarLink
+            as={"div"}
+            className='relative hover:text-blue-950 md:hover:text-blue-950'
+          >
+            <Link
               href='/register'
               className='relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-0 after:bg-[#e56c16] after:transition-all after:duration-300 after:ease-in-out hover:after:w-full'
             >
-              Create an account
+              Register
             </Link>
           </NavbarLink>
           <NavbarLink

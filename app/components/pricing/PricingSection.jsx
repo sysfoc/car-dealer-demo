@@ -183,14 +183,14 @@ const PricingSection = () => {
           <p className='mt-3 text-center'>We're excited to serve you!</p>
           {!currentUser && (
             <div>
-              <p className='text-red-600 my-2 text-sm font-semibold'>
-                Please login first to purchase plan
-              </p>
+              <Link href='/login' className='animate-pulse text-red-600 mt-2 text-sm font-semibold'>
+                Please login first to subscribe the plan
+              </Link>
             </div>
           )}
         </div>
       </div>
-      <div className='my-8 flex items-center justify-center'>
+      <div className='my-5 flex items-center justify-center'>
         <div className='w-full sm:w-[400px] rounded-lg border-t-4 bg-white border-[#fa7123] p-8 shadow-md'>
           <h2 className='text-center'>Subscription Term</h2>
           <div className='flex items-center justify-center'>
@@ -212,7 +212,7 @@ const PricingSection = () => {
           <div className='w-full overflow-x-scroll md:overflow-hidden shadow rounded-lg'>
             <Table striped className='min-w-[700px] md:w-full table-fixed'>
               <TableHead className='text-center'>
-                <TableHeadCell className='bg-[#fa7123] text-white'>
+                <TableHeadCell className='bg-[#fa7123] text-white text-left'>
                   <div>
                     <h2 className='text-xl'>Features</h2>
                   </div>
@@ -1039,7 +1039,7 @@ const PricingSection = () => {
           <div className='w-full overflow-x-scroll md:overflow-hidden shadow rounded-lg'>
             <Table striped className='min-w-[700px] md:w-full table-fixed'>
               <TableHead className='text-center'>
-                <TableHeadCell className='bg-[#fa7123] text-white'>
+                <TableHeadCell className='bg-[#fa7123] text-white text-left'>
                   <div>
                     <h2 className='text-xl'>Features</h2>
                   </div>
