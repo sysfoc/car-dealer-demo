@@ -36,7 +36,7 @@ const SocialMedia = () => {
               or brand awareness.
             </li>
             <li>
-              <i className="text-[#e56c16]">Ad spend is billed separately based on your budget.</i>
+              <strong className="text-sm text-[#e56c16]">Ad spend is billed separately based on your budget.</strong>
             </li>
           </ul>
         </li>

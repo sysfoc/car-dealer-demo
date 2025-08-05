@@ -39,7 +39,7 @@ export async function POST(req) {
     });
     await sendEmail({
       to: config.emailReceiver,
-      subject: "Refund Request - Automotiv Web Solutions",
+      subject: "Refund Request - Automotive Web Solutions",
       text: `A User has submitted a refund request, Please take neccessary actions:\nName: ${user.name}\nEmail: ${user.email}\nOrder ID: ${orderId}\nRequested Email: ${email}\nAmount: $${amount}\nRefund Method: ${refundMethod}\nReason: ${reason}`,
     });
     await Notification.create({

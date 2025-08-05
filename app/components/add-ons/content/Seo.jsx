@@ -29,10 +29,10 @@ const Seo = () => {
           <span>Monthly Reports</span>- Rankings, traffic & progress updates.
         </li>
       </ul>
-      <i className="text-sm text-[#e56c16]">
+      <strong className="text-sm text-[#e56c16]">
         Please note: Backlinks are not included in the SEO package and will only
         be added if the client agrees to pay for this add-on separately.
-      </i>
+      </strong>
       <h4 className='font-semibold text-lg'>Bonus for Car Dealers: </h4>
       <ul className='list-disc list-inside my-2'>
         <li>

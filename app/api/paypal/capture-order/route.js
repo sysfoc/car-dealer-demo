@@ -8,6 +8,7 @@ import User from "@/app/model/user.model";
 import Theme from "@/app/model/theme.model";
 import { connectToDatabase } from "@/app/api/utils/db";
 import { sendEmail } from "@/app/api/utils/send-email";
+import { config } from "@/app/api/utils/env-config";
 
 const clientId = process.env.PAYPAL_SANDBOX_CLIENT_ID;
 const clientSecret = process.env.PAYPAL_SANDBOX_CLIENT_SECRET;
@@ -98,6 +99,18 @@ export async function POST(req) {
             -6
           )}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sales@automotivewebsolutions.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\nsales@automotivewebsolutions.com\nhttps://www.automotivewebsolutions.com`,
         });
+        await sendEmail({
+          to: config.emailReceiver,
+          subject: "Addon Subscription – Activation & Details",
+          text: `Dear Automotive Web Solutions,\n\nA user has successfully subscribed to an add-on. Please find the details below:\n\nSubscription Summary:\nUserId: ${
+            user._id
+          }\nUsername: ${user.name}\nEmail: ${
+            user.email
+          }\nAddon Name: ${plan.slice(
+            0,
+            -6
+          )}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}`,
+        });
         await Notification.create({
           userId: user._id,
           type: "success",
@@ -164,6 +177,15 @@ export async function POST(req) {
         text: `Dear ${
           user.name || "User"
         },\n\nWe would like to inform you that your Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nSubscription Name: ${plan}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sales@automotivewebsolutions.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\nsales@automotivewebsolutions.com\nhttps://www.automotivewebsolutions.com`,
+      });
+      await sendEmail({
+        to: config.emailReceiver,
+        subject: "New Subscription – Activated",
+        text: `Dear ,\n\nA user has successfully subscribed to anpPlan. Please find the details below:\n\nSubscription Summary:\nUserId: ${
+          user._id
+        }\nUsername: ${user.name}\nEmail: ${
+          user.email
+        }\nSubscription Name: ${plan}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle:${timePeriod} \nAmount: $${price}`,
       });
     }
 

@@ -73,8 +73,8 @@ const Form = () => {
             Not Mentioned! What You Are Looking For? Contact Us Now
           </h3>
           <p className='mt-1'>
-            Add-ons are additional services that you can purchase to enhance
-            your website
+            We offer flexible add-on options and custom services — just let us
+            know what you're looking for.
           </p>
         </div>
         <div className='flex items-center justify-center'>

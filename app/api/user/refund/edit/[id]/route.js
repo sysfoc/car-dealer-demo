@@ -52,7 +52,7 @@ export async function POST(req, { params }) {
     await sendEmail({
       to: user.email,
       subject: "Refund approved",
-      text: `Hello ${user.name}, your refund request against order ${refund.orderId} has been approved.`,
+      text: `Dear ${user.name}, your refund request against order ${refund.orderId} has been approved.`,
     });
     await Notification.create({
       type: "success",
@@ -64,7 +64,7 @@ export async function POST(req, { params }) {
     await sendEmail({
       to: user.email,
       subject: "Refund rejected",
-      text: `Hello ${user.name}, your refund request against order ${refund.orderId} has been Rejected.`,
+      text: `Dear ${user.name}, your refund request against order ${refund.orderId} has been Rejected.`,
     });
     await Notification.create({
       type: "error",

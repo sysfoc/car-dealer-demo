@@ -16,8 +16,8 @@ export async function POST(req) {
     const contact = await Contact.create({ name, email, message });
     await sendEmail({
       to: config.emailReceiver,
-      subject: "Contact Form Submission - Automotiv Web Solutions",
-      text: `A User has submitted a contact form:\nName: ${name}\nEmail: ${email}\nMessage: ${message}`,
+      subject: "Contact Form Submission - Automotive Web Solutions",
+      text: `A user has submitted a contact form:\nName: ${name}\nEmail: ${email}\nMessage: ${message}`,
     })
     if (!contact) {
       return NextResponse.json(

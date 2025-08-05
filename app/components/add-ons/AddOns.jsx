@@ -249,7 +249,7 @@ const AddOns = () => {
                   <div
                     className={`transition-all duration-300 ease-in-out overflow-auto ${
                       activeId === service.id
-                        ? "max-h-[500px] opacity-100 bg-[#fa7123]/5 p-5"
+                        ? "max-h-[500px] opacity-100 bg-gray-100 p-5"
                         : "max-h-0 opacity-0"
                     }`}
                   >

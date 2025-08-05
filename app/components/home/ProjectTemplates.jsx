@@ -14,8 +14,7 @@ const ProjectTemplates = () => {
             Great packs of ready-made templates.
           </h2>
           <p className='mt-5 text-gray-500'>
-            Choose one of the existing styles or follow your ideas and customize
-            your site
+            Choose one of the existing styles or get your dream site customized
           </p>
         </div>
       </div>
