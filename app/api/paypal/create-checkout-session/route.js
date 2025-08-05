@@ -72,6 +72,7 @@ export async function POST(req) {
       return NextResponse.json({ url: approvalUrl });
     }
   } catch (error) {
+    console.error("Error creating PayPal session:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
