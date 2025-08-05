@@ -192,6 +192,7 @@ export async function POST(req) {
     await Payment.create({
       userId: user._id,
       customerId: "Paypal-user",
+      paymentId: capture.result.id,
       product: `${plan}${themes?.length > 0 ? " Themes: " : ""}${
         themes?.length > 0 ? ` (${themes?.join(", ")})` : ""
       }`,

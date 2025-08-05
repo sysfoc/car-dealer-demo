@@ -6,7 +6,7 @@ import { HiChartPie, HiOutlineMinusSm, HiOutlinePlusSm } from "react-icons/hi";
 import { TiFlowMerge } from "react-icons/ti";
 import { MdSubscriptions } from "react-icons/md";
 import { IoMdNotifications } from "react-icons/io";
-import { BiSupport } from "react-icons/bi";
+import { BiSupport, BiWorld } from "react-icons/bi";
 import { IoSettings, IoClose } from "react-icons/io5";
 import { RiRefundFill } from "react-icons/ri";
 import { FaMoneyBill1 } from "react-icons/fa6";
@@ -43,7 +43,7 @@ const UserSidebar = () => {
   return (
     <>
       <div className='md:hidden p-4 flex justify-between items-center bg-white shadow fixed top-0 w-full z-50'>
-        <h2 className='text-base font-semibold text-gray-800'>
+        <h2 className='text-base font-semibold text-gray-800 capitalize'>
           {currentUser?.name?.split(" ")[0]}'s Dashboard
         </h2>
         <button
@@ -62,11 +62,18 @@ const UserSidebar = () => {
           aria-label='Sidebar of a dashboard'
           className='w-full h-full shadow sidebar text-white pt-16 md:pt-0'
         >
-          <Sidebar.Logo href='/user/dashboard'>
+          <Sidebar.Logo href='/user/dashboard' className="capitalize">
             {currentUser?.name?.split(" ")[0]}&apos;s Dashboard
           </Sidebar.Logo>
           <Sidebar.Items>
             <Sidebar.ItemGroup>
+              <Sidebar.Item
+                href='/'
+                icon={BiWorld}
+                className='!text-white hover:!bg-[#fb8b4c] hover:!text-white'
+              >
+                Visit Site
+              </Sidebar.Item>
               <Sidebar.Item
                 href='/user/dashboard'
                 icon={HiChartPie}

@@ -1,7 +1,7 @@
 "use client";
 
 import { Sidebar } from "flowbite-react";
-import { BiSupport } from "react-icons/bi";
+import { BiSupport, BiWorld } from "react-icons/bi";
 import { FaBlog } from "react-icons/fa6";
 import { FaBitcoin } from "react-icons/fa";
 import { GrDomain } from "react-icons/gr";
@@ -43,6 +43,13 @@ const AdminSidebar = () => {
           <Sidebar.Logo href='/dashboard'>Admin Dashboard</Sidebar.Logo>
           <Sidebar.Items>
             <Sidebar.ItemGroup>
+              <Sidebar.Item
+                href='/'
+                icon={BiWorld}
+                className='!text-white hover:!bg-[#344b76] hover:!text-white'
+              >
+                Visit Site
+              </Sidebar.Item>
               <Sidebar.Item
                 href='/dashboard'
                 icon={HiChartPie}

@@ -72,7 +72,6 @@ export async function POST(req) {
       return NextResponse.json({ url: approvalUrl });
     }
   } catch (error) {
-    console.error("PayPal Checkout Error:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

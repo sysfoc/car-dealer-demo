@@ -109,7 +109,7 @@ export default function UserProfile() {
                 id='name'
                 name='name'
                 defaultValue={currentUser?.name}
-                placeholder='John Doe'
+                placeholder='Enter new name'
                 required
                 onChange={handleChange}
               />
@@ -121,7 +121,7 @@ export default function UserProfile() {
                 id='email'
                 name='email'
                 defaultValue={currentUser?.email}
-                placeholder='johndoe@gmail.com'
+                placeholder='Enter registered email'
                 required
                 disabled
               />
@@ -132,7 +132,7 @@ export default function UserProfile() {
                 type='password'
                 id='password'
                 name='password'
-                placeholder='*******'
+                placeholder='Leave blank if you don&apos;t want to change'
                 onChange={handleChange}
               />
             </div>
