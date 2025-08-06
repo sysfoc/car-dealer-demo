@@ -104,14 +104,14 @@ export default function viewUser() {
               <h2 className='text-lg font-semibold'>Domains</h2>
             </div>
             <div>
-              <Table className='mt-4' striped>
+              <div className='overflow-x-auto'>
+                <Table className='mt-4' striped>
                 <TableHead>
                   <TableHeadCell className="!bg-[#182641] text-white">Domain</TableHeadCell>
                   <TableHeadCell className="!bg-[#182641] text-white">Registrar</TableHeadCell>
                   <TableHeadCell className="!bg-[#182641] text-white">Username</TableHeadCell>
                   <TableHeadCell className="!bg-[#182641] text-white">Password</TableHeadCell>
                   <TableHeadCell className="!bg-[#182641] text-white">Custom Domain</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Status</TableHeadCell>
                   <TableHeadCell className="!bg-[#182641] text-white">Date</TableHeadCell>
                 </TableHead>
                 <TableBody>
@@ -119,22 +119,19 @@ export default function viewUser() {
                     record?.domain?.map((domain) => (
                       <TableRow key={domain._id}>
                         <TableCell title={domain.domainName}>
-                          {domain.domainName}
+                          {domain.domainName || "-----"}
                         </TableCell>
                         <TableCell title={domain.domainRegistrar}>
-                          {domain.domainRegistrar}
+                          {domain.domainRegistrar || "-----"}
                         </TableCell>
                         <TableCell title={domain.domainUsername}>
-                          {domain.domainUsername}
+                          {domain.domainUsername || "-----"}
                         </TableCell>
                         <TableCell title={domain.domainPassword}>
-                          {domain.domainPassword}
+                          {domain.domainPassword || "-----"}
                         </TableCell>
                         <TableCell title={domain?.customDomain}>
-                          {domain?.customDomain}
-                        </TableCell>
-                        <TableCell title={domain.domainStatus}>
-                          {domain.domainStatus}
+                          {domain?.customDomain || "-----"}
                         </TableCell>
                         <TableCell title={domain.createdAt}>
                           {new Date(domain.createdAt).toLocaleDateString(
@@ -157,6 +154,7 @@ export default function viewUser() {
                   )}
                 </TableBody>
               </Table>
+              </div>
             </div>
           </div>
           <div className='bg-white px-5 py-4 rounded-md shadow'>
@@ -210,7 +208,7 @@ export default function viewUser() {
                     ))
                   ) : (
                     <TableRow>
-                      <TableCell colSpan={6} className='text-center'>
+                      <TableCell colSpan={7} className='text-center'>
                         No payment history found
                       </TableCell>
                     </TableRow>
@@ -269,7 +267,7 @@ export default function viewUser() {
                     ))
                   ) : (
                     <TableRow>
-                      <TableCell colSpan={6} className='text-center'>
+                      <TableCell colSpan={5} className='text-center'>
                         No subscriptions found
                       </TableCell>
                     </TableRow>
@@ -408,7 +406,7 @@ export default function viewUser() {
                     ))
                   ) : (
                     <TableRow>
-                      <TableCell colSpan={5} className='text-center'>
+                      <TableCell colSpan={6} className='text-center'>
                         No Addon found
                       </TableCell>
                     </TableRow>

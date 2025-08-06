@@ -1,24 +1,30 @@
 "use client";
 import {
   Button,
+  Spinner,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeadCell,
   TableRow,
+  TextInput,
 } from "flowbite-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Blog() {
   const [formData, setFormData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const getAllBlogs = async () => {
+      setLoading(true);
       const res = await fetch("/api/blog/all", {
         method: "GET",
       });
       const data = await res.json();
+      setLoading(false);
       setFormData(data.blogs);
     };
     getAllBlogs();
@@ -34,12 +40,43 @@ export default function Blog() {
       console.log(error);
     }
   };
+
+  const filteredResults = searchTerm
+    ? formData.filter((item) => {
+        const lowerSearch = searchTerm.toLowerCase();
+        const createdAtMatch = item?.createdAt
+          ? new Date(item.createdAt)
+              .toLocaleDateString("en-US", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })
+              .toLowerCase()
+              .includes(lowerSearch)
+          : false;
+        return (
+          item?._id?.toLowerCase()?.includes(lowerSearch) ||
+          item?.title?.toLowerCase()?.includes(lowerSearch) ||
+          item?.slug?.toLowerCase()?.includes(lowerSearch) ||
+          item?.blogWriter?.toLowerCase()?.includes(lowerSearch) ||
+          createdAtMatch
+        );
+      })
+    : formData;
   return (
     <section className='my-5 p-5'>
       <div>
         <div className='flex items-center justify-between mb-3'>
-          <h2 className='text-2xl font-semibold mb-4'>Blogs</h2>
-          <div>
+          <h2 className='text-2xl font-semibold'>Blogs</h2>
+          <div className='flex gap-2 items-center'>
+            <TextInput
+              id='search'
+              type='search'
+              placeholder='Search'
+              className="w-[300px]"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
             <Link href={"/dashboard/blogs/add"}>
               <Button
                 size='md'
@@ -51,7 +88,7 @@ export default function Blog() {
           </div>
         </div>
       </div>
-      <div>
+      <div className='overflow-x-auto'>
         <Table>
           <TableHead>
             <TableHeadCell className='!bg-[#182641] text-white'>
@@ -71,8 +108,15 @@ export default function Blog() {
             </TableHeadCell>
           </TableHead>
           <TableBody className='divide-y'>
-            {formData &&
-              formData.map((item) => (
+            {loading && (
+              <TableRow>
+                <TableCell colSpan={5} className='text-center'>
+                  <Spinner size='lg' />
+                </TableCell>
+              </TableRow>
+            )}
+            {(filteredResults.length > 0 &&
+              filteredResults.map((item) => (
                 <TableRow key={item._id}>
                   <TableCell>{item.title}</TableCell>
                   <TableCell>{item.slug}</TableCell>
@@ -102,7 +146,13 @@ export default function Blog() {
                     </Button>
                   </TableCell>
                 </TableRow>
-              ))}
+              ))) || (
+              <TableRow>
+                <TableCell colSpan={5} className='text-center'>
+                  No Blogs found, Try created one
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </div>

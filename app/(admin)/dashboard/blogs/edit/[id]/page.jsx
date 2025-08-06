@@ -14,7 +14,7 @@ export default function EditBlog() {
     slug: "",
     metaTitle: "",
     metaDescription: "",
-    writer: "",
+    blogWriter: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -166,13 +166,13 @@ export default function EditBlog() {
               />
             </div>
             <div className='flex flex-col gap-1'>
-              <Label htmlFor='writer'>Writer</Label>
+              <Label htmlFor='blogWriter'>Writer</Label>
               <TextInput
                 type='text'
-                id='writer'
-                name='writer'
+                id='blogWriter'
+                name='blogWriter'
                 placeholder='John Doe'
-                value={formData.writer || ""}
+                value={formData.blogWriter || ""}
                 onChange={handleChange}
               />
             </div>

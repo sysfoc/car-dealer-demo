@@ -14,6 +14,7 @@ import {
   TableCell,
   Spinner,
   Alert,
+  TextInput,
 } from "flowbite-react";
 
 export default function Users() {
@@ -23,6 +24,7 @@ export default function Users() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -66,6 +68,17 @@ export default function Users() {
       setErrorMessage(error.message);
     }
   };
+
+  const filteredUsers = searchTerm
+    ? getAllUsers.filter((user) => {
+        const lowerSearch = searchTerm.toLowerCase();
+        return (
+          user._id?.toString().toLowerCase().includes(lowerSearch) ||
+          user.name?.toLowerCase().includes(lowerSearch) ||
+          user.email?.toLowerCase().includes(lowerSearch)
+        );
+      })
+    : getAllUsers;
   return (
     <div className='my-5 p-5 bg-white shadow'>
       {error && (
@@ -76,9 +89,16 @@ export default function Users() {
         </Alert>
       )}
       <div>
-        <div className='flex items-center justify-between'>
+        <div className='flex flex-wrap items-center justify-between'>
           <h2 className='text-xl font-semibold mb-4'>Users List</h2>
-          <div className='mb-3'>
+          <div className='mb-3 flex items-center gap-2'>
+            <TextInput
+              id='search'
+              type='search'
+              placeholder='Search'
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
             <Link href='/dashboard/users/create'>
               <Button size='sm' className='bg-[#e56c16] hover:!bg-[#e56c16]/90'>
                 Add User
@@ -116,7 +136,7 @@ export default function Users() {
                 </TableCell>
               </TableRow>
             )}
-            {getAllUsers.map((user) => (
+            {filteredUsers.map((user) => (
               <TableRow key={user._id}>
                 <TableCell className='capitalize'>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>

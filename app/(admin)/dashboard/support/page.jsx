@@ -8,6 +8,7 @@ import {
   TableHead,
   TableHeadCell,
   TableRow,
+  TextInput,
 } from "flowbite-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -15,6 +16,7 @@ import { useEffect, useState } from "react";
 export default function Support() {
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   useEffect(() => {
     const getAllIssues = async () => {
       try {
@@ -29,16 +31,59 @@ export default function Support() {
     };
     getAllIssues();
   }, []);
+
+  const filteredResults = searchTerm
+    ? issues.filter((issue) => {
+        const lowerSearch = searchTerm.toLowerCase();
+        const createdAtMatch = issue?.createdAt
+          ? new Date(issue.createdAt)
+              .toLocaleDateString("en-US", {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })
+              .toLowerCase()
+              .includes(lowerSearch)
+          : false;
+        return (
+          issue?.subject?.toLowerCase()?.includes(lowerSearch) ||
+          issue?.description?.toLowerCase()?.includes(lowerSearch) ||
+          issue?.status?.toLowerCase()?.includes(lowerSearch) ||
+          createdAtMatch
+        );
+      })
+    : issues;
   return (
     <section>
-      <div className='my-5'>
+      <div className='flex items-center justify-between flex-wrap my-5'>
+        <h1 className='text-2xl font-bold'>Support</h1>
+        <TextInput
+          id='search'
+          type='search'
+          placeholder='Search'
+          className='w-[300px]'
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+      <div className='overflow-x-auto my-5'>
         <Table>
           <TableHead>
-            <TableHeadCell className="!bg-[#182641] text-white">Subject</TableHeadCell>
-            <TableHeadCell className="!bg-[#182641] text-white">Message</TableHeadCell>
-            <TableHeadCell className="!bg-[#182641] text-white">Status</TableHeadCell>
-            <TableHeadCell className="!bg-[#182641] text-white">Date</TableHeadCell>
-            <TableHeadCell className="!bg-[#182641] text-white">Actions</TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Subject
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Message
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Status
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Date
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Actions
+            </TableHeadCell>
           </TableHead>
           <TableBody className='divide-y'>
             {loading && (
@@ -48,8 +93,8 @@ export default function Support() {
                 </TableCell>
               </TableRow>
             )}
-            {(issues.length > 0 &&
-              issues?.map((issue) => (
+            {(filteredResults.length > 0 &&
+              filteredResults?.map((issue) => (
                 <TableRow key={issue?._id}>
                   <TableCell className='capitalize'>{issue?.subject}</TableCell>
                   <TableCell className='capitalize'>
@@ -65,7 +110,12 @@ export default function Support() {
                   </TableCell>
                   <TableCell>
                     <Link href={`/dashboard/support/update/${issue?._id}`}>
-                      <Button size='sm' className="bg-green-500 hover:!bg-green-600">Update</Button>
+                      <Button
+                        size='sm'
+                        className='bg-green-500 hover:!bg-green-600'
+                      >
+                        Update
+                      </Button>
                     </Link>
                   </TableCell>
                 </TableRow>

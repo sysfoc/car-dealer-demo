@@ -12,7 +12,7 @@ export async function PATCH(req, { params }) {
   const content = formData.get("content");
   const metaTitle = formData.get("metaTitle");
   const metaDescription = formData.get("metaDescription");
-  const writer = formData.get("writer");
+  const writer = formData.get("blogWriter");
   const image = formData.get("image");
 
   try {

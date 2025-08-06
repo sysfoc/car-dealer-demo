@@ -13,6 +13,7 @@ import {
   TableHead,
   TableHeadCell,
   TableRow,
+  TextInput,
 } from "flowbite-react";
 import { FaEye } from "react-icons/fa6";
 
@@ -21,6 +22,7 @@ export default function PaymentHistory() {
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [loading, setloading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const getUserTransactions = async () => {
@@ -43,72 +45,102 @@ export default function PaymentHistory() {
     setSelectedTransaction(transaction);
     setOpenModal(true);
   };
+
+  const filteredResults = searchTerm
+    ? transactions.filter((transaction) => {
+        return (
+          transaction._id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          transaction.product
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          transaction.customerId
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          transaction.paymentId
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          transaction.paymentMethod
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase())
+        );
+      })
+    : transactions;
   return (
     <div className='my-5 p-5 bg-white shadow'>
       <div>
-        <div className='flex items-center justify-between'>
-          <h2 className='text-xl font-semibold mb-4'>Transactions</h2>
+        <div className='flex flex-wrap items-center justify-between mb-5'>
+          <h2 className='text-xl font-semibold'>Transactions</h2>
+          <TextInput
+            id='search'
+            type='search'
+            placeholder='Search'
+            className='w-[300px]'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
-        <Table>
-          <TableHead>
-            <TableHeadCell className='!bg-[#182641] text-white'>
-              Transaction ID
-            </TableHeadCell>
-            <TableHeadCell className='!bg-[#182641] text-white'>
-              Date
-            </TableHeadCell>
-            <TableHeadCell className='!bg-[#182641] text-white'>
-              Product
-            </TableHeadCell>
-            <TableHeadCell className='!bg-[#182641] text-white'>
-              Amount
-            </TableHeadCell>
-            <TableHeadCell className='!bg-[#182641] text-white'>
-              Payment Method
-            </TableHeadCell>
-            <TableHeadCell className='!bg-[#182641] text-white'>
-              Action
-            </TableHeadCell>
-          </TableHead>
-          <TableBody>
-            {loading && (
-              <TableRow>
-                <TableCell colSpan={6} className='text-center'>
-                  <Spinner size='lg' />
-                </TableCell>
-              </TableRow>
-            )}
-            {(transactions.length > 0 &&
-              transactions.map((transaction) => (
-                <TableRow key={transaction._id}>
-                  <TableCell>{transaction._id}</TableCell>
-                  <TableCell>
-                    {new Date(transaction.transactionDate).toLocaleDateString(
-                      "en-US",
-                      { year: "numeric", month: "long", day: "numeric" }
-                    )}
-                  </TableCell>
-                  <TableCell>{transaction.product}</TableCell>
-                  <TableCell>${transaction.productPrice}</TableCell>
-                  <TableCell>{transaction.paymentMethod}</TableCell>
-                  <TableCell>
-                    <Button
-                      className='!bg-[#182641] hover:!bg-[#182641]/90'
-                      onClick={() => handleViewTransaction(transaction)}
-                    >
-                      <FaEye />
-                    </Button>
+        <div className='overflow-x-auto'>
+          <Table>
+            <TableHead>
+              <TableHeadCell className='!bg-[#182641] text-white'>
+                Transaction ID
+              </TableHeadCell>
+              <TableHeadCell className='!bg-[#182641] text-white'>
+                Date
+              </TableHeadCell>
+              <TableHeadCell className='!bg-[#182641] text-white'>
+                Product
+              </TableHeadCell>
+              <TableHeadCell className='!bg-[#182641] text-white'>
+                Amount
+              </TableHeadCell>
+              <TableHeadCell className='!bg-[#182641] text-white'>
+                Payment Method
+              </TableHeadCell>
+              <TableHeadCell className='!bg-[#182641] text-white'>
+                Action
+              </TableHeadCell>
+            </TableHead>
+            <TableBody>
+              {loading && (
+                <TableRow>
+                  <TableCell colSpan={6} className='text-center'>
+                    <Spinner size='lg' />
                   </TableCell>
                 </TableRow>
-              ))) || (
-              <TableRow>
-                <TableCell colSpan={6} className='text-center'>
-                  No transactions found
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+              )}
+              {(filteredResults.length > 0 &&
+                filteredResults.map((transaction) => (
+                  <TableRow key={transaction._id}>
+                    <TableCell>{transaction._id}</TableCell>
+                    <TableCell>
+                      {new Date(transaction.transactionDate).toLocaleDateString(
+                        "en-US",
+                        { year: "numeric", month: "long", day: "numeric" }
+                      )}
+                    </TableCell>
+                    <TableCell>{transaction.product}</TableCell>
+                    <TableCell>${transaction.productPrice}</TableCell>
+                    <TableCell>{transaction.paymentMethod}</TableCell>
+                    <TableCell>
+                      <Button
+                        className='!bg-[#182641] hover:!bg-[#182641]/90'
+                        onClick={() => handleViewTransaction(transaction)}
+                      >
+                        <FaEye />
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))) || (
+                <TableRow>
+                  <TableCell colSpan={6} className='text-center'>
+                    No transactions found
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
         <Modal show={openModal} onClose={() => setOpenModal(false)}>
           <ModalHeader>
             <h2 className='text-lg font-semibold text-[#182641]'>
