@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Button } from "flowbite-react";
+import { Alert, Button } from "flowbite-react";
 import {
   GithubAuthProvider,
   signOut,
@@ -50,21 +50,29 @@ const Github = () => {
       }
     } catch (error) {
       setError(true);
-      dispatch(loginFailure(error.message));
+      let customErrorMessage = "Something went wrong. Please try again.";
+
+      if (error.code === "auth/popup-closed-by-user") {
+        customErrorMessage =
+          "You closed the popup before completing the sign-in.";
+      }
+
+      dispatch(loginFailure(customErrorMessage));
     }
   };
   return (
     <>
       {error && (
-        <div
-          className='p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 fixed top-5 right-5 max-w-[400px]'
+        <Alert
+          color='failure'
+          className='fixed top-5 right-5 max-w-[400px] z-50'
           role='alert'
         >
-          <span className='font-medium'>Oops!</span> {errorMessage}
-        </div>
+          {errorMessage}
+        </Alert>
       )}
       <Button
-      disabled={loading}
+        disabled={loading}
         onClick={handleGithubOauth}
         className='w-full flex items-center justify-center gap-2 bg-black text-white hover:!bg-gray-800'
       >
