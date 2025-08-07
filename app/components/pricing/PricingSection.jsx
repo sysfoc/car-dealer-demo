@@ -183,7 +183,10 @@ const PricingSection = () => {
           <p className='mt-3 text-center'>We're excited to serve you!</p>
           {!currentUser && (
             <div>
-              <Link href='/login' className='animate-pulse text-red-600 mt-2 text-sm font-semibold'>
+              <Link
+                href='/login'
+                className='animate-pulse text-red-600 mt-2 text-sm font-semibold'
+              >
                 Please login first to subscribe the plan
               </Link>
             </div>
@@ -300,6 +303,82 @@ const PricingSection = () => {
                 </TableHeadCell>
               </TableHead>
               <TableBody className='text-left [&_tr:nth-child(odd)]:bg-[#fa7123]/10 text-gray-700'>
+                <TableRow className='w-min bg-white'>
+                  <TableCell>
+                    <div>
+                      <p className='text-sm'>Setup Charges</p>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className='flex items-center justify-center'>
+                      <b>
+                        {selectedCurrency?.country ? (
+                          (() => {
+                            const converted = Number(
+                              199 * selectedCurrency.price
+                            ).toFixed(2);
+                            const [main, sup] = converted.split(".");
+                            return (
+                              <>
+                                {selectedCurrency.currency} {main}.
+                                <sup>{sup}</sup>
+                              </>
+                            );
+                          })()
+                        ) : (
+                          <>USD 199</>
+                        )}{" "}
+                        (Free for Limited Time)
+                      </b>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className='flex items-center justify-center'>
+                      <b>
+                        {selectedCurrency?.country ? (
+                          (() => {
+                            const converted = Number(
+                              199 * selectedCurrency.price
+                            ).toFixed(2);
+                            const [main, sup] = converted.split(".");
+                            return (
+                              <>
+                                {selectedCurrency.currency} {main}.
+                                <sup>{sup}</sup>
+                              </>
+                            );
+                          })()
+                        ) : (
+                          <>USD 199</>
+                        )}{" "}
+                        (Free for Limited Time)
+                      </b>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className='flex items-center justify-center'>
+                      <b>
+                        {selectedCurrency?.country ? (
+                          (() => {
+                            const converted = Number(
+                              199 * selectedCurrency.price
+                            ).toFixed(2);
+                            const [main, sup] = converted.split(".");
+                            return (
+                              <>
+                                {selectedCurrency.currency} {main}.
+                                <sup>{sup}</sup>
+                              </>
+                            );
+                          })()
+                        ) : (
+                          <>USD 199</>
+                        )}{" "}
+                        (Free for Limited Time)
+                      </b>
+                    </div>
+                  </TableCell>
+                </TableRow>
                 <TableRow className='w-min bg-white'>
                   <TableCell>
                     <div>
@@ -988,46 +1067,31 @@ const PricingSection = () => {
           </Modal>
           <Modal
             show={showPaymentModal}
+            size='lg'
             onClose={() => setShowPaymentModal(false)}
           >
             <ModalHeader>
-              <p>
-                Select Payment Method For {selectedPlan?.plan} at{" "}
-                {selectedCurrency?.country ? (
-                  (() => {
-                    const converted = Number(
-                      selectedPlan?.price * selectedCurrency?.price
-                    ).toFixed(2);
-                    const [main, sup] = converted.split(".");
-                    return (
-                      <>
-                        {selectedCurrency?.currency} {main}.<sup>{sup}</sup>
-                      </>
-                    );
-                  })()
-                ) : (
-                  <>USD {selectedPlan?.price}</>
-                )}
-              </p>
+              <p>Select Payment Method</p>
             </ModalHeader>
             <ModalBody>
-              <div className='w-full py-5 flex items-center justifiy-center'>
+              <div className='w-full flex items-center justifiy-center'>
                 <div className='w-full flex flex-col gap-4'>
                   <Button
                     onClick={handleStripePayment}
-                    color='dark'
-                    className='w-full uppercase'
+                    className='w-full flex items-center justify-center gap-3 bg-[#635bff] hover:!bg-[#5146ff] text-white font-semibold rounded-md transition duration-300'
                   >
-                    <FaCcStripe fontSize={22} className='text-white' />
-                    <span className='ml-3'>Pay Using Stripe</span>
+                    <FaCcStripe fontSize={22} className='text-white mr-2' />
+                    <span>Pay now</span>
                   </Button>
                   <Button
                     onClick={handlePaypalPayment}
-                    color='blue'
-                    className='w-full uppercase'
+                    className='w-full flex items-center justify-center gap-3 bg-[#FFC439] hover:!bg-[#ffb123] text-black font-semibold rounded-md transition duration-300'
                   >
-                    <SlPaypal fontSize={20} className='text-white' />
-                    <span className='ml-3'>Pay Using Paypal</span>
+                    <img
+                      src='/payment-icons/PayPal.png'
+                      alt='paypal'
+                      width={80}
+                    />
                   </Button>
                 </div>
               </div>
@@ -1184,6 +1248,82 @@ const PricingSection = () => {
                 </TableHeadCell>
               </TableHead>
               <TableBody className='text-left [&_tr:nth-child(odd)]:bg-[#fa7123]/10 text-gray-700'>
+                <TableRow className='w-min bg-white'>
+                  <TableCell>
+                    <div>
+                      <p className='text-sm'>Setup Charges</p>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className='flex items-center justify-center'>
+                      <b>
+                        {selectedCurrency?.country ? (
+                          (() => {
+                            const converted = Number(
+                              199 * selectedCurrency.price
+                            ).toFixed(2);
+                            const [main, sup] = converted.split(".");
+                            return (
+                              <>
+                                {selectedCurrency.currency} {main}.
+                                <sup>{sup}</sup>
+                              </>
+                            );
+                          })()
+                        ) : (
+                          <>USD 199</>
+                        )}{" "}
+                        (Free for Limited Time)
+                      </b>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className='flex items-center justify-center'>
+                      <b>
+                        {selectedCurrency?.country ? (
+                          (() => {
+                            const converted = Number(
+                              199 * selectedCurrency.price
+                            ).toFixed(2);
+                            const [main, sup] = converted.split(".");
+                            return (
+                              <>
+                                {selectedCurrency.currency} {main}.
+                                <sup>{sup}</sup>
+                              </>
+                            );
+                          })()
+                        ) : (
+                          <>USD 199</>
+                        )}{" "}
+                        (Free for Limited Time)
+                      </b>
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <div className='flex items-center justify-center'>
+                      <b>
+                        {selectedCurrency?.country ? (
+                          (() => {
+                            const converted = Number(
+                              199 * selectedCurrency.price
+                            ).toFixed(2);
+                            const [main, sup] = converted.split(".");
+                            return (
+                              <>
+                                {selectedCurrency.currency} {main}.
+                                <sup>{sup}</sup>
+                              </>
+                            );
+                          })()
+                        ) : (
+                          <>USD 199</>
+                        )}{" "}
+                        (Free for Limited Time)
+                      </b>
+                    </div>
+                  </TableCell>
+                </TableRow>
                 <TableRow className='w-min bg-white'>
                   <TableCell>
                     <div>
@@ -1872,46 +2012,31 @@ const PricingSection = () => {
           </Modal>
           <Modal
             show={showPaymentModal}
+            size='lg'
             onClose={() => setShowPaymentModal(false)}
           >
             <ModalHeader>
-              <p>
-                Select Payment Method For {selectedPlan?.plan} at{" "}
-                {selectedCurrency?.country ? (
-                  (() => {
-                    const converted = Number(
-                      selectedPlan?.price * selectedCurrency?.price
-                    ).toFixed(2);
-                    const [main, sup] = converted.split(".");
-                    return (
-                      <>
-                        {selectedCurrency?.currency} {main}.<sup>{sup}</sup>
-                      </>
-                    );
-                  })()
-                ) : (
-                  <>USD {selectedPlan?.price}</>
-                )}
-              </p>
+              <p>Select Payment Method</p>
             </ModalHeader>
             <ModalBody>
-              <div className='w-full py-10 flex items-center justifiy-center'>
+              <div className='w-full flex items-center justifiy-center'>
                 <div className='w-full flex flex-col gap-4'>
                   <Button
                     onClick={handleStripePayment}
-                    color='dark'
-                    className='w-full uppercase'
+                    className='w-full flex items-center justify-center gap-3 bg-[#635bff] hover:!bg-[#5146ff] text-white font-semibold rounded-md transition duration-300'
                   >
-                    <FaCcStripe fontSize={22} className='text-white' />
-                    <span className='ml-3'>Pay Using Stripe</span>
+                    <FaCcStripe fontSize={22} className='text-white mr-2' />
+                    <span>Pay now</span>
                   </Button>
                   <Button
                     onClick={handlePaypalPayment}
-                    color='blue'
-                    className='w-full uppercase'
+                    className='w-full flex items-center justify-center gap-3 bg-[#FFC439] hover:!bg-[#ffb123] text-black font-semibold rounded-md transition duration-300'
                   >
-                    <SlPaypal fontSize={20} className='text-white' />
-                    <span className='ml-3'>Pay Using Paypal</span>
+                    <img
+                      src='/payment-icons/PayPal.png'
+                      alt='paypal'
+                      width={80}
+                    />
                   </Button>
                 </div>
               </div>
