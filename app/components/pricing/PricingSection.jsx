@@ -18,7 +18,6 @@ import {
 import { FaCheck } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { FaCcStripe } from "react-icons/fa6";
-import { SlPaypal } from "react-icons/sl";
 import { dealers } from "@/lib/themes/theme";
 import Link from "next/link";
 import { AiOutlineEye } from "react-icons/ai";

@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FaCcStripe } from "react-icons/fa6";
-import { SlPaypal } from "react-icons/sl";
 import { IoIosArrowDown } from "react-icons/io";
 import ContentWriting from "./content/ContentWritting";
 import SEO from "./content/Seo";
@@ -208,11 +207,14 @@ const AddOns = () => {
                       {currentUser && (
                         <Button
                           className='w-full bg-[#fa7123] hover:!bg-[#fa7123]/90 text-white'
-                          disabled={addOns.some(
-                            (addon) =>
-                              addon.isActive &&
-                              addon.serviceName?.includes(service.title)
-                          )}
+                          disabled={
+                            loading ||
+                            addOns.some(
+                              (addon) =>
+                                addon.isActive &&
+                                addon.serviceName?.includes(service.title)
+                            )
+                          }
                           onClick={() =>
                             buySelectedPlan(
                               setSelectedPlan({
@@ -261,37 +263,25 @@ const AddOns = () => {
           </div>
         </div>
       </div>
-      <Modal show={showModal} onClose={() => setShowModal(false)}>
+      <Modal show={showModal} size='lg' onClose={() => setShowModal(false)}>
         <ModalHeader>
-          <p>
-            Select Payment Method For {selectedPlan?.plan} at{" "}
-            {selectedCurrency?.country
-              ? `${selectedCurrency?.currency} ${Number(
-                  selectedPlan?.price * selectedCurrency?.price
-                ).toFixed(2)}`
-              : `USD ${selectedPlan?.price}`}
-          </p>
+          <p>Select Payment Method</p>
         </ModalHeader>
         <ModalBody>
-          <div className='w-full py-10 flex items-center justifiy-center'>
+          <div className='w-full flex items-center justifiy-center'>
             <div className='w-full flex flex-col gap-4'>
               <Button
                 onClick={handleStripePayment}
-                color='dark'
-                className='w-full uppercase'
-                disabled={loading}
+                className='w-full flex items-center justify-center gap-3 bg-[#635bff] hover:!bg-[#5146ff] text-white font-semibold rounded-md transition duration-300'
               >
-                <FaCcStripe fontSize={22} className='text-white' />
-                <span className='ml-3'>Pay Using Stripe</span>
+                <FaCcStripe fontSize={22} className='text-white mr-2' />
+                <span>Pay now</span>
               </Button>
               <Button
                 onClick={handlePaypalPayment}
-                color='blue'
-                className='w-full uppercase'
-                disabled={loading}
+                className='w-full flex items-center justify-center gap-3 bg-[#FFC439] hover:!bg-[#ffb123] text-black font-semibold rounded-md transition duration-300'
               >
-                <SlPaypal fontSize={20} className='text-white' />
-                <span className='ml-3'>Pay Using Paypal</span>
+                <img src='/payment-icons/PayPal.png' alt='paypal' width={80} />
               </Button>
             </div>
           </div>

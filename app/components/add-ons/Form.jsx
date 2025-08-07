@@ -99,11 +99,10 @@ const Form = () => {
                   id='name'
                   name='name'
                   type='text'
-                  placeholder='John Doe'
+                  placeholder='Enter your name'
                   className='w-full'
                   autoComplete='on'
                   defaultValue={formData?.name || ""}
-                  disabled={formData?.name}
                   onChange={handleChange}
                   required
                 />
@@ -114,11 +113,10 @@ const Form = () => {
                   id='email'
                   name='email'
                   type='email'
-                  placeholder='john@gmail.com'
+                  placeholder='Enter your email'
                   className='w-full'
                   autoComplete='on'
                   defaultValue={formData?.email || ""}
-                  disabled={formData?.email}
                   onChange={handleChange}
                   required
                 />
