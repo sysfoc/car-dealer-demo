@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { FaEdit, FaEye } from "react-icons/fa";
 import Link from "next/link";
+import Image from "next/image";
 import { FaTrash } from "react-icons/fa6";
 import {
   Modal,
@@ -110,6 +111,9 @@ export default function Users() {
         <Table>
           <TableHead>
             <TableHeadCell className='!bg-[#182641] text-white'>
+              Image
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
               Username
             </TableHeadCell>
             <TableHeadCell className='!bg-[#182641] text-white'>
@@ -138,6 +142,7 @@ export default function Users() {
             )}
             {filteredUsers.map((user) => (
               <TableRow key={user._id}>
+                <TableCell><Image src={user.profileImg} alt={user.name} width={30} height={30} className="rounded-full size-auto object-cover"/></TableCell>
                 <TableCell className='capitalize'>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell className='capitalize'>{user.role}</TableCell>
