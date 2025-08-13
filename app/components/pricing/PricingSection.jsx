@@ -22,6 +22,7 @@ import { dealers } from "@/lib/themes/theme";
 import Link from "next/link";
 import { AiOutlineEye } from "react-icons/ai";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 const PricingSection = () => {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [showThemeModal, setShowThemeModal] = useState(false);
@@ -32,6 +33,7 @@ const PricingSection = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [selectedTheme, setSelectedTheme] = useState([]);
   const [selectedCurrency, setSelectedCurrency] = useState({});
+  const router = useRouter();
 
   const buySelectedPlan = () => {
     setShowThemeModal(true);
@@ -221,7 +223,29 @@ const PricingSection = () => {
                 </TableHeadCell>
                 <TableHeadCell className='bg-[#fa7123] text-white'>
                   <div>
-                    <h2 className='text-xl'>Basic</h2>
+                    {currentUser?.id ? (
+                      <h2
+                        className='text-xl hover:underline cursor-pointer'
+                        onClick={() =>
+                          buySelectedPlan(
+                            setSelectedPlan({
+                              plan: "Basic",
+                              price: "74.99",
+                              timePeriod: "Monthly",
+                            })
+                          )
+                        }
+                      >
+                        Basic
+                      </h2>
+                    ) : (
+                      <h2
+                        className='text-xl hover:underline cursor-pointer'
+                        onClick={() => router.push("/login")}
+                      >
+                        Basic
+                      </h2>
+                    )}
                     <h3 className='text-lg'>
                       (
                       {selectedCurrency?.country ? (
@@ -248,7 +272,29 @@ const PricingSection = () => {
                 </TableHeadCell>
                 <TableHeadCell className='bg-[#fa7123] text-white'>
                   <div>
-                    <h2 className='text-xl'>Standard</h2>
+                    {currentUser?._id ? (
+                      <h2
+                        className='text-xl hover:underline cursor-pointer'
+                        onClick={() =>
+                          buySelectedPlan(
+                            setSelectedPlan({
+                              plan: "Standard",
+                              price: "199.99",
+                              timePeriod: "Monthly",
+                            })
+                          )
+                        }
+                      >
+                        Standard
+                      </h2>
+                    ) : (
+                      <h2
+                        className='text-xl hover:underline cursor-pointer'
+                        onClick={() => router.push("/login")}
+                      >
+                        Standard
+                      </h2>
+                    )}
                     <h3 className='text-lg'>
                       (
                       {selectedCurrency?.country ? (
@@ -275,7 +321,29 @@ const PricingSection = () => {
                 </TableHeadCell>
                 <TableHeadCell className='bg-[#fa7123] text-white'>
                   <div>
-                    <h2 className='text-xl'>Premium</h2>
+                    {currentUser?._id ? (
+                      <h2
+                        className='text-xl hover:underline cursor-pointer'
+                        onClick={() =>
+                          buySelectedPlan(
+                            setSelectedPlan({
+                              plan: "Premium",
+                              price: "349.99",
+                              timePeriod: "Monthly",
+                            })
+                          )
+                        }
+                      >
+                        Premium
+                      </h2>
+                    ) : (
+                      <h2
+                        className='text-xl hover:underline cursor-pointer'
+                        onClick={() => router.push("/login")}
+                      >
+                        Premium
+                      </h2>
+                    )}
                     <h3 className='text-lg'>
                       (
                       {selectedCurrency?.country ? (
@@ -1109,7 +1177,29 @@ const PricingSection = () => {
                 </TableHeadCell>
                 <TableHeadCell className='bg-[#fa7123] text-white'>
                   <div>
-                    <h2 className='text-xl'>Basic</h2>
+                    {currentUser?._id ? (
+                      <h2
+                        className='text-xl hover:underline cursor-pointer'
+                        onClick={() =>
+                          buySelectedPlan(
+                            setSelectedPlan({
+                              plan: "Yearly Basic",
+                              price: "764.99",
+                              timePeriod: "Yearly",
+                            })
+                          )
+                        }
+                      >
+                        Basic
+                      </h2>
+                    ) : (
+                      <h2
+                        className='text-xl hover:underline cursor-pointer'
+                        onClick={() => router.push("/login")}
+                      >
+                        Basic
+                      </h2>
+                    )}
                     <h3 className='text-lg'>
                       (
                       {selectedCurrency?.country ? (
@@ -1155,7 +1245,29 @@ const PricingSection = () => {
                 </TableHeadCell>
                 <TableHeadCell className='bg-[#fa7123] text-white'>
                   <div>
-                    <h2 className='text-xl'>Standard</h2>
+                    {currentUser?._id ? (
+                      <h2
+                        className='text-xl hover:underline cursor-pointer'
+                        onClick={() =>
+                          buySelectedPlan(
+                            setSelectedPlan({
+                              plan: "Yearly Standard",
+                              price: "2029.99",
+                              timePeriod: "Yearly",
+                            })
+                          )
+                        }
+                      >
+                        Standard
+                      </h2>
+                    ) : (
+                      <h2
+                        className='text-xl hover:underline cursor-pointer'
+                        onClick={() => router.push("/login")}
+                      >
+                        Standard
+                      </h2>
+                    )}
                     <h3 className='text-lg'>
                       (
                       {selectedCurrency?.country ? (
@@ -1201,7 +1313,30 @@ const PricingSection = () => {
                 </TableHeadCell>
                 <TableHeadCell className='bg-[#fa7123] text-white'>
                   <div>
-                    <h2 className='text-xl'>Premium</h2>
+                    {currentUser?._id ? (
+                      <h2
+                        className='text-xl hover:underline cursor-pointer'
+                        onClick={() =>
+                          buySelectedPlan(
+                            setSelectedPlan({
+                              plan: "Yearly Premium",
+                              price: "3558.99",
+                              timePeriod: "Yearly",
+                            })
+                          )
+                        }
+                      >
+                        Premium
+                      </h2>
+                    ) : (
+                      <h2
+                        className='text-xl hover:underline cursor-pointer'
+                        onClick={() => router.push("/login")}
+                      >
+                        Premium
+                      </h2>
+                    )}
+
                     <h3 className='text-lg'>
                       (
                       {selectedCurrency?.country ? (
