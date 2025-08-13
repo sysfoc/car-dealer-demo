@@ -11,6 +11,7 @@ import {
   loginFailure,
 } from "@/lib/features/user/userSlice";
 import Link from "next/link";
+import { FaEye } from "react-icons/fa";
 
 const Login = () => {
   const [formData, setFormData] = useState({});
@@ -73,7 +74,7 @@ const Login = () => {
             />
           </div>
 
-          <div>
+          <div className='relative'>
             <Label htmlFor='password' value='Password' />
             <TextInput
               id='password'
@@ -82,6 +83,17 @@ const Login = () => {
               required
               autoComplete='on'
               onChange={handleChange}
+            />
+            <FaEye
+              fontSize={16}
+              className='absolute right-3 top-[55%] cursor-pointer'
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("password").type =
+                  document.getElementById("password").type === "password"
+                    ? "text"
+                    : "password";
+              }}
             />
           </div>
 

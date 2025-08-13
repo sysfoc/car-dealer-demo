@@ -4,6 +4,7 @@ import { Alert, Button, Label, TextInput, Spinner } from "flowbite-react";
 import Google from "@/app/components/auth/Google";
 import Github from "@/app/components/auth/Github";
 import { HiInformationCircle } from "react-icons/hi";
+import { FaEye } from "react-icons/fa";
 import Link from "next/link";
 
 const Register = () => {
@@ -89,7 +90,7 @@ const Register = () => {
             />
           </div>
 
-          <div>
+          <div className='relative'>
             <Label htmlFor='password' value='Password' />
             <TextInput
               id='password'
@@ -98,6 +99,17 @@ const Register = () => {
               required
               autoComplete='on'
               onChange={handleChange}
+            />
+            <FaEye
+              fontSize={16}
+              className='absolute right-3 top-[55%] cursor-pointer'
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("password").type =
+                  document.getElementById("password").type === "password"
+                    ? "text"
+                    : "password";
+              }}
             />
           </div>
 

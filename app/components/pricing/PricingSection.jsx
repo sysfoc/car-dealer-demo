@@ -223,7 +223,7 @@ const PricingSection = () => {
                 </TableHeadCell>
                 <TableHeadCell className='bg-[#fa7123] text-white'>
                   <div>
-                    {currentUser?.id ? (
+                    {currentUser?._id ? (
                       <h2
                         className='text-xl hover:underline cursor-pointer'
                         onClick={() =>
