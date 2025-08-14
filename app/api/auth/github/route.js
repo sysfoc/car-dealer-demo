@@ -18,14 +18,14 @@ export async function POST(req) {
           message: "User logged in successfully",
           user: {
             _id: isUserExist._id,
-            name: isUserExist.name,
-            email: isUserExist.email,
+            name: name,
+            email: email,
             role: isUserExist.role,
             signupMethod: "github",
             userAgent: req.headers.get("user-agent"),
             createdAt: isUserExist.createdAt,
             updatedAt: isUserExist.updatedAt,
-            profileImg: isUserExist.profileImg,
+            profileImg: profileImg,
           },
         },
         { status: 200 }
@@ -53,7 +53,7 @@ export async function POST(req) {
         userId: isUserExist._id,
         type: "success",
         title: "Login",
-        message: `Welcome back! ${isUserExist.name} to your account`,
+        message: `Welcome back! ${name} to your account`,
       });
       return response;
     } else {
