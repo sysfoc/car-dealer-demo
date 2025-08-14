@@ -48,7 +48,7 @@ const Datatable = () => {
             <TableHeadCell className="!bg-[#182641] text-white">Payment Method</TableHeadCell>
             <TableHeadCell className="!bg-[#182641] text-white">Action</TableHeadCell>
           </TableHead>
-          <TableBody>
+          <TableBody className='divide-y'>
             {loading && (
               <TableRow>
                 <TableCell colSpan={6} className='text-center'>

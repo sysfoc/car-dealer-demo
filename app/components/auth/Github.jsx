@@ -51,7 +51,10 @@ const Github = () => {
     } catch (error) {
       setError(true);
       let customErrorMessage = "Something went wrong. Please try again.";
-
+      if (error.code === "auth/account-exists-with-different-credential") {
+        customErrorMessage =
+          "Account already exists with different credentials.";
+      }
       if (error.code === "auth/popup-closed-by-user") {
         customErrorMessage =
           "You closed the popup before completing the sign-in.";

@@ -49,7 +49,7 @@ const Datatable = () => {
               <TableHeadCell className="bg-[#fa7123] text-white">Payment Method</TableHeadCell>
               <TableHeadCell className="bg-[#fa7123] text-white">Action</TableHeadCell>
             </TableHead>
-            <TableBody>
+            <TableBody className='divide-y'>
               {loading && (
                 <TableRow>
                   <TableCell colSpan={6} className='text-center'>

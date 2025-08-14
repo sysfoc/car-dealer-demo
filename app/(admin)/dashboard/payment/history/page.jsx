@@ -101,7 +101,7 @@ export default function PaymentHistory() {
                 Action
               </TableHeadCell>
             </TableHead>
-            <TableBody>
+            <TableBody className='divide-y'>
               {loading && (
                 <TableRow>
                   <TableCell colSpan={6} className='text-center'>

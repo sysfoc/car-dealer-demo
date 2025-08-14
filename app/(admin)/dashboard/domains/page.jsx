@@ -78,7 +78,7 @@ export default function Domains() {
               Date
             </TableHeadCell>
           </TableHead>
-          <TableBody>
+          <TableBody className='divide-y'>
             {loading && (
               <TableRow>
                 <TableCell colSpan={6} className='text-center'>

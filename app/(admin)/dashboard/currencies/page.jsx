@@ -114,7 +114,7 @@ export default function Currencies() {
               Actions
             </TableHeadCell>
           </TableHead>
-          <TableBody>
+          <TableBody className='divide-y'>
             {loading && (
               <TableRow>
                 <TableCell colSpan={7} className='text-center'>
