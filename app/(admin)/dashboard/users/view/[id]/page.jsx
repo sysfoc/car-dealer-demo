@@ -114,7 +114,7 @@ export default function viewUser() {
                   <TableHeadCell className="!bg-[#182641] text-white">Custom Domain</TableHeadCell>
                   <TableHeadCell className="!bg-[#182641] text-white">Date</TableHeadCell>
                 </TableHead>
-                <TableBody>
+                <TableBody className='divide-y'>
                   {record?.domain?.length > 0 ? (
                     record?.domain?.map((domain) => (
                       <TableRow key={domain._id}>
@@ -172,7 +172,7 @@ export default function viewUser() {
                   <TableHeadCell className="!bg-[#182641] text-white">Method</TableHeadCell>
                   <TableHeadCell className="!bg-[#182641] text-white">Date</TableHeadCell>
                 </TableHead>
-                <TableBody>
+                <TableBody className='divide-y'>
                   {record?.payments?.length > 0 ? (
                     record?.payments?.map((payment) => (
                       <TableRow key={payment._id}>
@@ -230,7 +230,7 @@ export default function viewUser() {
                   <TableHeadCell className="!bg-[#182641] text-white">Subscribed At</TableHeadCell>
                   <TableHeadCell className="!bg-[#182641] text-white">Expired At</TableHeadCell>
                 </TableHead>
-                <TableBody>
+                <TableBody className='divide-y'>
                   {record?.subscription?.length > 0 ? (
                     record?.subscription?.map((subscription) => (
                       <TableRow key={subscription._id}>
@@ -289,7 +289,7 @@ export default function viewUser() {
                   <TableHeadCell className="!bg-[#182641] text-white">Subscribed At</TableHeadCell>
                   <TableHeadCell className="!bg-[#182641] text-white">Expired At</TableHeadCell>
                 </TableHead>
-                <TableBody>
+                <TableBody className='divide-y'>
                   {record?.subscription &&
                   record?.subscription[0]?.themes?.length > 0 ? (
                     record?.subscription[0]?.themes?.map((theme) => (
@@ -358,7 +358,7 @@ export default function viewUser() {
                   <TableHeadCell className="!bg-[#182641] text-white">Subscribed At</TableHeadCell>
                   <TableHeadCell className="!bg-[#182641] text-white">Expired At</TableHeadCell>
                 </TableHead>
-                <TableBody>
+                <TableBody className='divide-y'>
                   {record?.subscription && record?.addons?.length > 0 ? (
                     record?.addons?.map((addon) => (
                       <TableRow key={addon?._id}>
@@ -430,7 +430,7 @@ export default function viewUser() {
                   <TableHeadCell className="!bg-[#182641] text-white">Status</TableHeadCell>
                   <TableHeadCell className="!bg-[#182641] text-white">Date</TableHeadCell>
                 </TableHead>
-                <TableBody>
+                <TableBody className='divide-y'>
                   {record?.refunds?.length > 0 ? (
                     record?.refunds?.map((refund) => (
                       <TableRow key={refund._id}>
@@ -488,7 +488,7 @@ export default function viewUser() {
                   <TableHeadCell className="!bg-[#182641] text-white">Reply</TableHeadCell>
                   <TableHeadCell className="!bg-[#182641] text-white">Created At</TableHeadCell>
                 </TableHead>
-                <TableBody>
+                <TableBody className='divide-y'>
                   {record?.support?.length > 0 ? (
                     record?.support?.map((support) => (
                       <TableRow key={support._id}>
@@ -518,7 +518,7 @@ export default function viewUser() {
                     ))
                   ) : (
                     <TableRow>
-                      <TableCell colSpan={6} className='text-center'>
+                      <TableCell colSpan={5} className='text-center'>
                         No support tickets found
                       </TableCell>
                     </TableRow>

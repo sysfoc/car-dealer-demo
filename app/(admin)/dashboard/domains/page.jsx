@@ -86,8 +86,8 @@ export default function Domains() {
                 </TableCell>
               </TableRow>
             )}
-            {filteredResults.map((domain) => {
-              return (
+            {filteredResults.length > 0 ? (
+              filteredResults.map((domain) => (
                 <TableRow key={domain._id}>
                   <TableCell title={domain.domainName}>
                     {domain.domainName || "-----"}
@@ -112,8 +112,8 @@ export default function Domains() {
                     })}
                   </TableCell>
                 </TableRow>
-              );
-            }) || (
+              ))
+            ) : (
               <TableRow>
                 <TableCell colSpan={6} className='text-center'>
                   No domains found

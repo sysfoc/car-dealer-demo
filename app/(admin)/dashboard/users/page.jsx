@@ -76,7 +76,9 @@ export default function Users() {
         return (
           user._id?.toString().toLowerCase().includes(lowerSearch) ||
           user.name?.toLowerCase().includes(lowerSearch) ||
-          user.email?.toLowerCase().includes(lowerSearch)
+          user.email?.toLowerCase().includes(lowerSearch) ||
+          user.role?.toLowerCase().includes(lowerSearch) ||
+          user.signupMethod?.toLowerCase().includes(lowerSearch)
         );
       })
     : getAllUsers;
@@ -90,9 +92,9 @@ export default function Users() {
         </Alert>
       )}
       <div>
-        <div className='flex flex-wrap items-center justify-between'>
+        <div className='flex flex-wrap items-center justify-between mb-5'>
           <h2 className='text-xl font-semibold mb-4'>Users List</h2>
-          <div className='mb-3 flex items-center gap-2'>
+          <div className='flex items-center gap-2'>
             <TextInput
               id='search'
               type='search'
@@ -140,44 +142,60 @@ export default function Users() {
                 </TableCell>
               </TableRow>
             )}
-            {filteredUsers.map((user) => (
-              <TableRow key={user._id}>
-                <TableCell><Image src={user.profileImg} alt={user.name} width={30} height={30} className="rounded-full size-auto object-cover"/></TableCell>
-                <TableCell className='capitalize'>{user.name}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell className='capitalize'>{user.role}</TableCell>
-                <TableCell className='capitalize'>
-                  {user.signupMethod}
-                </TableCell>
-                <TableCell>
-                  <div key={user?._id} className='flex items-center gap-2'>
-                    <Link href={`/dashboard/users/view/${user?._id}`}>
+            {filteredUsers.length > 0 ? (
+              filteredUsers.map((user) => (
+                <TableRow key={user._id}>
+                  <TableCell>
+                    <Image
+                      src={user.profileImg}
+                      alt={user.name}
+                      width={30}
+                      height={30}
+                      className='rounded-full size-auto object-cover'
+                    />
+                  </TableCell>
+                  <TableCell className='capitalize'>{user.name}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell className='capitalize'>{user.role}</TableCell>
+                  <TableCell className='capitalize'>
+                    {user.signupMethod}
+                  </TableCell>
+                  <TableCell>
+                    <div key={user?._id} className='flex items-center gap-2'>
+                      <Link href={`/dashboard/users/view/${user?._id}`}>
+                        <button
+                          className='p-2 rounded bg-[#182641] hover:!bg-[#182641]/90 text-white'
+                          title='View'
+                        >
+                          <FaEye className='w-3 h-3' />
+                        </button>
+                      </Link>
+                      <Link href={`/dashboard/users/edit/${user?._id}`}>
+                        <button
+                          className='p-2 bg-green-500 hover:!bg-green-600 text-white rounded'
+                          title='Edit'
+                        >
+                          <FaEdit className='w-3 h-3' />
+                        </button>
+                      </Link>
                       <button
-                        className='p-2 rounded bg-[#182641] hover:!bg-[#182641]/90 text-white'
-                        title='View'
+                        className='p-2 bg-red-600 text-white rounded hover:bg-red-700'
+                        title='Delete'
+                        onClick={() => handleDeleteUser(user)}
                       >
-                        <FaEye className='w-3 h-3' />
+                        <FaTrash className='w-3 h-3' />
                       </button>
-                    </Link>
-                    <Link href={`/dashboard/users/edit/${user?._id}`}>
-                      <button
-                        className='p-2 bg-green-500 hover:!bg-green-600 text-white rounded'
-                        title='Edit'
-                      >
-                        <FaEdit className='w-3 h-3' />
-                      </button>
-                    </Link>
-                    <button
-                      className='p-2 bg-red-600 text-white rounded hover:bg-red-700'
-                      title='Delete'
-                      onClick={() => handleDeleteUser(user)}
-                    >
-                      <FaTrash className='w-3 h-3' />
-                    </button>
-                  </div>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={6} className='text-center'>
+                  No users found
                 </TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
         <Modal

@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import Link from "next/link";
 import {
   Spinner,
@@ -10,11 +10,13 @@ import {
   TableHead,
   TableHeadCell,
   TableRow,
+  TextInput,
 } from "flowbite-react";
 
 const Datatable = () => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setloading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const getUserTransactions = async () => {
@@ -33,20 +35,51 @@ const Datatable = () => {
     };
     getUserTransactions();
   }, []);
+
+  const filteredResults = searchTerm
+    ? transactions.filter((transaction) => {
+        const lowerSearch = searchTerm.toLowerCase();
+        return (
+          transaction?._id?.toLowerCase()?.includes(lowerSearch) ||
+          transaction?.product?.toLowerCase()?.includes(lowerSearch) ||
+          transaction?.paymentMethod?.toLowerCase()?.includes(lowerSearch)
+        );
+      })
+    : transactions;
   return (
     <div className='my-5 p-5 bg-white shadow'>
       <div>
-        <div className='flex items-center justify-between'>
-          <h2 className='text-xl font-semibold mb-4'>Transactions</h2>
+        <div className='mb-5 flex items-center justify-between'>
+          <h2 className='text-xl font-semibold'>Transactions</h2>
+          <TextInput
+            id='search'
+            type='search'
+            placeholder='Search'
+            className='w-[300px]'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
         <Table>
           <TableHead>
-            <TableHeadCell className="!bg-[#182641] text-white">Transaction ID</TableHeadCell>
-            <TableHeadCell className="!bg-[#182641] text-white">Date</TableHeadCell>
-            <TableHeadCell className="!bg-[#182641] text-white">Product</TableHeadCell>
-            <TableHeadCell className="!bg-[#182641] text-white">Amount</TableHeadCell>
-            <TableHeadCell className="!bg-[#182641] text-white">Payment Method</TableHeadCell>
-            <TableHeadCell className="!bg-[#182641] text-white">Action</TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Transaction ID
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Date
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Product
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Amount
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Payment Method
+            </TableHeadCell>
+            <TableHeadCell className='!bg-[#182641] text-white'>
+              Action
+            </TableHeadCell>
           </TableHead>
           <TableBody className='divide-y'>
             {loading && (
@@ -56,8 +89,8 @@ const Datatable = () => {
                 </TableCell>
               </TableRow>
             )}
-            {(transactions.length > 0 &&
-              transactions.map((transaction) => (
+            {(filteredResults.length > 0 &&
+              filteredResults.map((transaction) => (
                 <TableRow key={transaction?._id}>
                   <TableCell>{transaction?._id}</TableCell>
                   <TableCell>
