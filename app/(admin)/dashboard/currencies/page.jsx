@@ -13,6 +13,7 @@ import {
   TableCell,
   Spinner,
   Alert,
+  TextInput,
 } from "flowbite-react";
 import { FaTrash } from "react-icons/fa6";
 
@@ -23,6 +24,7 @@ export default function Currencies() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -72,6 +74,19 @@ export default function Currencies() {
       setErrorMessage(error.message);
     }
   };
+
+  const filteredResults = searchTerm
+    ? getAllCurrencies.filter((currencies) => {
+        const lowerSearch = searchTerm.toLowerCase();
+        return (
+          currencies._id?.toString().toLowerCase().includes(lowerSearch) ||
+          currencies.name?.toLowerCase().includes(lowerSearch) ||
+          currencies.country?.toLowerCase().includes(lowerSearch) ||
+          currencies.currency?.toLowerCase().includes(lowerSearch) ||
+          currencies.symbol?.toLowerCase().includes(lowerSearch)
+        );
+      })
+    : getAllCurrencies;
   return (
     <div className='my-5 p-5 bg-white shadow'>
       {error && (
@@ -84,7 +99,15 @@ export default function Currencies() {
       <div>
         <div className='flex items-center justify-between'>
           <h2 className='text-xl font-semibold mb-4'>Currencies List</h2>
-          <div className='mb-3'>
+          <div className='mb-3 flex items-center gap-x-3'>
+            <TextInput
+              id='search'
+              type='search'
+              placeholder='Search'
+              value={searchTerm}
+              className='w-[250px]'
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
             <Link href='/dashboard/currencies/add'>
               <Button size='sm' className='bg-[#e56c16] hover:!bg-[#e56c16]/90'>
                 Add Currency
@@ -125,45 +148,58 @@ export default function Currencies() {
                 </TableCell>
               </TableRow>
             )}
-            {getAllCurrencies.map((currency) => (
-              <TableRow key={currency._id}>
-                <TableCell className='capitalize'>{currency.name}</TableCell>
-                <TableCell>{currency.country}</TableCell>
-                <TableCell className='capitalize'>
-                  {currency.currency}
-                </TableCell>
-                <TableCell className='capitalize'>{currency.symbol}</TableCell>
-                <TableCell className='capitalize'>{currency.price}</TableCell>
-                <TableCell>
-                  <div key={currency?._id} className='flex items-center gap-2'>
-                    <button
-                      className='p-2 bg-[#182641] hover:!bg-[#182641]/90 text-white rounded'
-                      title='View'
-                      onClick={() => handleShowCurrencyModal(currency)}
-                    >
-                      <FaEye className='w-3 h-3' />
-                    </button>
-                    <Link
-                      href={`/dashboard/currencies/update/${currency?._id}`}
+            {filteredResults.length > 0 ? (
+              filteredResults.map((currency) => (
+                <TableRow key={currency._id}>
+                  <TableCell className='capitalize'>{currency.name}</TableCell>
+                  <TableCell>{currency.country}</TableCell>
+                  <TableCell className='capitalize'>
+                    {currency.currency}
+                  </TableCell>
+                  <TableCell className='capitalize'>
+                    {currency.symbol}
+                  </TableCell>
+                  <TableCell className='capitalize'>{currency.price}</TableCell>
+                  <TableCell>
+                    <div
+                      key={currency?._id}
+                      className='flex items-center gap-2'
                     >
                       <button
-                        className='p-2 bg-green-500 hover:!bg-green-600 text-white rounded'
-                        title='Edit'
+                        className='p-2 bg-[#182641] hover:!bg-[#182641]/90 text-white rounded'
+                        title='View'
+                        onClick={() => handleShowCurrencyModal(currency)}
                       >
-                        <FaEdit className='w-3 h-3' />
+                        <FaEye className='w-3 h-3' />
                       </button>
-                    </Link>
-                    <button
-                      className='p-2 bg-red-600 text-white rounded hover:bg-red-700'
-                      title='Delete'
-                      onClick={() => handleDeleteUser(currency._id)}
-                    >
-                      <FaTrash className='w-3 h-3' />
-                    </button>
-                  </div>
+                      <Link
+                        href={`/dashboard/currencies/update/${currency?._id}`}
+                      >
+                        <button
+                          className='p-2 bg-green-500 hover:!bg-green-600 text-white rounded'
+                          title='Edit'
+                        >
+                          <FaEdit className='w-3 h-3' />
+                        </button>
+                      </Link>
+                      <button
+                        className='p-2 bg-red-600 text-white rounded hover:bg-red-700'
+                        title='Delete'
+                        onClick={() => handleDeleteUser(currency._id)}
+                      >
+                        <FaTrash className='w-3 h-3' />
+                      </button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={7} className='text-center'>
+                  No currency found your search
                 </TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
         <Modal
