@@ -41,32 +41,54 @@ export default function ViewInvoice() {
       return;
     }
 
-    const element = invoiceRef.current;
-    const canvas = await html2canvas(element, {
+    const actionButtons = invoiceRef.current.querySelectorAll("button");
+    actionButtons.forEach((btn) => btn.classList.add("hidden"));
+
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    const canvas = await html2canvas(invoiceRef.current, {
       scale: 4,
       useCORS: true,
+      preserveDrawingBuffer: true,
     });
 
-    const imgData = canvas.toDataURL("image/webp");
+    actionButtons.forEach((btn) => btn.classList.remove("hidden"));
+
+    const imgData = canvas.toDataURL("image/png");
 
     const pdf = new jsPDF("p", "mm", "a4");
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
 
-    pdf.addImage(imgData, "WEBP", 0, 0, pdfWidth, pdfHeight);
+    const imgWidth = pageWidth;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+    let finalWidth = imgWidth;
+    let finalHeight = imgHeight;
+    if (imgHeight > pageHeight) {
+      finalHeight = pageHeight;
+      finalWidth = (canvas.width * finalHeight) / canvas.height;
+    }
+
+    pdf.addImage(imgData, "PNG", 0, 0, finalWidth, finalHeight);
     pdf.save("invoice.pdf");
   };
+
   return (
     <div ref={invoiceRef} className='bg-gray-50 py-5 dark:bg-gray-800'>
       <div className='mx-auto w-full rounded-lg bg-white p-10 shadow dark:bg-gray-700'>
         <div className='my-5'>
           <div className='flex items-center justify-between'>
             <div>
-              <h1 className='font-semibold text-lg'>
-                Invoice Number:{" "}
-                <span className='font-normal'>#{invoice?.customerId}</span>
+              <h1 className='font-semibold'>
+                Invoice No:{" "}
+                <span className='font-normal'>#{invoice?.paymentId}</span>
               </h1>
               <h2 className='font-semibold'>
+                Customer Id:{" "}
+                <span className='font-normal'>#{invoice?.customerId}</span>
+              </h2>
+              <h3 className='font-semibold'>
                 Date:{" "}
                 <span className='font-normal'>
                   {new Date(invoice?.transactionDate).toLocaleDateString(
@@ -82,14 +104,15 @@ export default function ViewInvoice() {
                     }
                   )}
                 </span>
-              </h2>
+              </h3>
             </div>
-            <div>
+            <div className='max-w-[150px]'>
               <Image
-                src={"/logo.png"}
+                src='/logo.png'
                 alt='company-logo'
                 width={150}
                 height={120}
+                className='w-full h-auto object-contain'
               />
             </div>
           </div>
@@ -144,7 +167,7 @@ export default function ViewInvoice() {
                     <h3 className='text-gray-700'>Additional Information:</h3>
                     <p className='text-sm font-normal'>
                       At check-in, you may need to present the credit card used
-                      for payment of this ticket.
+                      for payment of this invoice.
                     </p>
                   </TableCell>
                   <TableCell
@@ -164,8 +187,9 @@ export default function ViewInvoice() {
             <div>
               <h3 className='text-gray-700 font-semibold text-sm'>Note:</h3>
               <p className='text-xs text-gray-700'>
-                Here we can write a additional notes for the client to get a
-                better understanding of this invoice.
+                Thanks for doing business with us! If you have any questions
+                about this invoice or need any changes, feel free to reach out —
+                we’re happy to help. Your support means a lot to us.
               </p>
             </div>
           </div>
@@ -175,13 +199,13 @@ export default function ViewInvoice() {
                 onClick={() => window.print()}
                 className='mt-4 flex items-center bg-transparent border border-[#fb8b4c] text-[#fb8b4c] hover:text-white hover:!bg-[#fb8b4c]/90'
               >
-                <IoIosPrint fontSize={22} className='mr-2' /> Print Invoice
+                <IoIosPrint fontSize={18} className='mr-2' /> Print Invoice
               </Button>
               <Button
                 onClick={handleDownloadPDF}
                 className='mt-4 flex items-center bg-[#fb8b4c] hover:!bg-[#fb8b4c]/90'
               >
-                <FaDownload fontSize={22} className='mr-2' /> Download Invoice
+                <FaDownload fontSize={18} className='mr-2' /> Download Invoice
               </Button>
             </div>
           </div>

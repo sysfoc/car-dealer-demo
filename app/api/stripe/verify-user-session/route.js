@@ -186,7 +186,7 @@ export async function GET(req) {
     await sendEmail({
       to: config.emailReceiver,
       subject: "New Subscription – Activated",
-      text: `Dear ,\n\nA user has successfully subscribed to anpPlan. Please find the details below:\n\nSubscription Summary:\nUserId: ${
+      text: `Dear ,\n\nA user has successfully subscribed to a Plan. Please find the details below:\n\nSubscription Summary:\nUserId: ${
         user._id
       }\nUsername: ${user.name}\nEmail: ${
         user.email

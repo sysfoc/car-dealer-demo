@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/app/api/utils/db";
 import Payment from "@/app/model/payment.model";
+import "@/app/model/user.model";
 
 export async function GET(req, { params }) {
   await connectToDatabase();
