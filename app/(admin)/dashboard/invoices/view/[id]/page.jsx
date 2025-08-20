@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   Button,
-  Spinner,
   Table,
   TableBody,
   TableCell,
@@ -10,7 +9,6 @@ import {
   TableHeadCell,
   TableRow,
 } from "flowbite-react";
-import Image from "next/image";
 import { IoIosPrint } from "react-icons/io";
 import { FaDownload } from "react-icons/fa6";
 import jsPDF from "jspdf";
@@ -21,16 +19,13 @@ export default function ViewInvoice() {
   const invoiceRef = useRef(null);
   const params = useParams();
   const [invoice, setInvoice] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchInvoiceDetails = async () => {
-      setLoading(true);
       const res = await fetch(
         `/api/user/payments/get-single-transaction/${params.id}`
       );
       const data = await res.json();
-      setLoading(false);
       if (res.ok) {
         setInvoice(data.transaction);
       }
@@ -39,72 +34,98 @@ export default function ViewInvoice() {
       fetchInvoiceDetails();
     }
   }, [params.id]);
+
   const handleDownloadPDF = async () => {
     if (!invoiceRef.current) {
       console.error("Invoice reference is missing!");
       return;
     }
-    setLoading(true);
-    const element = invoiceRef.current;
-    const canvas = await html2canvas(element, {
-      scale: 4,
-      useCORS: true,
-    });
+    const actionButtons = invoiceRef.current.querySelectorAll("button");
+    actionButtons.forEach((btn) => btn.classList.add("hidden"));
+    await new Promise((resolve) => setTimeout(resolve, 100));
 
-    const imgData = canvas.toDataURL("image/webp");
+    try {
+      const canvas = await html2canvas(invoiceRef.current, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: false,
+        backgroundColor: "#ffffff",
+        logging: false,
+        height: invoiceRef.current.scrollHeight,
+        width: invoiceRef.current.scrollWidth,
+      });
 
-    const pdf = new jsPDF("p", "mm", "a4");
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      actionButtons.forEach((btn) => btn.classList.remove("hidden"));
 
-    pdf.addImage(imgData, "WEBP", 0, 0, pdfWidth, pdfHeight);
-    pdf.save("invoice.pdf");
-    setLoading(false);
+      const imgData = canvas.toDataURL("image/png", 1.0);
+      const pdf = new jsPDF("p", "mm", "a4");
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      const imgWidth = pageWidth;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+      let finalWidth = imgWidth;
+      let finalHeight = imgHeight;
+      if (imgHeight > pageHeight) {
+        finalHeight = pageHeight;
+        finalWidth = (canvas.width * finalHeight) / canvas.height;
+      }
+
+      pdf.addImage(imgData, "PNG", 0, 0, finalWidth, finalHeight, "", "FAST");
+      const filename = `${invoice?.userId?.name}-invoice.pdf`;
+      pdf.save(filename);
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      actionButtons.forEach((btn) => btn.classList.remove("hidden"));
+    }
   };
+
   return (
     <div ref={invoiceRef} className='bg-gray-50 py-5 dark:bg-gray-800'>
       <div className='mx-auto w-full rounded-lg bg-white p-10 shadow dark:bg-gray-700'>
         <div className='my-5'>
           <div className='flex items-center justify-between'>
             <div>
-              <h1 className='font-semibold text-lg'>
-                Invoice Number:{" "}
-                {loading ? (
-                  <Spinner size='sm' />
-                ) : (
-                  <span className='font-normal'>#{invoice?.customerId}</span>
-                )}
+              <h1 className='font-semibold'>
+                Invoice No:{" "}
+                <span className='font-normal'>#{invoice?.paymentId}</span>
               </h1>
               <h2 className='font-semibold'>
+                Customer Id:{" "}
+                <span className='font-normal'>#{invoice?.customerId}</span>
+              </h2>
+              <h3 className='font-semibold'>
                 Date:{" "}
                 <span className='font-normal'>
-                  {loading ? (
-                    <Spinner size='sm' />
-                  ) : (
-                    <span className='font-normal'>
-                      {new Date(invoice?.transactionDate).toLocaleDateString(
-                        "en-US",
-                        { year: "numeric", month: "long", day: "numeric" }
-                      )}{" "}
-                      at{" "}
-                      {new Date(invoice?.transactionDate).toLocaleTimeString(
-                        "en-US",
-                        {
-                          hour: "2-digit",
-                          minute: "2-digit",
-                        }
-                      )}
-                    </span>
+                  {new Date(invoice?.transactionDate).toLocaleDateString(
+                    "en-US",
+                    { year: "numeric", month: "long", day: "numeric" }
+                  )}{" "}
+                  at{" "}
+                  {new Date(invoice?.transactionDate).toLocaleTimeString(
+                    "en-US",
+                    {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    }
                   )}
                 </span>
-              </h2>
+              </h3>
             </div>
-            <div>
-              <Image
-                src={"/logo.png"}
+            <div className='max-w-[150px]'>
+              <img
+                src='/logo.png'
                 alt='company-logo'
                 width={150}
                 height={120}
+                className='w-full h-auto object-contain'
+                style={{
+                  maxWidth: "150px",
+                  height: "auto",
+                  objectFit: "contain",
+                }}
+                crossOrigin='anonymous'
               />
             </div>
           </div>
@@ -112,35 +133,20 @@ export default function ViewInvoice() {
           <div className='flex items-start justify-between'>
             <div>
               <h3 className='font-semibold'>Invoice To:</h3>
-              {loading ? (
-                <Spinner size='lg' />
-              ) : (
-                <div className='flex flex-col mt-1'>
-                  <p className='text-sm text-gray-500 uppercase'>
-                    {invoice?.userId?.name}
-                  </p>
-                  <p className='text-sm text-gray-500 uppercase'>
-                    {invoice?.userId?.email}
-                  </p>
-                  <p className='text-sm text-gray-500 uppercase'>Pakistan</p>
-                </div>
-              )}
+              <div className='flex flex-col mt-1'>
+                <p className='text-sm uppercase'>{invoice?.userId?.name}</p>
+                <p className='text-sm uppercase'>{invoice?.userId?.email}</p>
+                <p className='text-sm uppercase'>Pakistan</p>
+              </div>
             </div>
             <div className='text-end'>
               <h3 className='font-semibold'>Pay To:</h3>
-              {loading ? (
-                <Spinner size='lg' />
-              ) : (
-                <div className='flex flex-col mt-1'>
-                  <p className='text-sm text-gray-500 uppercase'>Sysfoc</p>
-                  <p className='text-sm text-gray-500 uppercase'>
-                    Automotive Web Solutions
-                  </p>
-                  <p className='text-sm text-gray-500 uppercase'>
-                    sales@automotivewebsolutions.com
-                  </p>
-                </div>
-              )}
+              <div className='flex flex-col mt-1'>
+                <p className='text-sm uppercase'>Automotive Web Solutions</p>
+                <p className='text-sm uppercase'>
+                  sales@automotivewebsolutions.com
+                </p>
+              </div>
             </div>
           </div>
           <div className='my-5'>
@@ -153,29 +159,27 @@ export default function ViewInvoice() {
                 <TableHeadCell>Total</TableHeadCell>
               </TableHead>
               <TableBody>
-                {loading ? (
-                  <TableRow>
-                    <TableCell colSpan={5} className='text-center'>
-                      <Spinner size='lg' />
-                    </TableCell>
-                  </TableRow>
-                ) : (
-                  <TableRow>
-                    <TableCell>{invoice?.product} Package</TableCell>
-                    <TableCell>
-                      Purchased for {invoice?.productPlan} Subscription
-                    </TableCell>
-                    <TableCell>1</TableCell>
-                    <TableCell>${invoice?.productPrice}</TableCell>
-                    <TableCell>${invoice?.productPrice}</TableCell>
-                  </TableRow>
-                )}
+                <TableRow>
+                  <TableCell className='text-black'>
+                    {invoice?.product} Package
+                  </TableCell>
+                  <TableCell className='text-black'>
+                    Purchased for {invoice?.productPlan} Subscription
+                  </TableCell>
+                  <TableCell className='text-black'>1</TableCell>
+                  <TableCell className='text-black'>
+                    ${invoice?.productPrice}
+                  </TableCell>
+                  <TableCell className='text-black'>
+                    ${invoice?.productPrice}
+                  </TableCell>
+                </TableRow>
                 <TableRow>
                   <TableCell colSpan={2} rowSpan={3} className='font-semibold'>
                     <h3 className='text-gray-700'>Additional Information:</h3>
-                    <p className='text-sm font-normal'>
+                    <p className='text-sm font-normal text-gray-700'>
                       At check-in, you may need to present the credit card used
-                      for payment of this ticket.
+                      for payment of this invoice.
                     </p>
                   </TableCell>
                   <TableCell
@@ -185,7 +189,7 @@ export default function ViewInvoice() {
                     Subtotal
                   </TableCell>
                   <TableCell className='font-semibold bg-gray-50'>
-                    ${loading ? <Spinner size='sm' /> : invoice?.productPrice}
+                    ${invoice?.productPrice}
                   </TableCell>
                 </TableRow>
               </TableBody>
@@ -193,30 +197,29 @@ export default function ViewInvoice() {
           </div>
           <div className='my-5'>
             <div>
-              <h3 className='text-gray-700 font-semibold text-sm'>Note:</h3>
-              <p className='text-xs text-gray-700'>
-                Here we can write a additional notes for the client to get a
-                better understanding of this invoice.
+              <h3 className='font-semibold text-sm'>Note:</h3>
+              <p className='text-xs'>
+                Thanks for doing business with us! If you have any questions
+                about this invoice or need any changes, feel free to reach out —
+                we're happy to help. Your support means a lot to us.
               </p>
             </div>
           </div>
           <div className='my-5 flex items-center justify-center'>
-            {!loading && (
-              <div className='flex items-center gap-3'>
-                <Button
-                  onClick={() => window.print()}
-                  className='mt-4 flex items-center bg-transparent border border-[#182641] text-[#182641] hover:text-white hover:!bg-[#182641]/90'
-                >
-                  <IoIosPrint fontSize={22} className='mr-2' /> Print Invoice
-                </Button>
-                <Button
-                  onClick={handleDownloadPDF}
-                  className='mt-4 flex items-center bg-[#182641] hover:!bg-[#182641]/90'
-                >
-                  <FaDownload fontSize={22} className='mr-2' /> Download Invoice
-                </Button>
-              </div>
-            )}
+            <div className='hidden md:flex items-center gap-3'>
+              <Button
+                onClick={() => window.print()}
+                className='mt-4 flex items-center bg-transparent border border-[#fb8b4c] text-[#fb8b4c] hover:text-white hover:!bg-[#fb8b4c]/90'
+              >
+                <IoIosPrint fontSize={18} className='mr-2' /> Print Invoice
+              </Button>
+              <Button
+                onClick={handleDownloadPDF}
+                className='mt-4 flex items-center bg-[#fb8b4c] hover:!bg-[#fb8b4c]/90'
+              >
+                <FaDownload fontSize={18} className='mr-2' /> Download Invoice
+              </Button>
+            </div>
           </div>
         </div>
       </div>

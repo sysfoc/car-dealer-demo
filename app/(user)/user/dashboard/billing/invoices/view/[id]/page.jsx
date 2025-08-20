@@ -9,7 +9,6 @@ import {
   TableHeadCell,
   TableRow,
 } from "flowbite-react";
-import Image from "next/image";
 import { IoIosPrint } from "react-icons/io";
 import { FaDownload } from "react-icons/fa6";
 import jsPDF from "jspdf";
@@ -35,43 +34,51 @@ export default function ViewInvoice() {
       fetchInvoiceDetails();
     }
   }, [params.id]);
+
   const handleDownloadPDF = async () => {
     if (!invoiceRef.current) {
       console.error("Invoice reference is missing!");
       return;
     }
-
     const actionButtons = invoiceRef.current.querySelectorAll("button");
     actionButtons.forEach((btn) => btn.classList.add("hidden"));
-
     await new Promise((resolve) => setTimeout(resolve, 100));
 
-    const canvas = await html2canvas(invoiceRef.current, {
-      scale: 4,
-      useCORS: true,
-      preserveDrawingBuffer: true,
-    });
+    try {
+      const canvas = await html2canvas(invoiceRef.current, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: false,
+        backgroundColor: "#ffffff",
+        logging: false,
+        height: invoiceRef.current.scrollHeight,
+        width: invoiceRef.current.scrollWidth,
+      });
 
-    actionButtons.forEach((btn) => btn.classList.remove("hidden"));
+      actionButtons.forEach((btn) => btn.classList.remove("hidden"));
 
-    const imgData = canvas.toDataURL("image/png");
+      const imgData = canvas.toDataURL("image/png", 1.0);
+      const pdf = new jsPDF("p", "mm", "a4");
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
 
-    const pdf = new jsPDF("p", "mm", "a4");
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
+      const imgWidth = pageWidth;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    const imgWidth = pageWidth;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let finalWidth = imgWidth;
+      let finalHeight = imgHeight;
+      if (imgHeight > pageHeight) {
+        finalHeight = pageHeight;
+        finalWidth = (canvas.width * finalHeight) / canvas.height;
+      }
 
-    let finalWidth = imgWidth;
-    let finalHeight = imgHeight;
-    if (imgHeight > pageHeight) {
-      finalHeight = pageHeight;
-      finalWidth = (canvas.width * finalHeight) / canvas.height;
+      pdf.addImage(imgData, "PNG", 0, 0, finalWidth, finalHeight, "", "FAST");
+      const filename = `${invoice?.userId?.name}-invoice.pdf`;
+      pdf.save(filename);
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      actionButtons.forEach((btn) => btn.classList.remove("hidden"));
     }
-
-    pdf.addImage(imgData, "PNG", 0, 0, finalWidth, finalHeight);
-    pdf.save("invoice.pdf");
   };
 
   return (
@@ -107,12 +114,18 @@ export default function ViewInvoice() {
               </h3>
             </div>
             <div className='max-w-[150px]'>
-              <Image
+              <img
                 src='/logo.png'
                 alt='company-logo'
                 width={150}
                 height={120}
                 className='w-full h-auto object-contain'
+                style={{
+                  maxWidth: "150px",
+                  height: "auto",
+                  objectFit: "contain",
+                }}
+                crossOrigin='anonymous'
               />
             </div>
           </div>
@@ -121,23 +134,16 @@ export default function ViewInvoice() {
             <div>
               <h3 className='font-semibold'>Invoice To:</h3>
               <div className='flex flex-col mt-1'>
-                <p className='text-sm text-gray-500 uppercase'>
-                  {invoice?.userId?.name}
-                </p>
-                <p className='text-sm text-gray-500 uppercase'>
-                  {invoice?.userId?.email}
-                </p>
-                <p className='text-sm text-gray-500 uppercase'>Pakistan</p>
+                <p className='text-sm uppercase'>{invoice?.userId?.name}</p>
+                <p className='text-sm uppercase'>{invoice?.userId?.email}</p>
+                <p className='text-sm uppercase'>Pakistan</p>
               </div>
             </div>
             <div className='text-end'>
               <h3 className='font-semibold'>Pay To:</h3>
               <div className='flex flex-col mt-1'>
-                <p className='text-sm text-gray-500 uppercase'>Sysfoc</p>
-                <p className='text-sm text-gray-500 uppercase'>
-                  Automotive Web Solutions
-                </p>
-                <p className='text-sm text-gray-500 uppercase'>
+                <p className='text-sm uppercase'>Automotive Web Solutions</p>
+                <p className='text-sm uppercase'>
                   sales@automotivewebsolutions.com
                 </p>
               </div>
@@ -154,18 +160,24 @@ export default function ViewInvoice() {
               </TableHead>
               <TableBody>
                 <TableRow>
-                  <TableCell>{invoice?.product} Package</TableCell>
-                  <TableCell>
+                  <TableCell className='text-black'>
+                    {invoice?.product} Package
+                  </TableCell>
+                  <TableCell className='text-black'>
                     Purchased for {invoice?.productPlan} Subscription
                   </TableCell>
-                  <TableCell>1</TableCell>
-                  <TableCell>${invoice?.productPrice}</TableCell>
-                  <TableCell>${invoice?.productPrice}</TableCell>
+                  <TableCell className='text-black'>1</TableCell>
+                  <TableCell className='text-black'>
+                    ${invoice?.productPrice}
+                  </TableCell>
+                  <TableCell className='text-black'>
+                    ${invoice?.productPrice}
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell colSpan={2} rowSpan={3} className='font-semibold'>
                     <h3 className='text-gray-700'>Additional Information:</h3>
-                    <p className='text-sm font-normal'>
+                    <p className='text-sm font-normal text-gray-700'>
                       At check-in, you may need to present the credit card used
                       for payment of this invoice.
                     </p>
@@ -185,16 +197,16 @@ export default function ViewInvoice() {
           </div>
           <div className='my-5'>
             <div>
-              <h3 className='text-gray-700 font-semibold text-sm'>Note:</h3>
-              <p className='text-xs text-gray-700'>
+              <h3 className='font-semibold text-sm'>Note:</h3>
+              <p className='text-xs'>
                 Thanks for doing business with us! If you have any questions
                 about this invoice or need any changes, feel free to reach out —
-                we’re happy to help. Your support means a lot to us.
+                we're happy to help. Your support means a lot to us.
               </p>
             </div>
           </div>
           <div className='my-5 flex items-center justify-center'>
-            <div className='flex items-center gap-3'>
+            <div className='hidden md:flex items-center gap-3'>
               <Button
                 onClick={() => window.print()}
                 className='mt-4 flex items-center bg-transparent border border-[#fb8b4c] text-[#fb8b4c] hover:text-white hover:!bg-[#fb8b4c]/90'
