@@ -47,10 +47,10 @@ export async function GET() {
       );
     }
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    today.setUTCHours(0, 0, 0, 0);
 
     const tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
+    tomorrow.setUTCDate(today.getUTCDate() + 1);
 
     let remindersSent = 0;
     let expirationsSent = 0;
@@ -59,19 +59,20 @@ export async function GET() {
       isActive: true,
     }).populate("userId");
 
-    for (const sub of subscriptions) {
+    for (const sub of subscriptions) {setUTCMonthreminderThreshold.setUTCMonth(reminderThreshold.getUTCMonth() - 1);
+
       const user = sub.userId;
       if (!user || !user.email || !sub.endDate) continue;
 
       const reminderThreshold = new Date(sub.endDate);
       if (sub.subscriptionPlan === "Yearly") {
-        reminderThreshold.setMonth(reminderThreshold.getMonth() - 1);
+        reminderThreshold.setUTCMonth(reminderThreshold.getUTCMonth() - 1);
       } else {
-        reminderThreshold.setDate(reminderThreshold.getDate() - 3);
+        reminderThreshold.setUTCDate(reminderThreshold.getUTCDate() - 3);
       }
 
       const normalizedReminder = new Date(reminderThreshold);
-      normalizedReminder.setHours(0, 0, 0, 0);
+      normalizedReminder.setUTCHours(0, 0, 0, 0);
 
       if (normalizedReminder.getTime() === today.getTime()) {
         await sendEmail({

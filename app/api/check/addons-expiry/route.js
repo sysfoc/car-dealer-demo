@@ -48,16 +48,16 @@ export async function GET() {
       );
     }
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    today.setUTCHours(0, 0, 0, 0);
 
     const tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
+    tomorrow.setUTCDate(today.getUTCDate() + 1);
 
     const threeDaysFromNow = new Date(today);
-    threeDaysFromNow.setDate(today.getDate() + 3);
+    threeDaysFromNow.setUTCDate(today.getUTCDate() + 3);
 
     const threeDaysEnd = new Date(threeDaysFromNow);
-    threeDaysEnd.setDate(threeDaysEnd.getDate() + 1);
+    threeDaysEnd.setUTCDate(threeDaysEnd.getUTCDate() + 1);
 
     let remindersSent = 0;
     let expirationsSent = 0;
