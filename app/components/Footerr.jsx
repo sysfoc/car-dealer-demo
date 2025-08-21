@@ -23,7 +23,8 @@ const Footerr = () => {
               alt='automotive-web-solutions-logo'
             />
           </Link>
-          <Footer.LinkGroup className='gap-y-2'>
+          <div className="flex flex-col gap-y-1">
+            <Footer.LinkGroup className='gap-y-2'>
             <Footer.Link href='/about'>About</Footer.Link>
             <Footer.Link href='/contact'>Contact</Footer.Link>
             <Footer.Link href='/faq'>FAQ</Footer.Link>
@@ -33,6 +34,10 @@ const Footerr = () => {
             <Footer.Link href='/refund-policy'>Refund Policy</Footer.Link>
             <Footer.Link href='/cookies'>Cookies Policy</Footer.Link>
           </Footer.LinkGroup>
+          <div>
+              <small className="text-xs text-gray-500">SYSFOC WEB SOLUTIONS (ABN: 76141157764) Trading as Automotive Web Solutions.</small>
+            </div>
+          </div>
         </div>
         <Footer.Divider />
         <div className='w-full sm:flex sm:items-center sm:justify-between'>

@@ -105,12 +105,6 @@ export default function CookiePolicy() {
           If you have any questions regarding this Cookie Policy, please contact
           us at <strong>sales@automotivewebsolutions.com</strong>.
         </p>
-
-        <div className='mt-8 border-t pt-4'>
-          <p className='text-center text-sm text-gray-500 dark:text-white'>
-            © 2025 All rights reserved. AutomotiveWebSolutions by SYSFOC
-          </p>
-        </div>
       </div>
     </div>
   );

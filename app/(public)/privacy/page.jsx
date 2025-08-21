@@ -186,11 +186,6 @@ export default function Privacy() {
             Website: <strong>https://automotivewebsolutions.com</strong>
           </li>
         </ul>
-        <div className='mt-8 border-t pt-4'>
-          <p className='text-center text-sm text-gray-500 dark:text-white'>
-            © 2025 All rights reserved. AutomotiveWebSolutions by SYSFOC
-          </p>
-        </div>
       </div>
     </div>
   );

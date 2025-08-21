@@ -19,18 +19,43 @@ export default function ViewInvoice() {
   const invoiceRef = useRef(null);
   const params = useParams();
   const [invoice, setInvoice] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedCurrency, setSelectedCurrency] = useState(null);
 
-  useEffect(() => {
-    const fetchInvoiceDetails = async () => {
-      const res = await fetch(
-        `/api/user/payments/get-single-transaction/${params.id}`
-      );
-      const data = await res.json();
-      if (res.ok) {
-        setInvoice(data.transaction);
+  const fetchData = async () => {
+    try {
+      const response1 = await fetch("/api/user/get/settings");
+      const data1 = await response1.json();
+
+      if (response1.ok && data1.settings?.currency) {
+        const currency = data1.settings.currency;
+        const response2 = await fetch(
+          `/api/payment/currencies/get/currency-name/${currency}`
+        );
+        const data2 = await response2.json();
+
+        if (response2.ok) {
+          setSelectedCurrency(data2.currency);
+        }
       }
-    };
+
+      setLoading(false);
+    } catch {
+      setLoading(false);
+    }
+  };
+  const fetchInvoiceDetails = async () => {
+    const res = await fetch(
+      `/api/user/payments/get-single-transaction/${params.id}`
+    );
+    const data = await res.json();
+    if (res.ok) {
+      setInvoice(data.transaction);
+    }
+  };
+  useEffect(() => {
     if (params.id) {
+      fetchData();
       fetchInvoiceDetails();
     }
   }, [params.id]);
@@ -84,34 +109,16 @@ export default function ViewInvoice() {
   return (
     <div ref={invoiceRef} className='bg-gray-50 py-5 dark:bg-gray-800'>
       <div className='mx-auto w-full rounded-lg bg-white p-10 shadow dark:bg-gray-700'>
-        <div className='my-5'>
-          <div className='flex items-center justify-between'>
-            <div>
-              <h1 className='font-semibold'>
-                Invoice No:{" "}
-                <span className='font-normal'>#{invoice?.paymentId}</span>
+        <div className='my-3'>
+          <div className='flex justify-between'>
+            <div className='flex flex-col'>
+              <h1 className='uppercase text-xl font-bold'>
+                Automotive web solutions
               </h1>
-              <h2 className='font-semibold'>
-                Customer Id:{" "}
-                <span className='font-normal'>#{invoice?.customerId}</span>
-              </h2>
-              <h3 className='font-semibold'>
-                Date:{" "}
-                <span className='font-normal'>
-                  {new Date(invoice?.transactionDate).toLocaleDateString(
-                    "en-US",
-                    { year: "numeric", month: "long", day: "numeric" }
-                  )}{" "}
-                  at{" "}
-                  {new Date(invoice?.transactionDate).toLocaleTimeString(
-                    "en-US",
-                    {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    }
-                  )}
-                </span>
-              </h3>
+              <span>Merylands West</span>
+              <span>NSW 2160</span>
+              <span>Australia</span>
+              <span>+61 466 778 515</span>
             </div>
             <div className='max-w-[150px]'>
               <img
@@ -131,32 +138,46 @@ export default function ViewInvoice() {
           </div>
           <div className='my-5 border-b border-gray-300'></div>
           <div className='flex items-start justify-between'>
-            <div>
-              <h3 className='font-semibold'>Invoice To:</h3>
+            <div className='text-start'>
+              <h3 className='font-semibold uppercase'>Invoice</h3>
               <div className='flex flex-col mt-1'>
-                <p className='text-sm uppercase'>{invoice?.userId?.name}</p>
-                <p className='text-sm uppercase'>{invoice?.userId?.email}</p>
-                <p className='text-sm uppercase'>Pakistan</p>
+                <p className='font-semibold text-sm'>
+                  Invoice No:{" "}
+                  <span className='font-normal'>#{invoice?.paymentId}</span>
+                </p>
+                <p className='font-semibold text-sm'>
+                  Customer Id:{" "}
+                  <span className='font-normal'>#{invoice?.customerId}</span>
+                </p>
+                <p className='font-semibold text-sm'>
+                  Issue Date:{" "}
+                  <span className='font-normal'>
+                    {new Date(invoice?.transactionDate).toLocaleDateString(
+                      "en-US",
+                      { year: "numeric", month: "long", day: "numeric" }
+                    )}
+                  </span>
+                </p>
               </div>
             </div>
             <div className='text-end'>
-              <h3 className='font-semibold'>Pay To:</h3>
+              <h3 className='font-semibold uppercase'>Bill To</h3>
               <div className='flex flex-col mt-1'>
-                <p className='text-sm uppercase'>Automotive Web Solutions</p>
-                <p className='text-sm uppercase'>
-                  sales@automotivewebsolutions.com
-                </p>
+                <p className='text-sm uppercase'>{invoice?.userId?.name}</p>
+                <p className='text-sm uppercase'>{invoice?.userId?.email}</p>
               </div>
             </div>
           </div>
           <div className='my-5'>
-            <Table striped>
+            <Table>
               <TableHead>
-                <TableHeadCell>Item</TableHeadCell>
-                <TableHeadCell>Description</TableHeadCell>
-                <TableHeadCell>Qty</TableHeadCell>
-                <TableHeadCell>Price</TableHeadCell>
-                <TableHeadCell>Total</TableHeadCell>
+                <TableHeadCell className='text-[14px]'>Item</TableHeadCell>
+                <TableHeadCell className='text-[14px]'>
+                  Description
+                </TableHeadCell>
+                <TableHeadCell className='text-[14px]'>Qty</TableHeadCell>
+                <TableHeadCell className='text-[14px]'>Price</TableHeadCell>
+                <TableHeadCell className='text-[14px]'>Total</TableHeadCell>
               </TableHead>
               <TableBody>
                 <TableRow>
@@ -167,43 +188,123 @@ export default function ViewInvoice() {
                     Purchased for {invoice?.productPlan} Subscription
                   </TableCell>
                   <TableCell className='text-black'>1</TableCell>
-                  <TableCell className='text-black'>
-                    ${invoice?.productPrice}
+                  <TableCell className='text-black whitespace-nowrap'>
+                    {selectedCurrency?.currency === "AUD"
+                      ? `${selectedCurrency?.currency} ${Number(
+                          (invoice?.productPrice / 1.1) *
+                            selectedCurrency?.price
+                        ).toFixed(2)}`
+                      : `${selectedCurrency?.currency} ${Number(
+                          invoice?.productPrice * selectedCurrency?.price
+                        ).toFixed(2)}`}
                   </TableCell>
-                  <TableCell className='text-black'>
-                    ${invoice?.productPrice}
+                  <TableCell className='text-black whitespace-nowrap'>
+                    {selectedCurrency?.currency === "AUD"
+                      ? `${selectedCurrency?.currency} ${Number(
+                          (invoice?.productPrice / 1.1) *
+                            selectedCurrency?.price
+                        ).toFixed(2)}`
+                      : `${selectedCurrency?.currency} ${Number(
+                          invoice?.productPrice * selectedCurrency?.price
+                        ).toFixed(2)}`}
                   </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell colSpan={2} rowSpan={3} className='font-semibold'>
-                    <h3 className='text-gray-700'>Additional Information:</h3>
-                    <p className='text-sm font-normal text-gray-700'>
+                  <TableCell colSpan={3} className='font-semibold'>
+                    <div></div>
+                  </TableCell>
+                  <TableCell className='font-semibold bg-gray-50'>
+                    Subtotal
+                  </TableCell>
+                  <TableCell className='font-semibold bg-gray-50 whitespace-nowrap'>
+                    {selectedCurrency?.currency === "AUD"
+                      ? `${selectedCurrency?.currency} ${Number(
+                          (invoice?.productPrice / 1.1) *
+                            selectedCurrency?.price
+                        ).toFixed(2)}`
+                      : `${selectedCurrency?.currency} ${Number(
+                          invoice?.productPrice * selectedCurrency?.price
+                        ).toFixed(2)}`}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell colSpan={3} className='font-semibold'>
+                    <div></div>
+                  </TableCell>
+                  <TableCell className='font-semibold bg-gray-50'>
+                    GST
+                  </TableCell>
+                  <TableCell className='font-semibold bg-gray-50'>
+                    {selectedCurrency?.currency === "AUD"
+                      ? `${selectedCurrency?.currency} ${Number(
+                          (invoice?.productPrice -
+                            invoice?.productPrice / 1.1) *
+                            selectedCurrency?.price
+                        ).toFixed(2)}`
+                      : `${selectedCurrency?.currency} 0`}
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell
+                    colSpan={3}
+                    rowSpan={3}
+                    className='font-semibold bg-gray-50'
+                  >
+                    <h3 className='text-black'>Additional Information:</h3>
+                    <p className='text-sm font-normal text-black'>
                       At check-in, you may need to present the credit card used
                       for payment of this invoice.
                     </p>
                   </TableCell>
-                  <TableCell
-                    colSpan={2}
-                    className='text-right font-semibold bg-gray-50'
-                  >
-                    Subtotal
+                  <TableCell className='font-semibold text-black bg-gray-50'>
+                    Total
                   </TableCell>
-                  <TableCell className='font-semibold bg-gray-50'>
-                    ${invoice?.productPrice}
+                  <TableCell className='font-semibold bg-gray-50 text-black whitespace-nowrap'>
+                    {selectedCurrency?.country
+                      ? `${selectedCurrency?.currency} ${Number(
+                          invoice?.productPrice * selectedCurrency?.price
+                        ).toFixed(2)}`
+                      : `USD ${invoice?.productPrice}`}
                   </TableCell>
                 </TableRow>
               </TableBody>
             </Table>
           </div>
-          <div className='my-5'>
+          <div className='my-8'>
+            <div className='flex justify-between'>
+              <div>
+                <h3 className='font-semibold uppercase text-lg'>
+                  Bank Information
+                </h3>
+                <div className='mt-1 flex flex-col'>
+                  <span className='text-sm'>Account: SYSFOC WEB SOLUTIONS</span>
+                  <span className='text-sm'>Bank: National Australia Bank</span>
+                  <span className='text-sm'>BSB: 082 356</span>
+                  <span className='text-sm'>ACC: 556452985</span>
+                  <span className='text-sm'>PayPal: payments@sysfoc.com</span>
+                </div>
+              </div>
+              <div>
+                <strong className="text-xs">Printing Date: {new Date().toLocaleDateString()}</strong>
+              </div>
+            </div>
+          </div>
+          <div className='mb-3'>
             <div>
               <h3 className='font-semibold text-sm'>Note:</h3>
-              <p className='text-xs'>
+              <p className='text-sm'>
                 Thanks for doing business with us! If you have any questions
                 about this invoice or need any changes, feel free to reach out —
                 we're happy to help. Your support means a lot to us.
               </p>
             </div>
+          </div>
+          <div className='mb-1 border-b border-gray-300'></div>
+          <div>
+            <span className='text-xs font-semibold'>
+              SYSFOC WEB SOLUTIONS (ABN: 76141157764) Trading as Automotive Web
+              Solutions.
+            </span>
           </div>
           <div className='my-5 flex items-center justify-center'>
             <div className='hidden md:flex items-center gap-3'>
