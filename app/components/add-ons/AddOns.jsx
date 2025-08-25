@@ -98,7 +98,7 @@ const AddOns = () => {
       title: "Content Writing",
       description:
         "We create clear, engaging, and SEO-friendly content tailored for car dealers — designed to increase traffic, build authority, and turn visitors into customers.",
-      price: 10,
+      price: 0.10,
       detail: <ContentWriting />,
     },
     {
