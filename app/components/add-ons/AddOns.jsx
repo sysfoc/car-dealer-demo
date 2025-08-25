@@ -16,6 +16,7 @@ const AddOns = () => {
   const [addOns, setAddOns] = useState([]);
   const [activeId, setActiveId] = useState(null);
   const [selectedCurrency, setSelectedCurrency] = useState({});
+  const currentURL = window.location.href;
   const toggleDropdown = (id) => {
     setActiveId((prev) => (prev === id ? null : id));
   };
@@ -152,6 +153,7 @@ const AddOns = () => {
     setLoading(false);
     if (res.ok) {
       window.location.href = data.url;
+      localStorage.setItem("RedirectURL", currentURL);
     }
   };
 
@@ -174,6 +176,7 @@ const AddOns = () => {
       setLoading(false);
       if (res.ok) {
         window.location.href = data.url;
+        localStorage.setItem("RedirectURL", currentURL);
       }
     } catch (error) {
       alert("Something went wrong. Please try again.");

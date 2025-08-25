@@ -34,6 +34,7 @@ const PricingSection = () => {
   const [selectedTheme, setSelectedTheme] = useState([]);
   const [selectedCurrency, setSelectedCurrency] = useState({});
   const router = useRouter();
+  const currentURL = window.location.href;
 
   const buySelectedPlan = () => {
     setShowThemeModal(true);
@@ -148,6 +149,7 @@ const PricingSection = () => {
     const data = await res.json();
     if (res.ok) {
       window.location.href = data.url;
+      localStorage.setItem("RedirectURL", currentURL);
     }
   };
   const handlePaypalPayment = async () => {
@@ -168,6 +170,7 @@ const PricingSection = () => {
       const data = await res.json();
       if (res.ok) {
         window.location.href = data.url;
+        localStorage.setItem("RedirectURL", currentURL);
       }
     } catch (error) {
       alert("Something went wrong. Please try again.");

@@ -10,6 +10,7 @@ export default function PaymentSuccessPage() {
   const data = searchParams.get("data");
   const [status, setStatus] = useState("Verifying payment...");
   const navigate = useRouter();
+  const redirectURL = localStorage.getItem("RedirectURL");
 
   useEffect(() => {
     const capturePayment = async () => {
@@ -24,9 +25,15 @@ export default function PaymentSuccessPage() {
       const result = await res.json();
       if (res.ok && result.status === "success") {
         setStatus("Payment successfull!");
+        if(redirectURL){
+          localStorage.removeItem("RedirectURL");
+          window.location.href = redirectURL;
+        }
         navigate.push("/user/dashboard");
       } else {
         setStatus("Payment verification failed.");
+        localStorage.removeItem("RedirectURL");
+        navigate.push("/failed-payment");
       }
     };
 

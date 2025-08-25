@@ -11,6 +11,7 @@ export default function PaymentSuccessPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const hasVerified = useRef(false);
+  const redirectURL = localStorage.getItem("RedirectURL");
 
   useEffect(() => {
     const verifyPayment = async () => {
@@ -22,14 +23,20 @@ export default function PaymentSuccessPage() {
           `/api/stripe/verify-user-session?session_id=${sessionId}`
         );
         if (res.ok) {
+          if (redirectURL) {
+            localStorage.removeItem("RedirectURL");
+            window.location.href = redirectURL;
+          }
           router.push("/user/dashboard");
         } else {
           const data = await res.json();
           alert(data.error || "Payment verification failed");
+          localStorage.removeItem("RedirectURL");
           router.push("/failed-payment");
         }
       } catch (err) {
         alert("Something went wrong verifying your payment.");
+        localStorage.removeItem("RedirectURL");
         router.push("/failed-payment");
       } finally {
         setLoading(false);
@@ -61,9 +68,7 @@ export default function PaymentSuccessPage() {
             <TiLocationArrowOutline size={70} color='white' />
           </div>
           <div className='mt-4 text-center flex flex-col gap-1'>
-            <h1 className='text-3xl font-bold text-gray-700'>
-              Redirecting
-            </h1>
+            <h1 className='text-3xl font-bold text-gray-700'>Redirecting</h1>
             <p className='text-lg font-semibold text-gray-400'>
               Please wait...
             </p>
