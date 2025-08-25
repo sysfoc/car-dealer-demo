@@ -45,7 +45,7 @@ export async function POST(req) {
               currency_code: "USD",
               value: price.toString(),
             },
-            description: `Subscription plan: ${plan}}`,
+            description: `Subscription plan: ${plan}`,
           },
         ],
         application_context: {

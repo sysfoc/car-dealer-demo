@@ -13,7 +13,7 @@ import { config } from "@/app/api/utils/env-config";
 const clientId = process.env.PAYPAL_SANDBOX_CLIENT_ID;
 const clientSecret = process.env.PAYPAL_SANDBOX_CLIENT_SECRET;
 
-const environment = new paypal.core.SandboxEnvironment(clientId, clientSecret);
+const environment = new paypal.core.LiveEnvironment(clientId, clientSecret);
 const client = new paypal.core.PayPalHttpClient(environment);
 
 export async function POST(req) {
@@ -181,7 +181,7 @@ export async function POST(req) {
       await sendEmail({
         to: config.emailReceiver,
         subject: "New Subscription – Activated",
-        text: `Dear ,\n\nA user has successfully subscribed to anpPlan. Please find the details below:\n\nSubscription Summary:\nUserId: ${
+        text: `Dear ,\n\nA user has successfully subscribed to a Plan. Please find the details below:\n\nSubscription Summary:\nUserId: ${
           user._id
         }\nUsername: ${user.name}\nEmail: ${
           user.email

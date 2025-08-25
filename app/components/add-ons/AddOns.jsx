@@ -120,6 +120,16 @@ const AddOns = () => {
       price: 400,
       detail: <SocialMedia />,
     },
+    {
+      id: 4,
+      image: "/07.png",
+      alt: "Feature 9 - Social Media Marketing",
+      title: "For Testing",
+      description:
+        "We manage your Facebook and Instagram and other social media accounts to build your online presence, engage local buyers, and generate more leads — all while you focus on running your business.",
+      price: 1,
+      detail: <SocialMedia />,
+    },
   ];
   const buySelectedPlan = () => {
     setShowModal(true);
