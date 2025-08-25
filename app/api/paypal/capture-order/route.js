@@ -208,10 +208,7 @@ export async function POST(req) {
       message: `You have successfully subscribed to "${plan}" plan.`,
     });
 
-    return NextResponse.json({
-      status: "success",
-      details: capture.result,
-    });
+    return NextResponse.redirect(`${process.env.BASE_URL}/user/dashboard`);
   } catch (error) {
     console.error("PayPal Capture Error:", error);
     return NextResponse.json({ error: "Capture failed" }, { status: 500 });

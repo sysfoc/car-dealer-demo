@@ -271,21 +271,16 @@ export default function ViewInvoice() {
             </Table>
           </div>
           <div className='my-8'>
-            <div className='flex justify-between'>
-              <div>
-                <h3 className='font-semibold uppercase text-lg'>
-                  Bank Information
-                </h3>
-                <div className='mt-1 flex flex-col'>
-                  <span className='text-sm'>Account: SYSFOC WEB SOLUTIONS</span>
-                  <span className='text-sm'>Bank: National Australia Bank</span>
-                  <span className='text-sm'>BSB: 082 356</span>
-                  <span className='text-sm'>ACC: 556452985</span>
-                  <span className='text-sm'>PayPal: payments@sysfoc.com</span>
-                </div>
-              </div>
-              <div>
-                <strong className="text-xs">Printing Date: {new Date().toLocaleDateString()}</strong>
+            <div>
+              <h3 className='font-semibold uppercase text-lg'>
+                Bank Information
+              </h3>
+              <div className='mt-1 flex flex-col'>
+                <span className='text-sm'>Account: SYSFOC WEB SOLUTIONS</span>
+                <span className='text-sm'>Bank: National Australia Bank</span>
+                <span className='text-sm'>BSB: 082 356</span>
+                <span className='text-sm'>ACC: 556452985</span>
+                <span className='text-sm'>PayPal: payments@sysfoc.com</span>
               </div>
             </div>
           </div>
