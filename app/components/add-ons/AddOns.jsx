@@ -282,13 +282,54 @@ const AddOns = () => {
           </div>
         </div>
       </div>
-      <Modal show={showModal} size='lg' onClose={() => setShowModal(false)}>
+      <Modal show={showModal} size='xl' onClose={() => setShowModal(false)}>
         <ModalHeader>
-          <p>Select Payment Method</p>
+          <p>Confirm Payment Details</p>
         </ModalHeader>
         <ModalBody>
-          <div className='w-full flex items-center justifiy-center'>
-            <div className='w-full flex flex-col gap-4'>
+          <div className='mb-3'>
+            <div className='mb-2'>
+              <h3 className='text-xl font-semibold text-center bg-black text-white py-2'>
+                {selectedPlan?.plan}
+              </h3>
+            </div>
+            <div className='flex flex-col gap-2 my-6'>
+              <div className='flex items-center justify-between'>
+                <p className='text-lg'>Subtotal:</p>
+                <p>
+                  {selectedCurrency?.currency === "AUD"
+                    ? `${selectedCurrency?.currency} ${Number(
+                        (selectedPlan?.price / 1.1) * selectedCurrency?.price
+                      ).toFixed(2)}`
+                    : `${selectedCurrency?.currency} ${Number(
+                        selectedPlan?.price * selectedCurrency?.price
+                      ).toFixed(2)}`}
+                </p>
+              </div>
+              <div className='flex items-center justify-between'>
+                <p className='text-lg'>GST:</p>
+                <p>
+                  {selectedCurrency?.currency === "AUD"
+                    ? `${selectedCurrency?.currency} ${Number(
+                        (selectedPlan?.price - selectedPlan?.price / 1.1) *
+                          selectedCurrency?.price
+                      ).toFixed(2)}`
+                    : `${selectedCurrency?.currency} 0.00`}
+                </p>
+              </div>
+              <div className='flex items-center justify-between'>
+                <p className='text-lg'>Total:</p>
+                <p className='font-semibold'>
+                  {selectedCurrency?.currency &&
+                    `${selectedCurrency?.currency} ${
+                      (selectedPlan?.price * selectedCurrency?.price).toFixed(2)
+                    }`}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className='w-full flex items-center justify-center'>
+            <div className='w-full flex flex-row gap-4'>
               <Button
                 onClick={handleStripePayment}
                 className='w-full flex items-center justify-center gap-3 bg-[#635bff] hover:!bg-[#5146ff] text-white font-semibold rounded-md transition duration-300'
