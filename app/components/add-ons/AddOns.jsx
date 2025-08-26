@@ -146,7 +146,10 @@ const AddOns = () => {
       body: JSON.stringify({
         userId: currentUser?._id,
         plan: selectedPlan?.plan,
-        price: selectedPlan?.price,
+        price: selectedCurrency.country
+          ? selectedPlan?.price * selectedCurrency?.price
+          : selectedPlan?.price,
+        currency: selectedCurrency?.currency,
       }),
     });
     const data = await res.json();

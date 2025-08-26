@@ -19,31 +19,7 @@ export default function ViewInvoice() {
   const invoiceRef = useRef(null);
   const params = useParams();
   const [invoice, setInvoice] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [selectedCurrency, setSelectedCurrency] = useState(null);
 
-  const fetchData = async () => {
-    try {
-      const response1 = await fetch("/api/user/get/settings");
-      const data1 = await response1.json();
-
-      if (response1.ok && data1.settings?.currency) {
-        const currency = data1.settings.currency;
-        const response2 = await fetch(
-          `/api/payment/currencies/get/currency-name/${currency}`
-        );
-        const data2 = await response2.json();
-
-        if (response2.ok) {
-          setSelectedCurrency(data2.currency);
-        }
-      }
-
-      setLoading(false);
-    } catch {
-      setLoading(false);
-    }
-  };
   const fetchInvoiceDetails = async () => {
     const res = await fetch(
       `/api/user/payments/get-single-transaction/${params.id}`
@@ -55,7 +31,6 @@ export default function ViewInvoice() {
   };
   useEffect(() => {
     if (params.id) {
-      fetchData();
       fetchInvoiceDetails();
     }
   }, [params.id]);
@@ -189,23 +164,21 @@ export default function ViewInvoice() {
                   </TableCell>
                   <TableCell className='text-black'>1</TableCell>
                   <TableCell className='text-black whitespace-nowrap'>
-                    {selectedCurrency?.currency === "AUD"
-                      ? `${selectedCurrency?.currency} ${Number(
-                          (invoice?.productPrice / 1.1) *
-                            selectedCurrency?.price
+                    {invoice?.paymentCurrency === "AUD"
+                      ? `${invoice?.paymentCurrency} ${Number(
+                          (invoice?.productPrice / 1.1)
                         ).toFixed(2)}`
-                      : `${selectedCurrency?.currency} ${Number(
-                          invoice?.productPrice * selectedCurrency?.price
+                      : `${invoice?.paymentCurrency} ${Number(
+                          invoice?.productPrice
                         ).toFixed(2)}`}
                   </TableCell>
                   <TableCell className='text-black whitespace-nowrap'>
-                    {selectedCurrency?.currency === "AUD"
-                      ? `${selectedCurrency?.currency} ${Number(
-                          (invoice?.productPrice / 1.1) *
-                            selectedCurrency?.price
+                    {invoice?.paymentCurrency === "AUD"
+                      ? `${invoice?.paymentCurrency} ${Number(
+                          (invoice?.productPrice / 1.1)
                         ).toFixed(2)}`
-                      : `${selectedCurrency?.currency} ${Number(
-                          invoice?.productPrice * selectedCurrency?.price
+                      : `${invoice?.paymentCurrency} ${Number(
+                          invoice?.productPrice
                         ).toFixed(2)}`}
                   </TableCell>
                 </TableRow>
@@ -217,13 +190,12 @@ export default function ViewInvoice() {
                     Subtotal
                   </TableCell>
                   <TableCell className='font-semibold bg-gray-50 whitespace-nowrap'>
-                    {selectedCurrency?.currency === "AUD"
-                      ? `${selectedCurrency?.currency} ${Number(
-                          (invoice?.productPrice / 1.1) *
-                            selectedCurrency?.price
+                    {invoice?.paymentCurrency === "AUD"
+                      ? `${invoice?.paymentCurrency} ${Number(
+                          invoice?.productPrice / 1.1
                         ).toFixed(2)}`
-                      : `${selectedCurrency?.currency} ${Number(
-                          invoice?.productPrice * selectedCurrency?.price
+                      : `${invoice?.paymentCurrency} ${Number(
+                          invoice?.productPrice
                         ).toFixed(2)}`}
                   </TableCell>
                 </TableRow>
@@ -235,13 +207,12 @@ export default function ViewInvoice() {
                     GST
                   </TableCell>
                   <TableCell className='font-semibold bg-gray-50'>
-                    {selectedCurrency?.currency === "AUD"
-                      ? `${selectedCurrency?.currency} ${Number(
+                    {invoice?.paymentCurrency === "AUD"
+                      ? `${invoice?.paymentCurrency} ${Number(
                           (invoice?.productPrice -
-                            invoice?.productPrice / 1.1) *
-                            selectedCurrency?.price
+                            invoice?.productPrice / 1.1)
                         ).toFixed(2)}`
-                      : `${selectedCurrency?.currency} 0`}
+                      : `${invoice?.paymentCurrency} 0`}
                   </TableCell>
                 </TableRow>
                 <TableRow>
@@ -260,11 +231,11 @@ export default function ViewInvoice() {
                     Total
                   </TableCell>
                   <TableCell className='font-semibold bg-gray-50 text-black whitespace-nowrap'>
-                    {selectedCurrency?.country
-                      ? `${selectedCurrency?.currency} ${Number(
-                          invoice?.productPrice * selectedCurrency?.price
+                    {invoice?.paymentCurrency === "AUD"
+                      ? `${invoice?.paymentCurrency} ${Number(
+                          invoice?.productPrice
                         ).toFixed(2)}`
-                      : `USD ${invoice?.productPrice}`}
+                      : `${invoice?.paymentCurrency} ${invoice?.productPrice}`}
                   </TableCell>
                 </TableRow>
               </TableBody>

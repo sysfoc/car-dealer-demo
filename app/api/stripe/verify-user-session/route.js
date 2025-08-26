@@ -33,6 +33,7 @@ export async function GET(req) {
   const plan = session.metadata?.plan;
   const price = Number(session.amount_total) / 100;
   const timePeriod = session.metadata?.timePeriod;
+  const currency = session.metadata?.currency;
   const paymentId = session.payment_intent;
   let themes;
   if (!plan.includes("add-on")) {
@@ -102,7 +103,7 @@ export async function GET(req) {
         },\n\nWe would like to inform you that your Addon Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nAddon Name: ${plan.slice(
           0,
           -6
-        )}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sales@automotivewebsolutions.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\nsales@automotivewebsolutions.com\nhttps://www.automotivewebsolutions.com`,
+        )}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: ${currency}${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sales@automotivewebsolutions.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\nsales@automotivewebsolutions.com\nhttps://www.automotivewebsolutions.com`,
       });
       await sendEmail({
         to: config.emailReceiver,
@@ -114,7 +115,7 @@ export async function GET(req) {
         }\nAddon Name: ${plan.slice(
           0,
           -6
-        )}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}`,
+        )}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: ${currency}${price}`,
       });
       await Notification.create({
         userId: user._id,
@@ -181,7 +182,7 @@ export async function GET(req) {
       subject: "Subscription",
       text: `Dear ${
         user.name || "User"
-      },\n\nWe would like to inform you that your Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nSubscription Name: ${plan}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: $${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sales@automotivewebsolutions.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\nsales@automotivewebsolutions.com\nhttps://www.automotivewebsolutions.com`,
+      },\n\nWe would like to inform you that your Subscription has been successfully activated!. This subscription gives you access to additional features designed to enhance your experience and streamline your workflow.\n\nSubscription Summary:\nSubscription Name: ${plan}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle: Monthly\nAmount: ${currency}${price}\n\nYou can manage your subscription, update billing details, or cancel anytime by visiting your Account Settings or contacting our support team.\nIf you have any questions or require assistance, feel free to reply to this email or reach out to our support team at sales@automotivewebsolutions.com.\n\nThank you for choosing us!\n\nBest regards,\nAutomotive Web Solutions\nCustomer Support Team\nsales@automotivewebsolutions.com\nhttps://www.automotivewebsolutions.com`,
     });
     await sendEmail({
       to: config.emailReceiver,
@@ -190,7 +191,7 @@ export async function GET(req) {
         user._id
       }\nUsername: ${user.name}\nEmail: ${
         user.email
-      }\nSubscription Name: ${plan}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle:${timePeriod} \nAmount: $${price}`,
+      }\nSubscription Name: ${plan}\nStart Date: ${new Date().toLocaleDateString()}\nBilling Cycle:${timePeriod} \nAmount: ${currency}${price}`,
     });
   }
   await Payment.create({
@@ -201,6 +202,7 @@ export async function GET(req) {
       themes?.length > 0 ? ` (${themes?.join(", ")})` : ""
     }`,
     paymentMethod: "Stripe",
+    paymentCurrency: currency,
     productPrice: price,
     productPlan: timePeriod || "Monthly",
     transactionDate: new Date(),

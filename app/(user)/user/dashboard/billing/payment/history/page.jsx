@@ -89,7 +89,10 @@ export default function PaymentHistory() {
                     )}
                   </TableCell>
                   <TableCell>{transaction.product}</TableCell>
-                  <TableCell>${transaction.productPrice}</TableCell>
+                  <TableCell>
+                    {transaction?.paymentCurrency}
+                    {transaction.productPrice}
+                  </TableCell>
                   <TableCell>{transaction.paymentMethod}</TableCell>
                   <TableCell>
                     <Button

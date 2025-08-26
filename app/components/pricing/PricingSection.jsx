@@ -142,8 +142,11 @@ const PricingSection = () => {
         userId: currentUser?._id,
         plan: selectedPlan?.plan,
         themes: selectedTheme,
-        price: selectedPlan?.price,
         timePeriod: selectedPlan?.timePeriod,
+        price: selectedCurrency.country
+          ? selectedPlan?.price * selectedCurrency?.price
+          : selectedPlan?.price,
+        currency: selectedCurrency?.currency,
       }),
     });
     const data = await res.json();
@@ -228,7 +231,12 @@ const PricingSection = () => {
                   <div>
                     {currentUser?._id ? (
                       <h2
-                        className='text-xl hover:underline cursor-pointer'
+                        className={`text-xl hover:underline cursor-pointer ${
+                          subscription?.subscriptionType === "Basic" &&
+                          subscription?.isActive
+                            ? "pointer-events-none"
+                            : ""
+                        }`}
                         onClick={() =>
                           buySelectedPlan(
                             setSelectedPlan({
@@ -277,7 +285,12 @@ const PricingSection = () => {
                   <div>
                     {currentUser?._id ? (
                       <h2
-                        className='text-xl hover:underline cursor-pointer'
+                        className={`text-xl hover:underline cursor-pointer ${
+                          subscription?.subscriptionType === "Standard" &&
+                          subscription?.isActive
+                            ? "pointer-events-none"
+                            : ""
+                        }`}
                         onClick={() =>
                           buySelectedPlan(
                             setSelectedPlan({
@@ -326,7 +339,12 @@ const PricingSection = () => {
                   <div>
                     {currentUser?._id ? (
                       <h2
-                        className='text-xl hover:underline cursor-pointer'
+                        className={`text-xl hover:underline cursor-pointer ${
+                          subscription?.subscriptionType === "Premium" &&
+                          subscription?.isActive
+                            ? "pointer-events-none"
+                            : ""
+                        }`}
                         onClick={() =>
                           buySelectedPlan(
                             setSelectedPlan({
@@ -1182,7 +1200,12 @@ const PricingSection = () => {
                   <div>
                     {currentUser?._id ? (
                       <h2
-                        className='text-xl hover:underline cursor-pointer'
+                        className={`text-xl hover:underline cursor-pointer ${
+                          subscription?.subscriptionType === "Yearly Basic" &&
+                          subscription?.isActive
+                            ? "pointer-events-none"
+                            : ""
+                        }`}
                         onClick={() =>
                           buySelectedPlan(
                             setSelectedPlan({
@@ -1250,7 +1273,12 @@ const PricingSection = () => {
                   <div>
                     {currentUser?._id ? (
                       <h2
-                        className='text-xl hover:underline cursor-pointer'
+                        className={`text-xl hover:underline cursor-pointer ${
+                          subscription?.subscriptionType ===
+                            "Yearly Standard" && subscription?.isActive
+                            ? "pointer-events-none"
+                            : ""
+                        }`}
                         onClick={() =>
                           buySelectedPlan(
                             setSelectedPlan({
@@ -1318,7 +1346,12 @@ const PricingSection = () => {
                   <div>
                     {currentUser?._id ? (
                       <h2
-                        className='text-xl hover:underline cursor-pointer'
+                        className={`text-xl hover:underline cursor-pointer ${
+                          subscription?.subscriptionType === "Yearly Premium" &&
+                          subscription?.isActive
+                            ? "pointer-events-none"
+                            : ""
+                        }`}
                         onClick={() =>
                           buySelectedPlan(
                             setSelectedPlan({

@@ -67,7 +67,7 @@ const Datatable = () => {
                     )}
                   </TableCell>
                   <TableCell>{transaction?.product}</TableCell>
-                  <TableCell>${transaction?.productPrice}</TableCell>
+                  <TableCell>{transaction?.paymentCurrency}{transaction?.productPrice}</TableCell>
                   <TableCell>{transaction?.paymentMethod}</TableCell>
                   <TableCell>
                     <div className='flex items-center gap-2'>

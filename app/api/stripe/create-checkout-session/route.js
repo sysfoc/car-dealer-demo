@@ -6,7 +6,7 @@ import User from "@/app/model/user.model";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export async function POST(req) {
   await connectToDatabase();
-  const { userId, plan, themes, price, timePeriod } = await req.json();
+  const { userId, plan, themes, price, timePeriod, currency } = await req.json();
   try {
     const userExist = await User.findById(userId);
     if (userExist) {
@@ -30,7 +30,7 @@ export async function POST(req) {
           {
             quantity: 1,
             price_data: {
-              currency: "usd",
+              currency: currency.toLowerCase(),
               unit_amount: Math.round(price * 100),
               product_data: {
                 name: plan,
@@ -45,6 +45,7 @@ export async function POST(req) {
           price,
           theme: JSON.stringify(themes),
           timePeriod,
+          currency,
         },
       });
       return NextResponse.json({ url: session.url }, { status: 200 });
