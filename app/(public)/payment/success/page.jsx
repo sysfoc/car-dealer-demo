@@ -5,6 +5,7 @@ import { BiCheck } from "react-icons/bi";
 import { IoClose } from "react-icons/io5";
 
 export default function PaymentSuccessPage() {
+  const [called, setCalled] = useState(false);
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
   const data = searchParams.get("data");
@@ -13,9 +14,10 @@ export default function PaymentSuccessPage() {
   const redirectURL = localStorage.getItem("RedirectURL");
 
   useEffect(() => {
-    const capturePayment = async () => {
-      if (!token) return;
+    if (!token || called) return;
 
+    setCalled(true);
+    const capturePayment = async () => {
       const res = await fetch("/api/paypal/capture-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -23,13 +25,15 @@ export default function PaymentSuccessPage() {
       });
 
       const result = await res.json();
-      if (res.ok && result.status === "success") {
+
+      if (res.ok && result.success) {
         setStatus("Payment successfull!");
-        if(redirectURL){
+        if (redirectURL) {
           localStorage.removeItem("RedirectURL");
           window.location.href = redirectURL;
+        } else {
+          navigate.push("/user/dashboard");
         }
-        navigate.push("/user/dashboard");
       } else {
         setStatus("Payment verification failed.");
         localStorage.removeItem("RedirectURL");
@@ -38,7 +42,7 @@ export default function PaymentSuccessPage() {
     };
 
     capturePayment();
-  }, [token]);
+  }, [token, called]);
 
   return (
     <main className='h-screen p-10'>

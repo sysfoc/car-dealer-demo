@@ -12,7 +12,7 @@ const client = new paypal.core.PayPalHttpClient(environment);
 export async function POST(req) {
   await connectToDatabase();
   try {
-    const { userId, plan, price, timePeriod, themes } = await req.json();
+    const { userId, plan, price, timePeriod, themes, currency } = await req.json();
 
     if (!userId || !plan || !price || !timePeriod) {
       return NextResponse.json(
@@ -26,6 +26,7 @@ export async function POST(req) {
       price,
       timePeriod,
       themes,
+      currency,
     };
     const encodedPayload = Buffer.from(JSON.stringify(payload)).toString(
       "base64"
@@ -42,7 +43,7 @@ export async function POST(req) {
         purchase_units: [
           {
             amount: {
-              currency_code: "USD",
+              currency_code: currency,
               value: price.toString(),
             },
             description: `Subscription plan: ${plan}`,
