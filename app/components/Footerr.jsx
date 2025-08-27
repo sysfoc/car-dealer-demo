@@ -23,20 +23,17 @@ const Footerr = () => {
               alt='automotive-web-solutions-logo'
             />
           </Link>
-          <div className="flex flex-col gap-y-1">
+          <div className='flex flex-col gap-y-1'>
             <Footer.LinkGroup className='gap-y-2'>
-            <Footer.Link href='/about'>About</Footer.Link>
-            <Footer.Link href='/contact'>Contact</Footer.Link>
-            <Footer.Link href='/faq'>FAQ</Footer.Link>
-            <Footer.Link href='/terms'>Terms</Footer.Link>
-            <Footer.Link href='/blogs'>Blogs</Footer.Link>
-            <Footer.Link href='/privacy'>Privacy Policy</Footer.Link>
-            <Footer.Link href='/refund-policy'>Refund Policy</Footer.Link>
-            <Footer.Link href='/cookies'>Cookies Policy</Footer.Link>
-          </Footer.LinkGroup>
-          <div>
-              <small className="text-xs text-gray-500">SYSFOC WEB SOLUTIONS (ABN: 76141157764) Trading as Automotive Web Solutions.</small>
-            </div>
+              <Footer.Link href='/about'>About</Footer.Link>
+              <Footer.Link href='/contact'>Contact</Footer.Link>
+              <Footer.Link href='/faq'>FAQ</Footer.Link>
+              <Footer.Link href='/terms'>Terms</Footer.Link>
+              <Footer.Link href='/blogs'>Blogs</Footer.Link>
+              <Footer.Link href='/privacy'>Privacy Policy</Footer.Link>
+              <Footer.Link href='/refund-policy'>Refund Policy</Footer.Link>
+              <Footer.Link href='/cookies'>Cookies Policy</Footer.Link>
+            </Footer.LinkGroup>
           </div>
         </div>
         <Footer.Divider />

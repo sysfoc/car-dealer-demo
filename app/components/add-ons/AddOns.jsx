@@ -1,5 +1,11 @@
 "use client";
-import { Button, Modal, ModalBody, ModalHeader } from "flowbite-react";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "flowbite-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -98,7 +104,7 @@ const AddOns = () => {
       title: "Content Writing",
       description:
         "We create clear, engaging, and SEO-friendly content tailored for car dealers — designed to increase traffic, build authority, and turn visitors into customers.",
-      price: 1,
+      price: 300,
       detail: <ContentWriting />,
     },
     {
@@ -119,16 +125,6 @@ const AddOns = () => {
       description:
         "We manage your Facebook and Instagram and other social media accounts to build your online presence, engage local buyers, and generate more leads — all while you focus on running your business.",
       price: 400,
-      detail: <SocialMedia />,
-    },
-    {
-      id: 4,
-      image: "/07.png",
-      alt: "Feature 9 - Social Media Marketing",
-      title: "For Testing",
-      description:
-        "We manage your Facebook and Instagram and other social media accounts to build your online presence, engage local buyers, and generate more leads — all while you focus on running your business.",
-      price: 1,
       detail: <SocialMedia />,
     },
   ];
@@ -289,7 +285,7 @@ const AddOns = () => {
         <ModalBody>
           <div className='mb-3'>
             <div className='mb-2'>
-              <h3 className='text-xl font-semibold text-center bg-black text-white py-2'>
+              <h3 className='text-xl font-semibold capitalize text-center bg-black text-white py-2'>
                 {selectedPlan?.plan}
               </h3>
             </div>
@@ -321,31 +317,52 @@ const AddOns = () => {
                 <p className='text-lg'>Total:</p>
                 <p className='font-semibold'>
                   {selectedCurrency?.currency &&
-                    `${selectedCurrency?.currency} ${
-                      (selectedPlan?.price * selectedCurrency?.price).toFixed(2)
-                    }`}
+                    `${selectedCurrency?.currency} ${(
+                      selectedPlan?.price * selectedCurrency?.price
+                    ).toFixed(2)}`}
                 </p>
               </div>
             </div>
           </div>
           <div className='w-full flex items-center justify-center'>
-            <div className='w-full flex flex-row gap-4'>
-              <Button
-                onClick={handleStripePayment}
-                className='w-full flex items-center justify-center gap-3 bg-[#635bff] hover:!bg-[#5146ff] text-white font-semibold rounded-md transition duration-300'
-              >
-                <FaCcStripe fontSize={22} className='text-white mr-2' />
-                <span>Pay now</span>
-              </Button>
-              <Button
-                onClick={handlePaypalPayment}
-                className='w-full flex items-center justify-center gap-3 bg-[#FFC439] hover:!bg-[#ffb123] text-black font-semibold rounded-md transition duration-300'
-              >
-                <img src='/payment-icons/PayPal.png' alt='paypal' width={80} />
-              </Button>
+            <div className='w-full grid grid-cols-1 sm:grid-cols-2 gap-4'>
+              <div>
+                <Button
+                  onClick={handleStripePayment}
+                  className='w-full flex items-center justify-center gap-3 bg-[#635bff] hover:!bg-[#5146ff] text-white font-semibold rounded-md transition duration-300'
+                >
+                  <FaCcStripe fontSize={22} className='text-white mr-2' />
+                  <span>Pay now</span>
+                </Button>
+                <p className='mt-2 text-xs text-gray-500 text-justify'>
+                  Credit/Debit Card (via Stripe) – No Stripe account required
+                </p>
+              </div>
+              <div>
+                <Button
+                  onClick={handlePaypalPayment}
+                  className='w-full flex items-center justify-center gap-3 bg-[#FFC439] hover:!bg-[#ffb123] text-black font-semibold rounded-md transition duration-300'
+                >
+                  <img
+                    src='/payment-icons/PayPal.png'
+                    alt='paypal'
+                    width={80}
+                  />
+                </Button>
+                <p className='mt-2 text-xs text-gray-500 text-justify'>
+                  Credit/Debit Card or PayPal – Pay with your card or use
+                  your PayPal account.
+                </p>
+              </div>
             </div>
           </div>
         </ModalBody>
+        <ModalFooter>
+          <p className='text-xs text-gray-500 text-center'>
+            Payments are securely processed by our parent company SYSFOC
+            Web Solutions
+          </p>
+        </ModalFooter>
       </Modal>
     </section>
   );

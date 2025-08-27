@@ -241,7 +241,7 @@ const PricingSection = () => {
                           buySelectedPlan(
                             setSelectedPlan({
                               plan: "Basic",
-                              price: "74.99",
+                              price: 74.99,
                               timePeriod: "Monthly",
                             })
                           )
@@ -295,7 +295,7 @@ const PricingSection = () => {
                           buySelectedPlan(
                             setSelectedPlan({
                               plan: "Standard",
-                              price: "199.99",
+                              price: 199.99,
                               timePeriod: "Monthly",
                             })
                           )
@@ -349,7 +349,7 @@ const PricingSection = () => {
                           buySelectedPlan(
                             setSelectedPlan({
                               plan: "Premium",
-                              price: "349.99",
+                              price: 349.99,
                               timePeriod: "Monthly",
                             })
                           )
@@ -1164,8 +1164,9 @@ const PricingSection = () => {
             <ModalBody>
               <div className='mb-3'>
                 <div className='mb-2'>
-                  <h3 className='text-xl font-semibold text-center bg-black text-white py-2'>
-                    {selectedPlan?.plan}
+                  <h3 className='text-xl font-semibold text-center bg-black text-white p-2'>
+                    {selectedPlan?.plan} (
+                    {selectedTheme?.map((theme) => theme).join(", ")})
                   </h3>
                 </div>
                 <div className='flex flex-col gap-2 my-6'>
@@ -1183,7 +1184,7 @@ const PricingSection = () => {
                     </p>
                   </div>
                   <div className='flex items-center justify-between'>
-                    <p className='text-lg'>GST:</p>
+                    <p className='text-lg'>GST/VAT:</p>
                     <p>
                       {selectedCurrency?.currency === "AUD"
                         ? `${selectedCurrency?.currency} ${Number(
@@ -1204,28 +1205,46 @@ const PricingSection = () => {
                   </div>
                 </div>
               </div>
-              <div className='w-full flex items-center justifiy-center'>
-                <div className='w-full flex flex-row gap-4'>
-                  <Button
-                    onClick={handleStripePayment}
-                    className='w-full flex items-center justify-center gap-3 bg-[#635bff] hover:!bg-[#5146ff] text-white font-semibold rounded-md transition duration-300'
-                  >
-                    <FaCcStripe fontSize={22} className='text-white mr-2' />
-                    <span>Pay now</span>
-                  </Button>
-                  <Button
-                    onClick={handlePaypalPayment}
-                    className='w-full flex items-center justify-center gap-3 bg-[#FFC439] hover:!bg-[#ffb123] text-black font-semibold rounded-md transition duration-300'
-                  >
-                    <img
-                      src='/payment-icons/PayPal.png'
-                      alt='paypal'
-                      width={80}
-                    />
-                  </Button>
+              <div className='w-full flex items-center justify-center'>
+                <div className='w-full grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                  <div>
+                    <Button
+                      onClick={handleStripePayment}
+                      className='w-full flex items-center justify-center gap-3 bg-[#635bff] hover:!bg-[#5146ff] text-white font-semibold rounded-md transition duration-300'
+                    >
+                      <FaCcStripe fontSize={22} className='text-white mr-2' />
+                      <span>Pay now</span>
+                    </Button>
+                    <p className='mt-2 text-xs text-gray-500 text-justify'>
+                      Credit/Debit Card (via Stripe) – No Stripe account
+                      required
+                    </p>
+                  </div>
+                  <div>
+                    <Button
+                      onClick={handlePaypalPayment}
+                      className='w-full flex items-center justify-center gap-3 bg-[#FFC439] hover:!bg-[#ffb123] text-black font-semibold rounded-md transition duration-300'
+                    >
+                      <img
+                        src='/payment-icons/PayPal.png'
+                        alt='paypal'
+                        width={80}
+                      />
+                    </Button>
+                    <p className='mt-2 text-xs text-gray-500 text-justify'>
+                      Credit/Debit Card or PayPal – Pay with your card or use
+                      your PayPal account.
+                    </p>
+                  </div>
                 </div>
               </div>
             </ModalBody>
+            <ModalFooter>
+              <p className='text-xs text-gray-500 text-center'>
+                Payments are securely processed by our parent company SYSFOC
+                Web Solutions
+              </p>
+            </ModalFooter>
           </Modal>
         </div>
       ) : (
@@ -1252,7 +1271,7 @@ const PricingSection = () => {
                           buySelectedPlan(
                             setSelectedPlan({
                               plan: "Yearly Basic",
-                              price: "764.99",
+                              price: 764.99,
                               timePeriod: "Yearly",
                             })
                           )
@@ -1325,7 +1344,7 @@ const PricingSection = () => {
                           buySelectedPlan(
                             setSelectedPlan({
                               plan: "Yearly Standard",
-                              price: "2029.99",
+                              price: 2029.99,
                               timePeriod: "Yearly",
                             })
                           )
@@ -1398,7 +1417,7 @@ const PricingSection = () => {
                           buySelectedPlan(
                             setSelectedPlan({
                               plan: "Yearly Premium",
-                              price: "3558.99",
+                              price: 3558.99,
                               timePeriod: "Yearly",
                             })
                           )
@@ -2233,8 +2252,9 @@ const PricingSection = () => {
             <ModalBody>
               <div className='mb-3'>
                 <div className='mb-2'>
-                  <h3 className='text-xl font-semibold text-center bg-black text-white py-2'>
-                    {selectedPlan?.plan}
+                  <h3 className='text-xl font-semibold text-center bg-black text-white p-2'>
+                    {selectedPlan?.plan} (
+                    {selectedTheme?.map((theme) => theme).join(", ")})
                   </h3>
                 </div>
                 <div className='flex flex-col gap-2 my-6'>
@@ -2252,7 +2272,7 @@ const PricingSection = () => {
                     </p>
                   </div>
                   <div className='flex items-center justify-between'>
-                    <p className='text-lg'>GST:</p>
+                    <p className='text-lg'>GST/VAT:</p>
                     <p>
                       {selectedCurrency?.currency === "AUD"
                         ? `${selectedCurrency?.currency} ${Number(
@@ -2274,27 +2294,45 @@ const PricingSection = () => {
                 </div>
               </div>
               <div className='w-full flex items-center justify-center'>
-                <div className='w-full flex flex-row gap-4'>
-                  <Button
-                    onClick={handleStripePayment}
-                    className='w-full flex items-center justify-center gap-3 bg-[#635bff] hover:!bg-[#5146ff] text-white font-semibold rounded-md transition duration-300'
-                  >
-                    <FaCcStripe fontSize={22} className='text-white mr-2' />
-                    <span>Pay now</span>
-                  </Button>
-                  <Button
-                    onClick={handlePaypalPayment}
-                    className='w-full flex items-center justify-center gap-3 bg-[#FFC439] hover:!bg-[#ffb123] text-black font-semibold rounded-md transition duration-300'
-                  >
-                    <img
-                      src='/payment-icons/PayPal.png'
-                      alt='paypal'
-                      width={80}
-                    />
-                  </Button>
+                <div className='w-full grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                  <div>
+                    <Button
+                      onClick={handleStripePayment}
+                      className='w-full flex items-center justify-center gap-3 bg-[#635bff] hover:!bg-[#5146ff] text-white font-semibold rounded-md transition duration-300'
+                    >
+                      <FaCcStripe fontSize={22} className='text-white mr-2' />
+                      <span>Pay now</span>
+                    </Button>
+                    <p className='mt-2 text-xs text-gray-500 text-justify'>
+                      Credit/Debit Card (via Stripe) – No Stripe account
+                      required
+                    </p>
+                  </div>
+                  <div>
+                    <Button
+                      onClick={handlePaypalPayment}
+                      className='w-full flex items-center justify-center gap-3 bg-[#FFC439] hover:!bg-[#ffb123] text-black font-semibold rounded-md transition duration-300'
+                    >
+                      <img
+                        src='/payment-icons/PayPal.png'
+                        alt='paypal'
+                        width={80}
+                      />
+                    </Button>
+                    <p className='mt-2 text-xs text-gray-500 text-justify'>
+                      Credit/Debit Card or PayPal – Pay with your card or use
+                      your PayPal account.
+                    </p>
+                  </div>
                 </div>
               </div>
             </ModalBody>
+            <ModalFooter>
+              <p className='text-xs text-gray-500 text-center'>
+                Payments are securely processed by our parent company SYSFOC
+                Web Solutions
+              </p>
+            </ModalFooter>
           </Modal>
         </div>
       )}

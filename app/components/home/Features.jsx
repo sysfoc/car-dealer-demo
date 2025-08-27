@@ -86,7 +86,7 @@ const Features = () => {
   return (
     <section className='my-14 py-10 bg-white'>
       <div className='mx-4 md:mx-12 py-5 flex items-center justify-center'>
-        <div className='text-center w-full md:w-[50%]'>
+        <div className='text-center w-full md:w-[80%]'>
           <h3 className='text-3xl sm:text-4xl font-semibold'>Core Features</h3>
           <p className='my-2 text-gray-500'>
             Automotive Web Solutions provides full of features for creating a perfect
