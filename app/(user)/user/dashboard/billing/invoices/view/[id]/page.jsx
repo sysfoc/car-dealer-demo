@@ -160,13 +160,13 @@ export default function ViewInvoice() {
                     {invoice?.product} Package
                   </TableCell>
                   <TableCell className='text-black'>
-                    Purchased for {invoice?.productPlan} Subscription
+                    Purchased {invoice?.productPlan} Subscription
                   </TableCell>
                   <TableCell className='text-black'>1</TableCell>
                   <TableCell className='text-black whitespace-nowrap'>
                     {invoice?.paymentCurrency === "AUD"
                       ? `${invoice?.paymentCurrency} ${Number(
-                          (invoice?.productPrice / 1.1)
+                          invoice?.productPrice / 1.1
                         ).toFixed(2)}`
                       : `${invoice?.paymentCurrency} ${Number(
                           invoice?.productPrice
@@ -175,7 +175,7 @@ export default function ViewInvoice() {
                   <TableCell className='text-black whitespace-nowrap'>
                     {invoice?.paymentCurrency === "AUD"
                       ? `${invoice?.paymentCurrency} ${Number(
-                          (invoice?.productPrice / 1.1)
+                          invoice?.productPrice / 1.1
                         ).toFixed(2)}`
                       : `${invoice?.paymentCurrency} ${Number(
                           invoice?.productPrice
@@ -203,29 +203,18 @@ export default function ViewInvoice() {
                   <TableCell colSpan={3} className='font-semibold'>
                     <div></div>
                   </TableCell>
-                  <TableCell className='font-semibold bg-gray-50'>
-                    GST
-                  </TableCell>
-                  <TableCell className='font-semibold bg-gray-50'>
+                  <TableCell className='font-semibold'>GST/VAT</TableCell>
+                  <TableCell className='font-semibold'>
                     {invoice?.paymentCurrency === "AUD"
                       ? `${invoice?.paymentCurrency} ${Number(
-                          (invoice?.productPrice -
-                            invoice?.productPrice / 1.1)
+                          invoice?.productPrice - invoice?.productPrice / 1.1
                         ).toFixed(2)}`
                       : `${invoice?.paymentCurrency} 0`}
                   </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell
-                    colSpan={3}
-                    rowSpan={3}
-                    className='font-semibold bg-gray-50'
-                  >
-                    <h3 className='text-black'>Additional Information:</h3>
-                    <p className='text-sm font-normal text-black'>
-                      At check-in, you may need to present the credit card used
-                      for payment of this invoice.
-                    </p>
+                  <TableCell colSpan={3} rowSpan={3}>
+                    <div></div>
                   </TableCell>
                   <TableCell className='font-semibold text-black bg-gray-50'>
                     Total

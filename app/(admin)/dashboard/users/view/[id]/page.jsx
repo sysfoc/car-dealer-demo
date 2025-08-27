@@ -186,7 +186,7 @@ export default function viewUser() {
                           {payment.product}
                         </TableCell>
                         <TableCell title={payment.productPrice}>
-                          ${payment.productPrice}
+                          {payment.paymentCurrency}{payment.productPrice}
                         </TableCell>
                         <TableCell title={payment.productPlan}>
                           {payment.productPlan}
@@ -441,7 +441,7 @@ export default function viewUser() {
                           {refund?.email}
                         </TableCell>
                         <TableCell title={refund?.amount}>
-                          ${refund?.amount}
+                          {refund?.amount}
                         </TableCell>
                         <TableCell title={refund?.reason}>
                           {refund?.reason}
