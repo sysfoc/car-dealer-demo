@@ -26,9 +26,7 @@ const ProjectTemplates = () => {
           </div>
           <div className='flex items-center gap-3'>
             <FaCheck fontSize={20} className='text-[#fa7123]' />
-            <span className='font-semibold'>
-              Control Themes in Dashboard
-            </span>
+            <span className='font-semibold'>Control Themes in Dashboard</span>
           </div>
           <div className='flex items-center gap-3'>
             <FaCheck fontSize={20} className='text-[#fa7123]' />
@@ -55,7 +53,7 @@ const ProjectTemplates = () => {
                 </div>
                 <div className='px-2 py-3'>
                   <h3 className='text-center font-semibold text-xl'>
-                    Theme: <span className="text-[#fa7123]">{dealer.name}</span>
+                    Theme {dealer.id} - <span className='text-[#fa7123]'>{dealer.name}</span>
                   </h3>
                 </div>
               </Link>
