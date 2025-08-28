@@ -289,6 +289,34 @@ const AddOns = () => {
                 {selectedPlan?.plan}
               </h3>
             </div>
+            <div className='grid grid-cols-2 gap-4'>
+              <div>
+                <p className='text-xs text-gray-500'>
+                  Date:{" "}
+                  <span>
+                    {new Date().toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </span>
+                </p>
+              </div>
+              <div>
+                <p className='text-xs text-gray-500 text-end'>
+                  Expired At:
+                  <span>
+                    {new Date(
+                      new Date().setMonth(new Date().getMonth() + 1)
+                    ).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </span>
+                </p>
+              </div>
+            </div>
             <div className='flex flex-col gap-2 my-6'>
               <div className='flex items-center justify-between'>
                 <p className='text-lg'>Subtotal:</p>

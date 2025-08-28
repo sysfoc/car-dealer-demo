@@ -100,7 +100,7 @@ const Form = () => {
                   name='name'
                   type='text'
                   placeholder='Enter your name'
-                  className='w-full'
+                  className='w-full focus:border-[#fa7123] focus:ring-[#fa7123]'
                   autoComplete='on'
                   defaultValue={formData?.name || ""}
                   onChange={handleChange}
@@ -114,7 +114,7 @@ const Form = () => {
                   name='email'
                   type='email'
                   placeholder='Enter your email'
-                  className='w-full'
+                  className='w-full focus:border-[#fa7123] focus:ring-[#fa7123]'
                   autoComplete='on'
                   defaultValue={formData?.email || ""}
                   onChange={handleChange}
@@ -122,11 +122,11 @@ const Form = () => {
                 />
               </div>
               <div>
-                <Label htmlFor='message'>Addons Suggestion</Label>
+                <Label htmlFor='message'>Custom Add-on Request</Label>
                 <Textarea
                   id='message'
                   name='message'
-                  placeholder='Write your suggestion here'
+                  placeholder='Write custom add-on details'
                   className='w-full focus:border-[#fa7123] focus:ring-[#fa7123]'
                   rows={5}
                   required

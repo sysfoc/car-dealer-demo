@@ -1184,7 +1184,35 @@ const PricingSection = () => {
                     {selectedTheme?.map((theme) => theme).join(", ")})
                   </h3>
                 </div>
-                <div className='flex flex-col gap-2 my-6'>
+                <div className='grid grid-cols-2 gap-4 items-center'>
+                  <div>
+                    <p className='text-xs text-gray-600'>
+                      Date:{" "}
+                      <span>
+                        {new Date().toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </span>
+                    </p>
+                  </div>
+                  <div>
+                    <p className='text-xs text-gray-600 text-end'>
+                      Expired At:{" "}
+                      <span>
+                        {new Date(
+                          new Date().setMonth(new Date().getMonth() + 1)
+                        ).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+                <div className='flex flex-col gap-2 my-4'>
                   <div className='flex items-center justify-between'>
                     <p className='text-lg'>Subtotal:</p>
                     <p>
@@ -2291,7 +2319,35 @@ const PricingSection = () => {
                     {selectedTheme?.map((theme) => theme).join(", ")})
                   </h3>
                 </div>
-                <div className='flex flex-col gap-2 my-6'>
+                <div className='grid grid-cols-2 items-center gap-4'>
+                  <div>
+                    <p className='text-xs text-gray-600'>
+                      Date:{" "}
+                      <span>
+                        {new Date().toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </span>
+                    </p>
+                  </div>
+                  <div>
+                    <p className='text-xs text-gray-600 text-end'>
+                      Expired At:{" "}
+                      <span>
+                        {new Date(
+                          new Date().setFullYear(new Date().getFullYear() + 1)
+                        ).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+                <div className='flex flex-col gap-2 my-4'>
                   <div className='flex items-center justify-between'>
                     <p className='text-lg'>Subtotal:</p>
                     <p>

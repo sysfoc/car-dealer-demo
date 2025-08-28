@@ -8,8 +8,10 @@ import {
   TableRow,
 } from "flowbite-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { FaEye } from "react-icons/fa6";
 export default function viewUser() {
   const params = useParams();
   const [record, setRecord] = useState({});
@@ -104,56 +106,68 @@ export default function viewUser() {
               <h2 className='text-lg font-semibold'>Domains</h2>
             </div>
             <div>
-              <div className='overflow-x-auto'>
+              <div className='overflow-y-hidden'>
                 <Table className='mt-4' striped>
-                <TableHead>
-                  <TableHeadCell className="!bg-[#182641] text-white">Domain</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Registrar</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Username</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Password</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Custom Domain</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Date</TableHeadCell>
-                </TableHead>
-                <TableBody className='divide-y'>
-                  {record?.domain?.length > 0 ? (
-                    record?.domain?.map((domain) => (
-                      <TableRow key={domain._id}>
-                        <TableCell title={domain.domainName}>
-                          {domain.domainName || "-----"}
-                        </TableCell>
-                        <TableCell title={domain.domainRegistrar}>
-                          {domain.domainRegistrar || "-----"}
-                        </TableCell>
-                        <TableCell title={domain.domainUsername}>
-                          {domain.domainUsername || "-----"}
-                        </TableCell>
-                        <TableCell title={domain.domainPassword}>
-                          {domain.domainPassword || "-----"}
-                        </TableCell>
-                        <TableCell title={domain?.customDomain}>
-                          {domain?.customDomain || "-----"}
-                        </TableCell>
-                        <TableCell title={domain.createdAt}>
-                          {new Date(domain.createdAt).toLocaleDateString(
-                            "en-US",
-                            {
-                              year: "numeric",
-                              month: "long",
-                              day: "numeric",
-                            }
-                          )}
+                  <TableHead>
+                    <TableHeadCell className='!bg-[#182641] text-white'>
+                      Domain
+                    </TableHeadCell>
+                    <TableHeadCell className='!bg-[#182641] text-white'>
+                      Registrar
+                    </TableHeadCell>
+                    <TableHeadCell className='!bg-[#182641] text-white'>
+                      Username
+                    </TableHeadCell>
+                    <TableHeadCell className='!bg-[#182641] text-white'>
+                      Password
+                    </TableHeadCell>
+                    <TableHeadCell className='!bg-[#182641] text-white'>
+                      Custom Domain
+                    </TableHeadCell>
+                    <TableHeadCell className='!bg-[#182641] text-white'>
+                      Date
+                    </TableHeadCell>
+                  </TableHead>
+                  <TableBody className='divide-y'>
+                    {record?.domain?.length > 0 ? (
+                      record?.domain?.map((domain) => (
+                        <TableRow key={domain._id}>
+                          <TableCell title={domain.domainName}>
+                            {domain.domainName || "-----"}
+                          </TableCell>
+                          <TableCell title={domain.domainRegistrar}>
+                            {domain.domainRegistrar || "-----"}
+                          </TableCell>
+                          <TableCell title={domain.domainUsername}>
+                            {domain.domainUsername || "-----"}
+                          </TableCell>
+                          <TableCell title={domain.domainPassword}>
+                            {domain.domainPassword || "-----"}
+                          </TableCell>
+                          <TableCell title={domain?.customDomain}>
+                            {domain?.customDomain || "-----"}
+                          </TableCell>
+                          <TableCell title={domain.createdAt}>
+                            {new Date(domain.createdAt).toLocaleDateString(
+                              "en-US",
+                              {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                              }
+                            )}
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    ) : (
+                      <TableRow>
+                        <TableCell colSpan={6} className='text-center'>
+                          No domains found
                         </TableCell>
                       </TableRow>
-                    ))
-                  ) : (
-                    <TableRow>
-                      <TableCell colSpan={6} className='text-center'>
-                        No domains found
-                      </TableCell>
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
+                    )}
+                  </TableBody>
+                </Table>
               </div>
             </div>
           </div>
@@ -161,16 +175,33 @@ export default function viewUser() {
             <div>
               <h2 className='text-lg font-semibold'>Payment History</h2>
             </div>
-            <div className="overflow-x-auto">
+            <div className='overflow-y-hidden'>
               <Table className='mt-4' striped>
                 <TableHead>
-                  <TableHeadCell className="!bg-[#182641] text-white">Customer ID</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Payment ID</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Product</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Price</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Duration</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Method</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Date</TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Customer ID
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Payment ID
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Product
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Price
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Duration
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Method
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Date
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Action
+                  </TableHeadCell>
                 </TableHead>
                 <TableBody className='divide-y'>
                   {record?.payments?.length > 0 ? (
@@ -186,7 +217,8 @@ export default function viewUser() {
                           {payment.product}
                         </TableCell>
                         <TableCell title={payment.productPrice}>
-                          {payment.paymentCurrency}{payment.productPrice}
+                          {payment.paymentCurrency}
+                          {payment.productPrice}
                         </TableCell>
                         <TableCell title={payment.productPlan}>
                           {payment.productPlan}
@@ -204,11 +236,22 @@ export default function viewUser() {
                             }
                           )}
                         </TableCell>
+                        <TableCell>
+                          <div className='flex items-center gap-2'>
+                            <Link
+                              href={`/dashboard/invoices/view/${payment?._id}`}
+                              className='p-2 bg-[#182641] text-white rounded hover:!bg-[#182641]/90'
+                              title='View'
+                            >
+                              <FaEye className='w-3 h-3' />
+                            </Link>
+                          </div>
+                        </TableCell>
                       </TableRow>
                     ))
                   ) : (
                     <TableRow>
-                      <TableCell colSpan={7} className='text-center'>
+                      <TableCell colSpan={8} className='text-center'>
                         No payment history found
                       </TableCell>
                     </TableRow>
@@ -224,11 +267,21 @@ export default function viewUser() {
             <div>
               <Table className='mt-4' striped>
                 <TableHead>
-                  <TableHeadCell className="!bg-[#182641] text-white">Product</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Duration</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Status</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Subscribed At</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Expired At</TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Product
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Duration
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Status
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Subscribed At
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Expired At
+                  </TableHeadCell>
                 </TableHead>
                 <TableBody className='divide-y'>
                   {record?.subscription?.length > 0 ? (
@@ -283,11 +336,21 @@ export default function viewUser() {
             <div>
               <Table className='mt-4' striped>
                 <TableHead>
-                  <TableHeadCell className="!bg-[#182641] text-white">Theme name</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Status</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Current Status</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Subscribed At</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Expired At</TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Theme name
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Status
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Current Status
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Subscribed At
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Expired At
+                  </TableHeadCell>
                 </TableHead>
                 <TableBody className='divide-y'>
                   {record?.subscription &&
@@ -351,12 +414,24 @@ export default function viewUser() {
             <div>
               <Table className='mt-4' striped>
                 <TableHead>
-                  <TableHeadCell className="!bg-[#182641] text-white">Addon</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Price</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Status</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Current Status</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Subscribed At</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Expired At</TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Addon
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Price
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Status
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Current Status
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Subscribed At
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Expired At
+                  </TableHeadCell>
                 </TableHead>
                 <TableBody className='divide-y'>
                   {record?.subscription && record?.addons?.length > 0 ? (
@@ -422,13 +497,27 @@ export default function viewUser() {
             <div>
               <Table className='mt-4' striped>
                 <TableHead>
-                  <TableHeadCell className="!bg-[#182641] text-white">Order Id</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Email</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Amount</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Reason</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Method</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Status</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Date</TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Order Id
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Email
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Amount
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Reason
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Method
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Status
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Date
+                  </TableHeadCell>
                 </TableHead>
                 <TableBody className='divide-y'>
                   {record?.refunds?.length > 0 ? (
@@ -482,11 +571,21 @@ export default function viewUser() {
             <div>
               <Table className='mt-4' striped>
                 <TableHead>
-                  <TableHeadCell className="!bg-[#182641] text-white">Subject</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Description</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Status</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Reply</TableHeadCell>
-                  <TableHeadCell className="!bg-[#182641] text-white">Created At</TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Subject
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Description
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Status
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Reply
+                  </TableHeadCell>
+                  <TableHeadCell className='!bg-[#182641] text-white'>
+                    Created At
+                  </TableHeadCell>
                 </TableHead>
                 <TableBody className='divide-y'>
                   {record?.support?.length > 0 ? (
