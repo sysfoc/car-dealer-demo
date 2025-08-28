@@ -118,11 +118,11 @@ export default function ViewInvoice() {
               <div className='flex flex-col mt-1'>
                 <p className='font-semibold text-sm'>
                   Invoice No:{" "}
-                  <span className='font-normal'>#{invoice?.paymentId}</span>
+                  <span className='font-normal'>#{invoice?.invoiceId}</span>
                 </p>
                 <p className='font-semibold text-sm'>
                   Customer Id:{" "}
-                  <span className='font-normal'>#{invoice?.customerId}</span>
+                  <span className='font-normal'>#{invoice?.orderId}</span>
                 </p>
                 <p className='font-semibold text-sm'>
                   Issue Date:{" "}

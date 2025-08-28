@@ -192,10 +192,33 @@ export async function POST(req) {
       });
     }
 
+    const lastPayment = await Payment.findOne(
+      {},
+      {},
+      { sort: { createdAt: -1 } }
+    );
+
+    let nextNumber = 35;
+    if (lastPayment && lastPayment.orderId) {
+      const lastNumber = parseInt(lastPayment.orderId.replace("AWS", ""), 10);
+      nextNumber = lastNumber + 1;
+    }
+    const orderId = `AWS${String(nextNumber).padStart(5, "0")}`;
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, "0");
+    const month = String(now.getMonth() + 1);
+    const year = String(now.getFullYear()).slice(-2);
+    const invoiceId = `INV-${day}${month}${year}${String(nextNumber).padStart(
+      5,
+      "0"
+    )}`;
+
     await Payment.create({
       userId: user._id,
       customerId: customerId,
       paymentId: capture.result.id,
+      orderId: orderId,
+      invoiceId: invoiceId,
       product: `${plan}${themes?.length > 0 ? " Themes: " : ""}${
         themes?.length > 0 ? ` (${themes?.join(", ")})` : ""
       }`,

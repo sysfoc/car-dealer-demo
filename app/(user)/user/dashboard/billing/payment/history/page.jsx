@@ -124,13 +124,39 @@ export default function PaymentHistory() {
                   {selectedTransaction?.paymentId}
                 </p>
                 <p>
-                  <strong>Customer ID: </strong>
+                  <strong>Order ID: </strong>
                   {selectedTransaction?.customerId}
+                </p>
+                <p>
+                  <strong>Customer ID: </strong>
+                  {selectedTransaction?.orderId}
+                </p>
+                <p>
+                  <strong>Invoice ID: </strong>
+                  {selectedTransaction?.invoiceId}
+                </p>
+                <p>
+                  <strong>Purchased plan:</strong> {selectedTransaction.product}{" "}
+                  Package
+                </p>
+                <p>
+                  <strong>Amount:</strong> ${selectedTransaction.productPrice}
+                </p>
+                <p>
+                  <strong>Plan:</strong> {selectedTransaction.productPlan}
+                </p>
+                <p>
+                  <strong>Status:</strong>{" "}
+                  <span
+                    className={`px-3 py-1 text-white rounded bg-green-500 capitalize`}
+                  >
+                    completed
+                  </span>
                 </p>
                 <p>
                   <strong>Date:</strong>{" "}
                   {new Date(
-                    selectedTransaction?.transactionDate
+                    selectedTransaction.transactionDate
                   ).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
@@ -138,20 +164,22 @@ export default function PaymentHistory() {
                   })}
                 </p>
                 <p>
-                  <strong>Purchased plan:</strong>{" "}
-                  {selectedTransaction?.product} Package
-                </p>
-                <p>
-                  <strong>Amount:</strong> ${selectedTransaction?.productPrice}
-                </p>
-                <p>
-                  <strong>Plan:</strong> {selectedTransaction?.productPlan}
-                </p>
-                <p>
-                  <strong>Status:</strong>{" "}
-                  <span className={`px-3 py-1 text-white rounded bg-green-500`}>
-                    completed
-                  </span>
+                  <strong>Expired At:</strong>{" "}
+                  {(() => {
+                    const date = new Date(selectedTransaction.transactionDate);
+
+                    if (selectedTransaction.productPlan === "Monthly") {
+                      date.setMonth(date.getMonth() + 1);
+                    } else if (selectedTransaction.productPlan === "Yearly") {
+                      date.setFullYear(date.getFullYear() + 1);
+                    }
+
+                    return date.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    });
+                  })()}
                 </p>
               </div>
             ) : (

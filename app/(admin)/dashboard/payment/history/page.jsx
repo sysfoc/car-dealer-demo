@@ -153,25 +153,23 @@ export default function PaymentHistory() {
               <div className='space-y-3'>
                 <p>
                   <strong>Transaction ID: </strong>
-                  {selectedTransaction._id}
+                  {selectedTransaction?._id}
                 </p>
                 <p>
                   <strong>Payment ID: </strong>
-                  {selectedTransaction.paymentId}
+                  {selectedTransaction?.paymentId}
+                </p>
+                <p>
+                  <strong>Order ID: </strong>
+                  {selectedTransaction?.customerId}
                 </p>
                 <p>
                   <strong>Customer ID: </strong>
-                  {selectedTransaction.customerId}
+                  {selectedTransaction?.orderId}
                 </p>
                 <p>
-                  <strong>Date:</strong>{" "}
-                  {new Date(
-                    selectedTransaction.transactionDate
-                  ).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
+                  <strong>Invoice ID: </strong>
+                  {selectedTransaction?.invoiceId}
                 </p>
                 <p>
                   <strong>Purchased plan:</strong> {selectedTransaction.product}{" "}
@@ -190,6 +188,34 @@ export default function PaymentHistory() {
                   >
                     completed
                   </span>
+                </p>
+                <p>
+                  <strong>Date:</strong>{" "}
+                  {new Date(
+                    selectedTransaction.transactionDate
+                  ).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
+                <p>
+                  <strong>Expired At:</strong>{" "}
+                  {(() => {
+                    const date = new Date(selectedTransaction.transactionDate);
+
+                    if (selectedTransaction.productPlan === "Monthly") {
+                      date.setMonth(date.getMonth() + 1);
+                    } else if (selectedTransaction.productPlan === "Yearly") {
+                      date.setFullYear(date.getFullYear() + 1);
+                    }
+
+                    return date.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    });
+                  })()}
                 </p>
               </div>
             ) : (
