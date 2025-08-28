@@ -41,12 +41,8 @@ const PricingSection = () => {
     setSelectedTheme([]);
   };
 
-  const handleSelectedTheme = (theme, selectedPlan) => {
+  const handleSelectedTheme = (theme) => {
     let maxThemes = 1;
-    if (selectedPlan === "Standard" || selectedPlan === "Yearly Standard")
-      maxThemes = 2;
-    if (selectedPlan === "Premium" || selectedPlan === "Yearly Premium")
-      maxThemes = 3;
     setSelectedTheme((prevThemes) => {
       const alreadySelected = prevThemes.includes(theme);
       let updatedThemes = alreadySelected
@@ -470,22 +466,22 @@ const PricingSection = () => {
                 <TableRow className='w-min bg-white'>
                   <TableCell>
                     <div>
-                      <p className='text-sm'>Themes Subscriptions</p>
+                      <p className='text-sm'>Themes Choices</p>
                     </div>
                   </TableCell>
                   <TableCell>
                     <div className='flex items-center justify-center'>
-                      <b>1</b>
+                      <b>2</b>
                     </div>
                   </TableCell>
                   <TableCell>
                     <div className='flex items-center justify-center'>
-                      <b>Upto 2</b>
+                      <b>3</b>
                     </div>
                   </TableCell>
                   <TableCell>
                     <div className='flex items-center justify-center'>
-                      <b>Upto 3</b>
+                      <b>6</b>
                     </div>
                   </TableCell>
                 </TableRow>
@@ -1092,53 +1088,72 @@ const PricingSection = () => {
             <ModalBody>
               <div className='w-full py-5 flex items-center justifiy-center'>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                  {dealers.map((dealer) => (
-                    <div
-                      key={dealer.id}
-                      className='relative rounded-md shadow-lg transition-transform duration-300 hover:-translate-y-4 group'
-                    >
-                      {selectedTheme.includes(dealer.name) && (
-                        <span className='p-2 bg-[#fa7123] rounded-md text-sm text-white absolute top-2 left-2'>
-                          Selected
-                        </span>
-                      )}
-                      <Link href={dealer.link} target='_blank'>
-                        <div className='p-4 bg-white'>
-                          <Image
-                            src={dealer.image}
-                            alt={dealer.alt}
-                            width={500}
-                            height={500}
-                            className='size-auto'
-                          />
-                        </div>
-                        <div className='px-2 py-3'>
-                          <h3 className='text-center font-semibold text-xl'>
-                            {dealer.name}
-                          </h3>
-                        </div>
-                      </Link>
-                      <div className='absolute inset-0 bg-black bg-opacity-50 flex flex-col gap-y-4 justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+                  {dealers
+                    .filter((dealer, index) => {
+                      if (selectedPlan?.plan === "Basic") {
+                        return index < 2;
+                      }
+                      if (selectedPlan?.plan === "Standard") {
+                        return index < 3;
+                      }
+                      if (selectedPlan?.plan === "Premium") {
+                        return true;
+                      }
+                      return false;
+                    })
+                    .map((dealer) => (
+                      <div
+                        key={dealer.id}
+                        className='relative rounded-md shadow-lg transition-transform duration-300 hover:-translate-y-4 group'
+                      >
+                        {selectedTheme.includes(dealer.name) && (
+                          <span className='p-2 bg-[#fa7123] rounded-md text-sm text-white absolute top-2 left-2'>
+                            Selected
+                          </span>
+                        )}
                         <Link href={dealer.link} target='_blank'>
-                          <button className='flex items-center gap-2 bg-white text-black font-semibold py-2 px-4 rounded-md shadow-md hover:bg-gray-200'>
-                            <AiOutlineEye className='text-lg' />
-                            View Demo
-                          </button>
+                          <div className='p-4 bg-white'>
+                            <Image
+                              src={dealer.image}
+                              alt={dealer.alt}
+                              width={500}
+                              height={500}
+                              className='size-auto'
+                            />
+                          </div>
+                          <div className='px-2 py-3'>
+                            <h3 className='text-center font-semibold text-xl'>
+                              Theme {dealer.id} -{" "}
+                              <span className='text-[#fa7123]'>
+                                {dealer.name}
+                              </span>
+                            </h3>
+                          </div>
                         </Link>
-                        <Button
-                          onClick={() =>
-                            handleSelectedTheme(dealer.name, selectedPlan?.plan)
-                          }
-                          size='sm'
-                          className='bg-[#fa7123] text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-[#fa7123]/90'
-                        >
-                          {selectedTheme.includes(dealer.name)
-                            ? "Unselect Theme"
-                            : "Select Theme"}
-                        </Button>
+                        <div className='absolute inset-0 bg-black bg-opacity-50 flex flex-col gap-y-4 justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+                          <Link href={dealer.link} target='_blank'>
+                            <button className='flex items-center gap-2 bg-white text-black font-semibold py-2 px-4 rounded-md shadow-md hover:bg-gray-200'>
+                              <AiOutlineEye className='text-lg' />
+                              View Demo
+                            </button>
+                          </Link>
+                          <Button
+                            onClick={() =>
+                              handleSelectedTheme(
+                                dealer.name,
+                                selectedPlan?.plan
+                              )
+                            }
+                            size='sm'
+                            className='bg-[#fa7123] text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-[#fa7123]/90'
+                          >
+                            {selectedTheme.includes(dealer.name)
+                              ? "Unselect Theme"
+                              : "Select Theme"}
+                          </Button>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
                 </div>
               </div>
             </ModalBody>
@@ -1558,22 +1573,22 @@ const PricingSection = () => {
                 <TableRow className='w-min bg-white'>
                   <TableCell>
                     <div>
-                      <p className='text-sm'>Themes Subscription</p>
+                      <p className='text-sm'>Themes Choices</p>
                     </div>
                   </TableCell>
                   <TableCell>
                     <div className='flex items-center justify-center'>
-                      <b>1</b>
+                      <b>2</b>
                     </div>
                   </TableCell>
                   <TableCell>
                     <div className='flex items-center justify-center'>
-                      <b>Upto 2</b>
+                      <b>3</b>
                     </div>
                   </TableCell>
                   <TableCell>
                     <div className='flex items-center justify-center'>
-                      <b>Upto 3</b>
+                      <b>6</b>
                     </div>
                   </TableCell>
                 </TableRow>
@@ -2180,53 +2195,72 @@ const PricingSection = () => {
             <ModalBody>
               <div className='w-full py-5 flex items-center justifiy-center'>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                  {dealers.map((dealer) => (
-                    <div
-                      key={dealer.id}
-                      className='relative rounded-md shadow-lg transition-transform duration-300 hover:-translate-y-4 group'
-                    >
-                      {selectedTheme.includes(dealer.name) && (
-                        <span className='p-2 bg-[#fa7123] rounded-md text-sm text-white absolute top-2 left-2'>
-                          Selected
-                        </span>
-                      )}
-                      <Link href={dealer.link} target='_blank'>
-                        <div className='p-4 bg-white'>
-                          <Image
-                            src={dealer.image}
-                            alt={dealer.alt}
-                            width={500}
-                            height={500}
-                            className='size-auto'
-                          />
-                        </div>
-                        <div className='px-2 py-3'>
-                          <h3 className='text-center font-semibold text-xl'>
-                            {dealer.name}
-                          </h3>
-                        </div>
-                      </Link>
-                      <div className='absolute inset-0 bg-black bg-opacity-50 flex flex-col gap-y-4 justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+                  {dealers
+                    .filter((dealer, index) => {
+                      if (selectedPlan?.plan === "Yearly Basic") {
+                        return index < 2;
+                      }
+                      if (selectedPlan?.plan === "Yearly Standard") {
+                        return index < 3;
+                      }
+                      if (selectedPlan?.plan === "Yearly Premium") {
+                        return true;
+                      }
+                      return false;
+                    })
+                    .map((dealer) => (
+                      <div
+                        key={dealer.id}
+                        className='relative rounded-md shadow-lg transition-transform duration-300 hover:-translate-y-4 group'
+                      >
+                        {selectedTheme.includes(dealer.name) && (
+                          <span className='p-2 bg-[#fa7123] rounded-md text-sm text-white absolute top-2 left-2'>
+                            Selected
+                          </span>
+                        )}
                         <Link href={dealer.link} target='_blank'>
-                          <button className='flex items-center gap-2 bg-white text-black font-semibold py-2 px-4 rounded-md shadow-md hover:bg-gray-200'>
-                            <AiOutlineEye className='text-lg' />
-                            View Demo
-                          </button>
+                          <div className='p-4 bg-white'>
+                            <Image
+                              src={dealer.image}
+                              alt={dealer.alt}
+                              width={500}
+                              height={500}
+                              className='size-auto'
+                            />
+                          </div>
+                          <div className='px-2 py-3'>
+                            <h3 className='text-center font-semibold text-xl'>
+                              Theme {dealer.id} -{" "}
+                              <span className='text-[#fa7123]'>
+                                {dealer.name}
+                              </span>
+                            </h3>
+                          </div>
                         </Link>
-                        <Button
-                          onClick={() =>
-                            handleSelectedTheme(dealer.name, selectedPlan?.plan)
-                          }
-                          size='sm'
-                          className='bg-[#fa7123] text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-[#fa7123]/90'
-                        >
-                          {selectedTheme.includes(dealer.name)
-                            ? "Unselect Theme"
-                            : "Select Theme"}
-                        </Button>
+                        <div className='absolute inset-0 bg-black bg-opacity-50 flex flex-col gap-y-4 justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+                          <Link href={dealer.link} target='_blank'>
+                            <button className='flex items-center gap-2 bg-white text-black font-semibold py-2 px-4 rounded-md shadow-md hover:bg-gray-200'>
+                              <AiOutlineEye className='text-lg' />
+                              View Demo
+                            </button>
+                          </Link>
+                          <Button
+                            onClick={() =>
+                              handleSelectedTheme(
+                                dealer.name,
+                                selectedPlan?.plan
+                              )
+                            }
+                            size='sm'
+                            className='bg-[#fa7123] text-white font-semibold py-2 px-4 rounded-md shadow-md hover:!bg-[#fa7123]/90'
+                          >
+                            {selectedTheme.includes(dealer.name)
+                              ? "Unselect Theme"
+                              : "Select Theme"}
+                          </Button>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
                 </div>
               </div>
             </ModalBody>
