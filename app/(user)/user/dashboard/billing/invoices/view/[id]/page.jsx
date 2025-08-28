@@ -82,8 +82,8 @@ export default function ViewInvoice() {
   };
 
   return (
-    <div ref={invoiceRef} className='bg-gray-50 py-5 dark:bg-gray-800'>
-      <div className='mx-auto w-full rounded-lg bg-white p-10 shadow dark:bg-gray-700'>
+    <div ref={invoiceRef} className='mx-auto w-full py-5'>
+      <div className='mx-auto w-full rounded-lg bg-white p-10'>
         <div className='my-3'>
           <div className='flex justify-between'>
             <div className='flex flex-col'>
@@ -204,7 +204,7 @@ export default function ViewInvoice() {
                     <div></div>
                   </TableCell>
                   <TableCell className='font-semibold'>GST/VAT</TableCell>
-                  <TableCell className='font-semibold'>
+                  <TableCell className='font-semibold whitespace-nowrap'>
                     {invoice?.paymentCurrency === "AUD"
                       ? `${invoice?.paymentCurrency} ${Number(
                           invoice?.productPrice - invoice?.productPrice / 1.1
@@ -261,7 +261,7 @@ export default function ViewInvoice() {
               Solutions.
             </span>
           </div>
-          <div className='my-5 flex items-center justify-center'>
+          <div className='my-5 flex items-center justify-center print:hidden'>
             <div className='hidden md:flex items-center gap-3'>
               <Button
                 onClick={() => window.print()}
