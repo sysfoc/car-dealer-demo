@@ -3,7 +3,7 @@ import React from "react";
 
 const Features = () => {
   const features = [
-    { id: 1, title: "03 Demos", image: "/01.png", alt: "Feature 1 - 03 Demos" },
+    { id: 1, title: "06 Demos", image: "/01.png", alt: "Feature 1 - 06 Demos" },
     {
       id: 2,
       title: "30+ Inner Pages",
