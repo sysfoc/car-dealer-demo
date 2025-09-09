@@ -68,7 +68,7 @@ export async function POST(req) {
           response.cookies.set("admin", token, {
             httpOnly: true,
             secure: true,
-            maxAge: 60 * 60 * 24 * 7,
+            maxAge: 60 * 60 * 24 * 60,
             sameSite: "lax",
             path: "/",
             priority: "high",
@@ -77,7 +77,7 @@ export async function POST(req) {
         response.cookies.set("token", token, {
           httpOnly: true,
           secure: true,
-          maxAge: 60 * 60 * 24 * 7,
+          maxAge: 60 * 60 * 24 * 60,
           sameSite: "lax",
           path: "/",
           priority: "high",
