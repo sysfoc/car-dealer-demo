@@ -163,6 +163,7 @@ const PricingSection = () => {
           plan: selectedPlan?.plan,
           themes: selectedTheme,
           price: selectedPlan?.price,
+          currency: selectedCurrency?.currency,
           timePeriod: selectedPlan?.timePeriod,
         }),
       });
