@@ -11,7 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@paypal/checkout-server-sdk": "^1.0.3",
-    "@reduxjs/toolkit": "^2.7.0",
+    "@reduxjs/toolkit": "^2.9.0",
     "@table-library/react-table-library": "^4.1.12",
     "bcrypt": "^5.1.1",
     "firebase": "^11.6.0",
@@ -26,7 +26,7 @@
     "jspdf": "^3.0.0",
     "mongoose": "^8.13.2",
     "nanoid": "^5.1.5",
-    "next": "15.1.7",
+    "next": "^15.5.4",
     "nodemailer": "^7.0.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -35,7 +35,6 @@
     "react-redux": "^9.2.0",
     "react-tables": "^1.0.2",
     "redux-persist": "^6.0.0",
-    "redux-toolkit": "^1.1.2",
     "stripe": "^18.0.0"
   },
   "devDependencies": {
